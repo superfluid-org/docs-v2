@@ -15,311 +15,481 @@
           "editUrlLocalized": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/i18n/en/docusaurus-plugin-content-docs/current",
           "isLast": true,
           "routePriority": -1,
-          "sidebarFilePath": "/Users/youssefelallali/Desktop/Superfluid/Repos/docs-v2/sidebars.js",
+          "sidebarFilePath": "/Users/youssefelallali/Desktop/Superfluid/Repos/docs-v2/sidebars.ts",
           "contentPath": "/Users/youssefelallali/Desktop/Superfluid/Repos/docs-v2/docs",
           "contentPathLocalized": "/Users/youssefelallali/Desktop/Superfluid/Repos/docs-v2/i18n/en/docusaurus-plugin-content-docs/current",
           "docs": [
             {
-              "id": "intro",
-              "title": "Tutorial Intro",
-              "description": "Let's discover Docusaurus in less than 5 minutes.",
-              "source": "@site/docs/intro.md",
-              "sourceDirName": ".",
-              "slug": "/intro",
-              "permalink": "/docs/intro",
+              "id": "concepts/glossary",
+              "title": "📔 Glossary of Terms",
+              "description": "General Conceptual Terms",
+              "source": "@site/docs/concepts/glossary.mdx",
+              "sourceDirName": "concepts",
+              "slug": "/concepts/glossary",
+              "permalink": "/docs/concepts/glossary",
               "draft": false,
               "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/intro.md",
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 1,
-              "frontMatter": {
-                "sidebar_position": 1
-              },
-              "sidebar": "tutorialSidebar",
-              "next": {
-                "title": "Tutorial - Basics",
-                "permalink": "/docs/category/tutorial---basics"
-              }
-            },
-            {
-              "id": "tutorial-basics/congratulations",
-              "title": "Congratulations!",
-              "description": "You have just learned the basics of Docusaurus and made some changes to the initial template.",
-              "source": "@site/docs/tutorial-basics/congratulations.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/congratulations",
-              "permalink": "/docs/tutorial-basics/congratulations",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-basics/congratulations.md",
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 6,
-              "frontMatter": {
-                "sidebar_position": 6
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Deploy your site",
-                "permalink": "/docs/tutorial-basics/deploy-your-site"
-              },
-              "next": {
-                "title": "Tutorial - Extras",
-                "permalink": "/docs/category/tutorial---extras"
-              }
-            },
-            {
-              "id": "tutorial-basics/create-a-blog-post",
-              "title": "Create a Blog Post",
-              "description": "Docusaurus creates a page for each blog post, but also a blog index page, a tag system, an RSS feed...",
-              "source": "@site/docs/tutorial-basics/create-a-blog-post.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/create-a-blog-post",
-              "permalink": "/docs/tutorial-basics/create-a-blog-post",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-basics/create-a-blog-post.md",
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 3,
-              "frontMatter": {
-                "sidebar_position": 3
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Create a Document",
-                "permalink": "/docs/tutorial-basics/create-a-document"
-              },
-              "next": {
-                "title": "Markdown Features",
-                "permalink": "/docs/tutorial-basics/markdown-features"
-              }
-            },
-            {
-              "id": "tutorial-basics/create-a-document",
-              "title": "Create a Document",
-              "description": "Documents are groups of pages connected through:",
-              "source": "@site/docs/tutorial-basics/create-a-document.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/create-a-document",
-              "permalink": "/docs/tutorial-basics/create-a-document",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-basics/create-a-document.md",
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 2,
-              "frontMatter": {
-                "sidebar_position": 2
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Create a Page",
-                "permalink": "/docs/tutorial-basics/create-a-page"
-              },
-              "next": {
-                "title": "Create a Blog Post",
-                "permalink": "/docs/tutorial-basics/create-a-blog-post"
-              }
-            },
-            {
-              "id": "tutorial-basics/create-a-page",
-              "title": "Create a Page",
-              "description": "Add Markdown or React files to src/pages to create a standalone page:",
-              "source": "@site/docs/tutorial-basics/create-a-page.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/create-a-page",
-              "permalink": "/docs/tutorial-basics/create-a-page",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-basics/create-a-page.md",
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 1,
-              "frontMatter": {
-                "sidebar_position": 1
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Tutorial - Basics",
-                "permalink": "/docs/category/tutorial---basics"
-              },
-              "next": {
-                "title": "Create a Document",
-                "permalink": "/docs/tutorial-basics/create-a-document"
-              }
-            },
-            {
-              "id": "tutorial-basics/deploy-your-site",
-              "title": "Deploy your site",
-              "description": "Docusaurus is a static-site-generator (also called Jamstack).",
-              "source": "@site/docs/tutorial-basics/deploy-your-site.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/deploy-your-site",
-              "permalink": "/docs/tutorial-basics/deploy-your-site",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-basics/deploy-your-site.md",
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 5,
-              "frontMatter": {
-                "sidebar_position": 5
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Markdown Features",
-                "permalink": "/docs/tutorial-basics/markdown-features"
-              },
-              "next": {
-                "title": "Congratulations!",
-                "permalink": "/docs/tutorial-basics/congratulations"
-              }
-            },
-            {
-              "id": "tutorial-basics/markdown-features",
-              "title": "Markdown Features",
-              "description": "Docusaurus supports Markdown and a few additional features.",
-              "source": "@site/docs/tutorial-basics/markdown-features.mdx",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/markdown-features",
-              "permalink": "/docs/tutorial-basics/markdown-features",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-basics/markdown-features.mdx",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/glossary.mdx",
               "tags": [],
               "version": "current",
               "sidebarPosition": 4,
               "frontMatter": {
                 "sidebar_position": 4
               },
-              "sidebar": "tutorialSidebar",
+              "sidebar": "Concepts",
               "previous": {
-                "title": "Create a Blog Post",
-                "permalink": "/docs/tutorial-basics/create-a-blog-post"
-              },
-              "next": {
-                "title": "Deploy your site",
-                "permalink": "/docs/tutorial-basics/deploy-your-site"
+                "title": "Social & Community",
+                "permalink": "/docs/concepts/use-cases/social-and-community"
               }
             },
             {
-              "id": "tutorial-extras/manage-docs-versions",
-              "title": "Manage Docs Versions",
-              "description": "Docusaurus can manage multiple versions of your docs.",
-              "source": "@site/docs/tutorial-extras/manage-docs-versions.md",
-              "sourceDirName": "tutorial-extras",
-              "slug": "/tutorial-extras/manage-docs-versions",
-              "permalink": "/docs/tutorial-extras/manage-docs-versions",
+              "id": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+              "title": "🚰 Money Streaming (CFA)",
+              "description": "Definition",
+              "source": "@site/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa.mdx",
+              "sourceDirName": "concepts/in-depth-overview/super-agreements",
+              "slug": "/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+              "permalink": "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
               "draft": false,
               "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-extras/manage-docs-versions.md",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "Super Agreements",
+                "permalink": "/docs/category/super-agreements"
+              },
+              "next": {
+                "title": "✳ Distributions (IDA)",
+                "permalink": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida"
+              }
+            },
+            {
+              "id": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
+              "title": "✳ Distributions (IDA)",
+              "description": "One transaction to distribute to any number of receivers with a fixed gas cost",
+              "source": "@site/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida.mdx",
+              "sourceDirName": "concepts/in-depth-overview/super-agreements",
+              "slug": "/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
+              "permalink": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "description": "One transaction to distribute to any number of receivers with a fixed gas cost"
+              },
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "🚰 Money Streaming (CFA)",
+                "permalink": "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa"
+              },
+              "next": {
+                "title": "🌊 Streaming Distributions",
+                "permalink": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon"
+              }
+            },
+            {
+              "id": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+              "title": "🌊 Streaming Distributions",
+              "description": "The General Distribution Agreement (GDA)",
+              "source": "@site/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon.mdx",
+              "sourceDirName": "concepts/in-depth-overview/super-agreements",
+              "slug": "/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+              "permalink": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "description": "The General Distribution Agreement (GDA)"
+              },
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "✳ Distributions (IDA)",
+                "permalink": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida"
+              },
+              "next": {
+                "title": "Super Apps",
+                "permalink": "/docs/concepts/in-depth-overview/super-apps"
+              }
+            },
+            {
+              "id": "concepts/in-depth-overview/super-apps",
+              "title": "Super Apps",
+              "description": "Making Super Agreements truly programmable",
+              "source": "@site/docs/concepts/in-depth-overview/super-apps.mdx",
+              "sourceDirName": "concepts/in-depth-overview",
+              "slug": "/concepts/in-depth-overview/super-apps",
+              "permalink": "/docs/concepts/in-depth-overview/super-apps",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-apps.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "description": "Making Super Agreements truly programmable"
+              },
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "🌊 Streaming Distributions",
+                "permalink": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon"
+              },
+              "next": {
+                "title": "Superfluid Host",
+                "permalink": "/docs/concepts/in-depth-overview/superfluid-host"
+              }
+            },
+            {
+              "id": "concepts/in-depth-overview/super-tokens",
+              "title": "Super Tokens",
+              "description": "Super Tokens extend the ERC20 token standard with additional functionalities like streams or instant distributions, known as Super Agreements. There are two types of Super Tokens: wrapper and custom.",
+              "source": "@site/docs/concepts/in-depth-overview/super-tokens.mdx",
+              "sourceDirName": "concepts/in-depth-overview",
+              "slug": "/concepts/in-depth-overview/super-tokens",
+              "permalink": "/docs/concepts/in-depth-overview/super-tokens",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-tokens.mdx",
               "tags": [],
               "version": "current",
               "sidebarPosition": 1,
               "frontMatter": {
                 "sidebar_position": 1
               },
-              "sidebar": "tutorialSidebar",
+              "sidebar": "Concepts",
               "previous": {
-                "title": "Tutorial - Extras",
-                "permalink": "/docs/category/tutorial---extras"
+                "title": "In Depth Overview",
+                "permalink": "/docs/category/in-depth-overview"
               },
               "next": {
-                "title": "Translate your site",
-                "permalink": "/docs/tutorial-extras/translate-your-site"
+                "title": "Super Agreements",
+                "permalink": "/docs/category/super-agreements"
               }
             },
             {
-              "id": "tutorial-extras/translate-your-site",
-              "title": "Translate your site",
-              "description": "Let's translate docs/intro.md to French.",
-              "source": "@site/docs/tutorial-extras/translate-your-site.md",
-              "sourceDirName": "tutorial-extras",
-              "slug": "/tutorial-extras/translate-your-site",
-              "permalink": "/docs/tutorial-extras/translate-your-site",
+              "id": "concepts/in-depth-overview/superfluid-host",
+              "title": "Superfluid Host",
+              "description": "The \"brain\" of the Superfluid Protocol",
+              "source": "@site/docs/concepts/in-depth-overview/superfluid-host.mdx",
+              "sourceDirName": "concepts/in-depth-overview",
+              "slug": "/concepts/in-depth-overview/superfluid-host",
+              "permalink": "/docs/concepts/in-depth-overview/superfluid-host",
               "draft": false,
               "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-extras/translate-your-site.md",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/superfluid-host.mdx",
               "tags": [],
               "version": "current",
-              "sidebarPosition": 2,
               "frontMatter": {
-                "sidebar_position": 2
+                "description": "The \"brain\" of the Superfluid Protocol"
               },
-              "sidebar": "tutorialSidebar",
+              "sidebar": "Concepts",
               "previous": {
-                "title": "Manage Docs Versions",
-                "permalink": "/docs/tutorial-extras/manage-docs-versions"
+                "title": "Super Apps",
+                "permalink": "/docs/concepts/in-depth-overview/super-apps"
+              },
+              "next": {
+                "title": "Use Cases",
+                "permalink": "/docs/category/use-cases"
               }
+            },
+            {
+              "id": "concepts/intro",
+              "title": "💡 What is Superfluid?",
+              "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+              "source": "@site/docs/concepts/intro.mdx",
+              "sourceDirName": "concepts",
+              "slug": "/concepts/intro",
+              "permalink": "/docs/concepts/intro",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/intro.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "Concepts",
+              "next": {
+                "title": "In Depth Overview",
+                "permalink": "/docs/category/in-depth-overview"
+              }
+            },
+            {
+              "id": "concepts/use-cases/defi",
+              "title": "DeFi",
+              "description": "Using Superfluid to create novel DeFi apps",
+              "source": "@site/docs/concepts/use-cases/defi.mdx",
+              "sourceDirName": "concepts/use-cases",
+              "slug": "/concepts/use-cases/defi",
+              "permalink": "/docs/concepts/use-cases/defi",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/use-cases/defi.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "description": "Using Superfluid to create novel DeFi apps"
+              },
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "Use Cases",
+                "permalink": "/docs/category/use-cases"
+              },
+              "next": {
+                "title": "Gaming",
+                "permalink": "/docs/concepts/use-cases/gaming"
+              }
+            },
+            {
+              "id": "concepts/use-cases/gaming",
+              "title": "Gaming",
+              "description": "Superfluid can bring serious efficiencies to Web3 gaming",
+              "source": "@site/docs/concepts/use-cases/gaming.mdx",
+              "sourceDirName": "concepts/use-cases",
+              "slug": "/concepts/use-cases/gaming",
+              "permalink": "/docs/concepts/use-cases/gaming",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/use-cases/gaming.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "description": "Superfluid can bring serious efficiencies to Web3 gaming"
+              },
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "DeFi",
+                "permalink": "/docs/concepts/use-cases/defi"
+              },
+              "next": {
+                "title": "Recurring Payments",
+                "permalink": "/docs/concepts/use-cases/recurring-payments"
+              }
+            },
+            {
+              "id": "concepts/use-cases/recurring-payments",
+              "title": "Recurring Payments",
+              "description": "Superfluid is great for automating and scaling recurring payments",
+              "source": "@site/docs/concepts/use-cases/recurring-payments.mdx",
+              "sourceDirName": "concepts/use-cases",
+              "slug": "/concepts/use-cases/recurring-payments",
+              "permalink": "/docs/concepts/use-cases/recurring-payments",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/use-cases/recurring-payments.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "description": "Superfluid is great for automating and scaling recurring payments"
+              },
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "Gaming",
+                "permalink": "/docs/concepts/use-cases/gaming"
+              },
+              "next": {
+                "title": "Social & Community",
+                "permalink": "/docs/concepts/use-cases/social-and-community"
+              }
+            },
+            {
+              "id": "concepts/use-cases/social-and-community",
+              "title": "Social & Community",
+              "description": "Social tokens give PCR a new",
+              "source": "@site/docs/concepts/use-cases/social-and-community.mdx",
+              "sourceDirName": "concepts/use-cases",
+              "slug": "/concepts/use-cases/social-and-community",
+              "permalink": "/docs/concepts/use-cases/social-and-community",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/use-cases/social-and-community.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "description": "Social tokens give PCR a new"
+              },
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "Recurring Payments",
+                "permalink": "/docs/concepts/use-cases/recurring-payments"
+              },
+              "next": {
+                "title": "📔 Glossary of Terms",
+                "permalink": "/docs/concepts/glossary"
+              }
+            },
+            {
+              "id": "developers/intro",
+              "title": "💡 What is Superfluid?",
+              "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+              "source": "@site/docs/developers/intro.mdx",
+              "sourceDirName": "developers",
+              "slug": "/developers/intro",
+              "permalink": "/docs/developers/intro",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/intro.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "Developers"
+            },
+            {
+              "id": "products/intro",
+              "title": "💡 What is Superfluid?",
+              "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+              "source": "@site/docs/products/intro.mdx",
+              "sourceDirName": "products",
+              "slug": "/products/intro",
+              "permalink": "/docs/products/intro",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/products/intro.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "Products"
+            },
+            {
+              "id": "technical-reference/intro",
+              "title": "💡 What is Superfluid?",
+              "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+              "source": "@site/docs/technical-reference/intro.md",
+              "sourceDirName": "technical-reference",
+              "slug": "/technical-reference/intro",
+              "permalink": "/docs/technical-reference/intro",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/technical-reference/intro.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "TechnicalReference"
             }
           ],
           "drafts": [],
           "sidebars": {
-            "tutorialSidebar": [
+            "Concepts": [
               {
                 "type": "doc",
-                "id": "intro"
+                "id": "concepts/intro"
               },
               {
                 "type": "category",
-                "label": "Tutorial - Basics",
+                "label": "In Depth Overview",
                 "collapsible": true,
                 "collapsed": true,
                 "items": [
                   {
                     "type": "doc",
-                    "id": "tutorial-basics/create-a-page"
+                    "id": "concepts/in-depth-overview/super-tokens"
+                  },
+                  {
+                    "type": "category",
+                    "label": "Super Agreements",
+                    "collapsible": true,
+                    "collapsed": true,
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon"
+                      }
+                    ],
+                    "link": {
+                      "type": "generated-index",
+                      "slug": "/category/super-agreements",
+                      "permalink": "/docs/category/super-agreements"
+                    }
                   },
                   {
                     "type": "doc",
-                    "id": "tutorial-basics/create-a-document"
+                    "id": "concepts/in-depth-overview/super-apps"
                   },
                   {
                     "type": "doc",
-                    "id": "tutorial-basics/create-a-blog-post"
+                    "id": "concepts/in-depth-overview/superfluid-host"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "slug": "/category/in-depth-overview",
+                  "permalink": "/docs/category/in-depth-overview"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Use Cases",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "concepts/use-cases/defi"
                   },
                   {
                     "type": "doc",
-                    "id": "tutorial-basics/markdown-features"
+                    "id": "concepts/use-cases/gaming"
                   },
                   {
                     "type": "doc",
-                    "id": "tutorial-basics/deploy-your-site"
+                    "id": "concepts/use-cases/recurring-payments"
                   },
                   {
                     "type": "doc",
-                    "id": "tutorial-basics/congratulations"
+                    "id": "concepts/use-cases/social-and-community"
                   }
                 ],
                 "link": {
                   "type": "generated-index",
                   "description": "5 minutes to learn the most important Docusaurus concepts.",
-                  "slug": "/category/tutorial---basics",
-                  "permalink": "/docs/category/tutorial---basics"
+                  "slug": "/category/use-cases",
+                  "permalink": "/docs/category/use-cases"
                 }
               },
               {
-                "type": "category",
-                "label": "Tutorial - Extras",
-                "collapsible": true,
-                "collapsed": true,
-                "items": [
-                  {
-                    "type": "doc",
-                    "id": "tutorial-extras/manage-docs-versions"
-                  },
-                  {
-                    "type": "doc",
-                    "id": "tutorial-extras/translate-your-site"
-                  }
-                ],
-                "link": {
-                  "type": "generated-index",
-                  "slug": "/category/tutorial---extras",
-                  "permalink": "/docs/category/tutorial---extras"
-                }
+                "type": "doc",
+                "id": "concepts/glossary"
+              }
+            ],
+            "Products": [
+              {
+                "type": "doc",
+                "id": "products/intro"
+              }
+            ],
+            "Developers": [
+              {
+                "type": "doc",
+                "id": "developers/intro"
+              }
+            ],
+            "TechnicalReference": [
+              {
+                "type": "doc",
+                "id": "technical-reference/intro"
               }
             ]
           }
@@ -683,7 +853,7 @@
       {
         "type": "jsx",
         "permalink": "/",
-        "source": "@site/src/pages/index.js"
+        "source": "@site/src/pages/index.tsx"
       },
       {
         "type": "mdx",

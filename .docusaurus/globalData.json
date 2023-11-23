@@ -8,70 +8,123 @@
           "label": "Next",
           "isLast": true,
           "path": "/docs",
-          "mainDocId": "intro",
+          "mainDocId": "concepts/intro",
           "docs": [
             {
-              "id": "intro",
-              "path": "/docs/intro",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/glossary",
+              "path": "/docs/concepts/glossary",
+              "sidebar": "Concepts"
             },
             {
-              "id": "tutorial-basics/congratulations",
-              "path": "/docs/tutorial-basics/congratulations",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+              "path": "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+              "sidebar": "Concepts"
             },
             {
-              "id": "tutorial-basics/create-a-blog-post",
-              "path": "/docs/tutorial-basics/create-a-blog-post",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
+              "path": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
+              "sidebar": "Concepts"
             },
             {
-              "id": "tutorial-basics/create-a-document",
-              "path": "/docs/tutorial-basics/create-a-document",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+              "path": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+              "sidebar": "Concepts"
             },
             {
-              "id": "tutorial-basics/create-a-page",
-              "path": "/docs/tutorial-basics/create-a-page",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/in-depth-overview/super-apps",
+              "path": "/docs/concepts/in-depth-overview/super-apps",
+              "sidebar": "Concepts"
             },
             {
-              "id": "tutorial-basics/deploy-your-site",
-              "path": "/docs/tutorial-basics/deploy-your-site",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/in-depth-overview/super-tokens",
+              "path": "/docs/concepts/in-depth-overview/super-tokens",
+              "sidebar": "Concepts"
             },
             {
-              "id": "tutorial-basics/markdown-features",
-              "path": "/docs/tutorial-basics/markdown-features",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/in-depth-overview/superfluid-host",
+              "path": "/docs/concepts/in-depth-overview/superfluid-host",
+              "sidebar": "Concepts"
             },
             {
-              "id": "tutorial-extras/manage-docs-versions",
-              "path": "/docs/tutorial-extras/manage-docs-versions",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/intro",
+              "path": "/docs/concepts/intro",
+              "sidebar": "Concepts"
             },
             {
-              "id": "tutorial-extras/translate-your-site",
-              "path": "/docs/tutorial-extras/translate-your-site",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/use-cases/defi",
+              "path": "/docs/concepts/use-cases/defi",
+              "sidebar": "Concepts"
             },
             {
-              "id": "/category/tutorial---basics",
-              "path": "/docs/category/tutorial---basics",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/use-cases/gaming",
+              "path": "/docs/concepts/use-cases/gaming",
+              "sidebar": "Concepts"
             },
             {
-              "id": "/category/tutorial---extras",
-              "path": "/docs/category/tutorial---extras",
-              "sidebar": "tutorialSidebar"
+              "id": "concepts/use-cases/recurring-payments",
+              "path": "/docs/concepts/use-cases/recurring-payments",
+              "sidebar": "Concepts"
+            },
+            {
+              "id": "concepts/use-cases/social-and-community",
+              "path": "/docs/concepts/use-cases/social-and-community",
+              "sidebar": "Concepts"
+            },
+            {
+              "id": "developers/intro",
+              "path": "/docs/developers/intro",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "products/intro",
+              "path": "/docs/products/intro",
+              "sidebar": "Products"
+            },
+            {
+              "id": "technical-reference/intro",
+              "path": "/docs/technical-reference/intro",
+              "sidebar": "TechnicalReference"
+            },
+            {
+              "id": "/category/in-depth-overview",
+              "path": "/docs/category/in-depth-overview",
+              "sidebar": "Concepts"
+            },
+            {
+              "id": "/category/super-agreements",
+              "path": "/docs/category/super-agreements",
+              "sidebar": "Concepts"
+            },
+            {
+              "id": "/category/use-cases",
+              "path": "/docs/category/use-cases",
+              "sidebar": "Concepts"
             }
           ],
           "draftIds": [],
           "sidebars": {
-            "tutorialSidebar": {
+            "Concepts": {
               "link": {
-                "path": "/docs/intro",
-                "label": "intro"
+                "path": "/docs/concepts/intro",
+                "label": "concepts/intro"
+              }
+            },
+            "Products": {
+              "link": {
+                "path": "/docs/products/intro",
+                "label": "products/intro"
+              }
+            },
+            "Developers": {
+              "link": {
+                "path": "/docs/developers/intro",
+                "label": "developers/intro"
+              }
+            },
+            "TechnicalReference": {
+              "link": {
+                "path": "/docs/technical-reference/intro",
+                "label": "technical-reference/intro"
               }
             }
           }

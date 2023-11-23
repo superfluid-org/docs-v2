@@ -8,144 +8,237 @@
   "className": "docs-version-current",
   "isLast": true,
   "docsSidebars": {
-    "tutorialSidebar": [
+    "Concepts": [
       {
         "type": "link",
-        "label": "Tutorial Intro",
-        "href": "/docs/intro",
-        "docId": "intro",
+        "label": "💡 What is Superfluid?",
+        "href": "/docs/concepts/intro",
+        "docId": "concepts/intro",
         "unlisted": false
       },
       {
         "type": "category",
-        "label": "Tutorial - Basics",
+        "label": "In Depth Overview",
         "collapsible": true,
         "collapsed": true,
         "items": [
           {
             "type": "link",
-            "label": "Create a Page",
-            "href": "/docs/tutorial-basics/create-a-page",
-            "docId": "tutorial-basics/create-a-page",
+            "label": "Super Tokens",
+            "href": "/docs/concepts/in-depth-overview/super-tokens",
+            "docId": "concepts/in-depth-overview/super-tokens",
+            "unlisted": false
+          },
+          {
+            "type": "category",
+            "label": "Super Agreements",
+            "collapsible": true,
+            "collapsed": true,
+            "items": [
+              {
+                "type": "link",
+                "label": "🚰 Money Streaming (CFA)",
+                "href": "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+                "docId": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+                "unlisted": false
+              },
+              {
+                "type": "link",
+                "label": "✳ Distributions (IDA)",
+                "href": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
+                "docId": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
+                "unlisted": false
+              },
+              {
+                "type": "link",
+                "label": "🌊 Streaming Distributions",
+                "href": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+                "docId": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+                "unlisted": false
+              }
+            ],
+            "href": "/docs/category/super-agreements"
+          },
+          {
+            "type": "link",
+            "label": "Super Apps",
+            "href": "/docs/concepts/in-depth-overview/super-apps",
+            "docId": "concepts/in-depth-overview/super-apps",
             "unlisted": false
           },
           {
             "type": "link",
-            "label": "Create a Document",
-            "href": "/docs/tutorial-basics/create-a-document",
-            "docId": "tutorial-basics/create-a-document",
-            "unlisted": false
-          },
-          {
-            "type": "link",
-            "label": "Create a Blog Post",
-            "href": "/docs/tutorial-basics/create-a-blog-post",
-            "docId": "tutorial-basics/create-a-blog-post",
-            "unlisted": false
-          },
-          {
-            "type": "link",
-            "label": "Markdown Features",
-            "href": "/docs/tutorial-basics/markdown-features",
-            "docId": "tutorial-basics/markdown-features",
-            "unlisted": false
-          },
-          {
-            "type": "link",
-            "label": "Deploy your site",
-            "href": "/docs/tutorial-basics/deploy-your-site",
-            "docId": "tutorial-basics/deploy-your-site",
-            "unlisted": false
-          },
-          {
-            "type": "link",
-            "label": "Congratulations!",
-            "href": "/docs/tutorial-basics/congratulations",
-            "docId": "tutorial-basics/congratulations",
+            "label": "Superfluid Host",
+            "href": "/docs/concepts/in-depth-overview/superfluid-host",
+            "docId": "concepts/in-depth-overview/superfluid-host",
             "unlisted": false
           }
         ],
-        "href": "/docs/category/tutorial---basics"
+        "href": "/docs/category/in-depth-overview"
       },
       {
         "type": "category",
-        "label": "Tutorial - Extras",
+        "label": "Use Cases",
         "collapsible": true,
         "collapsed": true,
         "items": [
           {
             "type": "link",
-            "label": "Manage Docs Versions",
-            "href": "/docs/tutorial-extras/manage-docs-versions",
-            "docId": "tutorial-extras/manage-docs-versions",
+            "label": "DeFi",
+            "href": "/docs/concepts/use-cases/defi",
+            "docId": "concepts/use-cases/defi",
             "unlisted": false
           },
           {
             "type": "link",
-            "label": "Translate your site",
-            "href": "/docs/tutorial-extras/translate-your-site",
-            "docId": "tutorial-extras/translate-your-site",
+            "label": "Gaming",
+            "href": "/docs/concepts/use-cases/gaming",
+            "docId": "concepts/use-cases/gaming",
+            "unlisted": false
+          },
+          {
+            "type": "link",
+            "label": "Recurring Payments",
+            "href": "/docs/concepts/use-cases/recurring-payments",
+            "docId": "concepts/use-cases/recurring-payments",
+            "unlisted": false
+          },
+          {
+            "type": "link",
+            "label": "Social & Community",
+            "href": "/docs/concepts/use-cases/social-and-community",
+            "docId": "concepts/use-cases/social-and-community",
             "unlisted": false
           }
         ],
-        "href": "/docs/category/tutorial---extras"
+        "href": "/docs/category/use-cases"
+      },
+      {
+        "type": "link",
+        "label": "📔 Glossary of Terms",
+        "href": "/docs/concepts/glossary",
+        "docId": "concepts/glossary",
+        "unlisted": false
+      }
+    ],
+    "Products": [
+      {
+        "type": "link",
+        "label": "💡 What is Superfluid?",
+        "href": "/docs/products/intro",
+        "docId": "products/intro",
+        "unlisted": false
+      }
+    ],
+    "Developers": [
+      {
+        "type": "link",
+        "label": "💡 What is Superfluid?",
+        "href": "/docs/developers/intro",
+        "docId": "developers/intro",
+        "unlisted": false
+      }
+    ],
+    "TechnicalReference": [
+      {
+        "type": "link",
+        "label": "💡 What is Superfluid?",
+        "href": "/docs/technical-reference/intro",
+        "docId": "technical-reference/intro",
+        "unlisted": false
       }
     ]
   },
   "docs": {
-    "intro": {
-      "id": "intro",
-      "title": "Tutorial Intro",
-      "description": "Let's discover Docusaurus in less than 5 minutes.",
-      "sidebar": "tutorialSidebar"
+    "concepts/glossary": {
+      "id": "concepts/glossary",
+      "title": "📔 Glossary of Terms",
+      "description": "General Conceptual Terms",
+      "sidebar": "Concepts"
     },
-    "tutorial-basics/congratulations": {
-      "id": "tutorial-basics/congratulations",
-      "title": "Congratulations!",
-      "description": "You have just learned the basics of Docusaurus and made some changes to the initial template.",
-      "sidebar": "tutorialSidebar"
+    "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa": {
+      "id": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+      "title": "🚰 Money Streaming (CFA)",
+      "description": "Definition",
+      "sidebar": "Concepts"
     },
-    "tutorial-basics/create-a-blog-post": {
-      "id": "tutorial-basics/create-a-blog-post",
-      "title": "Create a Blog Post",
-      "description": "Docusaurus creates a page for each blog post, but also a blog index page, a tag system, an RSS feed...",
-      "sidebar": "tutorialSidebar"
+    "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida": {
+      "id": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
+      "title": "✳ Distributions (IDA)",
+      "description": "One transaction to distribute to any number of receivers with a fixed gas cost",
+      "sidebar": "Concepts"
     },
-    "tutorial-basics/create-a-document": {
-      "id": "tutorial-basics/create-a-document",
-      "title": "Create a Document",
-      "description": "Documents are groups of pages connected through:",
-      "sidebar": "tutorialSidebar"
+    "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon": {
+      "id": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+      "title": "🌊 Streaming Distributions",
+      "description": "The General Distribution Agreement (GDA)",
+      "sidebar": "Concepts"
     },
-    "tutorial-basics/create-a-page": {
-      "id": "tutorial-basics/create-a-page",
-      "title": "Create a Page",
-      "description": "Add Markdown or React files to src/pages to create a standalone page:",
-      "sidebar": "tutorialSidebar"
+    "concepts/in-depth-overview/super-apps": {
+      "id": "concepts/in-depth-overview/super-apps",
+      "title": "Super Apps",
+      "description": "Making Super Agreements truly programmable",
+      "sidebar": "Concepts"
     },
-    "tutorial-basics/deploy-your-site": {
-      "id": "tutorial-basics/deploy-your-site",
-      "title": "Deploy your site",
-      "description": "Docusaurus is a static-site-generator (also called Jamstack).",
-      "sidebar": "tutorialSidebar"
+    "concepts/in-depth-overview/super-tokens": {
+      "id": "concepts/in-depth-overview/super-tokens",
+      "title": "Super Tokens",
+      "description": "Super Tokens extend the ERC20 token standard with additional functionalities like streams or instant distributions, known as Super Agreements. There are two types of Super Tokens: wrapper and custom.",
+      "sidebar": "Concepts"
     },
-    "tutorial-basics/markdown-features": {
-      "id": "tutorial-basics/markdown-features",
-      "title": "Markdown Features",
-      "description": "Docusaurus supports Markdown and a few additional features.",
-      "sidebar": "tutorialSidebar"
+    "concepts/in-depth-overview/superfluid-host": {
+      "id": "concepts/in-depth-overview/superfluid-host",
+      "title": "Superfluid Host",
+      "description": "The \"brain\" of the Superfluid Protocol",
+      "sidebar": "Concepts"
     },
-    "tutorial-extras/manage-docs-versions": {
-      "id": "tutorial-extras/manage-docs-versions",
-      "title": "Manage Docs Versions",
-      "description": "Docusaurus can manage multiple versions of your docs.",
-      "sidebar": "tutorialSidebar"
+    "concepts/intro": {
+      "id": "concepts/intro",
+      "title": "💡 What is Superfluid?",
+      "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+      "sidebar": "Concepts"
     },
-    "tutorial-extras/translate-your-site": {
-      "id": "tutorial-extras/translate-your-site",
-      "title": "Translate your site",
-      "description": "Let's translate docs/intro.md to French.",
-      "sidebar": "tutorialSidebar"
+    "concepts/use-cases/defi": {
+      "id": "concepts/use-cases/defi",
+      "title": "DeFi",
+      "description": "Using Superfluid to create novel DeFi apps",
+      "sidebar": "Concepts"
+    },
+    "concepts/use-cases/gaming": {
+      "id": "concepts/use-cases/gaming",
+      "title": "Gaming",
+      "description": "Superfluid can bring serious efficiencies to Web3 gaming",
+      "sidebar": "Concepts"
+    },
+    "concepts/use-cases/recurring-payments": {
+      "id": "concepts/use-cases/recurring-payments",
+      "title": "Recurring Payments",
+      "description": "Superfluid is great for automating and scaling recurring payments",
+      "sidebar": "Concepts"
+    },
+    "concepts/use-cases/social-and-community": {
+      "id": "concepts/use-cases/social-and-community",
+      "title": "Social & Community",
+      "description": "Social tokens give PCR a new",
+      "sidebar": "Concepts"
+    },
+    "developers/intro": {
+      "id": "developers/intro",
+      "title": "💡 What is Superfluid?",
+      "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+      "sidebar": "Developers"
+    },
+    "products/intro": {
+      "id": "products/intro",
+      "title": "💡 What is Superfluid?",
+      "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+      "sidebar": "Products"
+    },
+    "technical-reference/intro": {
+      "id": "technical-reference/intro",
+      "title": "💡 What is Superfluid?",
+      "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+      "sidebar": "TechnicalReference"
     }
   }
 }

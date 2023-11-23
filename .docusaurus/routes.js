@@ -99,81 +99,123 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'ab0'),
+    component: ComponentCreator('/docs', '0af'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '40b'),
+        component: ComponentCreator('/docs', '9f5'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '292'),
+            component: ComponentCreator('/docs', '53c'),
             routes: [
               {
-                path: '/docs/category/tutorial---basics',
-                component: ComponentCreator('/docs/category/tutorial---basics', 'd44'),
+                path: '/docs/category/in-depth-overview',
+                component: ComponentCreator('/docs/category/in-depth-overview', '0d1'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/category/tutorial---extras',
-                component: ComponentCreator('/docs/category/tutorial---extras', 'f09'),
+                path: '/docs/category/super-agreements',
+                component: ComponentCreator('/docs/category/super-agreements', '3bc'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/intro',
-                component: ComponentCreator('/docs/intro', 'aed'),
+                path: '/docs/category/use-cases',
+                component: ComponentCreator('/docs/category/use-cases', 'c4e'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/tutorial-basics/congratulations',
-                component: ComponentCreator('/docs/tutorial-basics/congratulations', '793'),
+                path: '/docs/concepts/glossary',
+                component: ComponentCreator('/docs/concepts/glossary', 'd62'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/tutorial-basics/create-a-blog-post',
-                component: ComponentCreator('/docs/tutorial-basics/create-a-blog-post', '68e'),
+                path: '/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa',
+                component: ComponentCreator('/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa', '591'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/tutorial-basics/create-a-document',
-                component: ComponentCreator('/docs/tutorial-basics/create-a-document', 'c2d'),
+                path: '/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida',
+                component: ComponentCreator('/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida', '222'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/tutorial-basics/create-a-page',
-                component: ComponentCreator('/docs/tutorial-basics/create-a-page', 'f44'),
+                path: '/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon',
+                component: ComponentCreator('/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon', 'd75'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/tutorial-basics/deploy-your-site',
-                component: ComponentCreator('/docs/tutorial-basics/deploy-your-site', 'e46'),
+                path: '/docs/concepts/in-depth-overview/super-apps',
+                component: ComponentCreator('/docs/concepts/in-depth-overview/super-apps', '3a7'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/tutorial-basics/markdown-features',
-                component: ComponentCreator('/docs/tutorial-basics/markdown-features', '4b7'),
+                path: '/docs/concepts/in-depth-overview/super-tokens',
+                component: ComponentCreator('/docs/concepts/in-depth-overview/super-tokens', '6c0'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/tutorial-extras/manage-docs-versions',
-                component: ComponentCreator('/docs/tutorial-extras/manage-docs-versions', 'fdd'),
+                path: '/docs/concepts/in-depth-overview/superfluid-host',
+                component: ComponentCreator('/docs/concepts/in-depth-overview/superfluid-host', '8c4'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
               },
               {
-                path: '/docs/tutorial-extras/translate-your-site',
-                component: ComponentCreator('/docs/tutorial-extras/translate-your-site', '2d7'),
+                path: '/docs/concepts/intro',
+                component: ComponentCreator('/docs/concepts/intro', '18b'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "Concepts"
+              },
+              {
+                path: '/docs/concepts/use-cases/defi',
+                component: ComponentCreator('/docs/concepts/use-cases/defi', 'd17'),
+                exact: true,
+                sidebar: "Concepts"
+              },
+              {
+                path: '/docs/concepts/use-cases/gaming',
+                component: ComponentCreator('/docs/concepts/use-cases/gaming', '901'),
+                exact: true,
+                sidebar: "Concepts"
+              },
+              {
+                path: '/docs/concepts/use-cases/recurring-payments',
+                component: ComponentCreator('/docs/concepts/use-cases/recurring-payments', '132'),
+                exact: true,
+                sidebar: "Concepts"
+              },
+              {
+                path: '/docs/concepts/use-cases/social-and-community',
+                component: ComponentCreator('/docs/concepts/use-cases/social-and-community', 'ad7'),
+                exact: true,
+                sidebar: "Concepts"
+              },
+              {
+                path: '/docs/developers/intro',
+                component: ComponentCreator('/docs/developers/intro', '86e'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/products/intro',
+                component: ComponentCreator('/docs/products/intro', '9e0'),
+                exact: true,
+                sidebar: "Products"
+              },
+              {
+                path: '/docs/technical-reference/intro',
+                component: ComponentCreator('/docs/technical-reference/intro', '5ff'),
+                exact: true,
+                sidebar: "TechnicalReference"
               }
             ]
           }
@@ -183,7 +225,7 @@ export default [
   },
   {
     path: '/',
-    component: ComponentCreator('/', '771'),
+    component: ComponentCreator('/', '37f'),
     exact: true
   },
   {

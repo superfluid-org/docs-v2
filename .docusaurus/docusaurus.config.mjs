@@ -4,7 +4,7 @@
  * Modify the docusaurus.config.js file at your site's root instead.
  */
 export default {
-  "title": "My Site",
+  "title": "Suuperfluid Docs",
   "tagline": "Dinosaurs are cool",
   "favicon": "img/favicon.ico",
   "url": "https://your-docusaurus-site.example.com",
@@ -26,7 +26,7 @@ export default {
       "classic",
       {
         "docs": {
-          "sidebarPath": "./sidebars.js",
+          "sidebarPath": "./sidebars.ts",
           "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
         },
         "blog": {
@@ -42,7 +42,7 @@ export default {
   "themeConfig": {
     "image": "img/docusaurus-social-card.jpg",
     "navbar": {
-      "title": "My Site",
+      "title": "Superfluid Docs",
       "logo": {
         "alt": "My Site Logo",
         "src": "img/logo.svg"
@@ -50,14 +50,27 @@ export default {
       "items": [
         {
           "type": "docSidebar",
-          "sidebarId": "tutorialSidebar",
+          "sidebarId": "Concepts",
           "position": "left",
-          "label": "Tutorial"
+          "label": "Concepts"
         },
         {
-          "to": "/blog",
-          "label": "Blog",
-          "position": "left"
+          "type": "docSidebar",
+          "sidebarId": "Products",
+          "position": "left",
+          "label": "Products"
+        },
+        {
+          "type": "docSidebar",
+          "sidebarId": "Developers",
+          "position": "left",
+          "label": "Developers"
+        },
+        {
+          "type": "docSidebar",
+          "sidebarId": "TechnicalReference",
+          "position": "left",
+          "label": "Technical Reference"
         },
         {
           "href": "https://github.com/facebook/docusaurus",
