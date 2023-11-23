@@ -11,7 +11,7 @@
     "Concepts": [
       {
         "type": "link",
-        "label": "💡 What is Superfluid?",
+        "label": "What is Superfluid?",
         "href": "/docs/concepts/intro",
         "docId": "concepts/intro",
         "unlisted": false
@@ -30,34 +30,18 @@
             "unlisted": false
           },
           {
-            "type": "category",
-            "label": "Super Agreements",
-            "collapsible": true,
-            "collapsed": true,
-            "items": [
-              {
-                "type": "link",
-                "label": "🚰 Money Streaming (CFA)",
-                "href": "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
-                "docId": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
-                "unlisted": false
-              },
-              {
-                "type": "link",
-                "label": "✳ Distributions (IDA)",
-                "href": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
-                "docId": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
-                "unlisted": false
-              },
-              {
-                "type": "link",
-                "label": "🌊 Streaming Distributions",
-                "href": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
-                "docId": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
-                "unlisted": false
-              }
-            ],
-            "href": "/docs/category/super-agreements"
+            "type": "link",
+            "label": "Money Streaming",
+            "href": "/docs/concepts/in-depth-overview/money-streaming",
+            "docId": "concepts/in-depth-overview/money-streaming",
+            "unlisted": false
+          },
+          {
+            "type": "link",
+            "label": "Distributions",
+            "href": "/docs/concepts/in-depth-overview/distributions",
+            "docId": "concepts/in-depth-overview/distributions",
+            "unlisted": false
           },
           {
             "type": "link",
@@ -115,7 +99,7 @@
       },
       {
         "type": "link",
-        "label": "📔 Glossary of Terms",
+        "label": "Glossary of Terms",
         "href": "/docs/concepts/glossary",
         "docId": "concepts/glossary",
         "unlisted": false
@@ -152,32 +136,26 @@
   "docs": {
     "concepts/glossary": {
       "id": "concepts/glossary",
-      "title": "📔 Glossary of Terms",
+      "title": "Glossary of Terms",
       "description": "General Conceptual Terms",
       "sidebar": "Concepts"
     },
-    "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa": {
-      "id": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
-      "title": "🚰 Money Streaming (CFA)",
+    "concepts/in-depth-overview/distributions": {
+      "id": "concepts/in-depth-overview/distributions",
+      "title": "Distributions",
+      "description": "The introduction of streaming distributions marks a significant advancement in web3, offering a scalable method for one-to-many fund transfers.",
+      "sidebar": "Concepts"
+    },
+    "concepts/in-depth-overview/money-streaming": {
+      "id": "concepts/in-depth-overview/money-streaming",
+      "title": "Money Streaming",
       "description": "Definition",
-      "sidebar": "Concepts"
-    },
-    "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida": {
-      "id": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
-      "title": "✳ Distributions (IDA)",
-      "description": "One transaction to distribute to any number of receivers with a fixed gas cost",
-      "sidebar": "Concepts"
-    },
-    "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon": {
-      "id": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
-      "title": "🌊 Streaming Distributions",
-      "description": "The General Distribution Agreement (GDA)",
       "sidebar": "Concepts"
     },
     "concepts/in-depth-overview/super-apps": {
       "id": "concepts/in-depth-overview/super-apps",
       "title": "Super Apps",
-      "description": "Making Super Agreements truly programmable",
+      "description": "Super Apps represent a class of smart contracts that interact seamlessly with the Superfluid Protocol, enabling dynamic responses to Super Agreements.",
       "sidebar": "Concepts"
     },
     "concepts/in-depth-overview/super-tokens": {
@@ -189,37 +167,37 @@
     "concepts/in-depth-overview/superfluid-host": {
       "id": "concepts/in-depth-overview/superfluid-host",
       "title": "Superfluid Host",
-      "description": "The \"brain\" of the Superfluid Protocol",
+      "description": "The Superfluid Host Contract is a central element of the Superfluid Protocol, acting as a hub connecting Super Tokens, Super Agreements, and Super Apps.",
       "sidebar": "Concepts"
     },
     "concepts/intro": {
       "id": "concepts/intro",
-      "title": "💡 What is Superfluid?",
+      "title": "What is Superfluid?",
       "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
       "sidebar": "Concepts"
     },
     "concepts/use-cases/defi": {
       "id": "concepts/use-cases/defi",
       "title": "DeFi",
-      "description": "Using Superfluid to create novel DeFi apps",
+      "description": "Superfluid Protocol brings innovative solutions to the DeFi space, allowing for novel applications in financial management and transactions.",
       "sidebar": "Concepts"
     },
     "concepts/use-cases/gaming": {
       "id": "concepts/use-cases/gaming",
       "title": "Gaming",
-      "description": "Superfluid can bring serious efficiencies to Web3 gaming",
+      "description": "Superfluid brings a new level of efficiency and scalability to the movement of in-game value. For an in-depth understanding, explore this article on blockchain gaming with Superfluid streams.",
       "sidebar": "Concepts"
     },
     "concepts/use-cases/recurring-payments": {
       "id": "concepts/use-cases/recurring-payments",
       "title": "Recurring Payments",
-      "description": "Superfluid is great for automating and scaling recurring payments",
+      "description": "Superfluid revolutionizes the concept of recurring payments, offering automated and continuous value transfer between accounts. This innovation enables a variety of practical use cases in the realm of decentralized finance.",
       "sidebar": "Concepts"
     },
     "concepts/use-cases/social-and-community": {
       "id": "concepts/use-cases/social-and-community",
       "title": "Social & Community",
-      "description": "Social tokens give PCR a new",
+      "description": "Superfluid Protocol introduces innovative methods for community engagement and social token incentives, fostering long-term loyalty and participation.",
       "sidebar": "Concepts"
     },
     "developers/intro": {

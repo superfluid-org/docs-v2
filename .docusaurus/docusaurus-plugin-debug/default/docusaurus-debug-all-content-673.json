@@ -21,7 +21,7 @@
           "docs": [
             {
               "id": "concepts/glossary",
-              "title": "📔 Glossary of Terms",
+              "title": "Glossary of Terms",
               "description": "General Conceptual Terms",
               "source": "@site/docs/concepts/glossary.mdx",
               "sourceDirName": "concepts",
@@ -43,75 +43,26 @@
               }
             },
             {
-              "id": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
-              "title": "🚰 Money Streaming (CFA)",
-              "description": "Definition",
-              "source": "@site/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa.mdx",
-              "sourceDirName": "concepts/in-depth-overview/super-agreements",
-              "slug": "/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
-              "permalink": "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+              "id": "concepts/in-depth-overview/distributions",
+              "title": "Distributions",
+              "description": "The introduction of streaming distributions marks a significant advancement in web3, offering a scalable method for one-to-many fund transfers.",
+              "source": "@site/docs/concepts/in-depth-overview/distributions.mdx",
+              "sourceDirName": "concepts/in-depth-overview",
+              "slug": "/concepts/in-depth-overview/distributions",
+              "permalink": "/docs/concepts/in-depth-overview/distributions",
               "draft": false,
               "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa.mdx",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/distributions.mdx",
               "tags": [],
               "version": "current",
-              "frontMatter": {},
-              "sidebar": "Concepts",
-              "previous": {
-                "title": "Super Agreements",
-                "permalink": "/docs/category/super-agreements"
-              },
-              "next": {
-                "title": "✳ Distributions (IDA)",
-                "permalink": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida"
-              }
-            },
-            {
-              "id": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
-              "title": "✳ Distributions (IDA)",
-              "description": "One transaction to distribute to any number of receivers with a fixed gas cost",
-              "source": "@site/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida.mdx",
-              "sourceDirName": "concepts/in-depth-overview/super-agreements",
-              "slug": "/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
-              "permalink": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida.mdx",
-              "tags": [],
-              "version": "current",
+              "sidebarPosition": 3,
               "frontMatter": {
-                "description": "One transaction to distribute to any number of receivers with a fixed gas cost"
+                "sidebar_position": 3
               },
               "sidebar": "Concepts",
               "previous": {
-                "title": "🚰 Money Streaming (CFA)",
-                "permalink": "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa"
-              },
-              "next": {
-                "title": "🌊 Streaming Distributions",
-                "permalink": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon"
-              }
-            },
-            {
-              "id": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
-              "title": "🌊 Streaming Distributions",
-              "description": "The General Distribution Agreement (GDA)",
-              "source": "@site/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon.mdx",
-              "sourceDirName": "concepts/in-depth-overview/super-agreements",
-              "slug": "/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
-              "permalink": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon.mdx",
-              "tags": [],
-              "version": "current",
-              "frontMatter": {
-                "description": "The General Distribution Agreement (GDA)"
-              },
-              "sidebar": "Concepts",
-              "previous": {
-                "title": "✳ Distributions (IDA)",
-                "permalink": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida"
+                "title": "Money Streaming",
+                "permalink": "/docs/concepts/in-depth-overview/money-streaming"
               },
               "next": {
                 "title": "Super Apps",
@@ -119,9 +70,36 @@
               }
             },
             {
+              "id": "concepts/in-depth-overview/money-streaming",
+              "title": "Money Streaming",
+              "description": "Definition",
+              "source": "@site/docs/concepts/in-depth-overview/money-streaming.mdx",
+              "sourceDirName": "concepts/in-depth-overview",
+              "slug": "/concepts/in-depth-overview/money-streaming",
+              "permalink": "/docs/concepts/in-depth-overview/money-streaming",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/money-streaming.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 2,
+              "frontMatter": {
+                "sidebar_position": 2
+              },
+              "sidebar": "Concepts",
+              "previous": {
+                "title": "Super Tokens",
+                "permalink": "/docs/concepts/in-depth-overview/super-tokens"
+              },
+              "next": {
+                "title": "Distributions",
+                "permalink": "/docs/concepts/in-depth-overview/distributions"
+              }
+            },
+            {
               "id": "concepts/in-depth-overview/super-apps",
               "title": "Super Apps",
-              "description": "Making Super Agreements truly programmable",
+              "description": "Super Apps represent a class of smart contracts that interact seamlessly with the Superfluid Protocol, enabling dynamic responses to Super Agreements.",
               "source": "@site/docs/concepts/in-depth-overview/super-apps.mdx",
               "sourceDirName": "concepts/in-depth-overview",
               "slug": "/concepts/in-depth-overview/super-apps",
@@ -131,13 +109,14 @@
               "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/super-apps.mdx",
               "tags": [],
               "version": "current",
+              "sidebarPosition": 4,
               "frontMatter": {
-                "description": "Making Super Agreements truly programmable"
+                "sidebar_position": 4
               },
               "sidebar": "Concepts",
               "previous": {
-                "title": "🌊 Streaming Distributions",
-                "permalink": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon"
+                "title": "Distributions",
+                "permalink": "/docs/concepts/in-depth-overview/distributions"
               },
               "next": {
                 "title": "Superfluid Host",
@@ -167,14 +146,14 @@
                 "permalink": "/docs/category/in-depth-overview"
               },
               "next": {
-                "title": "Super Agreements",
-                "permalink": "/docs/category/super-agreements"
+                "title": "Money Streaming",
+                "permalink": "/docs/concepts/in-depth-overview/money-streaming"
               }
             },
             {
               "id": "concepts/in-depth-overview/superfluid-host",
               "title": "Superfluid Host",
-              "description": "The \"brain\" of the Superfluid Protocol",
+              "description": "The Superfluid Host Contract is a central element of the Superfluid Protocol, acting as a hub connecting Super Tokens, Super Agreements, and Super Apps.",
               "source": "@site/docs/concepts/in-depth-overview/superfluid-host.mdx",
               "sourceDirName": "concepts/in-depth-overview",
               "slug": "/concepts/in-depth-overview/superfluid-host",
@@ -184,8 +163,9 @@
               "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/in-depth-overview/superfluid-host.mdx",
               "tags": [],
               "version": "current",
+              "sidebarPosition": 5,
               "frontMatter": {
-                "description": "The \"brain\" of the Superfluid Protocol"
+                "sidebar_position": 5
               },
               "sidebar": "Concepts",
               "previous": {
@@ -199,7 +179,7 @@
             },
             {
               "id": "concepts/intro",
-              "title": "💡 What is Superfluid?",
+              "title": "What is Superfluid?",
               "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
               "source": "@site/docs/concepts/intro.mdx",
               "sourceDirName": "concepts",
@@ -223,7 +203,7 @@
             {
               "id": "concepts/use-cases/defi",
               "title": "DeFi",
-              "description": "Using Superfluid to create novel DeFi apps",
+              "description": "Superfluid Protocol brings innovative solutions to the DeFi space, allowing for novel applications in financial management and transactions.",
               "source": "@site/docs/concepts/use-cases/defi.mdx",
               "sourceDirName": "concepts/use-cases",
               "slug": "/concepts/use-cases/defi",
@@ -233,8 +213,9 @@
               "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/use-cases/defi.mdx",
               "tags": [],
               "version": "current",
+              "sidebarPosition": 1,
               "frontMatter": {
-                "description": "Using Superfluid to create novel DeFi apps"
+                "sidebar_position": 1
               },
               "sidebar": "Concepts",
               "previous": {
@@ -249,7 +230,7 @@
             {
               "id": "concepts/use-cases/gaming",
               "title": "Gaming",
-              "description": "Superfluid can bring serious efficiencies to Web3 gaming",
+              "description": "Superfluid brings a new level of efficiency and scalability to the movement of in-game value. For an in-depth understanding, explore this article on blockchain gaming with Superfluid streams.",
               "source": "@site/docs/concepts/use-cases/gaming.mdx",
               "sourceDirName": "concepts/use-cases",
               "slug": "/concepts/use-cases/gaming",
@@ -259,8 +240,9 @@
               "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/use-cases/gaming.mdx",
               "tags": [],
               "version": "current",
+              "sidebarPosition": 2,
               "frontMatter": {
-                "description": "Superfluid can bring serious efficiencies to Web3 gaming"
+                "sidebar_position": 2
               },
               "sidebar": "Concepts",
               "previous": {
@@ -275,7 +257,7 @@
             {
               "id": "concepts/use-cases/recurring-payments",
               "title": "Recurring Payments",
-              "description": "Superfluid is great for automating and scaling recurring payments",
+              "description": "Superfluid revolutionizes the concept of recurring payments, offering automated and continuous value transfer between accounts. This innovation enables a variety of practical use cases in the realm of decentralized finance.",
               "source": "@site/docs/concepts/use-cases/recurring-payments.mdx",
               "sourceDirName": "concepts/use-cases",
               "slug": "/concepts/use-cases/recurring-payments",
@@ -285,8 +267,9 @@
               "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/use-cases/recurring-payments.mdx",
               "tags": [],
               "version": "current",
+              "sidebarPosition": 3,
               "frontMatter": {
-                "description": "Superfluid is great for automating and scaling recurring payments"
+                "sidebar_position": 3
               },
               "sidebar": "Concepts",
               "previous": {
@@ -301,7 +284,7 @@
             {
               "id": "concepts/use-cases/social-and-community",
               "title": "Social & Community",
-              "description": "Social tokens give PCR a new",
+              "description": "Superfluid Protocol introduces innovative methods for community engagement and social token incentives, fostering long-term loyalty and participation.",
               "source": "@site/docs/concepts/use-cases/social-and-community.mdx",
               "sourceDirName": "concepts/use-cases",
               "slug": "/concepts/use-cases/social-and-community",
@@ -311,8 +294,9 @@
               "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts/use-cases/social-and-community.mdx",
               "tags": [],
               "version": "current",
+              "sidebarPosition": 4,
               "frontMatter": {
-                "description": "Social tokens give PCR a new"
+                "sidebar_position": 4
               },
               "sidebar": "Concepts",
               "previous": {
@@ -320,7 +304,7 @@
                 "permalink": "/docs/concepts/use-cases/recurring-payments"
               },
               "next": {
-                "title": "📔 Glossary of Terms",
+                "title": "Glossary of Terms",
                 "permalink": "/docs/concepts/glossary"
               }
             },
@@ -400,29 +384,12 @@
                     "id": "concepts/in-depth-overview/super-tokens"
                   },
                   {
-                    "type": "category",
-                    "label": "Super Agreements",
-                    "collapsible": true,
-                    "collapsed": true,
-                    "items": [
-                      {
-                        "type": "doc",
-                        "id": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa"
-                      },
-                      {
-                        "type": "doc",
-                        "id": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida"
-                      },
-                      {
-                        "type": "doc",
-                        "id": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon"
-                      }
-                    ],
-                    "link": {
-                      "type": "generated-index",
-                      "slug": "/category/super-agreements",
-                      "permalink": "/docs/category/super-agreements"
-                    }
+                    "type": "doc",
+                    "id": "concepts/in-depth-overview/money-streaming"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "concepts/in-depth-overview/distributions"
                   },
                   {
                     "type": "doc",

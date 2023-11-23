@@ -1,0 +1,73 @@
+---
+sidebar_position: 3
+---
+import Admonition from '@theme/Admonition';
+
+# Distributions
+
+The introduction of streaming distributions marks a significant advancement in web3, offering a scalable method for one-to-many fund transfers.
+
+<Admonition type="info">
+Distributions are currently active on testnets. Relevant addresses and tooling support are in progress, including additions to SuperTokenV1Library and SDK Core. For more information, visit the [Superfluid Console](https://console.superfluid.finance/eth-goerli/protocol).
+</Admonition>
+
+## Overview
+
+Distributions allow for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable.
+
+### Key Features
+
+- **Pools as Contracts**: Unlike previous approaches, pools in streaming distributions are contracts and can be ERC20 tokens. This allows pool members to transfer units among themselves, which wasn't possible earlier.
+- **Roles and Permissions**: A pool admin can grant and revoke units, while any account can act as a **distributor** to execute fund distributions.
+- **Distribution Methods**: There are two primary ways to distribute funds:
+  - **Instant Distribution**: Calculated as `distributionAmount * (poolMemberUnits / poolTotalUnits)`.
+  - **Streaming Distribution**: Determined by `poolFlowRate * (poolMemberUnits / poolTotalUnits)`.
+- **Gas Efficiency**: The cost of executing distributions remains constant, regardless of the number of pool members.
+
+### High-Level Workflow
+
+1. **Pool Creation**: Any account can create a pool and appoint a pool admin. This pool acts as a channel for distributing funds.
+2. **Unit Management**: The pool admin assigns units to members, representing their share in future distributions.
+3. **Member Connection**: Pool members can connect to or disconnect from the pool, affecting how they access distributed funds.
+4. **Distribution Execution**: Distributors can initiate either instant or streaming distributions, which are then divided among pool members based on their unit share.
+
+## Distribution Examples
+
+### Streaming Distribution Illustration
+
+This diagram shows a distributor streaming funds to various pool members, each holding different unit amounts. Note: A single transaction can cater to multiple members.
+
+![Streaming Distribution](/assets/Screen_Shot_2023-01-22_at_11.22.13_AM.png)
+
+### Adjusting Unit Counts
+
+Here, a distributor modifies unit counts for members. This change instantly alters the distribution rate for all members in one transaction. Batch updates can be done using Superfluid's batch call.
+
+![Unit Count Adjustment](/assets/Screen_Shot_2023-01-22_at_11.25.33_AM.png)
+
+### Modifying the Flow Rate
+
+This example demonstrates how a change in the distributor's streaming rate affects the total flow rate of the pool, thus instantly impacting each member's rate.
+
+![Flow Rate Change](/assets/Screen_Shot_2023-01-22_at_11.26.18_AM.png)
+
+## Advanced Pool Features
+
+As pools are also ERC20 tokens, they enable:
+
+- **Transfer of Units**: Pool members can freely transfer their units.
+- **Delegated Transfers**: Using the `approve` and `transferFrom` functions, units can be transferred on behalf of a member.
+
+These features add composability and flexibility, expanding the potential use cases for pools in web3.
+
+## Handling Odd Numbers: Adjustment Flow Rate
+
+To manage indivisible token amounts due to the absence of floating-point arithmetic in Solidity, distributions use an **adjustment flow rate**. This flow rate is streamed to the pool admin to ensure precise fund allocation.
+
+### Example Scenario
+
+- **Pool Creation**: Alice assigns 3 units each to Bob, Carol, and Dave, totaling 9 units.
+- **Streaming Distribution**: Alice initiates a flow of 100 DAIx/second, which isn't divisible by 9.
+- **Adjustment Flow Rate**: To address the indivisibility, 99 DAIx/second is streamed to members, with 1 DAIx/second as the adjustment flow to Alice.
+
+In conclusion, streaming distributions offer a robust and scalable solution for distributing funds in web3, backed by the flexibility and efficiency of the underlying technology.

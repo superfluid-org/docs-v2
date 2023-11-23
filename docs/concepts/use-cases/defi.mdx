@@ -1,59 +1,47 @@
 ---
-description: Using Superfluid to create novel DeFi apps
+sidebar_position: 1
 ---
 
-# DeFi
+# DeFi 
 
-### Dollar-Cost Averaging
+Superfluid Protocol brings innovative solutions to the DeFi space, allowing for novel applications in financial management and transactions.
 
-Like how Superfluid can automate recurring payments, you can also use the protocol to develop automated recurring investing applications. A Superfluid-powered DCA application would allow you to stream money towards an investment of your choice and receive periodic distributions of the desired investment back.
+## Dollar-Cost Averaging
 
-[Ricochet Exchange](https://ricochet.exchange/) is an example of a live application that accomplishes this.
+Superfluid's automation capabilities extend to the development of recurring investment applications. These applications can stream funds towards investments, providing a hands-off approach to dollar-cost averaging (DCA).
 
-### Automated Savings
+- **Example**: [Ricochet Exchange](https://ricochet.exchange/) demonstrates an application of this concept, where users can automate their investment strategies.
 
-Most of us set aside a fixed amount each month for savings and investment. Using Superfluid, you are able to automatically accomplish that investment allocation with money streams combined with [real-time investing applications](https://medium.com/superfluid-blog/real-time-investing-empowering-the-next-generation-of-investors-b216d6ac8d3f). As a result, the transactional effort of investing is cut out and made set-and-forget.
+## Automated Savings
 
-Imagine a "streaming portfolio" where an individual or organization could gradually allocate a portion of their assets or revenue into a range of investments, from yield-bearing positions to Ethereum and Bitcoin.
+Using Superfluid, individuals and organizations can automate their savings or investment allocations. This setup enables a continuous, hassle-free process, effectively creating a "streaming portfolio".
 
-### Undercollateralized Lending
+- **Example**: This approach can be used to allocate funds into various investments, like yield-bearing assets or cryptocurrencies such as Ethereum and Bitcoin. Further details can be found in this [article on real-time investing](https://medium.com/superfluid-blog/real-time-investing-empowering-the-next-generation-of-investors-b216d6ac8d3f).
 
-When an employee is receiving a salary stream or a business is earning on-chain revenue through money streams, it provides an on-chain view at the creditworthiness of the employee/business. Assuming that the employee continues receiving their salary and the business continues to earn, that business/employee could be allowed to borrow against that income _without need for collateral_.
+## Undercollateralized Lending
 
-Here's a good example of how this might look: first, a lending contract would be given authorization to acquire control over the salary/revenue stream. Then, the lending contract would lend to this employee/business and expect the loan to be repaid by a certain date. If they fail to do so, then the lending contract could take control of their salary/revenue stream and make up the loan that way, essentially garnishing the borrower's income.
+Superfluid facilitates undercollateralized lending based on income streams. This system allows businesses or individuals with consistent revenue streams to secure loans without traditional collateral.
 
-That whole process can be encapsulated in an undercollateralized lending contract. Check out the [Employment Based Loan](https://github.com/superfluid-finance/protocol-monorepo/tree/fc916ffca38749fb79a2a6f22edd3cbadaae7bac/examples/employment-based-loan) Example and this video of us breaking down how it works at a technical level 👇
+- **Process**: A lending contract gains control over a salary or revenue stream, enabling borrowing against future income.
+- **Example**: Explore the [Employment Based Loan](https://github.com/superfluid-finance/protocol-monorepo/tree/fc916ffca38749fb79a2a6f22edd3cbadaae7bac/examples/employment-based-loan) for a practical implementation. Additionally, [this video](https://youtu.be/yxzOimYwxHY?t=741) provides a technical breakdown.
 
+## Lending in Streams
 
+Superfluid introduces a new paradigm in on-chain lending, where loan repayments and borrowings are handled through continuous streams rather than lump-sum transactions.
 
-### Lending in Streams
+- **Benefit**: This system allows for automated, on-chain loan repayments and gradual borrowing against collateral.
+- **Example**: An illustrative project demonstrating this concept can be viewed [here](https://showcase.ethglobal.com/roadtoweb3/the-loan-stream).
 
-The way we traditionally experience on-chain lending is with one-time repays or borrows (i.e. "I borrow 100 USDC" or "I repay my loan with 500 DAI"). Using Superfluid, you can create lending applications where both repayment and borrowing can be done in streams instead of lump-sums.
+## Streaming Options
 
-On the repayment side, this offers a way to automatically repay a loan on-chain and on the borrowing side, allows credit to be taken out gradually against existing collateral instead of all at once.
+Superfluid also enables a novel approach to options trading, replacing upfront premium payments with continuous streaming payments.
 
-Check out this example of a project that lets you take out a loan in the form of a money stream 👇
+- **Mechanism**: An option seller receives a continuous stream of payments until the option is exercised by the buyer.
+- **Application**: This model is applicable to perpetual options, where the rights are maintained as long as the premium is streamed. For an example, see this [streaming call option project](https://github.com/superfluid-finance/protocol-monorepo/tree/chainshot/examples/archive/streaming-call-option).
 
+## On-Chain Tradeable Cashflow Assets
 
+Tradeable cashflow assets in Superfluid involve using NFTs as pointers for money streams, enabling the transfer of future cashflows on-chain.
 
-### Streaming Options
-
-With traditional options contracts, a buyer pays an upfront premium for the right (or "option") to buy or sell as asset at a particular price before a particular time. With Superfluid, you are able to replace the upfront payment to the option seller with a continuous by-the-second payment as long as the option remains unexercised (the buyer hasn't used the option).&#x20;
-
-Here's an example: let's say you're selling an NFT [call option](https://www.investopedia.com/terms/c/calloption.asp) and the premium is getting paid in a stream. This means that you start receiving an inbound money stream as soon as the call option is purchased and right as it gets exercised (your buyer purchases the NFT off of you), you then stop receiving the stream.&#x20;
-
-This is a very unique way to structure options and can be applied for perpetual options (as long as you're streaming your premium payment you have the option rights forever). Check out this example project of a streaming call option 👇
-
-
-
-### On-Chain Tradeable Cashflow Assets
-
-Tradeable cashflow assets revolve around setting an NFT as a pointer for a money stream such that the holder of the NFT is receiving the money stream. Upon transfer of the NFT to a new address, the money stream to the previous holder is cancelled and started to the new holder.&#x20;
-
-This design allows for the sale of future cashflow on-chain. You could sell an NFT that designates a portion of cashflows from a protocol, employment position, or business so long as that cashflow is in the form of on-chain money streams. By doing so, you acquire that cashflow up front.
-
-Check out this basic tradeable cashflow example to see how you can tokenize money streams! 👇
-
-
-
-
+- **Functionality**: The transfer of the NFT shifts the cashflow from the previous holder to the new one.
+- **Example**: This [basic tradeable cashflow example](../../.gitbook/assets/image_(50).png) showcases how money streams can be tokenized for on-chain trading.

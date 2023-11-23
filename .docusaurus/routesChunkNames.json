@@ -186,26 +186,22 @@
     },
     "content": "content---markdown-page-393-028"
   },
-  "/docs-0af": {
+  "/docs-8e2": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---docs-6-b-7-a25"
     }
   },
-  "/docs-9f5": {
+  "/docs-02f": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
     "version": "version---docs-935-398"
   },
-  "/docs-53c": {
+  "/docs-b02": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
   "/docs/category/in-depth-overview-0d1": {
     "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
     "categoryGeneratedIndex": "categoryGeneratedIndex---docs-category-in-depth-overviewc-8-d-f95"
-  },
-  "/docs/category/super-agreements-3bc": {
-    "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
-    "categoryGeneratedIndex": "categoryGeneratedIndex---docs-category-super-agreements-439-7a2"
   },
   "/docs/category/use-cases-c4e": {
     "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
@@ -215,17 +211,13 @@
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---docs-concepts-glossarybd-6-566"
   },
-  "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa-591": {
+  "/docs/concepts/in-depth-overview/distributions-3da": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-concepts-in-depth-overview-super-agreements-constant-flow-agreement-cfab-85-0c8"
+    "content": "content---docs-concepts-in-depth-overview-distributionsea-2-65f"
   },
-  "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida-222": {
+  "/docs/concepts/in-depth-overview/money-streaming-c46": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-concepts-in-depth-overview-super-agreements-instant-distribution-agreement-ida-4-f-2-962"
-  },
-  "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon-d75": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-concepts-in-depth-overview-super-agreements-streaming-distributions-coming-sooncf-3-143"
+    "content": "content---docs-concepts-in-depth-overview-money-streaming-206-fd9"
   },
   "/docs/concepts/in-depth-overview/super-apps-3a7": {
     "__comp": "__comp---theme-doc-item-178-a40",

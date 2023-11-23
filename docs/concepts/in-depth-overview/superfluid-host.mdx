@@ -1,33 +1,47 @@
 ---
-description: The "brain" of the Superfluid Protocol
+sidebar_position: 5
 ---
+
+import Admonition from '@theme/Admonition';
 
 # Superfluid Host
 
-## Definition
+The Superfluid Host Contract is a central element of the Superfluid Protocol, acting as a hub connecting Super Tokens, Super Agreements, and Super Apps.
 
-The Superfluid Host Contract is the centerpiece of the Superfluid Protocol which connects Super Tokens, Super Agreements, and Super Apps. It works like a conduit for information throughout the Superfluid Protocol.
+![Superfluid Host Contract](/assets/image_(68)_(1).png)
 
-That looks complicated. Let's break down the basic linkages from core pieces of the Superfluid Protocol to the Host contract :point\_down:
+Let's explore how the Host Contract interacts with different components of the Superfluid Protocol.
 
 ## Super Agreements 🔗 Host Contract
 
-Super Agreements are modular and house their logic in their own individual contracts that are connected to the Host Contract. Calling a Super Agreement means calling [`callAgreement()`](https://docs.superfluid.finance/superfluid/developers/solidity-examples/interacting-with-superfluid-smart-contracts) on the Host Contract with a chosen Super Agreement and parameters.
+Super Agreements, each with their unique contracts, interface with the Host Contract. Interaction with a Super Agreement is typically done by calling [`callAgreement()`](https://docs.superfluid.finance/superfluid/developers/solidity-examples/interacting-with-superfluid-smart-contracts) on the Host Contract, specifying the agreement and parameters.
 
-As a result, Super Agreements can be upgraded and new Super Agreements can be developed and registered to the Host Contract.
+### Key Points
 
+- **Upgradeability and Expansion**: Super Agreements can be updated or new ones can be added and registered with the Host Contract.
 
-**NOTE**: Accounts do NOT actually interact with the Super Token contract when calling a Super Agreement. Accounts call Super Agreements through the Host Contract, which in turn enacts the agreement's functionality upon the Super Token balances of the accounts involved.
-
+<Admonition type="info">
+<strong>NOTE</strong>: Direct interactions with Super Token contracts are not required for invoking Super Agreements. Instead, these agreements are accessed via the Host Contract, which then manages the Super Token balances involved.
+</Admonition>
 
 ## Super Tokens 🔗 Host Contract
 
-Super Tokens are essentially the base of the Superfluid Protocol where all the Super Agreement information for an account is aggregated.
+Super Tokens form the foundational layer of the Superfluid Protocol, where all Super Agreement data for an account is compiled.
 
-Through a Super Token contract, the effects of each Super Agreement (CFA & IDA) on the balance of an account is combined to return the account's Super Token balance.
+### Functionality
 
-The Super Token grabs this information through the Host contract by iterating across the list of Super Agreements registered with the Host.&#x20;
+- **Aggregated Balance Calculation**: The impact of each Super Agreement on an account's balance is cumulatively calculated to determine the Super Token balance.
+- **Data Sourcing**: Super Token contracts obtain necessary data through the Host Contract by iterating over the registered Super Agreements.
 
 ## Super Apps 🔗 Host Contract
 
-Super Apps must be registered with the Superfluid Host in order to activate callback logic. Once deployed and registered, when an account engages a Super Agreement to a Super App, the Host will trigger the Super App's callback functionality.
+Registration of Super Apps with the Superfluid Host is essential to enable their callback functionalities.
+
+### Interaction Mechanics
+
+- **Registration Requirement**: Super Apps must be registered with the Host to function correctly.
+- **Callback Activation**: When a Super Agreement is engaged with a Super App, the Host Contract triggers the Super App's callbacks.
+
+![Super Apps and Host Contract](/assets/image_(58).png)
+
+In summary, the Superfluid Host Contract is integral to the Superfluid Protocol, facilitating seamless interactions and integrations among Super Tokens, Super Agreements, and Super Apps.

@@ -16,18 +16,13 @@
               "sidebar": "Concepts"
             },
             {
-              "id": "concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
-              "path": "/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa",
+              "id": "concepts/in-depth-overview/distributions",
+              "path": "/docs/concepts/in-depth-overview/distributions",
               "sidebar": "Concepts"
             },
             {
-              "id": "concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
-              "path": "/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida",
-              "sidebar": "Concepts"
-            },
-            {
-              "id": "concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
-              "path": "/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon",
+              "id": "concepts/in-depth-overview/money-streaming",
+              "path": "/docs/concepts/in-depth-overview/money-streaming",
               "sidebar": "Concepts"
             },
             {
@@ -88,11 +83,6 @@
             {
               "id": "/category/in-depth-overview",
               "path": "/docs/category/in-depth-overview",
-              "sidebar": "Concepts"
-            },
-            {
-              "id": "/category/super-agreements",
-              "path": "/docs/category/super-agreements",
               "sidebar": "Concepts"
             },
             {

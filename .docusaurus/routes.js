@@ -99,25 +99,19 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '0af'),
+    component: ComponentCreator('/docs', '8e2'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '9f5'),
+        component: ComponentCreator('/docs', '02f'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '53c'),
+            component: ComponentCreator('/docs', 'b02'),
             routes: [
               {
                 path: '/docs/category/in-depth-overview',
                 component: ComponentCreator('/docs/category/in-depth-overview', '0d1'),
-                exact: true,
-                sidebar: "Concepts"
-              },
-              {
-                path: '/docs/category/super-agreements',
-                component: ComponentCreator('/docs/category/super-agreements', '3bc'),
                 exact: true,
                 sidebar: "Concepts"
               },
@@ -134,20 +128,14 @@ export default [
                 sidebar: "Concepts"
               },
               {
-                path: '/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa',
-                component: ComponentCreator('/docs/concepts/in-depth-overview/super-agreements/constant-flow-agreement-cfa', '591'),
+                path: '/docs/concepts/in-depth-overview/distributions',
+                component: ComponentCreator('/docs/concepts/in-depth-overview/distributions', '3da'),
                 exact: true,
                 sidebar: "Concepts"
               },
               {
-                path: '/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida',
-                component: ComponentCreator('/docs/concepts/in-depth-overview/super-agreements/instant-distribution-agreement-ida', '222'),
-                exact: true,
-                sidebar: "Concepts"
-              },
-              {
-                path: '/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon',
-                component: ComponentCreator('/docs/concepts/in-depth-overview/super-agreements/streaming-distributions-coming-soon', 'd75'),
+                path: '/docs/concepts/in-depth-overview/money-streaming',
+                component: ComponentCreator('/docs/concepts/in-depth-overview/money-streaming', 'c46'),
                 exact: true,
                 sidebar: "Concepts"
               },
