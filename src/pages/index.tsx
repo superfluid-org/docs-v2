@@ -26,7 +26,7 @@ export const actions = [
   {
     title: 'For Developers',
     icon: BookOpen,
-    to: '/contracts/v3/overview',
+    to: '/developers',
     text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
   },
 ]
