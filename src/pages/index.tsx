@@ -12,22 +12,22 @@ import { ArrowUpRight as LinkIcon, BookOpen, HelpCircle, Info, MessageCircle } f
 
 export const actions = [
   {
-    title: 'What is Uniswap',
+    title: 'What is Superfluid?',
     icon: Info,
     to: '/concepts/overview',
-    text: `Learn about the core concepts of the Uniswap Protocol, Swaps, Pools, Concentrated Liquidity and more.`,
+    text: `Learn about the core concepts of the Superfluid Protocol.`,
   },
   {
-    title: 'Integrate with Uniswap',
+    title: 'Products',
     icon: HelpCircle,
-    to: '/sdk/v3/overview',
+    to: '/products',
     text: `Learn how to integrate with Uniswap by building a dApp through guided examples.`,
   },
   {
-    title: 'The Uniswap smart contracts',
+    title: 'For Developers',
     icon: BookOpen,
     to: '/contracts/v3/overview',
-    text: `Learn about the architecture of the Uniswap Protocol smart contracts through guided examples.`,
+    text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
   },
 ]
 

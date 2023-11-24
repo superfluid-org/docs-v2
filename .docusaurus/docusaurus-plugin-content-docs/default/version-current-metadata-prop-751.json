@@ -137,7 +137,7 @@
     "concepts/glossary": {
       "id": "concepts/glossary",
       "title": "Glossary of Terms",
-      "description": "General Conceptual Terms",
+      "description": "This glossary provides a comprehensive overview of terms and concepts within the Superfluid ecosystem.",
       "sidebar": "Concepts"
     },
     "concepts/in-depth-overview/distributions": {

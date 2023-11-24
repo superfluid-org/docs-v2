@@ -1,73 +1,73 @@
----
-sidebar_position: 4
----
+import Link from '@docusaurus/Link';
 
 # Glossary of Terms
 
-### General Conceptual Terms
+This glossary provides a comprehensive overview of terms and concepts within the Superfluid ecosystem.
 
-**Superfluid Ecosystem**: The ecosystem of Superfluid users and Super Apps that utilize and add utility to real-time finance.
+## General Conceptual Terms
 
-**Real-Time Finance**: the second-by-second movement of money made possible on-chain through Superfluid’s smart contract framework
+**Superfluid Ecosystem**: The collective of users and Super Apps utilizing real-time finance through Superfluid.
 
-### Super Tokens
+**Real-Time Finance**: The movement of money on a second-by-second basis enabled by Superfluid's smart contract framework.
 
-**Super Token**: tokens which may be used for any Superfluid related operation. There are 3 types of Super Tokens: ERC20 Wrapper Tokens, Pure Super Tokens, and Native Asset Super Tokens. More can be found on this in our[ section on Super Tokens](../developers/super-tokens/super-tokens/)
+## Super Tokens
 
-**Wrap**: Converting ERC20 tokens to wrapped super tokens. Wrapping will transfer underlying ERC20 assets into the wrapper contract, and mint an equivalent amount of super tokens which are sent back in exchange. You may also see this denoted as `upgrade` in our codebase or on block explorers
+**Super Token**: Tokens used in all Superfluid operations. Types include ERC20 Wrapper Tokens, Pure Super Tokens, and Native Asset Super Tokens. Detailed information is available in our [Super Tokens section](../developers/super-tokens/super-tokens/).
 
-**Unwrap**: Converting wrapped super tokens to their underlying ERC20 asset. Unwrapping will transfer the underlying asset back to the caller, and burn an equivalent number of super tokens. You may also see this denoted as `downgrade` in our codebase or on block explorers
+**Wrap**: The process of converting ERC20 tokens into wrapped super tokens. This involves transferring ERC20 assets into the wrapper contract and receiving an equivalent amount of super tokens.
 
-**Real Time Balance:** A calculation which determines the balance of a given account that takes into consideration dynamic balances which are determined Superfluid agreement logic as well as static token balances.
+**Unwrap**: Converting wrapped super tokens back into their underlying ERC20 assets. This involves burning super tokens and transferring the underlying asset to the user.
 
-### Agreements
+**Real Time Balance**: A dynamic calculation of an account's balance, considering both Superfluid agreement logic and static token balances.
 
-**Superfluid Agreement**: A supplementary value transfer functionality that is given to Super Tokens through the Superfluid protocol. These contracts contain logic for how super tokens may be used within the protocol. The two current Super Agreements are the Constant Flow Agreement and the Instant Distribution Agreement. More may be added in the future.
+## Agreements
 
-**Constant Flow Agreement (CFA)**: A Super Agreement that allows perpetual second-by-second movement of Super Tokens between addresses.
+**Superfluid Agreement**: Additional functionalities for Super Tokens provided by the Superfluid protocol. Examples include the Constant Flow Agreement and the Instant Distribution Agreement, with potential for more in the future.
 
-**Instant Distribution Agreement (IDA):** A Super Agreement that allows mass dispersion of Super Tokens to multiple addresses in accordance with distribution shares (or “units”) at a fixed gas cost.
+**Constant Flow Agreement (CFA)**: An agreement allowing perpetual, second-by-second movement of Super Tokens between addresses.
 
-**Flow**: A continuous stream of money that is sent from one address to another. A sender can only have a single flow open to the same receiver on each token. This term is often used interchangeably with `stream`.
+**Instant Distribution Agreement (IDA)**: An agreement for mass dispersion of Super Tokens to multiple addresses based on distribution shares or "units" at a fixed gas cost.
 
-**Flow Rate**: The number of tokens being sent in a stream, denominated in wei per second
+**Flow**: A continuous money stream from one address to another. A sender can maintain only one flow to the same receiver per token.
 
-**Net Flow Rate:** The net amount of tokens being sent or received per second, in wei, by a given account for a specific token
+**Flow Rate**: The amount of tokens sent in a stream, denominated in wei per second.
 
-**ACL (Access Control List)**: A set of features which enables accounts to provide varying levels of control to operators that can `create`, `update`, or `delete` streams on their behalf.
+**Net Flow Rate**: The net amount of tokens sent or received per second by an account for a specific token.
 
-**Index**: A pool that is created using the Instant Distribution Agreement
+**ACL (Access Control List)**: A feature enabling varying levels of control to operators for creating, updating, or deleting streams on behalf of an account.
 
-**Publisher**: The creator of a given Index
+**Index**: A pool created using the Instant Distribution Agreement.
 
-**Units**: These are shares which Denominate an address’s overall share of an IDA index. This term is often used interchangeably with `distribution shares`.
+**Publisher**: The creator of an Index.
 
-**Distribution**: An action that sends tokens to the addresses which own shares in an index. This distribution will be split amongst addresses that are a part of the index in accordance with the number of shares that they own. For example, say a publisher distributes 100 tokens to an index which has 100 shares. If you have 10 shares, you’ll be entitled to 10% of the pool, and in this case, 10 tokens.
+**Units**: Shares denoting an address’s share of an IDA index, interchangeable with "distribution shares".
 
-### Protocol
+**Distribution**: The action of sending tokens to addresses owning shares in an index, proportionate to the number of shares held.
 
-**Callback**: A function that will run automatically when specific actions are taken. Super Apps are powerful because developers can implement logic in callbacks that run in response to Superfluid related actions
+## Protocol
 
-**User Data**: Arbitrary data which can be passed along with your calls to superfluid specific functions. This userData may be decoded within Super App callbacks, and used within application logic.
+**Callback**: A function that automatically executes when specific actions are taken. Super Apps use callbacks to respond to Superfluid-related actions.
 
-**Batch Calls**: A feature of Super Tokens which allow you to batch actions together so that they can all be executed in a single transaction
+**User Data**: Data that can be included with Superfluid function calls and utilized within Super App callbacks.
 
-**The Superfluid Host**: The ‘brain’ of the protocol. Superfluid agreements are whitelisted by the host contract, and the host processes all function calls which intend to make use of features on specific agreements. The host also plays a critical role in protocol governance, and facilitates the execution of adjacent protocol features like Super App callbacks
+**Batch Calls**: A Super Token feature allowing multiple actions to be executed in a single transaction.
 
-**Resolver:** A helper contract which allows you to quickly find all the contract addresses which constitute the protocol
+**The Superfluid Host**: The core of the protocol, processing function calls and facilitating protocol governance and Super App callbacks.
 
-### Sentinels & Solvency
+**Resolver**: A contract assisting in locating all protocol constituent contract addresses.
 
-**Buffer**: The amount of tokens that an account must temporarily lock up when a stream is started.
+## Sentinels & Solvency
 
-**Liquidation**: Occurs when a stream is closed by a sentinel once an account's token balance hits zero while still streaming funds
+**Buffer**: Tokens locked temporarily when a stream starts.
 
-**Sentinel**: A node that watches the Superfluid network & closes streams when they become critical or insolvent. Anyone can become a Sentinel by running a node
+**Liquidation**: The process initiated by a sentinel when an account's balance reaches zero while streaming funds.
 
-**PIC**: The Patrician in Charge who receives rewards each time a stream is closed in the priority period when an account goes critical
+**Sentinel**: A node monitoring the Superfluid network and closing critical or insolvent streams. Anyone can run a sentinel node.
 
-**TOGA**: the Transparent Ongoing Auction which allows anyone to become the Patrician in Charge (PIC) if they put up a higher staked amount than the previous PIC
+**PIC (Patrician in Charge)**: The recipient of rewards for closing streams during the priority period when an account becomes critical.
 
-**Stake**: The amount of funds locked in the TOGA contract by the Patrician in Charge (PIC)
+**TOGA (Transparent Ongoing Auction)**: An auction allowing individuals to become the PIC by staking a higher amount than the current PIC.
 
-**Top Up:** adding to your Super Token balance such that the address’s balance does not reach zero resulting in liquidation
+**Stake**: Funds locked in the TOGA contract by the PIC.
+
+**Top Up**: Adding to a Super Token balance to prevent liquidation due to a zero balance.
