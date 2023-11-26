@@ -66,6 +66,11 @@
               "sidebar": "Concepts"
             },
             {
+              "id": "developers/guides/deploy-super-token",
+              "path": "/docs/developers/guides/deploy-super-token",
+              "sidebar": "Developers"
+            },
+            {
               "id": "developers/intro",
               "path": "/docs/developers/intro",
               "sidebar": "Developers"
@@ -89,6 +94,11 @@
               "id": "/category/use-cases",
               "path": "/docs/category/use-cases",
               "sidebar": "Concepts"
+            },
+            {
+              "id": "/category/guides",
+              "path": "/docs/category/guides",
+              "sidebar": "Developers"
             }
           ],
           "draftIds": [],

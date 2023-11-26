@@ -121,6 +121,22 @@
         "href": "/docs/developers/intro",
         "docId": "developers/intro",
         "unlisted": false
+      },
+      {
+        "type": "category",
+        "label": "Guides",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "link",
+            "label": "deploy-super-token",
+            "href": "/docs/developers/guides/deploy-super-token",
+            "docId": "developers/guides/deploy-super-token",
+            "unlisted": false
+          }
+        ],
+        "href": "/docs/category/guides"
       }
     ],
     "TechnicalReference": [
@@ -199,6 +215,12 @@
       "title": "Social & Community",
       "description": "Superfluid Protocol introduces innovative methods for community engagement and social token incentives, fostering long-term loyalty and participation.",
       "sidebar": "Concepts"
+    },
+    "developers/guides/deploy-super-token": {
+      "id": "developers/guides/deploy-super-token",
+      "title": "deploy-super-token",
+      "description": "",
+      "sidebar": "Developers"
     },
     "developers/intro": {
       "id": "developers/intro",

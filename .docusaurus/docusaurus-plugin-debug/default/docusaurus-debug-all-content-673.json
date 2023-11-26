@@ -306,6 +306,26 @@
               }
             },
             {
+              "id": "developers/guides/deploy-super-token",
+              "title": "deploy-super-token",
+              "description": "",
+              "source": "@site/docs/developers/guides/deploy-super-token.mdx",
+              "sourceDirName": "developers/guides",
+              "slug": "/developers/guides/deploy-super-token",
+              "permalink": "/docs/developers/guides/deploy-super-token",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/guides/deploy-super-token.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Developers",
+              "previous": {
+                "title": "Guides",
+                "permalink": "/docs/category/guides"
+              }
+            },
+            {
               "id": "developers/intro",
               "title": "💡 What is Superfluid?",
               "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
@@ -322,7 +342,11 @@
               "frontMatter": {
                 "sidebar_position": 1
               },
-              "sidebar": "Developers"
+              "sidebar": "Developers",
+              "next": {
+                "title": "Guides",
+                "permalink": "/docs/category/guides"
+              }
             },
             {
               "id": "products/intro",
@@ -448,6 +472,23 @@
               {
                 "type": "doc",
                 "id": "developers/intro"
+              },
+              {
+                "type": "category",
+                "label": "Guides",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "developers/guides/deploy-super-token"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "slug": "/category/guides",
+                  "permalink": "/docs/category/guides"
+                }
               }
             ],
             "TechnicalReference": [

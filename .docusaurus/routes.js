@@ -99,16 +99,22 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '8e2'),
+    component: ComponentCreator('/docs', 'e5d'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '02f'),
+        component: ComponentCreator('/docs', '2ae'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', 'b02'),
+            component: ComponentCreator('/docs', '871'),
             routes: [
+              {
+                path: '/docs/category/guides',
+                component: ComponentCreator('/docs/category/guides', '8a9'),
+                exact: true,
+                sidebar: "Developers"
+              },
               {
                 path: '/docs/category/in-depth-overview',
                 component: ComponentCreator('/docs/category/in-depth-overview', '0d1'),
@@ -186,6 +192,12 @@ export default [
                 component: ComponentCreator('/docs/concepts/use-cases/social-and-community', 'ad7'),
                 exact: true,
                 sidebar: "Concepts"
+              },
+              {
+                path: '/docs/developers/guides/deploy-super-token',
+                component: ComponentCreator('/docs/developers/guides/deploy-super-token', 'e1a'),
+                exact: true,
+                sidebar: "Developers"
               },
               {
                 path: '/docs/developers/intro',
