@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import Logo from '@site/src/components/Logo';
 import Heading from '@theme/Heading';
 import styled from '@emotion/styled'
 
@@ -114,10 +114,14 @@ export default function Home(): JSX.Element {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <main>
-        <HomepageFeatures />
-      </main>
       <div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}><Logo /></div>
+      
+      
       <Row>
             {actions.map((action) => (
                 <Link style={{ textDecoration: 'none' }} to={action.to}>
