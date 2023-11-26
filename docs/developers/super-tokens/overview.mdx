@@ -1,0 +1,108 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Overview of Super Tokens
+
+Super Tokens enhance the ERC20 token standard by integrating additional functionalities like streams and instant distributions, termed as Super Agreements. Super Tokens exist in two primary forms: Wrapper and Pure.
+
+:::info
+Beyond traditional ERC20 capabilities, Super Tokens enable advanced value transfer methods, including money streaming, through Superfluid's functionalities.
+:::
+
+## Real-Time Balance
+
+Super Tokens offer a dynamic approach to balance calculation, incorporating both standard transfers and the ongoing effects of Super Agreements.
+
+- **Static Balance**: Traditional ERC20 balance.
+- **Real-Time Balances**: Fluctuations due to Super Agreements, either positive or negative.
+
+The actual balance is the sum of these elements, providing a real-time view of an account's funds.
+
+## Types of Super Tokens
+
+<Tabs
+  defaultValue="wrapper"
+  values={[
+    {label: 'Wrapper Super Tokens', value: 'wrapper'},
+    {label: 'Pure Super Tokens', value: 'pure'},
+    {label: 'Native Super Tokens', value: 'native'},
+  ]}>
+  <TabItem value="wrapper">
+
+### 1. Wrapper Super Tokens
+
+Wrapper Super Tokens are created from existing ERC20 tokens to include Superfluid's functionalities. They are the most common and can be permissionlessly created for any ERC20 token.
+
+#### Wrapping & Unwrapping
+
+- **Wrapping**: Deposit ERC20 tokens into the Wrapper Super Token contract to mint an equivalent amount of Super Tokens.
+- **Unwrapping**: Burn Super Tokens to get back the underlying ERC20 tokens.
+
+![Wrapper Super Tokens](/assets/image_(1)_(1)_(1).png)
+
+#### Custom Wrapper Super Tokens
+
+Custom Wrapper Super Tokens are used when underlying ERC20 tokens have complex functionalities that standard wrappers can't handle.
+
+For detailed deployment steps and further information, visit the [Deploy a Super Token Page](./guides/deploy-super-token.mdx).
+
+  </TabItem>
+  <TabItem value="pure">
+
+### 2. Pure Super Tokens
+
+Pure Super Tokens are independent of any underlying asset, inheriting all Superfluid functionalities directly.
+
+#### Customization
+
+Pure Super Tokens can be customized with additional features like pre-minting, access control, and wallet whitelisting. They can be categorized as Governed or Independent, with Governed Pure Super Tokens recommended for alignment with Superfluid Protocol Governance.
+
+For a step-by-step guide on deploying Pure Super Tokens, refer to the [Pure Super Token Deployment](./guides/deploy-super-token.mdx#deploying-a-pure-super-token) section.
+
+  </TabItem>
+  <TabItem value="native">
+
+### 3. Native Super Tokens
+
+Native Super Tokens are similar to wrappers but are designed for native assets like ETH, MATIC, or AVAX. Depositing these assets into the Native Super Token contract yields a wrapped version of the asset.
+
+Canonical deployments of Native Super Tokens are available for each chain that Superfluid operates on. For detailed deployment steps and further information, visit the [Deploy a Super Token Page](./guides/deploy-super-token.mdx).
+
+  </TabItem>
+</Tabs>
+
+## ERC777 in Super Tokens
+
+### Understanding ERC777
+
+ERC777 is a token standard that builds on ERC20, introducing send/receive hooks and operator accounts for more complex token interactions.
+
+#### Features
+
+- **Send/Receive Hooks**: Custom logic triggered upon sending or receiving ERC777 tokens.
+- **Operators**: Accounts authorized to move tokens on behalf of others, triggering relevant hooks.
+
+![ERC777 Hooks](/assets/image_(10)_(1).png)
+
+### Super Token ERC777 Implementation
+
+Super Tokens utilize ERC777 to allow for advanced token interactions.
+
+- **Override of `transferFrom`**: In Super Tokens, this function doesn't trigger hooks, differing from typical ERC777 behavior.
+- **Preserving `send` Functionality**: The `send` function is maintained as is, suitable for interactions requiring ERC777 features.
+
+![Super Token ERC777 Implementation](/assets/image_(2)_(2).png)
+
+### Additional Resources
+
+- [Ethereum.org's ERC777 Overview](https://ethereum.org/en/developers/docs/standards/tokens/erc-777/)
+- [Formal EIP-777 Description](https://eips.ethereum.org/EIPS/eip-777)
+- [OpenZeppelin's ERC777 Code](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/2c69f9f9f5d0e59bba030f6eba5495f7a6991162/contracts/token/ERC777/ERC777.sol#L269)
+- [SuperToken and ERC777 Integration](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperToken.sol)
+
+---
+This overview provides a comprehensive understanding of Super Tokens and their integration with the ERC777 standard, highlighting the advanced capabilities and potential applications within the Superfluid ecosystem.

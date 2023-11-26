@@ -123,7 +123,7 @@
             {
               "id": "concepts/in-depth-overview/super-tokens",
               "title": "Super Tokens",
-              "description": "Super Tokens extend the ERC20 token standard with additional functionalities like streams or instant distributions, known as Super Agreements. There are two types of Super Tokens: wrapper and custom.",
+              "description": "Super Tokens extend the ERC20 token standard with additional functionalities like Money Streaming or Distributions, known as Super Agreements. There are two types of Super Tokens: wrapper and custom.",
               "source": "@site/docs/concepts/in-depth-overview/super-tokens.mdx",
               "sourceDirName": "concepts/in-depth-overview",
               "slug": "/concepts/in-depth-overview/super-tokens",
@@ -306,26 +306,6 @@
               }
             },
             {
-              "id": "developers/guides/deploy-super-token",
-              "title": "deploy-super-token",
-              "description": "",
-              "source": "@site/docs/developers/guides/deploy-super-token.mdx",
-              "sourceDirName": "developers/guides",
-              "slug": "/developers/guides/deploy-super-token",
-              "permalink": "/docs/developers/guides/deploy-super-token",
-              "draft": false,
-              "unlisted": false,
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/guides/deploy-super-token.mdx",
-              "tags": [],
-              "version": "current",
-              "frontMatter": {},
-              "sidebar": "Developers",
-              "previous": {
-                "title": "Guides",
-                "permalink": "/docs/category/guides"
-              }
-            },
-            {
               "id": "developers/intro",
               "title": "💡 What is Superfluid?",
               "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
@@ -343,6 +323,185 @@
                 "sidebar_position": 1
               },
               "sidebar": "Developers",
+              "next": {
+                "title": "Super Tokens",
+                "permalink": "/docs/category/super-tokens"
+              }
+            },
+            {
+              "id": "developers/money-streaming/guides/create-update-delete-flow",
+              "title": "Create, Update, and Delete Flows",
+              "description": "This guide covers various methods for managing flows in Superfluid, including direct management by the sender and management via Access Control List (ACL), both on-chain and off-chain.",
+              "source": "@site/docs/developers/money-streaming/guides/create-update-delete-flow.mdx",
+              "sourceDirName": "developers/money-streaming/guides",
+              "slug": "/developers/money-streaming/guides/create-update-delete-flow",
+              "permalink": "/docs/developers/money-streaming/guides/create-update-delete-flow",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/money-streaming/guides/create-update-delete-flow.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "Developers",
+              "previous": {
+                "title": "Guides",
+                "permalink": "/docs/category/guides-1"
+              },
+              "next": {
+                "title": "Money Streaming with Super Tokens",
+                "permalink": "/docs/category/money-streaming-with-super-tokens"
+              }
+            },
+            {
+              "id": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain",
+              "title": "Interact Off-Chain",
+              "description": "",
+              "source": "@site/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain.mdx",
+              "sourceDirName": "developers/money-streaming/guides/money-streaming-with-super-tokens",
+              "slug": "/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain",
+              "permalink": "/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 2,
+              "frontMatter": {
+                "sidebar_position": 2
+              },
+              "sidebar": "Developers",
+              "previous": {
+                "title": "Interact On-Chain",
+                "permalink": "/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain"
+              }
+            },
+            {
+              "id": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain",
+              "title": "Interact On-Chain",
+              "description": "This guide delves into the specifics of Superfluid's smart contract functions, offering step-by-step guidance and practical insights for developers.",
+              "source": "@site/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain.mdx",
+              "sourceDirName": "developers/money-streaming/guides/money-streaming-with-super-tokens",
+              "slug": "/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain",
+              "permalink": "/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "Developers",
+              "previous": {
+                "title": "Money Streaming with Super Tokens",
+                "permalink": "/docs/category/money-streaming-with-super-tokens"
+              },
+              "next": {
+                "title": "Interact Off-Chain",
+                "permalink": "/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain"
+              }
+            },
+            {
+              "id": "developers/money-streaming/overview",
+              "title": "Money Streaming in Superfluid",
+              "description": "Money Streaming, previously known as Constant Flow Agreement (CFA), revolutionizes the movement of tokens with a by-the-second transfer mechanism. This page provides an in-depth overview of Money Streaming and the unique aspects of Flow NFTs in the Superfluid ecosystem.",
+              "source": "@site/docs/developers/money-streaming/overview.mdx",
+              "sourceDirName": "developers/money-streaming",
+              "slug": "/developers/money-streaming/overview",
+              "permalink": "/docs/developers/money-streaming/overview",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/money-streaming/overview.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "Developers",
+              "previous": {
+                "title": "Money Streaming",
+                "permalink": "/docs/category/money-streaming"
+              },
+              "next": {
+                "title": "Guides",
+                "permalink": "/docs/category/guides-1"
+              }
+            },
+            {
+              "id": "developers/super-tokens/guides/deploy-super-token",
+              "title": "Deploy Super Tokens",
+              "description": "This guide offers detailed instructions for deploying different types of Super Tokens within the Superfluid ecosystem, allowing you to customize and deploy all types of Super Tokens.",
+              "source": "@site/docs/developers/super-tokens/guides/deploy-super-token.mdx",
+              "sourceDirName": "developers/super-tokens/guides",
+              "slug": "/developers/super-tokens/guides/deploy-super-token",
+              "permalink": "/docs/developers/super-tokens/guides/deploy-super-token",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/super-tokens/guides/deploy-super-token.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Developers",
+              "previous": {
+                "title": "Guides",
+                "permalink": "/docs/category/guides"
+              },
+              "next": {
+                "title": "Tracking Super Token Balances",
+                "permalink": "/docs/developers/super-tokens/guides/super-token-balances"
+              }
+            },
+            {
+              "id": "developers/super-tokens/guides/super-token-balances",
+              "title": "Tracking Super Token Balances",
+              "description": "Super Token balances can dynamically change every second, presenting unique challenges and considerations for tracking them within the Ethereum ecosystem.",
+              "source": "@site/docs/developers/super-tokens/guides/super-token-balances.mdx",
+              "sourceDirName": "developers/super-tokens/guides",
+              "slug": "/developers/super-tokens/guides/super-token-balances",
+              "permalink": "/docs/developers/super-tokens/guides/super-token-balances",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/super-tokens/guides/super-token-balances.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Developers",
+              "previous": {
+                "title": "Deploy Super Tokens",
+                "permalink": "/docs/developers/super-tokens/guides/deploy-super-token"
+              },
+              "next": {
+                "title": "Money Streaming",
+                "permalink": "/docs/category/money-streaming"
+              }
+            },
+            {
+              "id": "developers/super-tokens/overview",
+              "title": "Overview of Super Tokens",
+              "description": "Super Tokens enhance the ERC20 token standard by integrating additional functionalities like streams and instant distributions, termed as Super Agreements. Super Tokens exist in two primary forms: Wrapper and Pure.",
+              "source": "@site/docs/developers/super-tokens/overview.mdx",
+              "sourceDirName": "developers/super-tokens",
+              "slug": "/developers/super-tokens/overview",
+              "permalink": "/docs/developers/super-tokens/overview",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/developers/super-tokens/overview.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "Developers",
+              "previous": {
+                "title": "Super Tokens",
+                "permalink": "/docs/category/super-tokens"
+              },
               "next": {
                 "title": "Guides",
                 "permalink": "/docs/category/guides"
@@ -475,19 +634,95 @@
               },
               {
                 "type": "category",
-                "label": "Guides",
+                "label": "Super Tokens",
                 "collapsible": true,
                 "collapsed": true,
                 "items": [
                   {
                     "type": "doc",
-                    "id": "developers/guides/deploy-super-token"
+                    "id": "developers/super-tokens/overview"
+                  },
+                  {
+                    "type": "category",
+                    "label": "Guides",
+                    "collapsible": true,
+                    "collapsed": true,
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "developers/super-tokens/guides/deploy-super-token"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "developers/super-tokens/guides/super-token-balances"
+                      }
+                    ],
+                    "link": {
+                      "type": "generated-index",
+                      "slug": "/category/guides",
+                      "permalink": "/docs/category/guides"
+                    }
                   }
                 ],
                 "link": {
                   "type": "generated-index",
-                  "slug": "/category/guides",
-                  "permalink": "/docs/category/guides"
+                  "slug": "/category/super-tokens",
+                  "permalink": "/docs/category/super-tokens"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Money Streaming",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "developers/money-streaming/overview"
+                  },
+                  {
+                    "type": "category",
+                    "label": "Guides",
+                    "collapsible": true,
+                    "collapsed": true,
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "developers/money-streaming/guides/create-update-delete-flow"
+                      },
+                      {
+                        "type": "category",
+                        "label": "Money Streaming with Super Tokens",
+                        "collapsible": true,
+                        "collapsed": true,
+                        "items": [
+                          {
+                            "type": "doc",
+                            "id": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain"
+                          },
+                          {
+                            "type": "doc",
+                            "id": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain"
+                          }
+                        ],
+                        "link": {
+                          "type": "generated-index",
+                          "slug": "/category/money-streaming-with-super-tokens",
+                          "permalink": "/docs/category/money-streaming-with-super-tokens"
+                        }
+                      }
+                    ],
+                    "link": {
+                      "type": "generated-index",
+                      "slug": "/category/guides-1",
+                      "permalink": "/docs/category/guides-1"
+                    }
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "slug": "/category/money-streaming",
+                  "permalink": "/docs/category/money-streaming"
                 }
               }
             ],

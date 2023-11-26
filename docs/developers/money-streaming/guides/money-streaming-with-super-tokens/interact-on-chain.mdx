@@ -1,0 +1,160 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+import CodeBlock from '@theme/CodeBlock';
+
+# Interact On-Chain
+
+This guide delves into the specifics of Superfluid's smart contract functions, offering step-by-step guidance and practical insights for developers.
+
+## Direct Interaction Functions
+
+<Admonition type="info">
+  These functions allow direct interactions with Super Tokens, providing real-time information about ongoing flows.
+</Admonition>
+
+<Tabs>
+  <TabItem value="getFlowInfo" label="getFlowInfo">
+### `getFlowInfo`
+
+<CodeBlock language="solidity">
+{`
+function getFlowInfo(ISuperToken token, address sender, address receiver)
+    internal view
+    returns(uint256 lastUpdated, int96 flowRate, uint256 deposit, uint256 owedDeposit)
+`}
+</CodeBlock>
+
+**Usage**: Retrieve flow information, such as the rate and deposit details, between two accounts for a given Super Token. Useful for tracking and auditing ongoing streams.
+    
+    </TabItem>
+    <TabItem value="getFlowRate" label="getFlowRate">
+
+### `getFlowRate`
+
+<CodeBlock language="solidity">
+{`
+function getFlowRate(ISuperToken token, address sender, address receiver)
+    internal view returns(int96 flowRate)
+`}
+</CodeBlock>
+
+**Usage**: Use this function to quickly check the current flow rate between two accounts. Ideal for applications that need to display or make calculations based on live flow rates.
+    
+      </TabItem>
+      <TabItem value="getNetFlowRate" label="getNetFlowRate">
+
+### `getNetFlowRate`
+
+<CodeBlock language="solidity">
+{`
+function getNetFlowRate(ISuperToken token, address account)
+    internal view returns (int96 flowRate)
+`}
+</CodeBlock>
+
+**Usage**: Determine the net flow rate (inflow minus outflow) of a specific account. Essential for balancing and financial planning within the Superfluid ecosystem.
+     
+        </TabItem>
+</Tabs>
+
+## Functions with User Data and Context
+
+<Admonition type="tip">
+  These advanced functions allow passing additional `userData` for custom operations and require context handling in Super App callbacks.
+</Admonition>
+
+### User Data Overload
+
+<CodeBlock language="solidity">
+{`
+// Same function call just with additional parameter for user data
+token.createFlow(address receiver, int96 flowRate, bytes memory userData);
+token.updateFlow(address receiver, int96 flowRate, bytes memory userData);
+token.deleteFlow(address sender, address receiver, bytes memory userData);
+`}
+</CodeBlock>
+
+**Usage**: Attach custom `userData` to your flow transactions. This feature is crucial for applications that require additional data to be transmitted or stored with each flow operation.
+
+### Context in Super App Callbacks
+
+<CodeBlock language="javascript">
+{`
+function onFlowCreated(ISuperToken superToken, address sender, bytes calldata ctx)
+    internal override returns (bytes memory /*newCtx*/) {
+    // ... callback logic
+}
+`}
+</CodeBlock>
+
+**Usage**: In Super App callbacks, use context (`ctx`) to manage state throughout the flow lifecycle. This is particularly important for apps that react to flow creations, updates, or deletions.
+
+## Access Control List Functions
+
+<Tabs>
+  <TabItem value="setFlowPermissions" label="setFlowPermissions">
+
+### `setFlowPermissions`
+
+<CodeBlock language="solidity">
+{`
+function setFlowPermissions(
+    ISuperToken token,
+    address flowOperator,
+    bool allowCreate,
+    bool allowUpdate,
+    bool allowDelete,
+    int96 flowRateAllowance
+) internal returns (bool)
+`}
+</CodeBlock>
+
+**Usage**: Grant specific flow permissions to an operator. This function is key for delegating flow management responsibilities, similar to setting allowances in ERC20 tokens.
+
+  </TabItem>
+  <TabItem value="setMaxFlowPermissions" label="setMaxFlowPermissions">
+
+### `setMaxFlowPermissions`
+
+<CodeBlock language="solidity">
+{`
+function setMaxFlowPermissions(
+    ISuperToken token,
+    address flowOperator
+) internal returns (bool)
+`}
+</CodeBlock>
+
+**Usage**: Quickly grant an operator maximum permissions over your Super Token flows. Ideal for trusted operators where maximum flexibility is required.
+
+  </TabItem>
+  <TabItem value="revokeFlowPermissions" label="revokeFlowPermissions">
+
+### `revokeFlowPermissions`
+
+<CodeBlock language="solidity">
+{`
+function revokeFlowPermissions(
+    ISuperToken token,
+    address flowOperator
+) internal returns (bool)
+`}
+</CodeBlock>
+
+**Usage**: Use this function to revoke previously granted permissions, enhancing security and control over your Super Token flows.
+
+  </TabItem>
+</Tabs>
+
+## Conclusion
+
+This guide aims to provide a thorough understanding of Superfluid's smart contract functions with practical examples and usage scenarios. It's designed to assist developers in effectively utilizing these functions in their applications.
+
+<Admonition type="info">
+  Adapt the content as needed for your project and verify its functionality in your Docusaurus environment for an optimal developer experience.
+</Admonition>

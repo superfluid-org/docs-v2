@@ -124,19 +124,97 @@
       },
       {
         "type": "category",
-        "label": "Guides",
+        "label": "Super Tokens",
         "collapsible": true,
         "collapsed": true,
         "items": [
           {
             "type": "link",
-            "label": "deploy-super-token",
-            "href": "/docs/developers/guides/deploy-super-token",
-            "docId": "developers/guides/deploy-super-token",
+            "label": "Overview of Super Tokens",
+            "href": "/docs/developers/super-tokens/overview",
+            "docId": "developers/super-tokens/overview",
             "unlisted": false
+          },
+          {
+            "type": "category",
+            "label": "Guides",
+            "collapsible": true,
+            "collapsed": true,
+            "items": [
+              {
+                "type": "link",
+                "label": "Deploy Super Tokens",
+                "href": "/docs/developers/super-tokens/guides/deploy-super-token",
+                "docId": "developers/super-tokens/guides/deploy-super-token",
+                "unlisted": false
+              },
+              {
+                "type": "link",
+                "label": "Tracking Super Token Balances",
+                "href": "/docs/developers/super-tokens/guides/super-token-balances",
+                "docId": "developers/super-tokens/guides/super-token-balances",
+                "unlisted": false
+              }
+            ],
+            "href": "/docs/category/guides"
           }
         ],
-        "href": "/docs/category/guides"
+        "href": "/docs/category/super-tokens"
+      },
+      {
+        "type": "category",
+        "label": "Money Streaming",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "link",
+            "label": "Money Streaming in Superfluid",
+            "href": "/docs/developers/money-streaming/overview",
+            "docId": "developers/money-streaming/overview",
+            "unlisted": false
+          },
+          {
+            "type": "category",
+            "label": "Guides",
+            "collapsible": true,
+            "collapsed": true,
+            "items": [
+              {
+                "type": "link",
+                "label": "Create, Update, and Delete Flows",
+                "href": "/docs/developers/money-streaming/guides/create-update-delete-flow",
+                "docId": "developers/money-streaming/guides/create-update-delete-flow",
+                "unlisted": false
+              },
+              {
+                "type": "category",
+                "label": "Money Streaming with Super Tokens",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "link",
+                    "label": "Interact On-Chain",
+                    "href": "/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain",
+                    "docId": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain",
+                    "unlisted": false
+                  },
+                  {
+                    "type": "link",
+                    "label": "Interact Off-Chain",
+                    "href": "/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain",
+                    "docId": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain",
+                    "unlisted": false
+                  }
+                ],
+                "href": "/docs/category/money-streaming-with-super-tokens"
+              }
+            ],
+            "href": "/docs/category/guides-1"
+          }
+        ],
+        "href": "/docs/category/money-streaming"
       }
     ],
     "TechnicalReference": [
@@ -177,7 +255,7 @@
     "concepts/in-depth-overview/super-tokens": {
       "id": "concepts/in-depth-overview/super-tokens",
       "title": "Super Tokens",
-      "description": "Super Tokens extend the ERC20 token standard with additional functionalities like streams or instant distributions, known as Super Agreements. There are two types of Super Tokens: wrapper and custom.",
+      "description": "Super Tokens extend the ERC20 token standard with additional functionalities like Money Streaming or Distributions, known as Super Agreements. There are two types of Super Tokens: wrapper and custom.",
       "sidebar": "Concepts"
     },
     "concepts/in-depth-overview/superfluid-host": {
@@ -216,16 +294,52 @@
       "description": "Superfluid Protocol introduces innovative methods for community engagement and social token incentives, fostering long-term loyalty and participation.",
       "sidebar": "Concepts"
     },
-    "developers/guides/deploy-super-token": {
-      "id": "developers/guides/deploy-super-token",
-      "title": "deploy-super-token",
-      "description": "",
-      "sidebar": "Developers"
-    },
     "developers/intro": {
       "id": "developers/intro",
       "title": "💡 What is Superfluid?",
       "description": "Superfluid is a revolutionary asset streaming protocol that brings subscriptions, salaries, vesting, and rewards to DAOs and crypto-native businesses worldwide. This is made possible by the protocol’s smart contract framework which introduces the Super Token - an extension to the ERC20 standard that enables digital value to be moved in entirely novel ways.",
+      "sidebar": "Developers"
+    },
+    "developers/money-streaming/guides/create-update-delete-flow": {
+      "id": "developers/money-streaming/guides/create-update-delete-flow",
+      "title": "Create, Update, and Delete Flows",
+      "description": "This guide covers various methods for managing flows in Superfluid, including direct management by the sender and management via Access Control List (ACL), both on-chain and off-chain.",
+      "sidebar": "Developers"
+    },
+    "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain": {
+      "id": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain",
+      "title": "Interact Off-Chain",
+      "description": "",
+      "sidebar": "Developers"
+    },
+    "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain": {
+      "id": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain",
+      "title": "Interact On-Chain",
+      "description": "This guide delves into the specifics of Superfluid's smart contract functions, offering step-by-step guidance and practical insights for developers.",
+      "sidebar": "Developers"
+    },
+    "developers/money-streaming/overview": {
+      "id": "developers/money-streaming/overview",
+      "title": "Money Streaming in Superfluid",
+      "description": "Money Streaming, previously known as Constant Flow Agreement (CFA), revolutionizes the movement of tokens with a by-the-second transfer mechanism. This page provides an in-depth overview of Money Streaming and the unique aspects of Flow NFTs in the Superfluid ecosystem.",
+      "sidebar": "Developers"
+    },
+    "developers/super-tokens/guides/deploy-super-token": {
+      "id": "developers/super-tokens/guides/deploy-super-token",
+      "title": "Deploy Super Tokens",
+      "description": "This guide offers detailed instructions for deploying different types of Super Tokens within the Superfluid ecosystem, allowing you to customize and deploy all types of Super Tokens.",
+      "sidebar": "Developers"
+    },
+    "developers/super-tokens/guides/super-token-balances": {
+      "id": "developers/super-tokens/guides/super-token-balances",
+      "title": "Tracking Super Token Balances",
+      "description": "Super Token balances can dynamically change every second, presenting unique challenges and considerations for tracking them within the Ethereum ecosystem.",
+      "sidebar": "Developers"
+    },
+    "developers/super-tokens/overview": {
+      "id": "developers/super-tokens/overview",
+      "title": "Overview of Super Tokens",
+      "description": "Super Tokens enhance the ERC20 token standard by integrating additional functionalities like streams and instant distributions, termed as Super Agreements. Super Tokens exist in two primary forms: Wrapper and Pure.",
       "sidebar": "Developers"
     },
     "products/intro": {

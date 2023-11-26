@@ -99,15 +99,15 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'e5d'),
+    component: ComponentCreator('/docs', '77d'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '2ae'),
+        component: ComponentCreator('/docs', '0f2'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '871'),
+            component: ComponentCreator('/docs', 'f44'),
             routes: [
               {
                 path: '/docs/category/guides',
@@ -116,10 +116,34 @@ export default [
                 sidebar: "Developers"
               },
               {
+                path: '/docs/category/guides-1',
+                component: ComponentCreator('/docs/category/guides-1', 'e73'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
                 path: '/docs/category/in-depth-overview',
                 component: ComponentCreator('/docs/category/in-depth-overview', '0d1'),
                 exact: true,
                 sidebar: "Concepts"
+              },
+              {
+                path: '/docs/category/money-streaming',
+                component: ComponentCreator('/docs/category/money-streaming', 'b6c'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/category/money-streaming-with-super-tokens',
+                component: ComponentCreator('/docs/category/money-streaming-with-super-tokens', '187'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/category/super-tokens',
+                component: ComponentCreator('/docs/category/super-tokens', 'a02'),
+                exact: true,
+                sidebar: "Developers"
               },
               {
                 path: '/docs/category/use-cases',
@@ -194,14 +218,50 @@ export default [
                 sidebar: "Concepts"
               },
               {
-                path: '/docs/developers/guides/deploy-super-token',
-                component: ComponentCreator('/docs/developers/guides/deploy-super-token', 'e1a'),
+                path: '/docs/developers/intro',
+                component: ComponentCreator('/docs/developers/intro', '86e'),
                 exact: true,
                 sidebar: "Developers"
               },
               {
-                path: '/docs/developers/intro',
-                component: ComponentCreator('/docs/developers/intro', '86e'),
+                path: '/docs/developers/money-streaming/guides/create-update-delete-flow',
+                component: ComponentCreator('/docs/developers/money-streaming/guides/create-update-delete-flow', 'ed7'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain',
+                component: ComponentCreator('/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain', 'b3d'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain',
+                component: ComponentCreator('/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain', '360'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/developers/money-streaming/overview',
+                component: ComponentCreator('/docs/developers/money-streaming/overview', '621'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/developers/super-tokens/guides/deploy-super-token',
+                component: ComponentCreator('/docs/developers/super-tokens/guides/deploy-super-token', '039'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/developers/super-tokens/guides/super-token-balances',
+                component: ComponentCreator('/docs/developers/super-tokens/guides/super-token-balances', 'ec1'),
+                exact: true,
+                sidebar: "Developers"
+              },
+              {
+                path: '/docs/developers/super-tokens/overview',
+                component: ComponentCreator('/docs/developers/super-tokens/overview', '3db'),
                 exact: true,
                 sidebar: "Developers"
               },

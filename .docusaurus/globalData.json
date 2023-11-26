@@ -66,13 +66,43 @@
               "sidebar": "Concepts"
             },
             {
-              "id": "developers/guides/deploy-super-token",
-              "path": "/docs/developers/guides/deploy-super-token",
+              "id": "developers/intro",
+              "path": "/docs/developers/intro",
               "sidebar": "Developers"
             },
             {
-              "id": "developers/intro",
-              "path": "/docs/developers/intro",
+              "id": "developers/money-streaming/guides/create-update-delete-flow",
+              "path": "/docs/developers/money-streaming/guides/create-update-delete-flow",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain",
+              "path": "/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain",
+              "path": "/docs/developers/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "developers/money-streaming/overview",
+              "path": "/docs/developers/money-streaming/overview",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "developers/super-tokens/guides/deploy-super-token",
+              "path": "/docs/developers/super-tokens/guides/deploy-super-token",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "developers/super-tokens/guides/super-token-balances",
+              "path": "/docs/developers/super-tokens/guides/super-token-balances",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "developers/super-tokens/overview",
+              "path": "/docs/developers/super-tokens/overview",
               "sidebar": "Developers"
             },
             {
@@ -96,8 +126,28 @@
               "sidebar": "Concepts"
             },
             {
+              "id": "/category/super-tokens",
+              "path": "/docs/category/super-tokens",
+              "sidebar": "Developers"
+            },
+            {
               "id": "/category/guides",
               "path": "/docs/category/guides",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "/category/money-streaming",
+              "path": "/docs/category/money-streaming",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "/category/guides-1",
+              "path": "/docs/category/guides-1",
+              "sidebar": "Developers"
+            },
+            {
+              "id": "/category/money-streaming-with-super-tokens",
+              "path": "/docs/category/money-streaming-with-super-tokens",
               "sidebar": "Developers"
             }
           ],

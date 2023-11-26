@@ -1,0 +1,34 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+
+# Tracking Super Token Balances
+
+Super Token balances can dynamically change every second, presenting unique challenges and considerations for tracking them within the Ethereum ecosystem.
+
+## Compatibility with ERC20
+
+Super Tokens, while being ERC20 compatible, have some nuances in terms of forward compatibility with Ethereum infrastructure and tools.
+
+### Key Points
+
+- **Backward Compatibility**: Super Tokens work with existing Ethereum tools like Metamask and Gnosis Safe. You can view balances in Metamask, transfer funds using Gnosis Safe, and even swap Super Tokens on platforms like Uniswap.
+- **Forward Compatibility**: While tools like Metamask and Gnosis Safe can display balances accurately, they do not support all functionalities of Super Tokens. For example, you cannot swap your streamed money on Automated Market Makers (eg. Uniswap).
+
+## Balance Tracking Considerations
+
+Tracking the balance of Super Tokens requires a more nuanced approach than traditional ERC20 tokens.
+
+### Challenges
+
+- **Event-Based Tracking Limitation**: Some applications, like Etherscan, use `transfer` events to track user balances. However, due to scalability concerns, Super Tokens don't emit `transfer` events with every balance change, leading to potential discrepancies in displayed balances.
+
+### Solutions
+
+- **AgreementStateUpdated Event**: To accurately track Super Token balances, applications should monitor the `AgreementStateUpdated` event, signaling changes in an account's state and likely their balance.
+- **Using balanceOf Function**: For the most accurate balance information, call the Superfluid `balanceOf` function, which accounts for various fund movement methods unique to Super Tokens.
+
+<Admonition type="tip" title="Real-Time Balance Tracking Tool">
+
+Check out the [Superfluid Console](https://console.superfluid.finance) for an open-source tool that provides real-time balance tracking of Super Tokens. This tool can be a valuable resource for applications integrating Superfluid functionalities.
+
+</Admonition>
