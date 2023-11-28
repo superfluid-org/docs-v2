@@ -1,12 +1,8 @@
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Logo from '@site/src/components/Logo';
-import Heading from '@theme/Heading';
 import styled from '@emotion/styled'
-
-import styles from './index.module.css';
 
 import { ArrowUpRight as LinkIcon, BookOpen, HelpCircle, Info, MessageCircle } from 'react-feather'
 
@@ -27,6 +23,12 @@ export const actions = [
     title: 'For Developers',
     icon: BookOpen,
     to: '/developers',
+    text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
+  },
+  {
+    title: 'Technical Reference',
+    icon: BookOpen,
+    to: '/technical-reference',
     text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
   },
 ]
@@ -134,8 +136,8 @@ export default function Home(): JSX.Element {
                         <LinkIcon />
                       </LinkIconWrapper>
                     </TopSection>
-                    <h3 style={{ marginBottom: '.75rem', fontWeight: 500 }}>{action.title}</h3>
-                    <p style={{ marginBottom: '0.5rem', fontWeight: 300 }}>{action.text}</p>
+                    <h3 style={{ marginBottom: '.75rem', fontWeight: 500, color: 'white' }}>{action.title}</h3>
+                    <p style={{ marginBottom: '0.5rem', fontWeight: 300, color: 'white' }}>{action.text}</p>
                   </ShadowCard>
                 </Link>
             ))}
