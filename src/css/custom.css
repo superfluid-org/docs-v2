@@ -10,7 +10,7 @@
 
 body {
 
-  background-image: url('/static/img/background.svg');
+
   background-size: cover; /* Cover the entire page */
   background-attachment: fixed; /* Fix the background image */
   background-repeat: repeat-y; /* Prevent the background from repeating */
@@ -103,4 +103,11 @@ code {
 ::-webkit-scrollbar-thumb {
   background-color: var(--ifm-color-primary);
   border-radius: 10px;
+}
+
+.customBackground {
+  background-image: url('/img/background.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

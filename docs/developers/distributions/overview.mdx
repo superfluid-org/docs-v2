@@ -2,4 +2,134 @@
 sidebar_position: 1
 ---
 
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+
+
 # Distributions Overview
+
+## Overview
+
+Distributions allow scalable, recurring one-to-many token distributions at a fixed gas cost. By assigning proportions to receivers, a single transaction can distribute tokens to many recipients. 
+
+### How It Works
+
+1. **Publishing an Index or a Pool**: A sender (or "publisher") creates a distribution channel (Index/Pool).
+2. **Assigning Proportions**: The publisher (or pool admin) sets proportions for receivers (or "subscribers"/"pool members") by allocating units, acting like distribution shares.
+3. **Distributing Tokens**: Upon distribution, subscribers receive tokens proportionally to their unit holdings, all in a single transaction.
+
+<Admonition type="info">
+
+Distributions are persistent and can be triggered multiple times with varying amounts. Units for each receiver can be adjusted by the publisher as needed.
+
+</Admonition>
+
+## Key Concepts
+
+- **Index/Pool**: A channel for proportional token distribution.
+- **Distribution**: The action of allocating specified token amounts to receivers.
+- **Units**: Represent the proportion of the distribution each subscriber receives.
+- **Publisher/Pool Admin**: The initiator of the distribution process.
+- **Subscribers/Pool Member**: Receivers allocated units and eligible to receive tokens through the Index.
+
+## Calculations
+
+The share of tokens a subscriber receives is their units divided by the total units. Distributions affect the publisher's and receivers' balances based on their respective unit shares.
+
+[text](/assets/image_(77).png)
+
+## Balancing Formula
+
+The current balance of an account subscribed to one or more distribution Indices is calculated considering the shares owned and total shares issued.
+
+[Balance calculation formula](/assets/image_(56).png)
+
+
+<Admonition type="info">
+
+Publishers can manage multiple Indices, and subscribers can be part of multiple Indices simultaneously.
+
+</Admonition>
+
+
+Distributions in Superfluid are a powerful feature that extends the capabilities of the protocol to allow.
+
+## Overview
+
+The Distributions system generalizes the IDA concept by offering flexibility in creating distribution channels within the Superfluid ecosystem. This includes constant flow distributions, adding a new dimension of flexibility to the Superfluid framework.
+
+<Admonition type="info">
+
+Distributions are implemented using the Superfluid agreement framework. Unlike the IDA, Distributions currently do not support callbacks.
+
+</Admonition>
+
+## Implementation Guide
+
+### Code Structure
+
+Distributions utilize the `TokenMonad` abstract contract and the Semantic Money Library, diverging from the structure of existing agreements in Superfluid. The `TokenMonad` acts as a foundation, leveraging pure functions and data structures from the Semantic Money Library to manipulate the state of inheriting contracts.
+
+#### Key Components
+
+- **GeneralDistributionAgreementV1.sol**: This contract interfaces between `TokenMonad`/`Semantic Money` and the Superfluid protocol. It handles input sanitization and implements virtual functions from `TokenMonad`.
+- **SuperfluidPool.sol**: This contract represents pools in the Distributions system, allowing for dynamic pool creation and management.
+
+### Semantic Money Library
+
+This library is a cornerstone of the Distributions system, providing essential building blocks through limited functional programming in Solidity.
+
+#### Core Elements
+
+- **SemanticMoney.sol**: Contains foundational data structures and functions.
+- **TokenMonad.sol**: An abstract contract that outlines essential agreement operations and virtual functions for inheriting contracts.
+
+## Major Design Choices
+
+### Superfluid Pool
+
+The Superfluid Pool concept in Distributions enables token distribution to multiple members, managed by a pool admin. This structure allows for flexible and dynamic distribution mechanisms within the Superfluid framework.
+
+#### Key Features
+
+- **Pool Administration**: Pool admins have privileges over unit management and token distribution.
+- **Member Participation**: Pool members receive distributions proportionate to their share of pool units.
+- **Upgradeability**: Utilizes the beacon proxy pattern for future enhancements.
+
+### Distribution Types
+
+Distributions support both instant and flowing distribution types, catering to a variety of use cases within the Superfluid ecosystem.
+
+#### Differentiation from IDA
+
+- **Flow Distributions**: Distributions extend the IDA by enabling not only instant but also constant flow distributions.
+- **Admin Controls**: Enhanced control mechanisms for pool admins compared to the IDA.
+
+### ERC20 Compatibility
+
+The Superfluid Pool implements basic ERC20 functionality, allowing it to interact seamlessly with ERC20 standards.
+
+## Solvency Mechanism
+
+Distributions maintain the integrity of the solvency mechanism in Superfluid, ensuring a robust and secure system for token flow and distribution.
+
+## Misc
+
+### Adjustment Flow
+
+The adjustment flow mechanism in Distributions addresses the limitation of non-divisible flow rates, ensuring precise and fair token distribution among pool members.
+
+### Lack of Callback Support
+
+Currently, Distributions do not support callbacks, streamlining the implementation while focusing on the core distribution functionality.
+
+## References
+
+- [Superfluid Developer Docs](https://docs.superfluid.finance/superfluid/developers/constant-flow-agreement-cfa/money-streaming-1)
+- Community Presentations and Reviews on Distributions ([Session #1](https://www.youtube.com/watch?v=8JuvByBHeNw), [Session #2](https://www.youtube.com/watch?v=7cjwLpsQ2OE), [Session #3](https://www.youtube.com/watch?v=KKS1SjlF7yg))
+
+<Admonition type="note">
+
+For more detailed information on Distributions and their implementation, refer to the [Superfluid developer documentation](https://docs.superfluid.finance/superfluid/developers/distributions).
+
+</Admonition>

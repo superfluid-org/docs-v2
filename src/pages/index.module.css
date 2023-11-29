@@ -8,6 +8,10 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-image: url('/img/background.svg'); /* Add background image */
+  background-size: cover; /* Cover the entire area */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the image */
 }
 
 @media screen and (max-width: 996px) {

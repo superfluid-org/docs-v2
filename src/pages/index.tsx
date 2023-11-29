@@ -1,38 +1,43 @@
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Layout from '@theme/Layout';
-import Logo from '@site/src/components/Logo';
-import styled from '@emotion/styled'
+import Link from "@docusaurus/Link";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import Layout from "@theme/Layout";
+import Logo from "@site/src/components/Logo";
+import styled from "@emotion/styled";
 
-import { ArrowUpRight as LinkIcon, BookOpen, HelpCircle, Info, MessageCircle } from 'react-feather'
+import {
+  ArrowUpRight as LinkIcon,
+  BookOpen,
+  HelpCircle,
+  Info,
+  MessageCircle,
+} from "react-feather";
 
 export const actions = [
   {
-    title: 'What is Superfluid?',
+    title: "What is Superfluid?",
     icon: Info,
-    to: '/concepts/overview',
+    to: "/docs/concepts/overview",
     text: `Learn about the core concepts of the Superfluid Protocol.`,
   },
   {
-    title: 'Products',
+    title: "Products",
     icon: HelpCircle,
-    to: '/products',
+    to: "/docs/products/intro",
     text: `Learn how to integrate with Uniswap by building a dApp through guided examples.`,
   },
   {
-    title: 'For Developers',
+    title: "For Developers",
     icon: BookOpen,
-    to: '/developers',
+    to: "/docs/developers/overview",
     text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
   },
   {
-    title: 'Technical Reference',
+    title: "Technical Reference",
     icon: BookOpen,
-    to: '/technical-reference',
+    to: "/technical-reference",
     text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
   },
-]
-
+];
 
 const Row = styled.div`
   display: grid;
@@ -52,7 +57,7 @@ const Row = styled.div`
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
   }
-`
+`;
 
 const Card = styled.div`
   display: flex;
@@ -75,8 +80,7 @@ const Card = styled.div`
   @media (max-width: 960px) {
     width: 100%;
   }
-`
-
+`;
 
 const ShadowCard = styled(Card)`
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
@@ -84,7 +88,7 @@ const ShadowCard = styled(Card)`
   backdrop-filter: blur(10px);
   min-height: 200px;
   /* background-color: var(--ifm-color-emphasis-0); */
-`
+`;
 
 const TopSection = styled.div`
   width: 100%;
@@ -93,7 +97,7 @@ const TopSection = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
-`
+`;
 
 const IconWrapper = styled.div`
   width: 32px;
@@ -103,46 +107,72 @@ const IconWrapper = styled.div`
   justify-content: center;
   border-radius: 4px;
   margin-right: 0.5rem;
-`
+`;
 
 const LinkIconWrapper = styled.div`
   opacity: 0.25;
-`
-
+`;
 
 export default function Home(): JSX.Element {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}><Logo /></div>
-      
-      
-      <Row>
+    <div className="customBackground">
+      <Layout
+        title={`Hello from ${siteConfig.title}`}
+        description="Description will go into a meta tag in <head />"
+      >
+        <div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Logo />
+          </div>
+
+          <Row>
             {actions.map((action) => (
-                <Link style={{ textDecoration: 'none' }} to={action.to}>
-                  <ShadowCard key={action.title}>
-                    <TopSection>
-                      <IconWrapper>
-                        <action.icon style={{ width: '24px' }} />
-                      </IconWrapper>
-                      <LinkIconWrapper>
-                        <LinkIcon />
-                      </LinkIconWrapper>
-                    </TopSection>
-                    <h3 style={{ marginBottom: '.75rem', fontWeight: 500, color: 'white' }}>{action.title}</h3>
-                    <p style={{ marginBottom: '0.5rem', fontWeight: 300, color: 'white' }}>{action.text}</p>
-                  </ShadowCard>
-                </Link>
+              <Link style={{ textDecoration: "none" }} to={action.to}>
+                <ShadowCard key={action.title}>
+                  <TopSection>
+                    <IconWrapper>
+                      <action.icon style={{ width: "24px" }} />
+                    </IconWrapper>
+                    <LinkIconWrapper>
+                      <LinkIcon />
+                    </LinkIconWrapper>
+                  </TopSection>
+                  <h3
+                    style={{
+                      marginBottom: ".75rem",
+                      fontWeight: 500,
+                      color: "white",
+                    }}
+                  >
+                    {action.title}
+                  </h3>
+                  <p
+                    style={{
+                      marginBottom: "0.5rem",
+                      fontWeight: 300,
+                      color: "white",
+                    }}
+                  >
+                    {action.text}
+                  </p>
+                </ShadowCard>
+              </Link>
             ))}
           </Row>
-      </div>
-    </Layout>
+        </div>
+      </Layout>
+    </div>
   );
 }
