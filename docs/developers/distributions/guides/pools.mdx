@@ -1,4 +1,124 @@
 ---
 sidebar_position: 1
 ---
+import Admonition from '@theme/Admonition';
+import PoolsVisualization from '@site/src/components/PoolsVisualization';
+
 # Pools
+
+Superfluid's [`SuperTokenV1Library.sol`](/docs/technical-reference/intro) is a comprehensive library that enables interactions with all of the Superfluid components (including Pools) through the SuperToken interface. In this page we will show you the most relevant functions from this library to interact with Pools through the Super Token interface.
+
+## What is a Pool?
+
+A pool is a smart contract that facilitates the distribution of tokens to multiple members, managed by a pool admin. Members hold units within the pool that determine their proportion of the distribution.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<PoolsVisualization/>
+</div>
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <p>*A visualization of units in a pool*</p>
+</div>
+
+:::note
+
+The Superfluid Pool implements basic ERC20 functionality, allowing it to interact seamlessly with [ERC20](https://docs.openzeppelin.com/contracts/4.x/erc20) standards.
+This allows you to interact with the pool units as if they were ERC20 tokens, including transferring them to other addresses, if it is allowed by the pool configuration.
+Check the [next section](#important-functions) for more information on pool configurations.
+
+:::
+
+## Important Functions
+
+Here are some of the most important functions provided by `SuperTokenV1Library.sol` for interacting with Superfluid pools:
+
+### createPool
+
+```solidity
+function createPool(ISuperToken token, address admin, PoolConfig memory poolConfig)
+```
+
+Creates a new pool with the specified admin, configuration and poolConfig.
+
+The `PoolConfig` struct is defined as follows:
+
+```solidity
+struct PoolConfig {
+    bool transferabilityForUnitsOwner;
+    bool distributionFromAnyAddress;
+}
+```
+`transferabilityForUnitsOwner`: If true, the pool members can transfer their owned units, else, only the pool admin can manipulate the units for pool members
+`distributionFromAnyAddress`: If true, anyone can execute distributions via the pool, else, only the pool admin can execute distributions via the pool
+
+
+### updateMemberUnits
+
+```solidity
+function updateMemberUnits(ISuperToken token, ISuperfluidPool pool, address memberAddress, uint128 newUnits)
+```
+
+Updates the number of units a member has within a pool, effectively changing their share of future distributions.
+
+### claimAll
+
+```solidity
+function claimAll(ISuperToken token, ISuperfluidPool pool, address memberAddress)
+```
+
+Allows a member to claim their share of the tokens from all previous distributions.
+
+### connectPool
+
+```solidity
+function connectPool(ISuperToken token, ISuperfluidPool pool)
+```
+
+Connects a pool to the Superfluid network, enabling it to begin receiving distributions.
+
+### disconnectPool
+
+```solidity
+function disconnectPool(ISuperToken token, ISuperfluidPool pool)
+```
+
+Disconnects a pool from the Superfluid network.
+
+### distributeToPool
+
+```solidity
+function distributeToPool(ISuperToken token, address from, ISuperfluidPool pool, uint256 requestedAmount)
+```
+
+Distributes a specified amount of tokens to the pool, to be shared among members according to their units.
+
+<Admonition type="note"> These functions are meant to be called from contracts that import `SuperTokenV1Library.sol` and are not directly accessible as external calls on the blockchain. </Admonition>
+
+## Example Usage
+
+Here's how you might use these functions within a smart contract to set up and manage a pool:
+
+```solidity
+// Assume ISuperToken and SuperfluidPool interfaces are imported and available.
+
+contract MyContract {
+    ISuperToken private superToken;
+    ISuperfluidPool private pool;
+
+    constructor(ISuperToken _superToken) {
+        superToken = _superToken;
+        pool = SuperTokenV1Library.createPool(_superToken, address(this), poolConfig);
+    }
+
+    function addMember(address member, uint128 units) public {
+        superToken.updateMemberUnits(_superToken, _pool, member, units);
+    }
+
+    function distribute(uint256 amount) public {
+        superToken.distributeToPool(_superToken, address(this), _pool, amount);
+    }
+}
+```
+
+In this example, `MyContract` creates a pool, adds a member, and distributes tokens using the functions from `SuperTokenV1Library.sol`.
+
+<Admonition type="info"> For more detailed information on the implementation and usage of `SuperTokenV1Library.sol`, refer to the [Superfluid developer documentation](https://docs.superfluid.finance/superfluid/developers/pools). </Admonition> 

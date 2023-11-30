@@ -4,6 +4,7 @@ sidebar_position: 1
 
 import Admonition from '@theme/Admonition';
 import Link from '@docusaurus/Link';
+import UnitsVisualization from "@site/src/components/UnitsVisualization";
 
 
 # Distributions Overview
@@ -36,13 +37,20 @@ Distributions are persistent and can be triggered multiple times with varying am
 
 The share of tokens a subscriber receives is their units divided by the total units. Distributions affect the publisher's and receivers' balances based on their respective unit shares.
 
-[text](/assets/image_(77).png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<UnitsVisualization/>
+</div>
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <p>*A visualization of units in a distribution*</p>
+</div>
 
 ## Balancing Formula
 
 The current balance of an account subscribed to one or more distribution Indices is calculated considering the shares owned and total shares issued.
 
-[Balance calculation formula](/assets/image_(56).png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+![Balance calculation formula](/assets/image_(56).png)
+</div>
 
 
 <Admonition type="info">
