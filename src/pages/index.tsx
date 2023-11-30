@@ -118,8 +118,8 @@ export default function Home(): JSX.Element {
   return (
     <div className="customBackground">
       <Layout
-        title={`Hello from ${siteConfig.title}`}
-        description="Description will go into a meta tag in <head />"
+        title={`${siteConfig.title}`}
+        description="What is Superfluid and How can I build on it? <head />"
       >
         <div>
           <br />
@@ -136,7 +136,6 @@ export default function Home(): JSX.Element {
           >
             <Logo />
           </div>
-
           <Row>
             {actions.map((action) => (
               <Link style={{ textDecoration: "none" }} to={action.to}>
