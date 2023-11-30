@@ -4,140 +4,90 @@ sidebar_position: 1
 
 import Admonition from '@theme/Admonition';
 import Link from '@docusaurus/Link';
-import UnitsVisualization from "@site/src/components/UnitsVisualization";
-
+import UnitsVisualization from "@site/src/components/Visualizations/UnitsVis";
+import PoolStreamVisualization from '@site/src/components/Visualizations/PoolStreamVis';
 
 # Distributions Overview
 
+Superfluid's distribution system offers two distinct types of distributions - Instant and Streaming - each catering to different use cases within the Superfluid framework.
+
+## Instant Distributions
+
+Instant distributions are discrete, one-time transfers triggered by a transaction on the blockchain. They allow for immediate and proportional distribution of tokens to all members of a pool.
+
+## Streaming Distributions
+
+Streaming distributions utilize the concept of money streaming to transfer value over time from one entity to many. This type of distribution enables a continuous flow of tokens, proportional to the units held by each member.
+
 ## Overview
 
-Distributions allow scalable, recurring one-to-many token distributions at a fixed gas cost. By assigning proportions to receivers, a single transaction can distribute tokens to many recipients. 
+Distributions in Superfluid enable scalable, recurring one-to-many token distributions at a fixed gas cost. By assigning units to receivers, tokens can be distributed to multiple recipients efficiently.
 
 ### How It Works
 
-1. **Publishing an Index or a Pool**: A sender (or "publisher") creates a distribution channel (Index/Pool).
-2. **Assigning Proportions**: The publisher (or pool admin) sets proportions for receivers (or "subscribers"/"pool members") by allocating units, acting like distribution shares.
-3. **Distributing Tokens**: Upon distribution, subscribers receive tokens proportionally to their unit holdings, all in a single transaction.
+1. **Publishing an Index or a Pool**: A publisher creates a distribution channel.
+2. **Assigning Proportions**: The publisher sets proportions by allocating units to subscribers or pool members.
+3. **Distributing Tokens**: Subscribers receive tokens based on their unit holdings.
 
 <Admonition type="info">
-
-Distributions are persistent and can be triggered multiple times with varying amounts. Units for each receiver can be adjusted by the publisher as needed.
-
+Distributions are persistent, allowing multiple triggers with varying amounts. Units can be adjusted as needed.
 </Admonition>
 
 ## Key Concepts
 
-- **Index/Pool**: A channel for proportional token distribution.
-- **Distribution**: The action of allocating specified token amounts to receivers.
-- **Units**: Represent the proportion of the distribution each subscriber receives.
-- **Publisher/Pool Admin**: The initiator of the distribution process.
-- **Subscribers/Pool Member**: Receivers allocated units and eligible to receive tokens through the Index.
-
-## Calculations
-
-The share of tokens a subscriber receives is their units divided by the total units. Distributions affect the publisher's and receivers' balances based on their respective unit shares.
+- **Index/Pool**: Channels for proportional token distribution.
+- **Publisher/Pool Admin**: Initiates the distribution process.
+- **Subscribers/Pool Members**: Receivers allocated units for distribution.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <UnitsVisualization/>
 </div>
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <p>*A visualization of units in a distribution*</p>
+    <p>*Visualization of unit distribution in a pool*</p>
 </div>
 
 ## Balancing Formula
 
-The current balance of an account subscribed to one or more distribution Indices is calculated considering the shares owned and total shares issued.
+Calculates the current balance of an account subscribed to one or more distribution Indices.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 ![Balance calculation formula](/assets/image_(56).png)
 </div>
 
-
 <Admonition type="info">
-
-Publishers can manage multiple Indices, and subscribers can be part of multiple Indices simultaneously.
-
+Publishers can manage multiple Indices, and subscribers can be part of multiple Indices.
 </Admonition>
 
+## Pool Administration and Member Participation
 
-Distributions in Superfluid are a powerful feature that extends the capabilities of the protocol to allow.
+Pool admins manage units and distributions, while members receive distributions based on their units.
 
-## Overview
-
-The Distributions system generalizes the IDA concept by offering flexibility in creating distribution channels within the Superfluid ecosystem. This includes constant flow distributions, adding a new dimension of flexibility to the Superfluid framework.
-
-<Admonition type="info">
-
-Distributions are implemented using the Superfluid agreement framework. Unlike the IDA, Distributions currently do not support callbacks.
-
-</Admonition>
-
-## Implementation Guide
-
-### Code Structure
-
-Distributions utilize the `TokenMonad` abstract contract and the Semantic Money Library, diverging from the structure of existing agreements in Superfluid. The `TokenMonad` acts as a foundation, leveraging pure functions and data structures from the Semantic Money Library to manipulate the state of inheriting contracts.
-
-#### Key Components
-
-- **GeneralDistributionAgreementV1.sol**: This contract interfaces between `TokenMonad`/`Semantic Money` and the Superfluid protocol. It handles input sanitization and implements virtual functions from `TokenMonad`.
-- **SuperfluidPool.sol**: This contract represents pools in the Distributions system, allowing for dynamic pool creation and management.
-
-### Semantic Money Library
-
-This library is a cornerstone of the Distributions system, providing essential building blocks through limited functional programming in Solidity.
-
-#### Core Elements
-
-- **SemanticMoney.sol**: Contains foundational data structures and functions.
-- **TokenMonad.sol**: An abstract contract that outlines essential agreement operations and virtual functions for inheriting contracts.
-
-## Major Design Choices
-
-### Superfluid Pool
-
-The Superfluid Pool concept in Distributions enables token distribution to multiple members, managed by a pool admin. This structure allows for flexible and dynamic distribution mechanisms within the Superfluid framework.
-
-#### Key Features
-
-- **Pool Administration**: Pool admins have privileges over unit management and token distribution.
-- **Member Participation**: Pool members receive distributions proportionate to their share of pool units.
-- **Upgradeability**: Utilizes the beacon proxy pattern for future enhancements.
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<PoolStreamVisualization/>
+</div>
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <p>*Visualization of money streaming from an external source to a Pool and its members*</p>
+</div>
 
 ### Distribution Types
 
-Distributions support both instant and flowing distribution types, catering to a variety of use cases within the Superfluid ecosystem.
+- **Instant Distribution**: One-time proportional token allocation.
+- **Streaming Distribution**: Continuous flow of tokens over time.
 
-#### Differentiation from IDA
+### Major Design Choices
 
-- **Flow Distributions**: Distributions extend the IDA by enabling not only instant but also constant flow distributions.
-- **Admin Controls**: Enhanced control mechanisms for pool admins compared to the IDA.
+- **Pool Administration**: Admins have control over unit management and token distribution.
+- **Member Participation**: Members receive distributions proportionate to their units.
+- **ERC20 Compatibility**: The Pool interacts seamlessly with ERC20 standards.
 
-### ERC20 Compatibility
+## Solvency Mechanism and Adjustment Flow
 
-The Superfluid Pool implements basic ERC20 functionality, allowing it to interact seamlessly with ERC20 standards.
+Ensures a secure system for token flow and fair distribution among pool members.
 
-## Solvency Mechanism
+## References and More Information
 
-Distributions maintain the integrity of the solvency mechanism in Superfluid, ensuring a robust and secure system for token flow and distribution.
-
-## Misc
-
-### Adjustment Flow
-
-The adjustment flow mechanism in Distributions addresses the limitation of non-divisible flow rates, ensuring precise and fair token distribution among pool members.
-
-### Lack of Callback Support
-
-Currently, Distributions do not support callbacks, streamlining the implementation while focusing on the core distribution functionality.
-
-## References
-
-- [Superfluid Developer Docs](https://docs.superfluid.finance/superfluid/developers/constant-flow-agreement-cfa/money-streaming-1)
-- Community Presentations and Reviews on Distributions ([Session #1](https://www.youtube.com/watch?v=8JuvByBHeNw), [Session #2](https://www.youtube.com/watch?v=7cjwLpsQ2OE), [Session #3](https://www.youtube.com/watch?v=KKS1SjlF7yg))
+For detailed information on Distributions and their implementation, visit [Superfluid Developer Docs](https://docs.superfluid.finance/superfluid/developers/distributions).
 
 <Admonition type="note">
-
-For more detailed information on Distributions and their implementation, refer to the [Superfluid developer documentation](https://docs.superfluid.finance/superfluid/developers/distributions).
-
+Explore community presentations and reviews on Distributions for practical insights.
 </Admonition>
