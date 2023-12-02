@@ -6,6 +6,7 @@ const config: Config = {
   title: 'Superfluid Docs',
   tagline: 'Docs but they hyper super fluid',
   favicon: 'img/favicon.ico',
+  themes: ['@docusaurus/theme-live-codeblock'],
 
   // Set the production url of your site here
   url: 'https://your-docusaurus-site.example.com',
@@ -147,7 +148,10 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['solidity'],
     },
+    plugins:
+      ['@saucelabs/theme-github-codeblock', {}],
   } satisfies Preset.ThemeConfig,
 };
 
