@@ -1,4 +1,123 @@
 ---
 sidebar_position: 2
 ---
+import Admonition from '@theme/Admonition';
+import CodeBlock from '@theme/CodeBlock';
+
 # Deploy a Super App
+
+## Deploying a Super App
+
+Deploying a Super App involves integration with the Superfluid Protocol and compliance with its governance for activation. For mainnet deployment, you have two options for registration:
+
+1. **Registration Key**: Request a key associated with a deployer account. This key, possibly with an expiry, can be used multiple times via `ISuperfluid.registerAppWithKey()`.
+2. **Factory Contract Whitelisting**: Use a factory contract to register an unlimited number of Super Apps via `ISuperfluid.registerAppByFactory()`.
+
+For further guidance and mainnet deployment, refer to these resources:
+
+- [Super App Whitelisting Guide](https://github.com/superfluid-finance/protocol-monorepo/wiki/Super-App-White-listing-Guide)
+- [Mainnet Deployment Guide by Omnifient](https://mirror.xyz/0x52EF1F3c4A1068d0079093cD2DCAe9eBE9Edcb8F/z2uHwWCZcphEnEHhDJ15UZGw_dMwm-uVD2Iy4Dp76M0)
+
+## SuperAppBaseFlow - Simplifying Super App Development
+
+### What is SuperAppBaseFlow?
+
+SuperAppBaseFlow is an inheritable base contract designed to streamline the development of Super Apps. It abstracts the complexities involved in writing callbacks and reduces redundancy.
+
+![SuperAppBaseFlow Illustration](/assets/image_(30)_(2).png)
+
+*Example: onFlowCreated is a more intuitive function than afterAgreementCreated.*
+
+### Key Features of SuperAppBaseFlow
+
+- **Intuitive Callback Functions**: SuperAppBaseFlow consolidates callback development into three functions (`onFlowCreated`, `onFlowUpdated`, `onFlowDeleted`) with user-friendly parameters.
+- **Ease of Use**: Simplifies the callback process compared to the original SuperAppBase, making it more accessible for developers.
+
+#### Importing and Using SuperAppBaseFlow
+
+```solidity
+// Example Code
+import { SuperAppBaseFlow } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperAppBaseFlow.sol";
+
+contract SomeSuperAppContract is SuperAppBaseFlow {
+    // Your contract implementation
+}
+```
+
+#### Constructor Arguments
+
+```solidity
+constructor(
+    ISuperfluid host_,
+    bool activateOnCreated,
+    bool activateOnUpdated,
+    bool activateOnDeleted
+)
+    // Constructor implementation
+```
+
+* **`host_`**: Superfluid Host address for your target network.
+* **Activation Flags**: Indicate which callbacks (`onFlowCreated`, `onFlowUpdated`, `onFlowDeleted`) your Super App will use.
+
+### Token Acceptance
+
+Override the `isAcceptedSuperToken` function to specify which Super Tokens can trigger the Super App's callbacks.
+
+```solidity
+function isAcceptedSuperToken(ISuperToken /*superToken*/) public view virtual returns (bool) {
+    return true; // Default implementation
+}
+```
+
+### Callback Functions
+
+#### onFlowCreated
+
+Override for logic when a new flow to the Super App is created.
+
+```solidity
+function onFlowCreated(
+    ISuperToken superToken,
+    address sender,
+    bytes calldata ctx
+) internal virtual returns (bytes memory /*newCtx*/) {
+    // Your logic here
+}
+```
+
+#### onFlowUpdated
+
+Override for logic when an existing flow to the Super App is updated.
+
+```solidity
+function onFlowUpdated(
+    ISuperToken superToken,
+    address sender,
+    int96 previousFlowRate,
+    uint256 lastUpdated,
+    bytes calldata ctx
+) internal virtual returns (bytes memory /*newCtx*/) {
+    // Your logic here
+}
+```
+
+#### onFlowDeleted
+
+Override for logic when an existing flow to the Super App is deleted. Note: This callback must not revert to avoid jailing the Super App.
+
+```solidity
+function onFlowDeleted(
+    ISuperToken superToken,
+    address sender,
+    address receiver,
+    int96 previousFlowRate,
+    uint256 lastUpdated,
+    bytes calldata ctx
+) internal virtual returns (bytes memory /*newCtx*/) {
+    // Your logic here
+}
+```
+
+## Conclusion
+
+SuperAppBaseFlow is a recommended and easier way to deploy Super Apps, offering a more straightforward approach to developing with Superfluid's innovative features. Its intuitive design and simplified callback functions make it an ideal starting point for developers diving into programmable cash flows.
