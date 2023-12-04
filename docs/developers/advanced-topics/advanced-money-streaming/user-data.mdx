@@ -1,4 +1,131 @@
 ---
 sidebar_position: 3
 ---
-# User Data: NFT Billboard Example
+# User Data
+
+Another powerful component of the Superfluid protocol is the ability to pass in additional user data along with your calls to super agreements. Think of it as metadata that can accompany your streams or IDAs.
+
+Before we look at user data, let's take a quick dive into a new element: **Context**.
+
+Context is used for several key items within the Superfluid protocol such as gas optimization, governance, security, and SuperApp callbacks. One parameter that's also available for use within the context field is userData.
+
+This is from the host interface ([ISuperfluid.sol)](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol) file inside of our interfaces folder in the Superfluid repo. On line 20, we see `userData`.
+
+```solidity
+struct Context {
+    //
+    // Call context
+    //
+    // callback level
+    uint8 appLevel;
+    // type of call
+    uint8 callType;
+    // the system timestsamp
+    uint256 timestamp;
+    // The intended message sender for the call
+    address msgSender;
+    
+    //
+    // Callback context
+    //
+    // For callbacks it is used to know which agreement function selector is called
+    bytes4 agreementSelector;
+    // User provided data for app callbacks
+    bytes userData;
+    
+    //
+    // App context
+    //
+    // app allowance granted
+    uint256 appAllowanceGranted;
+    // app allowance wanted by the app callback
+    uint256 appAllowanceWanted;
+    // app allowance used, allowing negative values over a callback session
+    int256 appAllowanceUsed;
+    // app address
+    address appAddress;
+    // app allowance in super token
+    ISuperfluidToken appAllowanceToken;
+}
+}
+```
+
+Whenever you see `ctx` being moved around within the protocol, this struct is what's under the hood (it's just compiled down to bytes each time it's passed between functions).
+
+#### Quick Review: How Are Super Agreements Called Again?
+
+To call a function in a Super Agreement, you first need to use `abi.encode` to compile a function call to the super agreement you're looking to trigger. Then, you need to pass the agreement type, the bytecode of the previously compiled function call, and `userData` to `callAgreement`. The whole process looks like this:
+
+```solidity
+// Addresses for host and cfa on Polygon
+ISuperfluid host = "0x3E14dC1b13c488a8d5D310918780c983bD5982E7";
+IConstantFlowAgreementV1 cfa = "0x6EeE6060f715257b970700bc2656De21dEdF074C";
+// DAIx
+ISuperToken acceptedToken = "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063";
+// empty user data
+bytes userData = "0x";
+
+// $1000 DAI per month
+int96 flowRate = "385802469135802";
+
+// receiver is arbitrary
+address receiver = "0x...";
+
+host.callAgreement(
+     cfa,
+     abi.encodeWithSelector(
+         cfa.createFlow.selector,
+         acceptedToken,
+         receiver,
+         flowRate,
+         new bytes(0) // placeholder
+     ),
+     userData,
+);
+```
+
+> **Note**: `userData` is always passed into `callAgreement` as type `bytes`.
+
+```solidity
+function callAgreement(
+   ISuperAgreement agreementClass,
+   bytes calldata callData,
+   bytes calldata userData
+)
+     external
+     returns(bytes memory returnedData);
+```
+
+Behind the scenes, your `userData` variable is appended onto `Context`, which is then available to you as a developer in the SuperApp callbacks.
+
+When you execute an operation in the CFA contract, you'll have access to the Context after the initial call to the protocol was made. For example, if I pass in `userData` when creating a flow into a Super App, I can decode the `context` & this user data inside any of the super app callbacks, and re-use or manipulate this data as I please:
+
+```solidity
+function afterAgreementCreated(
+    ISuperToken _superToken,
+    address _agreementClass,
+    bytes32, // _agreementId,
+    bytes calldata /*_agreementData*/,
+    bytes calldata ,// _cbdata,
+    bytes calldata _ctx
+)
+    external override
+    onlyExpected(_superToken, _agreementClass)
+    onlyHost
+    returns (bytes memory newCtx)
+{
+    // decode Context
+    ISuperfluid.Context memory decompiledContext = _host.decodeCtx(_ctx);
+    // Decode userData
+    string memory decodedUserData = abi.decode(decompiledContext.userData, (string));
+    
+    // Do some stuff with your decodedUserData
+    return _doSomeStuff(decodedUserData);
+}
+```
+
+#### In Conclusion
+
+UserData can be _any_ arbitrary piece of data. It's like metadata associated with actions in Super Agreements. This metadata could be used for a wide variety of use cases, like accompanying a salary stream with employee info, sending a message with a distribution, or even passing in the bytecode for another smart contract.
+
+We invite you to be creative with this!
