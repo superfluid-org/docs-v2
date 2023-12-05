@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { ethers } from 'ethers';
 import abi from './abi.json';
+import Logo from '/src/components/Logo';
 
 const FlowSenderComponent = ({contractAddress}) => {
   const [walletAddress, setWalletAddress] = useState('');
@@ -81,33 +82,36 @@ const FlowSenderComponent = ({contractAddress}) => {
     };
 
     return (
-      <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h2>Flow Sender Interface</h2>
-      <h3>Step 1: Connect Wallet to your chosen testnet (e.g. Polygon Mumbai)</h3>
-      {walletAddress ? (
-          <p>Connected Wallet: {walletAddress}</p>
-      ) : (
-          <button onClick={connectWallet} style={{ margin: '10px' }}>Connect Wallet</button>
-      )}
-
-      <div style={{ margin: '10px' }}>
-      <h3>Step 2: Get fDAIx faucet</h3>
-          <button onClick={gainDaiX} style={{ margin: '5px' }}>Get fDAIx faucet</button>
-          <br />
-          <h3>Step 3: Call contract methods</h3>
-          <p>Enter Receiver Address and FlowRate Below to Create or Update stream</p>
-          <p>Enter Only Receiver Address Delete or Read Flow</p>
-          <input type="text" placeholder="Receiver Address" value={receiver} onChange={(e) => setReceiver(e.target.value)} style={{ margin: '5px' }} />
-          <input type="text" placeholder="Flow Rate" value={flowRate} onChange={(e) => setFlowRate(e.target.value)} style={{ margin: '5px' }} />
-          <br />
-          <button onClick={createStream} style={{ margin: '5px' }}>Create Stream</button>
-          <button onClick={updateStream} style={{ margin: '5px' }}>Update Stream</button>
-          <button onClick={deleteStream} style={{ margin: '5px' }}>Delete Stream</button>
-          <br />
-          <button onClick={readFlowRate} style={{ margin: '5px' }}>Read Flow Rate</button>
-      </div>
-      <p>{message}</p>
-  </div>
+        <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Arial, sans-serif', color: 'white' }}>
+            <h2>Flow Sender Interface</h2>
+            
+            <Logo/>
+            
+            <h3>Step 1: Connect Wallet to your chosen testnet (e.g. Polygon Mumbai)</h3>
+            {walletAddress ? (
+                <p>Connected Wallet: <strong>{walletAddress}</strong></p>
+            ) : (
+                <button onClick={connectWallet} style={{ backgroundColor: '#168c1e', color: 'white', padding: '10px 15px', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>Connect Wallet</button>
+            )}
+    
+            <div style={{ margin: '10px' }}>
+                <h3>Step 2: Get fDAIx faucet</h3>
+                <button onClick={gainDaiX} style={{ backgroundColor: '#168c1e', color: 'white', padding: '10px 15px', borderRadius: '5px', border: 'none', cursor: 'pointer', margin: '5px' }}>Get fDAIx faucet</button>
+                <br />
+                <h3>Step 3: Call contract methods</h3>
+                <p>Enter Receiver Address and FlowRate Below to Create or Update stream</p>
+                <p>Enter Only Receiver Address Delete or Read Flow</p>
+                <input type="text" placeholder="Receiver Address" value={receiver} onChange={(e) => setReceiver(e.target.value)} style={{ margin: '5px', padding: '5px', borderRadius: '3px', border: '1px solid #ddd' }} />
+                <input type="text" placeholder="Flow Rate" value={flowRate} onChange={(e) => setFlowRate(e.target.value)} style={{ margin: '5px', padding: '5px', borderRadius: '3px', border: '1px solid #ddd' }} />
+                <br />
+                <button onClick={createStream} style={{ backgroundColor: '#168c1e', color: 'white', padding: '10px 15px', borderRadius: '5px', border: 'none', cursor: 'pointer', margin: '5px' }}>Create Stream</button>
+                <button onClick={updateStream} style={{ backgroundColor: '#168c1e', color: 'white', padding: '10px 15px', borderRadius: '5px', border: 'none', cursor: 'pointer', margin: '5px' }}>Update Stream</button>
+                <button onClick={deleteStream} style={{ backgroundColor: '#168c1e', color: 'white', padding: '10px 15px', borderRadius: '5px', border: 'none', cursor: 'pointer', margin: '5px' }}>Delete Stream</button>
+                <br />
+                <button onClick={readFlowRate} style={{ backgroundColor: '#168c1e', color: 'white', padding: '10px 15px', borderRadius: '5px', border: 'none', cursor: 'pointer', margin: '5px' }}>Read Flow Rate</button>
+            </div>
+            <p style={{ marginTop: '20px' }}>{message}</p>
+        </div>
     );
 };
 

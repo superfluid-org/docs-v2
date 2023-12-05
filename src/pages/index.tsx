@@ -3,6 +3,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import Logo from "@site/src/components/Logo";
 import styled from "@emotion/styled";
+import WavyBackground from "../components/WavyBackground";
 
 import {
   ArrowUpRight as LinkIcon,
@@ -116,6 +117,8 @@ const LinkIconWrapper = styled.div`
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
+    <>
+    <WavyBackground />
     <div className="customBackground">
       <Layout
         title={`${siteConfig.title}`}
@@ -173,5 +176,6 @@ export default function Home(): JSX.Element {
         </div>
       </Layout>
     </div>
+    </>
   );
 }
