@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import SuperTokenVis from "@site/src/components/Visualizations/SuperTokenVis";
 
 # Super Tokens
 
@@ -35,21 +35,21 @@ The actual current balance is a sum of these components.
 
 A Super Token's `balanceOf()` function reflects this dynamic balance, unlike a regular ERC20's static approach.
 
-## Types of Super Tokens
+## Wrapper Super Tokens
 
-<Tabs>
-  <TabItem value="wrapper" label="Wrapper">
-    Wrapper Super Tokens are existing tokens wrapped to gain Superfluid functionalities. Wrapping converts the underlying token into its Super Token version, while unwrapping reverses the process.
+Wrapper Super Tokens are existing tokens wrapped to gain Superfluid functionalities. Wrapping converts the underlying token into its Super Token version, while unwrapping reverses the process.
 
-    ![Wrapper Super Token Example](./img/wrappedToken.webp)
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <SuperTokenVis />
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>*By wrapping the original token you obtain a SUPER TOKEN*</p>
+</div>
+<p><strong>Example:</strong> Converting a standard token to a Super Token and vice versa.</p>
 
-    **Example**: Converting a standard token to a Super Token and vice versa.
-  </TabItem>
-  <TabItem value="pure" label="Pure">
-    Pure Super Tokens are natively Superfluid-enabled without an underlying token. They offer inherent ERC20 functionalities plus Superfluid's Super Agreement capabilities.
+## Pure Super Tokens
 
-    ![Pure Super Token Example](./img/Pure.webp)
+Pure Super Tokens are natively Superfluid-enabled without an underlying token. They offer inherent ERC20 functionalities plus Superfluid's Super Agreement capabilities.
 
-    **Example**: $RIC by Ricochet DAO, a governance token deployed as a pure Super Token for extensive use of Super Agreements.
-  </TabItem>
-</Tabs>
+<img src="./img/Pure.webp" alt="Pure Super Token Example" />
+<p><strong>Example:</strong> $RIC by Ricochet DAO, a governance token deployed as a pure Super Token for extensive use of Super Agreements.</p>

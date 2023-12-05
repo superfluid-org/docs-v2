@@ -4,6 +4,9 @@ sidebar_position: 1
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import SuperTokenVis from '@site/src/components/Visualizations/SuperTokenVis';
+
+
 
 # Overview of Super Tokens
 
@@ -42,7 +45,14 @@ Wrapper Super Tokens are created from existing ERC20 tokens to include Superflui
 - **Wrapping**: Deposit ERC20 tokens into the Wrapper Super Token contract to mint an equivalent amount of Super Tokens.
 - **Unwrapping**: Burn Super Tokens to get back the underlying ERC20 tokens.
 
-![Wrapper Super Tokens](/assets/image_(1)_(1)_(1).png)
+<br/>
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<SuperTokenVis/>
+</div>
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <p>*By wrapping the original token you obain a SUPER TOKEN*</p>
+</div>
 
 #### Custom Wrapper Super Tokens
 
