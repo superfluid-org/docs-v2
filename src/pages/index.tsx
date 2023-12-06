@@ -37,13 +37,13 @@ export const actions = [
     title: "SDK",
     icon: AtSign,
     to: "/docs/sdk/overview",
-    text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
+    text: `Learn about how to use the Superfluid SDK in your JavaScript/TypeScript project.`,
   },
   {
     title: "Technical Reference",
     icon: BookOpen,
     to: "/technical-reference",
-    text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
+    text: `A comprehensive reference for the Superfluid Protocol contracts.`,
   },
 ];
 

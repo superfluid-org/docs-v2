@@ -101,17 +101,17 @@ const config: Config = {
         },
         {
           href: 'https://twitter.com/intent/follow?screen_name=Superfluid_HQ',
-          html: '<img src="img/twitter.png" alt="Twitter" width="35" height="35" /> _x/twitter',
+          html: '<img src="/img/twitter.png" alt="Twitter" width="35" height="35" /> _x/twitter',
           position: 'right',
         },
         {
           href: 'https://github.com/superfluid-finance',
-          html: '<img src="img/github.png" alt="Github" width="35" height="35" /> _github',
+          html: '<img src="/img/github.png" alt="Github" width="35" height="35" /> _github',
           position: 'right',
         },
         {
           href: 'https://discord.gg/pPzPEDMVua',
-          html: '<img src="img/discord.png" alt="Discord" width="35" height="35" /> _discord',
+          html: '<img src="/img/discord.png" alt="Discord" width="35" height="35" /> _discord',
           position: 'right',
         },
       ],

@@ -14,7 +14,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
       const memberCount = 5;
       const memberRadius = 15;
       const streamPathLength = 200;
-      const unitFlowSpeed = 2000; // Increased speed of unit flow
+      const unitFlowSpeed = 700; // Increased speed of unit flow
       const adminPosition = { x: poolCenter.x - 250, y: poolCenter.y }; // Position of the pool admin
   
       // Create pool with label

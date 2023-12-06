@@ -1,19 +1,72 @@
 ---
 sidebar_position: 3
 ---
-import Admonition from '@theme/Admonition';
+
+import Admonition from "@theme/Admonition";
+import PoolInstantVis from "@site/src/components/Visualizations/PoolInstantVis";
+import PoolStreamVis from "@site/src/components/Visualizations/PoolStreamVis";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Distributions
 
-The introduction of streaming distributions marks a significant advancement in web3, offering a scalable method for one-to-many fund transfers.
+The introduction of Distributions marks a significant advancement in web3, offering a scalable method for one-to-many fund transfers.
 
 <Admonition type="info">
-Distributions are currently active on testnets. Relevant addresses and tooling support are in progress, including additions to SuperTokenV1Library and SDK Core. For more information, visit the [Superfluid Console](https://console.superfluid.finance/eth-goerli/protocol).
+  Distributions are currently active on testnets. Relevant addresses and tooling
+  support are in progress, including additions to SuperTokenV1Library and SDK
+  Core. For more information, visit the [Superfluid
+  Console](https://console.superfluid.finance/eth-goerli/protocol).
 </Admonition>
 
 ## Overview
 
-Distributions allow for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable.
+Distributions allow for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable. There are two types of Distributions:
+
+- **Instant Distributions**: They allow one transaction distribution to any number of receivers with a fixed gas cost.
+- **Streaming Distributions**: They allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.
+
+---
+<Tabs defaultValue="instant" values={[
+  { label: 'Instant Distribution', value: 'instant' },
+  { label: 'Streaming Distribution', value: 'streaming' },
+]}>
+<TabItem value="instant">
+
+**Instant Distributions allow one transaction to distribute to any number of receivers with a fixed gas cost.**
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  *Click on the Blue Circle to initiate an Instant Distribution*
+  <br />
+</div>
+<PoolInstantVis />
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>
+    *By creating a Distribution Pool, you can distribute any token instantly*
+  </p>
+</div>
+
+  </TabItem>
+  <TabItem value="streaming">
+
+**Instant Distributions allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.**
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  *Watch how the continuous stream gets distributed automatically through the pool*
+  <br />
+</div>
+<PoolStreamVis />
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>
+    *By creating a Distribution Pool, you can distribute any stream with no gas cost*
+  </p>
+</div>
+
+  </TabItem>
+  
+</Tabs>
+
+---
 
 ### Definitions
 

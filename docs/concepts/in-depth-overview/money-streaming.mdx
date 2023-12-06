@@ -16,7 +16,7 @@ Money Streaming is a process where tokens are continuously transferred from a se
 - **Sender**: The account initiating the stream, specifying a receiver and flow rate.
 - **Receiver**: The account on the receiving end of a stream.
 - [**CRUD Timestamp**](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete): The timestamp when a stream is created, updated, or deleted.
-- **CFA Real-Time Balance**: The change in the account's Super Token balance since the last CRUD action.
+- **Real-Time Balance**: The change in the account's Super Token balance since the last CRUD action.
 - **Static Balance**: The Super Token balance at the last CRUD timestamp.
 - **Current Balance**: The sum of Static Balance and Streaming Real-Time Balance.
 
@@ -28,7 +28,12 @@ Money Streaming is a process where tokens are continuously transferred from a se
 
 The netflow for an account is calculated by netting its inbound and outbound streaming flow rates.
 
-![Netflow Calculation](/assets/image_(63).png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+  ![Netflow Calculation](/assets/image_(63).png)
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>*Example of Net Flow calculation*</p>
+</div>
 
 When a stream is modified, the following are updated in the Superfluid contracts:
 
@@ -39,7 +44,12 @@ When a stream is modified, the following are updated in the Superfluid contracts
 
 The Real-Time Balance then adjusts by-the-second at the netflow rate.
 
-![Streaming Real-Time Balance](/assets/image_(50)_(1).png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+  ![Streaming Real-Time Balance](/assets/image_(50)_(1).png)
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>*Streaming Real-Time Balance*</p>
+</div>
 
 <Admonition type="info">
 <strong>NOTE</strong>: Creating a stream is a one-time action. The balance is dynamically calculated and does not require continuous transactions.
@@ -57,7 +67,12 @@ Let's examine how Account A's balance changes with stream interactions.
 
 #### **1. Starting an Outbound Stream**
 
-![Outbound Stream](/assets/image_(50)_(1)_(1).png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+  ![Outbound Stream](/assets/image_(50)_(1)_(1).png)
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>*Outbound Stream*</p>
+</div>
 
 - Initial Balance: 1000 USDCx
 - Flow Rate to Account B: 0.01 USDCx/sec
@@ -66,7 +81,14 @@ Let's examine how Account A's balance changes with stream interactions.
 
 #### **2. Increasing the Flow Rate**
 
-![Flow Rate Increase](/assets/image_(60).png)
+
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  ![Flow Rate Increase](/assets/image_(60).png)
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>*Flow Rate Increase*</p>
+</div>
 
 - Static Balance: 990 USDCx
 - New Flow Rate: 0.02 USDCx/sec
@@ -74,28 +96,48 @@ Let's examine how Account A's balance changes with stream interactions.
 
 #### **3. Time Elapse Post Flow Rate Change**
 
-![Time Elapse](/assets/image_(59)_(1).png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+  ![Time Elapse](/assets/image_(59)_(1).png)
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>*Time Elapse*</p>
+</div>
 
 - Time Elapsed: 2000 seconds
 - **Current Balance**: 950 USDCx
 
 #### **4. Receiving an Inbound Stream**
 
-![Inbound Stream](/assets/image_(57).png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+    ![Inbound Stream](/assets/image_(57).png)
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+    <p>*Inbound Stream*</p>
+</div>
 
 - Inbound Flow Rate from Account C: 0.04 USDCx/sec
 - **Current Balance**: 950 USDCx
 
 #### **5. Post Inbound Stream Time Elapse**
 
-![Post Inbound Stream](/assets/image_(39).png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+    ![Post Inbound Stream](/assets/image_(39).png)
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+    <p>*Post Inbound Stream*</p>
+</div>
 
 - Time Elapsed: 1000 seconds
 - **Current Balance**: 970 USDCx
 
 #### **6. Deleting the Outbound Stream**
 
-![Deleting Outbound Stream](/assets/image_(38).png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+    ![Deleting Outbound Stream](/assets/image_(38).png)
+</div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+    <p>*Deleting Inbound Stream</p>
+</div>
 
 - Static Balance: 970 USDCx
 - **Current Balance**: 970 USDCx
@@ -104,11 +146,11 @@ Let's examine how Account A's balance changes with stream interactions.
 
 #### Discrete Actions and Active Streams
 
-Transferring, wrapping, or unwrapping Super Tokens, being lump-sum actions, only affect the Static Balance and not the CFA Real-Time Balance.
+Transferring, wrapping, or unwrapping Super Tokens, being lump-sum actions, only affect the Static Balance and not the Real-Time Balance.
 
-#### Interaction with Instant Distribution Agreement (IDA)
+#### Interaction with Distributions 
 
-Actions within IDA have their own Real-Time Balance and are added separately to the overall account balance.
+Actions within Distributions have their own Real-Time Balance and are added separately to the overall account balance.
 
 ## Solvency and Sentinels
 
@@ -120,6 +162,6 @@ Buffer deposits are taken when opening a stream, serving as a reserve in case of
 
 ### Sentinels
 
-Sentinels are external actors who monitor CFAs, close streams of critical accounts, and earn buffer deposits.
+Sentinels are external actors who monitor Constant Flow Agreements (Money Streaming), close streams of critical accounts, and earn buffer deposits.
 
 _For more details, see the [Liquidations](../../../sentinels/liquidations-and-toga.md) and [Sentinels](https://docs.superfluid.finance/superfluid/sentinels/running-a-sentinel) pages._

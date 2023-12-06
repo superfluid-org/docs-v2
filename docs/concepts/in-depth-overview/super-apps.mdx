@@ -13,15 +13,15 @@ Super Apps are smart contracts registered with the Superfluid Protocol, designed
 
 ## **Reacting to Super Agreements**
 
-The reactivity of Super Apps stems from **callbacks**. These are segments of code within the Super App that are triggered when a Super Agreement involving the Super App is created, updated, or deleted. Such callbacks can execute various actions, from minting NFTs to initiating new CFAs (Constant Flow Agreements).
+The reactivity of Super Apps stems from **callbacks**. These are segments of code within the Super App that are triggered when a Super Agreement involving the Super App is created, updated, or deleted. Such callbacks can execute various actions, from minting NFTs to initiating new Streams (Constant Flow Agreements).
 
 ### **Example - Stream Consolidator Super App**
 
 Consider a Super App designed to consolidate all incoming flows into a single outgoing flow to a specific account (Account Z):
 
-1. **Incoming Flow from Account A**: Account A initiates a CFA to the Super App (100 USDCx/mo). The Super App, in turn, starts an outbound CFA of the same rate to Account Z.
-2. **Multiple Flow Adjustments**: If Account B starts a new CFA to the Super App (25 USDCx/mo) and Account A adjusts its flow (to 50 USDCx/mo), the Super App responds by updating its outbound CFA accordingly.
-3. **Ongoing Reactions**: The Super App continues to adapt to new CFAs or adjustments from various accounts, maintaining a reactive outbound flow.
+1. **Incoming Flow from Account A**: Account A initiates a Money Stream to the Super App (100 USDCx/mo). The Super App, in turn, starts an outbound Stream of the same rate to Account Z.
+2. **Multiple Flow Adjustments**: If Account B starts a new Money Stream to the Super App (25 USDCx/mo) and Account A adjusts its flow (to 50 USDCx/mo), the Super App responds by updating its outbound Streams accordingly.
+3. **Ongoing Reactions**: The Super App continues to adapt to new Money Streams or adjustments from various accounts, maintaining a reactive outbound flow.
 
 <Admonition type="info">
 <strong>NOTE</strong>: For a smart contract to qualify as a Super App, it must have defined callbacks to interact with Super Agreements.
@@ -44,8 +44,8 @@ Super Apps introduce a layer of programmability to Super Agreements, enhancing t
 
 ### Potential Use Cases
 
-- **Lending Applications**: Automate loan repayments through CFAs, eliminating the need for manual transactions.
-- **Subscription Services**: Enable on-chain subscriptions paid via CFAs, incorporating features like automatic affiliate payouts.
+- **Lending Applications**: Automate loan repayments through Streams, eliminating the need for manual transactions.
+- **Subscription Services**: Enable on-chain subscriptions paid via Streams, incorporating features like automatic affiliate payouts.
 
 Super Apps open up a realm of possibilities, combining custom logic with the functionalities of Super Agreements to craft unique and scalable dApps.
 

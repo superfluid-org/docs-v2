@@ -51,9 +51,11 @@ The actual current balance is a sum of these components.
 ### Example Calculation
 
 - Account A's Static Balance: 1,000 USDCx
-- Account A's CFA Stream Out: -100 USDCx
-- Account A's IDA Receipts: +200 USDCx
+- Account A's Stream Out: -100 USDCx
+- Account A's Instant Distribution Receipts: +200 USDCx
 
 > **Current Balance**: 1000 - 100 + 200 = **1100 USDCx**
 
-A Super Token's `balanceOf()` function reflects this dynamic balance, unlike a regular ERC20's static approach.
+:::info About Super Tokens `balanceOf()`
+If you are familiar with the ERC20 standard, you are certainly familiar with `balanceOf()`. A Super Token `balanceOf()` function reflects this dynamic balance, unlike a regular ERC20's static approach.
+:::
