@@ -58,14 +58,14 @@ const TokenWrapper = () => {
     // Initialize the data for the small and big ball
     let data = [
       {
-        name: "Original Token",
+        name: "Your Token",
         x: width / 4,
         y: height / 2,
         radius: 40,
         color: "green",
       },
       {
-        name: "Wrapper Token",
+        name: "Wrapper Super Token",
         x: (3 * width) / 4,
         y: height / 2,
         radius: 90,
@@ -161,9 +161,41 @@ const TokenWrapper = () => {
       updateStatusText();
     }
 
+    // Function to create and animate particles
+    function createParticles() {
+      const wrapperToken = data.find((d) => d.name === "Wrapper Super Token");
+    
+      function emitParticle() {
+        const particle = svg.append("circle")
+          .attr("class", "particle")
+          .attr("r", 2) // Small radius for particles
+          .attr("cx", wrapperToken.x+wrapperToken.radius) // Start position
+          .attr("cy", wrapperToken.y)
+          .attr("fill", "gold");
+    
+        particle.transition()
+          .duration(2000)
+          .attr("cx", wrapperToken.x + Math.random() * 100 + 50) // Controlled end position
+          .attr("cy", wrapperToken.y + Math.random() * 100 + 50)
+          .on("end", function() { d3.select(this).remove(); }); // Remove particle after animation
+    
+        // Recursive call to emit another particle
+        setTimeout(emitParticle, 200); // Adjust delay for continuous stream
+      }
+    
+      emitParticle(); // Start emitting particles
+    }
+    
+
+    // Function to remove particles
+    function removeParticles() {
+      svg.selectAll(".particle").remove();
+    }
+
+
     function updateStatusText() {
-      const originalToken = data.find((d) => d.name === "Original Token");
-      const wrapperToken = data.find((d) => d.name === "Wrapper Token");
+      const originalToken = data.find((d) => d.name === "Your Token");
+      const wrapperToken = data.find((d) => d.name === "Wrapper Super Token");
       const distance = Math.sqrt(
         (originalToken.x - wrapperToken.x) ** 2 +
           (originalToken.y - wrapperToken.y) ** 2
@@ -171,9 +203,11 @@ const TokenWrapper = () => {
       if (distance < wrapperToken.radius + originalToken.radius) {
         statusText.style("fill", "yellow").text("Your token is SUPER!");
         setIsSuper(true);
+        createParticles();
       } else {
-        statusText.style("fill", "pink").text("Your token is normal");
+        statusText.style("fill", "pink").text("Your token is normal - drag it to give it superpowers!");
         setIsSuper(false);
+        removeParticles();
       }
     }
   }, []);
