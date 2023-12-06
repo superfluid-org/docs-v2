@@ -89,13 +89,29 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'SDK',
+          position: 'left',
+          label: 'SDK',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'TechnicalReference',
           position: 'left',
           label: 'Technical Reference',
         },
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
+          href: 'https://twitter.com/intent/follow?screen_name=Superfluid_HQ',
+          html: '<img src="img/twitter.png" alt="Twitter" width="35" height="35" /> _x/twitter',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/superfluid-finance',
+          html: '<img src="img/github.png" alt="Github" width="35" height="35" /> _github',
+          position: 'right',
+        },
+        {
+          href: 'https://discord.gg/pPzPEDMVua',
+          html: '<img src="img/discord.png" alt="Discord" width="35" height="35" /> _discord',
           position: 'right',
         },
       ],
@@ -107,8 +123,24 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Concepts',
+              to: '/docs/concepts/overview',
+            },
+            {
+              label: 'Products',
+              to: '/docs/products/intro',
+            },
+            {
+              label: 'Developers',
+              to: '/docs/concepts/quickstart',
+            },
+            {
+              label: 'SDK',
+              to: '/docs/concepts/overview',
+            },
+            {
+              label: 'Technical Reference',
+              to: '/docs/technical-reference/intro',
             },
           ],
         },
@@ -116,16 +148,16 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Github',
+              href: 'https://github.com/superfluid-finance',
             },
             {
               label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              href: 'https://discord.gg/pPzPEDMVua',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'X/Twitter',
+              href: 'https://twitter.com/intent/follow?screen_name=Superfluid_HQ',
             },
           ],
         },
@@ -133,17 +165,25 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: 'About Us',
+              href: 'https://www.superfluid.finance/about',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Blog',
+              href: 'https://www.superfluid.finance/blog',
+            },
+            {
+              label: 'Terms of Use',
+              href: 'https://www.superfluid.finance/terms',
+            },
+            {
+              label: 'Privacy Policy',
+              href: 'https://www.iubenda.com/privacy-policy/34415583/legal',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Superfluid Finance LTD. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

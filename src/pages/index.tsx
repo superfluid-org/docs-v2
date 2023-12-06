@@ -10,26 +10,33 @@ import {
   BookOpen,
   HelpCircle,
   Info,
-  MessageCircle,
+  MousePointer,
+  AtSign,
 } from "react-feather";
 
 export const actions = [
   {
     title: "What is Superfluid?",
-    icon: Info,
+    icon: HelpCircle,
     to: "/docs/concepts/overview",
     text: `Learn about the core concepts of the Superfluid Protocol.`,
   },
   {
-    title: "Products",
-    icon: HelpCircle,
+    title: "Use Cases",
+    icon: Info,
     to: "/docs/products/intro",
-    text: `Learn how to integrate with Uniswap by building a dApp through guided examples.`,
+    text: `Learn about our use cases and how to implement them for your users.`,
   },
   {
     title: "For Developers",
-    icon: BookOpen,
+    icon: MousePointer,
     to: "/docs/developers/overview",
+    text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
+  },
+  {
+    title: "SDK",
+    icon: AtSign,
+    to: "/docs/sdk/overview",
     text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
   },
   {
@@ -137,7 +144,7 @@ export default function Home(): JSX.Element {
               justifyContent: "center",
             }}
           >
-            <Logo />
+            <Logo /><br/> <span style={{ fontSize: "20px" }}>Technical Documentation for the Superfluid Protocol</span>
           </div>
           <Row>
             {actions.map((action) => (
@@ -173,6 +180,7 @@ export default function Home(): JSX.Element {
               </Link>
             ))}
           </Row>
+          <br/>
         </div>
       </Layout>
     </div>
