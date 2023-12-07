@@ -77,9 +77,9 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'Products',
+          sidebarId: 'UseCases',
           position: 'left',
-          label: 'Products',
+          label: 'Use Cases',
         },
         {
           type: 'docSidebar',
@@ -127,7 +127,7 @@ const config: Config = {
               to: '/docs/concepts/overview',
             },
             {
-              label: 'Products',
+              label: 'UseCases',
               to: '/docs/products/intro',
             },
             {

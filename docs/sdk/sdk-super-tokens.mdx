@@ -1,0 +1,121 @@
+---
+sidebar_position: 2
+---
+
+import CodeBlock from '@theme/CodeBlock';
+
+# Super Tokens (SDK)
+
+The SuperToken class in the Superfluid SDK Core allows for various operations like basic transfers, approvals, token wrapping & unwrapping. It also facilitates interactions with the CFAV1 and IDAV1 contracts. This guide explains how to initialize and use the SuperToken class.
+
+## Framework Based Initialization
+
+### Importing and Initializing the Framework
+
+```javascript
+import { Framework } from "@superfluid-finance/sdk-core";
+import { ethers } from "ethers";
+
+const provider = new ethers.providers.InfuraProvider("matic", "<INFURA_API_KEY>");
+
+const sf = await Framework.create({
+  networkName: "matic",
+  provider
+});
+
+const usdcx = await sf.loadSuperToken("0xCAa7349CEA390F89641fe306D93591f87595dc1F");
+```
+
+## Direct Initialization
+
+### Importing and Initializing SuperToken Directly
+
+```javascript
+import { SuperToken } from "@superfluid-finance/sdk-core";
+import { ethers } from "ethers";
+
+const provider = new ethers.providers.InfuraProvider("matic", "<INFURA_API_KEY>");
+
+const config = {
+  hostAddress: "0x3E14dC1b13c488a8d5D310918780c983bD5982E7",
+  cfaV1Address: "0x6EeE6060f715257b970700bc2656De21dEdF074C",
+  idaV1Address: "0xB0aABBA4B2783A72C52956CDEF62d438ecA2d7a1"
+};
+
+const usdcx = await SuperToken.create({
+  address: "0xCAa7349CEA390F89641fe306D93591f87595dc1F",
+  config,
+  networkName: "matic",
+  provider
+});
+```
+
+## SuperToken Functions
+
+### Read and Write Operations
+
+```javascript
+const usdcx = await sf.loadSuperToken("0xCAa7349CEA390F89641fe306D93591f87595dc1F");
+
+// ERC20 Token Read Functions
+await usdcx.balanceOf(/* parameters */);
+await usdcx.allowance(/* parameters */);
+await usdcx.name(/* parameters */);
+await usdcx.symbol(/* parameters */);
+await usdcx.totalSupply(/* parameters */);
+
+// ERC20 Token Write Operations
+usdcx.approve(/* parameters */);
+usdcx.transfer(/* parameters */);
+usdcx.transferFrom(/* parameters */);
+
+// SuperToken only Read Function
+await usdcx.realtimeBalanceOf(/* parameters */);
+
+// SuperToken Write Operations
+usdcx.downgrade(/* parameters */);
+usdcx.upgrade(/* parameters */);
+
+// SuperToken CFAV1/IDAV1 Functions
+// Equivalent to ConstantFlowAgreementV1/InstantDistributionAgreementV1 class functions
+// e.g., await usdcx.createIndex(/* parameters */).exec(signer);
+```
+
+## Example Usage
+
+### Reading and Writing Super Token Operations
+
+```javascript
+import { Framework } from "@superfluid-finance/sdk-core";
+import { ethers } from "ethers";
+
+const provider = new ethers.providers.InfuraProvider("matic", "<INFURA_API_KEY>");
+
+const sf = await Framework.create({
+  networkName: "matic",
+  provider
+});
+
+const usdcx = await sf.loadSuperToken("0xCAa7349CEA390F89641fe306D93591f87595dc1F");
+
+// Read example
+const name = await usdcx.name();
+console.log(name);
+
+// Write operation example
+const signer = sf.createSigner({ privateKey: "<TEST_ACCOUNT_PRIVATE_KEY>", provider });
+const transferOperation = usdcx.transfer({ receiver: "0x...", amount: "1000000" });
+const txnResponse = await transferOperation.exec(signer);
+const txnReceipt = await txnResponse.wait();
+```
+
+### Note
+
+For operations like approving token spend prior to upgrading, you can access the underlying ERC20 Token object:
+
+```javascript
+const usdc = usdcx.underlyingToken;
+const totalSupply = await usdc.totalSupply();
+```
+
+This guide covers the initialization and usage of the SuperToken class in the Superfluid SDK Core, demonstrating both framework-based and direct initialization methods, along with examples of read and write operations.

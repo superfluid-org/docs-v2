@@ -1,0 +1,91 @@
+---
+sidebar_position: 8
+---
+
+import CodeBlock from '@theme/CodeBlock';
+
+# Resolver 
+
+The Resolver is a crucial helper contract in the Superfluid Framework, serving as an on-chain directory for finding all related contract addresses. 
+
+## Overview of Resolver
+
+The Resolver contract is deployed alongside the protocol and is integral to operations, even if you're not directly aware of its use. For example, when you call `Framework.create()` in the SDK Core, it utilizes the Resolver.
+
+## Using the Resolver with the SDK Core
+
+### Accessing Super Tokens and Agreement Addresses
+
+```javascript
+// Example of accessing a Super Token
+const sf = await Framework.create({ networkName: "goerli", provider });
+const usdcx = await sf.loadSuperToken("USDCx");
+
+// Accessing the host contract address
+const hostAddress = sf.settings.config.hostAddress;
+
+// Accessing CFA and IDA contract addresses
+const cfaAddress = sf.settings.config.cfaV1Address;
+const idaAddress = sf.settings.config.idaV1Address;
+```
+
+## Accessing Contracts in Solidity
+
+### Sample Solidity Contract Utilizing Resolver and Host
+
+```solidity
+pragma solidity 0.8.13;
+
+import { IResolver } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/utils/IResolver.sol";
+import { ISuperfluid } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+
+contract ResolverExample {
+    IResolver public resolver;
+    ISuperfluid public host;
+
+    constructor(IResolver _resolver, ISuperfluid _host) {
+        resolver = _resolver;
+        host = _host;
+    }
+
+    function getContractFromResolver(string calldata name) external view returns (address) {
+        return resolver.get(name);
+    }
+
+    function getCFAContract() external view returns (address) {
+        bytes32 agreement = keccak256("org.superfluid-finance.agreements.ConstantFlowAgreement.v1");
+        return address(host.getAgreementClass(agreement));
+    }
+
+    function getIDAContract() external view returns (address) {
+        bytes32 agreement = keccak256("org.superfluid-finance.agreements.InstantDistributionAgreement.v1");
+        return address(host.getAgreementClass(agreement));
+    }
+}
+```
+
+In this contract, the `getAgreementClass` method of the Superfluid Host contract is used to access the addresses of Superfluid agreements like Constant Flow Agreement (CFA) and Instant Distribution Agreement (IDA).
+
+## Using Resolver for Specific Tokens
+
+### Retrieving Token Addresses
+
+```javascript
+// For Super Tokens
+resolver.get(`supertokens.v1.DAIx`);
+
+// For ERC20 tokens listed with the protocol
+resolver.get('tokens.DAI');
+```
+
+### Using the Superfluid Loader
+
+To get the entire framework, you can use the Superfluid Loader contract:
+
+```javascript
+const superfluidLoaderAddress = resolver.get('SuperfluidLoader-v1');
+// Load the framework using the Superfluid Loader
+superfluidLoader.loadFramework("v1");
+```
+
+This guide covers how to use the Resolver in the Superfluid SDK Core, including accessing contract addresses in both JavaScript and Solidity, and using the Resolver to retrieve specific token addresses or the entire framework.

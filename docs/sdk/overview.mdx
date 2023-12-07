@@ -1,1 +1,46 @@
-#overview
+---
+sidebar_position: 1
+---
+import React from 'react';
+import CodeBlock from '@theme/CodeBlock';
+
+# Overview
+
+## What is the Superfluid SDK?
+
+The Superfluid SDK-Core is a wrapper library around `@superfluid-finance/ethereum-contracts` which allows 
+web developers to interact with the Superfluid contracts.
+Under the hood, SDK-Core leverages TypeScript, ethers.js and The Graph and GraphQL.
+The chapters of this page provide an overview on how to use the SDK core to
+interact with the protocol.
+
+## Key Features
+
+- **Real-Time Streaming**: The most notable feature of Superfluid is the ability to stream tokens continuously over time, rather than in discrete transactions.
+- **Programmable Cashflows**: It allows the creation of cash flows that are programmable and composable, providing a high degree of flexibility and automation.
+- **Versatility**: The SDK is compatible with various EVM-based networks and is designed to be both developer-friendly and highly adaptable to different use cases.
+
+## Capabilities and Use Cases
+
+- **Continuous Payments**: Ideal for subscriptions, salaries, or rent, where payments can be streamed per second rather than monthly.
+- **Reward Distributions**: Stream or send rewards to multiple participants in real-time, ensuring a fair and transparent distribution system.
+- **Continuous DCA**: Seamlessly Dollar-cost-average (DCA) every second in your favourite asset without the need for complex and costly transactions.
+
+## Getting Started with the SDK
+
+The SDK is designed to be intuitive and accessible for developers:
+
+```javascript
+import { Framework } from "@superfluid-finance/sdk-core";
+// Framework initialization code
+```
+
+* **Framework Initialization**: Begin by creating a Framework instance, which is the entry point to interact with Superfluid features.
+* **Token Operations**: Manage Super Tokens, perform upgrades, downgrades, and transfers.
+* **Agreement Operations**: Utilize CFA and IDA for streaming and distributing tokens.
+
+## Conclusion
+
+The Superfluid SDK is a potent tool for developers looking to harness the power of real-time finance on the blockchain. By enabling new models of financial transactions, it paves the way for innovative applications and more efficient systems in the DeFi space.
+
+For more detailed technical documentation, refer to the specific sections of this guide.
