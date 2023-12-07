@@ -18,19 +18,19 @@ export const actions = [
   {
     title: "What is Superfluid?",
     icon: HelpCircle,
-    to: "/docs/concepts/overview",
+    to: "/docs/concepts/superfluid",
     text: `Learn about the core concepts of the Superfluid Protocol.`,
   },
   {
     title: "Use Cases",
     icon: Info,
-    to: "/docs/products/intro",
+    to: "/docs/category/use-cases/",
     text: `Learn about our use cases and how to implement them for your users.`,
   },
   {
     title: "For Developers",
     icon: MousePointer,
-    to: "/docs/developers/overview",
+    to: "/docs/developers/quickstart",
     text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
   },
   {

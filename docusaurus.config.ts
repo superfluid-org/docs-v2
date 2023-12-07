@@ -75,12 +75,12 @@ const config: Config = {
           position: 'left',
           label: 'Concepts',
         },
-        {
+        /*{
           type: 'docSidebar',
           sidebarId: 'UseCases',
           position: 'left',
           label: 'Use Cases',
-        },
+        },*/
         {
           type: 'docSidebar',
           sidebarId: 'Developers',
@@ -124,7 +124,7 @@ const config: Config = {
           items: [
             {
               label: 'Concepts',
-              to: '/docs/concepts/overview',
+              to: '/docs/concepts/superfluid',
             },
             {
               label: 'UseCases',
@@ -132,11 +132,11 @@ const config: Config = {
             },
             {
               label: 'Developers',
-              to: '/docs/concepts/quickstart',
+              to: '/docs/developers/quickstart',
             },
             {
               label: 'SDK',
-              to: '/docs/concepts/overview',
+              to: '/docs/sdk/overview',
             },
             {
               label: 'Technical Reference',
