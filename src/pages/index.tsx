@@ -28,9 +28,9 @@ export const actions = [
     text: `Learn about our use cases and how to implement them for your users.`,
   },
   {
-    title: "For Developers",
+    title: "Protocol",
     icon: MousePointer,
-    to: "/docs/developers/quickstart",
+    to: "/docs/Protocol/quickstart",
     text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
   },
   {

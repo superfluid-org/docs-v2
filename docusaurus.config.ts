@@ -83,9 +83,9 @@ const config: Config = {
         },*/
         {
           type: 'docSidebar',
-          sidebarId: 'Developers',
+          sidebarId: 'Protocol',
           position: 'left',
-          label: 'Developers',
+          label: 'Protocol',
         },
         {
           type: 'docSidebar',
@@ -131,8 +131,8 @@ const config: Config = {
               to: '/docs/products/intro',
             },
             {
-              label: 'Developers',
-              to: '/docs/developers/quickstart',
+              label: 'Protocol',
+              to: '/docs/protocol/quickstart',
             },
             {
               label: 'SDK',
