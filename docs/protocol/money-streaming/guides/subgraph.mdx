@@ -11,7 +11,6 @@ The Graph is the indexing layer of our industry, providing a queryable platform 
 <Admonition type="tip" title="New to GraphQL?">
 
 Before diving into subgraph queries, familiarize yourself with GraphQL basics:
-
 [Learn GraphQL](https://graphql.org/learn/)
 
 </Admonition>
@@ -91,7 +90,7 @@ HOL entities represent entities over their lifetime and may be updated.
 
 - **`Account`**: Represents any address interacting with Superfluid.
 - **`Token`**: Represents valid SuperTokens.
-- **`Index`**, **`IndexSubscription`**, **`Stream`**, **`StreamPeriod`**: Related to Superfluid agreements and streams.
+- **`Pool`**, **`PoolMember`**, **`Stream`**, **`StreamPeriod`**: Related to Superfluid streams and [pools](/docs/protocol/distributions/guides/pools).
 
 ### Aggregate Entities
 
@@ -115,6 +114,7 @@ Here are examples to help you get started with Superfluid subgraphs:
     underlyingAddress
   }
 }
+```
 
 ### Get All Streams for a Given Account
 
@@ -258,3 +258,7 @@ Query data on a specific account using both the `Account` and `AccountTokenSnaps
 Use `AccountTokenSnapshot` to get activity data for a specific token associated with an account.
 
 </Admonition> 
+
+## Explore more queries
+
+Explore more queries using the [Superfluid Subgraph Playground](https://console.superfluid.finance/subgraph).
