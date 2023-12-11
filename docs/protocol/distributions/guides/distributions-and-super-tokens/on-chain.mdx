@@ -96,8 +96,10 @@ contract MyDistributionsContract {
 
 This contract demonstrates how to estimate the amount for an instant distribution and start a streaming distribution using the `SuperTokenV1Library`.
 
-<Admonition type="info">
+:::tip
+When using the `SuperTokenV1Library.sol`, you don't need to include the `SuperToken` as a parameter in your method call.
+Simply call `SuperToken.[Method]` and the library will handle the rest.
+:::
 
-For a comprehensive understanding of the Superfluid protocol, including detailed API documentation and examples, refer to the [Superfluid Developer Documentation](https://docs.superfluid.finance/superfluid/developers).
-
-</Admonition>
+## Further Reading
+For more detailed information on the implementation and usage of `SuperTokenV1Library.sol`, refer to the [SuperTokenV1Library Technical reference](/docs/technical-reference/SuperTokenV1Library).
