@@ -54,7 +54,7 @@ struct PoolConfig {
 ### updateMemberUnits
 
 ```solidity
-function updateMemberUnits(ISuperToken token, ISuperfluidPool pool, address memberAddress, uint128 newUnits)
+function updateMemberUnits(ISuperfluidPool pool, address memberAddress, uint128 newUnits)
 ```
 
 Updates the number of units a member has within a pool, effectively changing their share of future distributions.
@@ -62,7 +62,7 @@ Updates the number of units a member has within a pool, effectively changing the
 ### claimAll
 
 ```solidity
-function claimAll(ISuperToken token, ISuperfluidPool pool, address memberAddress)
+function claimAll(ISuperfluidPool pool, address memberAddress)
 ```
 
 Allows a member to claim their share of the tokens from all previous distributions.
@@ -70,7 +70,7 @@ Allows a member to claim their share of the tokens from all previous distributio
 ### connectPool
 
 ```solidity
-function connectPool(ISuperToken token, ISuperfluidPool pool)
+function connectPool( ISuperfluidPool pool)
 ```
 
 Connects a pool to the Superfluid network, enabling it to begin receiving distributions.
@@ -78,7 +78,7 @@ Connects a pool to the Superfluid network, enabling it to begin receiving distri
 ### disconnectPool
 
 ```solidity
-function disconnectPool(ISuperToken token, ISuperfluidPool pool)
+function disconnectPool(ISuperfluidPool pool)
 ```
 
 Disconnects a pool from the Superfluid network.
@@ -103,22 +103,29 @@ Here's how you might use these functions within a smart contract to set up and m
 contract MyContract {
     ISuperToken private superToken;
     ISuperfluidPool private pool;
+    using SuperTokenV1Library for ISuperToken;
 
     constructor(ISuperToken _superToken) {
         superToken = _superToken;
-        pool = SuperTokenV1Library.createPool(_superToken, address(this), poolConfig);
+        pool = SuperTokenV1Library.createPool(address(this), poolConfig);
     }
 
     function addMember(address member, uint128 units) public {
-        superToken.updateMemberUnits(_superToken, _pool, member, units);
+        superToken.updateMemberUnits(pool, member, units);
     }
 
     function distribute(uint256 amount) public {
-        superToken.distributeToPool(_superToken, address(this), _pool, amount);
+        superToken.distributeToPool(address(this), pool, amount);
     }
 }
 ```
 
 In this example, `MyContract` creates a pool, adds a member, and distributes tokens using the functions from `SuperTokenV1Library.sol`.
 
-<Admonition type="info"> For more detailed information on the implementation and usage of `SuperTokenV1Library.sol`, refer to the [Superfluid developer documentation](https://docs.superfluid.finance/superfluid/developers/pools). </Admonition> 
+:::tip
+When using the `SuperTokenV1Library.sol`, you don't need to include the `SuperToken` as a parameter in your method call.
+Simply call `SuperToken.[Method]` and the library will handle the rest.
+:::
+
+## Further Reading
+For more detailed information on the implementation and usage of `SuperTokenV1Library.sol`, refer to the [SuperTokenV1Library Technical reference](/docs/technical-reference/SuperTokenV1Library).
