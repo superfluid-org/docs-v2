@@ -6,23 +6,61 @@ import Admonition from '@theme/Admonition';
 import Link from '@docusaurus/Link';
 import UnitsVisualization from "@site/src/components/Visualizations/UnitsVis";
 import PoolStreamVisualization from '@site/src/components/Visualizations/PoolStreamVis';
+import PoolInstantVis from "@site/src/components/Visualizations/PoolInstantVis";
+import PoolStreamVis from "@site/src/components/Visualizations/PoolStreamVis";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-# Distributions Overview
+# Distributions Explained
 
-Superfluid's distribution system offers two distinct types of distributions - Instant and Streaming - each catering to different use cases within the Superfluid framework.
+## Introduction
 
-## Instant Distributions
+Distributions allow for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable. There are two types of Distributions:
 
-Instant distributions are discrete, one-time transfers triggered by a transaction on the blockchain. They allow for immediate and proportional distribution of tokens to all members of a pool.
+- **Instant Distributions**: They allow one transaction distribution to any number of receivers with a fixed gas cost.
+- **Streaming Distributions**: They allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.
 
-## Streaming Distributions
+---
+<Tabs defaultValue="instant" values={[
+  { label: 'Instant Distribution', value: 'instant' },
+  { label: 'Streaming Distribution', value: 'streaming' },
+]}>
+<TabItem value="instant">
 
-Streaming distributions utilize the concept of money streaming to transfer value over time from one entity to many. This type of distribution enables a continuous flow of tokens, proportional to the units held by each member.
+**Instant Distributions allow one transaction to distribute to any number of receivers with a fixed gas cost.**
 
-## Overview
+<div style={{ display: "flex", justifyContent: "center" }}>
+  *Click on the Blue Circle to initiate an Instant Distribution*
+  <br />
+</div>
+<PoolInstantVis />
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>
+    *By creating a Distribution Pool, you can distribute any token instantly*
+  </p>
+</div>
 
-Distributions in Superfluid enable scalable, recurring one-to-many token distributions at a fixed gas cost. By assigning units to receivers, tokens can be distributed to multiple recipients efficiently.
+  </TabItem>
+  <TabItem value="streaming">
 
+**Instant Distributions allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.**
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  *Watch how the continuous stream gets distributed automatically through the pool*
+  <br />
+</div>
+<PoolStreamVis />
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>
+    *By creating a Distribution Pool, you can distribute any stream with no gas cost*
+  </p>
+</div>
+
+  </TabItem>
+  
+</Tabs>
+
+---
 ### How It Works
 
 1. **Publishing an Index or a Pool**: A publisher creates a distribution channel.
@@ -79,14 +117,6 @@ Pool admins manage units and distributions, while members receive distributions 
 - **Pool Administration**: Admins have control over unit management and token distribution.
 - **Member Participation**: Members receive distributions proportionate to their units.
 - **ERC20 Compatibility**: The Pool interacts seamlessly with ERC20 standards.
-
-## Solvency Mechanism and Adjustment Flow
-
-Ensures a secure system for token flow and fair distribution among pool members.
-
-## References and More Information
-
-For detailed information on Distributions and their implementation, visit [Superfluid Developer Docs](https://docs.superfluid.finance/superfluid/developers/distributions).
 
 <Admonition type="note">
 Explore community presentations and reviews on Distributions for practical insights.
