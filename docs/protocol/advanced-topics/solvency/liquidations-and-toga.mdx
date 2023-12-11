@@ -1,8 +1,9 @@
 ---
 sidebar_position: 1
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Liquidations & TOGA
 
@@ -35,11 +36,16 @@ If the stream isn't closed, and the sender's deposit is completely consumed, the
 We also call this open ended timeframe the _**Pirate Period**_.
 
 When the stream is eventually closed, the `deficit` is taken from the PICs stake as a slashing fee. This slashing fee is then burned, to offset the tokens created by the insolvent stream. Additionally, a reward equal in amount to the `buffer` amount before its consumption is issued to the account closing the stream, whom we call a _**Pirate.**_. This reward is also detracted from the PICs stake.
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-![Buffer and balance](https://lh6.googleusercontent.com/X7ShIBo-weuUDIVwxj4Klj0VNy0PNP7ajC9zNC9WxiCOMkPDfhjpK4YpNJQ8i1Oor2OjDYzxr1493JxtCU4ycHwU7lZ9rRkiwm4mRQEA9xTDybxd4WXht3JW95U6qEqEvSHA60zi)
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  ![Buffer and
+  balance](https://lh6.googleusercontent.com/X7ShIBo-weuUDIVwxj4Klj0VNy0PNP7ajC9zNC9WxiCOMkPDfhjpK4YpNJQ8i1Oor2OjDYzxr1493JxtCU4ycHwU7lZ9rRkiwm4mRQEA9xTDybxd4WXht3JW95U6qEqEvSHA60zi)
 </div>
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-    <p>*Visualization showing the tota user balance as well as the outgoing stream part of the buffer*</p>
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <p>
+    *Visualization showing the tota user balance as well as the outgoing stream
+    part of the buffer*
+  </p>
 </div>
 
 ### Patricians, Plebs and Pirates (3Ps)
@@ -68,7 +74,7 @@ Note that thanks to this flexible roles model, PICs have an incentive to close s
 1. they can still get rewards, essentially acting as a Pleb or Pirate in the context of that transaction
 2. due to the slashing of the `deficit` from their stake, their incentive to close insolvent streams grows linearly over time
 
-![Toga payoff table](/assets/image_(72).png)
+![Toga payoff table](</assets/image_(72).png>)
 
 ### TOGA - Transparent OnGoing Auction
 
@@ -115,12 +121,18 @@ Do NOT use `ERC20.transfer()` for TOGA bids, because those may not trigger the n
         4 week default `exitPeriod`
     </TabItem>
     <TabItem value="ethereum-mainnet">
-        **Minimum Deposit Specifications**
+        **Minimum Deposit**
+
+        Ethereum L1 is a different environment from other networks where Superfluid has been deployed.
+        This is due to the fact that performing any operation on L1 is much more expensive
+        in terms of gas cost than it is on other networks.
+
+        To cover additional costs incurred by sentinels, tokens on L1 have been deployed with minimum deposit values.
+        This means that the buffer on each of these tokens will not always be calculated
+        as 4 hours worth of the stream as it is on lower cost networks.
 
         - ETHx: 0.042 ETHx
         - USDCx & DAIx: 69 tokens
-
-        Learn more about minimum deposits and building on Ethereum L1 [here](../resources/superfluid-on-ethereum-mainnet.md).
 
         **Deposit**
 
@@ -196,7 +208,10 @@ Do NOT use `ERC20.transfer()` for TOGA bids, because those may not trigger the n
 
         4 week default `exitPeriod`
     </TabItem>
+
 </Tabs>
+
+---
 
 :::info
 Note that this parameter definitions in terms of time units refer to simplified idealized scenarios and are basically lower bounds.

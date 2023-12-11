@@ -115,11 +115,9 @@ const FlowSenderComponent = ({contractAddress}) => {
     );
 };
 
-
-
 const ReactLiveScope = {
   React,
   ...React,
-  FlowSenderComponent,
+  FlowSenderComponent
 };
 export default ReactLiveScope;

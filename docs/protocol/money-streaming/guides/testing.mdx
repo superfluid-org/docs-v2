@@ -2,6 +2,9 @@
 sidebar_position: 4
 ---
 
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+
 # Testing
 
 In this guide, we'll walk through the process of testing a Superfluid contract using the Foundry framework. We'll use the `FlowSender` contract described in the [Quickstart](/docs/protocol/quickstart.mdx) as our example to demonstrate how to write effective tests.
@@ -150,11 +153,29 @@ contract FlowSender {
 
 ### Setting Up Your Test Environment
 
-Create a new Solidity file for your tests. Import `forge-std/Test.sol` and inherit from `Test`:
+Your test environment will depend on where you would like to test your Superfluid application. 
+If you testing on a public testnet (e.g Polygon Mumbai), you do not need to deplot a new instance of the Superfluid protocol.
+However, if you are testing on a local testnet you may want to deploy a new instance of the Superfluid protocol.
+
+<Tabs
+    defaultValue="testnet"
+    values={[
+        { label: 'Public Testnet', value: 'testnet' },
+        { label: 'Local Net', value: 'localnet' },
+    ]}
+>
+
+<TabItem value="testnet">
+
+- Create a new Solidity file for your tests
+- Import `forge-std/Test.sol` and inherit from `Test`.
+- Import the Superfluid protocol contracts.
+- Write your `setUp` function to run before each test case.
 
 ```solidity
 pragma solidity ^0.8.14;
 import "forge-std/Test.sol";
+import {ISuperfluid} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
 
 contract FlowSenderTest is Test {
     // Test contract instance
@@ -163,12 +184,76 @@ contract FlowSenderTest is Test {
     // Setup function to initialize test environment
     function setUp() public {
         // Initialize your contract here
+        flowSender=FlowSender("YOUR_CONTRACT_ADDRESS_HERE");
+        //if your contract is not deployed on the testnet yet, you can deploy it
+        //flowSender=new FlowSender(FAKE_DAIX_CONTRACT_ADDRESS);
     }
 }
-````
+```
+
+</TabItem>
+<TabItem value="localnet">
+- Create a new Solidity file for your test.
+- Import `forge-std/Test.sol` and inherit from `Test`.
+- Import the Superfluid protocol contracts.
+- Deploy a new instance of the Superfluid Protocol in the `setUp`function.
+- Create and Deploy a new instance of your test contract.
+
+```solidity
+pragma solidity ^0.8.14;
+import "forge-std/Test.sol";
+import {ISuperfluid} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import {SuperfluidFrameworkDeployer,
+    TestGovernance,
+    Superfluid,
+    ConstantFlowAgreementV1,
+    CFAv1Library,
+    SuperTokenFactory
+} from "@superfluid-finance/ethereum-contracts/contracts/utils/SuperfluidFrameworkDeployer.sol";
+
+
+contract FlowSenderTest is Test {
+    // Test contract instance
+    FlowSender flowSender;
+    //Set up your Superfluid framework
+    struct Framework {
+        TestGovernance governance;
+        Superfluid host;
+        ConstantFlowAgreementV1 cfa;
+        CFAv1Library.InitData cfaLib;
+        InstantDistributionAgreementV1 ida;
+        IDAv1Library.InitData idaLib;
+        SuperTokenFactory superTokenFactory;
+    }
+
+    SuperfluidFrameworkDeployer.Framework sf;
+
+    // Setup function to initialize test environment
+    function setUp() public {
+        address public owner;
+	    //DEPLOYING THE FRAMEWORK
+        SuperfluidFrameworkDeployer sfDeployer = new SuperfluidFrameworkDeployer();
+        sf = sfDeployer.getFramework();
+				
+	    // DEPLOYING DAI and DAI wrapper super token
+
+	    ISuperToken daix = sfDeployer.deployWrapperToken(
+	    "Fake DAI", "DAI", 18, 10000000000000
+	    );
+
+        // Initialize your contract here
+        flowSender = new FlowSender(
+            daix
+        );
+
+    }
+}
+```
+</TabItem>
+</Tabs>
 
 :::tip About the `setUp` Function
-The `setUp` function is a **optional** special function that is executed before each test case. It is used to initialize the test environment and contract instances.
+The `setUp` function is an **optional** function standardized by Foundry (but it is necessary here, especially in the case of local testnet). It is a special function that is executed before each test case. It is used to initialize the test environment and contract instances.
 To learn more about the `setUp` function, check out the [Foundry documentation](https://book.getfoundry.sh/forge/writing-tests).
 :::
 

@@ -75,12 +75,12 @@ const config: Config = {
           position: 'left',
           label: 'Concepts',
         },
-        /*{
+        {
           type: 'docSidebar',
           sidebarId: 'UseCases',
           position: 'left',
           label: 'Use Cases',
-        },*/
+        },
         {
           type: 'docSidebar',
           sidebarId: 'Protocol',
