@@ -9,17 +9,17 @@ import CodeBlock from '@theme/CodeBlock';
 
 # Interact On-Chain
 
-This guide delves into the specifics of Superfluid's smart contract functions, offering step-by-step guidance and practical insights for developers.
+This guide delves into the specifics of Superfluid's smart contract functions, offering step-by-step guidance and practical insights for developers
+looking to integrate Superfluid Money Streaming into their applications.
 
 ## Direct Interaction Functions
 
-<Admonition type="info">
-  These functions allow direct interactions with Super Tokens, providing real-time information about ongoing flows.
-</Admonition>
+### Read functions
+
+These functions allow direct interactions with Super Tokens, providing real-time information about ongoing flows.
 
 <Tabs>
   <TabItem value="getFlowInfo" label="getFlowInfo">
-### `getFlowInfo`
 
 <CodeBlock language="solidity">
 {`
@@ -34,7 +34,6 @@ function getFlowInfo(ISuperToken token, address sender, address receiver)
     </TabItem>
     <TabItem value="getFlowRate" label="getFlowRate">
 
-### `getFlowRate`
 
 <CodeBlock language="solidity">
 {`
@@ -48,7 +47,6 @@ function getFlowRate(ISuperToken token, address sender, address receiver)
       </TabItem>
       <TabItem value="getNetFlowRate" label="getNetFlowRate">
 
-### `getNetFlowRate`
 
 <CodeBlock language="solidity">
 {`
@@ -62,13 +60,58 @@ function getNetFlowRate(ISuperToken token, address account)
         </TabItem>
 </Tabs>
 
+### Write functions
+
+These functions allow direct interactions with Super Tokens, providing real-time information about ongoing flows.
+
+<Tabs>
+  <TabItem value="createFlow" label="createFlow">
+
+```solidity
+
+function createFlow(ISuperToken token, address receiver, int96 flowRate)
+    internal returns (bool)
+```
+
+**Usage**: Create a flow to a receiver white specifying a flowRate.
+    
+    </TabItem>
+    <TabItem value="updateFlow" label="updateFlow">
+
+
+```solidity
+
+function updateFlow(ISuperToken token, address receiver, int96 flowRate)
+    internal returns (bool)
+```
+
+**Usage**: Update the flow of a receiver.
+    
+      </TabItem>
+      <TabItem value="deleteFlow" label="deleteFlow">
+
+
+```solidity
+
+function deleteFlow(ISuperToken token, address sender, address receiver)
+    internal returns (bool)
+```
+
+**Usage**: Delete a flow from a sender to a receiver.
+     
+        </TabItem>
+</Tabs>
+
+:::tip About Create, Update, and Delete Flow Functions
+
+Check our specific guide for [Create, Update, and Delete Flow Functions](/docs/protocol/money-streaming/guides/create-update-delete-flow) for more details on these functions.
+:::
+
 ## Functions with User Data and Context
 
-<Admonition type="tip">
-  These advanced functions allow passing additional `userData` for custom operations and require context handling in Super App callbacks.
-</Admonition>
 
 ### User Data Overload
+These advanced functions allow passing additional `userData` for custom operations.
 
 <CodeBlock language="solidity">
 {`
@@ -83,18 +126,22 @@ token.deleteFlow(address sender, address receiver, bytes memory userData);
 
 ### Context in Super App Callbacks
 
-<CodeBlock language="javascript">
-{`
+These functions allow passing additional `ctx` for custom operations related to [Super App callbacks](/docs/protocol/advanced-topics/super-apps/callbacks).
+
+```solidity
 function onFlowCreated(ISuperToken superToken, address sender, bytes calldata ctx)
     internal override returns (bytes memory /*newCtx*/) {
     // ... callback logic
 }
-`}
-</CodeBlock>
+```
+
 
 **Usage**: In Super App callbacks, use context (`ctx`) to manage state throughout the flow lifecycle. This is particularly important for apps that react to flow creations, updates, or deletions.
 
 ## Access Control List Functions
+
+The Access Control List (ACL) in Superfluid allows any account (either a plain Ethereum account or a smart contract) to configure permissions for another account to manage streams on its behalf.
+ It's akin to the money streaming version of the ERC20 approval mechanism. For more details, check our [ACL guide](/docs/protocol/advanced-topics/advanced-money-streaming/access-control-list).
 
 <Tabs>
   <TabItem value="setFlowPermissions" label="setFlowPermissions">
@@ -155,6 +202,3 @@ function revokeFlowPermissions(
 
 This guide aims to provide a thorough understanding of Superfluid's smart contract functions with practical examples and usage scenarios. It's designed to assist developers in effectively utilizing these functions in their applications.
 
-<Admonition type="info">
-  Adapt the content as needed for your project and verify its functionality in your Docusaurus environment for an optimal developer experience.
-</Admonition>
