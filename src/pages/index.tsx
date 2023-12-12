@@ -24,7 +24,7 @@ export const actions = [
   {
     title: "Use Cases",
     icon: Info,
-    to: "/docs/category/use-cases/",
+    to: "/docs/use-cases/vesting",
     text: `Learn about our use cases and how to implement them for your users.`,
   },
   {

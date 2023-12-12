@@ -7,7 +7,7 @@ import SuperTokenPureVis from "@site/src/components/Visualizations/SuperTokenPur
 
 # Super Tokens
 
-Super Tokens extend the [ERC20 token standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) with additional functionalities like [Money Streaming](./money-streaming.mdx) or [Distributions](./distributions.mdx), known as Super Agreements. There are two types of Super Tokens: wrapper and custom.
+Super Tokens extend the [ERC20 token standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) with additional functionalities like [Money Streaming](./money-streaming.mdx) or [Distributions](./distributions.mdx), formerly known as Super Agreements. There are two types of Super Tokens: wrapper and custom.
 
 :::info
 Super Tokens can perform all the functions of a traditional [ERC20 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/), plus additional value transfer methods enabled by Superfluid, such as money streaming.
@@ -39,7 +39,7 @@ Pure Super Tokens are natively Superfluid-enabled without an underlying token. T
 
 ## Real-Time Balance
 
-Super Tokens track an account's balance dynamically, factoring in both regular transfers and impacts from Super Agreements.
+Super Tokens track an account's balance dynamically, factoring in both regular transfers and impacts from Money Streaming and Distributions.
 
 - **Static Balance**: The standard ERC20 balance affected by lump-sum transfers.
 - **Real-Time Balances**: The ongoing impact of each Super Agreement on an account's balance, which can be positive or negative.
