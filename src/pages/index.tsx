@@ -4,6 +4,7 @@ import Layout from "@theme/Layout";
 import Logo from "@site/src/components/Logo";
 import styled from "@emotion/styled";
 import WavyBackground from "../components/WavyBackground";
+import StepList from "@site/src/components/StepList";
 
 import {
   ArrowUpRight as LinkIcon,
@@ -13,6 +14,7 @@ import {
   MousePointer,
   AtSign,
 } from "react-feather";
+import { Step } from "@mui/material";
 
 export const actions = [
   {
@@ -125,65 +127,34 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <>
-    <WavyBackground />
-    <div className="customBackground">
-      <Layout
-        title={`${siteConfig.title}`}
-        description="What is Superfluid and How can I build on it? <head />"
-      >
-        <div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Logo /><br/> <span style={{ fontSize: "20px" }}>Technical Documentation for the Superfluid Protocol</span>
+      <div>
+        <Layout
+          title={`${siteConfig.title}`}
+          description="What is Superfluid and How can I build on it? <head />"
+        >
+          <div>
+            <br />
+            <br />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Logo />
+              <br />
+              <span style={{ fontSize: "20px" }}>
+                Technical Documentation for the Superfluid Protocol
+              </span>
+              <br />
+              <StepList />
+              <br />
+            </div>
           </div>
-          <Row>
-            {actions.map((action) => (
-              <Link style={{ textDecoration: "none" }} to={action.to}>
-                <ShadowCard key={action.title}>
-                  <TopSection>
-                    <IconWrapper>
-                      <action.icon style={{ width: "24px" }} />
-                    </IconWrapper>
-                    <LinkIconWrapper>
-                      <LinkIcon />
-                    </LinkIconWrapper>
-                  </TopSection>
-                  <h3
-                    style={{
-                      marginBottom: ".75rem",
-                      fontWeight: 500,
-                      color: "white",
-                    }}
-                  >
-                    {action.title}
-                  </h3>
-                  <p
-                    style={{
-                      marginBottom: "0.5rem",
-                      fontWeight: 300,
-                      color: "white",
-                    }}
-                  >
-                    {action.text}
-                  </p>
-                </ShadowCard>
-              </Link>
-            ))}
-          </Row>
-          <br/>
-        </div>
-      </Layout>
-    </div>
+        </Layout>
+      </div>
     </>
   );
 }

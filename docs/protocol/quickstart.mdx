@@ -2,14 +2,13 @@
 sidebar_position: 1
 ---
 
-import Admonition from '@theme/Admonition';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import FlowSenderVis from '@site/src/components/Visualizations/FlowSenderVis';
 
 # Quickstart
 
-In this guide, we'll walk through the process of setting up and deploying a basic Superfluid contract for creating, updating and deleting flows.
+In this guide, we'll walk through the process of setting up and deploying a basic contract for creating, updating and deleteing Superfluid money streams.
 
 ## Prerequisites
 
@@ -21,9 +20,9 @@ In this guide, we'll walk through the process of setting up and deploying a basi
 ## Contract Overview: FlowSender
 
 In this guide we will describe the contract `FlowSender`:
-- This contract is designed to interact with the Superfluid protocol, specifically using [Super Tokens](/docs/protocol/super-tokens/overview.mdx) and [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
+- This contract is designed to interact with the Superfluid protocol, specifically to send [Super Tokens](/docs/protocol/super-tokens/overview.mdx) using [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
 - This contract enables the creation, modification, and deletion of continuous money streams.
-- The contract interacts with the fDAIx token to create a stream from itself to a receiver.
+- The contract interacts with an example super token (fake DAI Super Token - fDAIx) to create a stream from itself to a receiver.
 - Each time a stream is created, a new receiver is added to the list of receivers, and the Superfluid Protocol keeps track of the balances and the receivers on the blockchain.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
