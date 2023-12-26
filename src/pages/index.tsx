@@ -145,7 +145,7 @@ export default function Home(): JSX.Element {
             >
               <Logo />
               <br />
-              <span style={{ fontSize: "20px" }}>
+              <span style={{ fontSize: "20px"}}>
                 Technical Documentation for the Superfluid Protocol
               </span>
               <br />

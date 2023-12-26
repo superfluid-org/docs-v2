@@ -1,15 +1,16 @@
 @import "superfluid.css";
 
 [data-theme='dark'] {
-  --ifm-color-primary: #c28b25;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #030c0a;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #1db227;
+  --ifm-color-primary-dark: #1aa023;
+  --ifm-color-primary-darker: #199721;
+  --ifm-color-primary-darkest: #147d1b;
+  --ifm-color-primary-light: #20c42b;
+  --ifm-color-primary-lighter: #21cd2d;
+  --ifm-color-primary-lightest: #30dd3b;
   --ifm-background-color: #2a377a;
   --ifm-background-image: url('/img/blue-glow-bg.png');
+  
 }
 
 body::before {
