@@ -1,5 +1,21 @@
 @import "superfluid.css";
 
+:root {
+  --ifm-color-primary: #1db227;
+  --ifm-color-primary-dark: #1aa023;
+  --ifm-color-primary-darker: #199721;
+  --ifm-color-primary-darkest: #147d1b;
+  --ifm-color-primary-light: #20c42b;
+  --ifm-color-primary-lighter: #21cd2d;
+  --ifm-color-primary-lightest: #30dd3b;
+  --ifm-background-color: #ffffff;
+  --ifm-background-image: url('/img/green-glow.png');
+  --ifm-color-cards-bg: linear-gradient(137deg, #ffffff, #f2f2f2);
+  --ifm-color-cards-title:#000;
+  --ifm-color-cards-text:#333;
+  --ifm-color-logo: black;
+}
+
 [data-theme='dark'] {
   --ifm-color-primary: #1db227;
   --ifm-color-primary-dark: #1aa023;
@@ -8,8 +24,12 @@
   --ifm-color-primary-light: #20c42b;
   --ifm-color-primary-lighter: #21cd2d;
   --ifm-color-primary-lightest: #30dd3b;
-  --ifm-background-color: #2a377a;
+  --ifm-background-color: #151619;
   --ifm-background-image: url('/img/blue-glow-bg.png');
+  --ifm-color-cards-bg: linear-gradient(137deg, #21253a, #0c131a);
+  --ifm-color-cards-title:#fff;
+  --ifm-color-cards-text:#8995a1;
+  --ifm-color-logo: white;
   
 }
 
@@ -23,8 +43,24 @@ body::before {
   background-image: var(--ifm-background-image);
   background-size: 50%;
   background-position: center;
-  background-color:#151619;
-  background-repeat: repeat;
+  background-color:#ffffff;
+  background-repeat: repeat-x;
+  opacity: 0.5; /* Adjust to make the image more or less pale */
+  z-index: -1;
+}
+
+[data-theme='dark'] body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: var(--ifm-background-image);
+  background-size: 70%;
+  background-position: center;
+  background-color:#1b1b1d;
+  background-repeat: repeat-x;
   opacity: 0.3; /* Adjust to make the image more or less pale */
   z-index: -1;
 }
@@ -34,15 +70,12 @@ html, body {
   margin: 0;
 }
 
-html {
-  background-color:#151619;
-  background-size: cover;
-  min-height: 100%;
+[data-theme='dark'] html, body {
+  height: 100%;
+  margin: 0;
 }
 
-navbar {
-  background-color: linear-gradient(137deg, #21253a, #0c131a);; /* Replace with your color */
-}
+
 
 
 /* Further styles and overrides as needed */

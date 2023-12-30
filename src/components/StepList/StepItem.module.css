@@ -1,3 +1,4 @@
+@import "@site/src/css/custom.css";
 /* Common styles */
 .common {
     -webkit-text-size-adjust: 100%;
@@ -24,7 +25,7 @@
   /* Individual item */
   .stepItem {
     will-change: auto;
-    background: linear-gradient(137deg, #21253a, #0c131a);
+    background: var(--ifm-color-cards-bg);
     border: 1px solid #47559d;
     border-radius: 40px;
     padding: 30px;
@@ -55,7 +56,7 @@
   
   /* Title */
   .stepTitle {
-    color: #fff;
+    color: var(--ifm-color-cards-title);
     font-size: 1.25rem;
     font-weight: 500;
     margin-bottom: 8px;
@@ -63,7 +64,7 @@
   
   /* Text */
   .stepText {
-    color: #8995a1;
+    color: var(--ifm-color-cards-text);
     font-size: 16px;
     font-weight: 400;
     line-height: 150%;

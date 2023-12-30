@@ -58,7 +58,7 @@ const config: Config = {
   themeConfig: {
     colorMode: {
       defaultMode: 'dark',
-      disableSwitch: true,
+      disableSwitch: false,
       respectPrefersColorScheme: false,
     },
     image: 'img/docusaurus-social-card.jpg',
@@ -66,7 +66,8 @@ const config: Config = {
       title: 'Docs',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo-black.svg',
+        srcDark: 'img/logo.svg',
       },
       items: [
         {
