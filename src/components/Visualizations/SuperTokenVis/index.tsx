@@ -21,7 +21,7 @@ const TokenWrapper = () => {
       .attr("x", width / 2)
       .attr("y", 30)
       .attr("text-anchor", "middle")
-      .style("fill", "white")
+      .style("fill", "gray")
       .style("font-size", "28px")
       .style("font-weight", "bold")
       .text("Drag the tokens together to create a SUPER TOKEN!");
@@ -104,7 +104,7 @@ const TokenWrapper = () => {
       .attr("x", width / 2)
       .attr("y", height - 30)
       .attr("text-anchor", "middle")
-      .style("fill", "pink")
+      .style("fill", "red")
       .style("font-size", "30px")
       .text("Your token is normal");
 
@@ -175,7 +175,7 @@ const TokenWrapper = () => {
     
         particle.transition()
           .duration(2000)
-          .attr("cx", wrapperToken.x + Math.random() * 100 + 50) // Controlled end position
+          .attr("cx", wrapperToken.x + Math.random() * 100+300) // Controlled end position
           .attr("cy", wrapperToken.y + Math.random() * 100 + 50)
           .on("end", function() { d3.select(this).remove(); }); // Remove particle after animation
     
@@ -201,11 +201,11 @@ const TokenWrapper = () => {
           (originalToken.y - wrapperToken.y) ** 2
       );
       if (distance < wrapperToken.radius + originalToken.radius) {
-        statusText.style("fill", "yellow").text("Your token is SUPER!");
+        statusText.style("fill", "orange").text("Your token is SUPER!");
         setIsSuper(true);
         createParticles();
       } else {
-        statusText.style("fill", "pink").text("Your token is normal - drag it to give it superpowers!");
+        statusText.style("fill", "red").text("Your token is normal - drag it to give it superpowers!");
         setIsSuper(false);
         removeParticles();
       }

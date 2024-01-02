@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
+import styles from "@site/src/components/Logo/Logo.module.css";
 
 const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
     const ref = useRef();
@@ -30,7 +31,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
             .attr('text-anchor', 'middle')
             .attr('dy', '0.3em')
             .text('Distribution Pool')
-            .style('fill', "white");
+            .style('fill','gray');
 
         // Create pool admin with label
         const poolAdmin = svg.append('circle')
@@ -45,7 +46,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
             .attr('y', adminPosition.y - memberRadius - 5)
             .attr('text-anchor', 'middle')
             .text('Click to distribute a token')
-            .style('fill', "white");
+            .style('fill', "--ifm-color-text");
 
         // Function to emit a particle to the pool
         function emitParticleToPool() {
@@ -109,7 +110,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
                 .attr('y', memberY - memberRadius - 5)
                 .attr('text-anchor', 'middle')
                 .text(`Member ${String.fromCharCode(65 + i)}`)
-                .style('fill', "white");
+                .style('fill',"--ifm-color-text");
         }
     }, []);
 

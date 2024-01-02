@@ -82,7 +82,7 @@ const FlowSenderComponent = ({contractAddress}) => {
     };
 
     return (
-        <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Arial, sans-serif', color: 'white' }}>
+        <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Arial, sans-serif', color: '--ifm-color-text' }}>
             <h2>Flow Sender Interface</h2>
             
             <Logo/>
