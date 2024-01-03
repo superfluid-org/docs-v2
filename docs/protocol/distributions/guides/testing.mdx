@@ -109,14 +109,15 @@ contract DistributionContract {
 
 ### Setting Up Your Test Environment
 
-Your test environment will depend on where you would like to test your Superfluid application. 
-If you testing on a public testnet (e.g Polygon Mumbai), you do not need to deplot a new instance of the Superfluid protocol.
-However, if you are testing on a local testnet you may want to deploy a new instance of the Superfluid protocol.
+Your test environment will depend on where you would like to test your Superfluid application.
+You can fork a public testnet where an instance of the Superfluid Protocol already exists (e.g Polygon Mumbai). In this case, you do not need to deploy a new instance of the Superfluid protocol.
+However, if you are testing on a local testnet you would need to deploy a new instance of the Superfluid protocol.
+
 
 <Tabs
     defaultValue="testnet"
     values={[
-        { label: 'Public Testnet', value: 'testnet' },
+        { label: 'Forking Testnet', value: 'testnet' },
         { label: 'Local Net', value: 'localnet' },
     ]}
 >
@@ -131,18 +132,35 @@ However, if you are testing on a local testnet you may want to deploy a new inst
 ```solidity
 pragma solidity ^0.8.14;
 import "forge-std/Test.sol";
-import {ISuperfluid} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import {ISuperfluid, ISuperToken} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import {TestGovernance, Superfluid, ConstantFlowAgreementV1, CFAv1Library, SuperTokenFactory} from "@superfluid-finance/ethereum-contracts/contracts/utils/SuperfluidFrameworkDeploymentSteps.sol";
+import {SuperfluidFrameworkDeployer} from "@superfluid-finance/ethereum-contracts/contracts/utils/SuperfluidFrameworkDeployer.sol";
+import {SuperTokenV1Library} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
 
 contract DistributionContractTest is Test {
     // Test contract instance
     DistributionContract distributionContract;
+    // Mumbai fork parameters
+    uint256 mumbaiFork;
+    // Set up your environment variables and include MUMBAI_RPC_URL
+    string MUMBAI_RPC_URL = vm.envString("MUMBAI_RPC_URL");
 
     // Setup function to initialize test environment
     function setUp() public {
-        // Initialize your contract here
-        distributionContract=DistributionContract("YOUR_CONTRACT_ADDRESS_HERE");
-        //if your contract is not deployed on the testnet yet, you can deploy it
-        //distributionContract= new DistributionContract("YOUR_CONTRACT_ADDRESS_HERE");
+
+        //Forking and selecting the Mumbai testnet
+        mumbaiFork = vm.createSelectFork(MUMBAI_RPC_URL);
+
+        //Pointing to the fake Daix contract on Mumbai
+        //For token and protocol addresses on all networks, check out the Superfluid console: https://console.superfluid.finance/
+        daix = ISuperToken(0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f);
+
+        //Deploy the contract
+        vm.prank(address(0x123)); // Simulate a different caller
+        distributionContract= new DistributionContract(daix);
+        vm.unprank(); // Restore the caller
+
+        //Add other functions and test contracts...
     }
 }
 ```
