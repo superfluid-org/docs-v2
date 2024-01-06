@@ -76,12 +76,12 @@ const config: Config = {
           position: 'left',
           label: 'Concepts',
         },
-        {
+        /*{
           type: 'docSidebar',
           sidebarId: 'UseCases',
           position: 'left',
           label: 'Use Cases',
-        },
+        },*/
         {
           type: 'docSidebar',
           sidebarId: 'Protocol',
@@ -115,6 +115,21 @@ const config: Config = {
           position: 'right',
           label: 'Discord',
         },
+        {
+          type: 'dropdown',
+          label: 'Version',
+          position: 'right',
+          items: [
+            {
+              label: 'Current',
+              href: '#',
+            },
+            {
+              label: 'Legacy',
+              href: 'https://docs.superfluid.finance/',
+            },
+          ],
+        }
       ],
     },
     footer: {
@@ -190,6 +205,35 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
       additionalLanguages: ['solidity'],
+    },
+    algolia: {
+      // The application ID provided by Algolia
+      appId: 'O3JEVRIQUM',
+
+      // Public API key: it is safe to commit it
+      apiKey: '8de88a77f0d3ae7ea04ea6e10bd6b52c',
+
+      indexName: 'v2-omega',
+
+      // Optional: see doc section below
+      contextualSearch: true,
+
+      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+      //externalUrlRegex: 'external\\.com|domain\\.com',
+
+      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+      /*replaceSearchResultPathname: {
+        from: '/docs/', // or as RegExp: /\/docs\//
+        to: '/',
+      },*/
+
+      // Optional: Algolia search parameters
+      //searchParameters: {},
+
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: 'search',
+
+      //... other Algolia params
     },
     plugins:
       ['@saucelabs/theme-github-codeblock', {}],

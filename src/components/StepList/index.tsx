@@ -16,11 +16,17 @@ export const actions = [
     to: "/docs/concepts/superfluid",
     text: `Learn about the core concepts of the Superfluid Protocol.`,
   },
-  {
+  /*{
     title: "Use Cases",
     icon: Info,
     to: "/docs/use-cases/vesting",
     text: `Learn about our use cases and how to implement them for your users.`,
+  },*/
+  {
+    title: "Get started",
+    icon: LinkIcon,
+    to: "/docs/protocol/quickstart",
+    text: `Start building very quickly with Superfluid.`,
   },
   {
     title: "Protocol",
@@ -38,7 +44,7 @@ export const actions = [
     title: "Technical Reference",
     icon: BookOpen,
     to: "/technical-reference",
-    text: `A comprehensive reference for the Superfluid Protocol contracts.`,
+    text: `A comprehensive reference for the most relevant Superfluid contracts.`,
   },
 ];
 

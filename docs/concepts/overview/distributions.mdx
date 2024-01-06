@@ -10,17 +10,17 @@ import TabItem from "@theme/TabItem";
 
 # Distributions
 
-The introduction of Distributions marks a significant advancement in web3, offering a scalable method for one-to-many fund transfers.
+The introduction of Distributions marks a significant advancement in DeFi applications, offering a scalable method for one-to-many fund transfers.
+Distributions allow for the transfer of value to multiple recipients with minimal on-chain data modification, making them infinitely scalable, highly efficient and gas-friendly.
 
-<Admonition type="info">
-  Distributions are currently active on testnets. Relevant addresses and tooling
-  support are in progress, including additions to SuperTokenV1Library and SDK
-  Core. For more information, visit the [Superfluid  Console](https://console.superfluid.finance/eth-goerli/protocol).
-</Admonition>
+:::note
+There are other on-chain solutions that may seem to solve this problem without using a new token implementation (e.g [Disperse App](https://disperse.app/)).
+While these solutions can be great for a low amount of recipients, they are not infinitely scalable and can become very expensive as the number of recipients increases. Furthermore, they do not allow for distributing money streaming
+:::
 
 ## Overview
 
-Distributions allow for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable. There are two types of Distributions:
+Distributions function by allowing for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable. There are two types of Distributions:
 
 - **Instant Distributions**: They allow one transaction distribution to any number of receivers with a fixed gas cost.
 - **Streaming Distributions**: They allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.
@@ -32,7 +32,7 @@ Distributions allow for the creation of **pools** with a designated **pool admin
 ]}>
 <TabItem value="instant">
 
-**Instant Distributions allow one transaction to distribute to any number of receivers with a fixed gas cost.**
+**Instant Distributions** allow one transaction to distribute to any number of receivers with a fixed gas cost.
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   *Click on the Blue Circle to initiate an Instant Distribution*
@@ -48,7 +48,7 @@ Distributions allow for the creation of **pools** with a designated **pool admin
   </TabItem>
   <TabItem value="streaming">
 
-**Instant Distributions allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.**
+**Instant Distributions** allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   *Watch how the continuous stream gets distributed automatically through the pool*
@@ -97,19 +97,25 @@ Distributions allow for the creation of **pools** with a designated **pool admin
 
 This diagram shows a distributor streaming funds to various pool members, each holding different unit amounts. Note: A single transaction can cater to multiple members.
 
-![Streaming Distribution](/assets/Screen_Shot_2023-01-22_at_11.22.13_AM.png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+![Streaming Distribution](/assets/streaming-distribution.png)
+</div>
 
 ### Adjusting Unit Counts
 
 Here, a distributor modifies unit counts for members. This change instantly alters the distribution rate for all members in one transaction. Batch updates can be done using Superfluid's batch call.
 
-![Unit Count Adjustment](/assets/Screen_Shot_2023-01-22_at_11.25.33_AM.png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+![Unit Count Adjustment](/assets/unit-count-adjustment.png)
+</div>
 
 ### Modifying the Flow Rate
 
 This example demonstrates how a change in the distributor's streaming rate affects the total flow rate of the pool, thus instantly impacting each member's rate.
 
-![Flow Rate Change](/assets/Screen_Shot_2023-01-22_at_11.26.18_AM.png)
+<div style={{ display: "flex", justifyContent: "center" }}>
+![Flow Rate Change](/assets/modify-flow-rate.png)
+</div>
 
 ## Advanced Pool Features
 
@@ -119,15 +125,3 @@ As pools are also ERC20 tokens, they enable:
 - **Delegated Transfers**: Using the `approve` and `transferFrom` functions, units can be transferred on behalf of a member.
 
 These features add composability and flexibility, expanding the potential use cases for pools in web3.
-
-## Handling Odd Numbers: Adjustment Flow Rate
-
-To manage indivisible token amounts due to the absence of floating-point arithmetic in Solidity, distributions use an **adjustment flow rate**. This flow rate is streamed to the pool admin to ensure precise fund allocation.
-
-### Example Scenario
-
-- **Pool Creation**: Alice assigns 3 units each to Bob, Carol, and Dave, totaling 9 units.
-- **Streaming Distribution**: Alice initiates a flow of 100 DAIx/second, which isn't divisible by 9.
-- **Adjustment Flow Rate**: To address the indivisibility, 99 DAIx/second is streamed to members, with 1 DAIx/second as the adjustment flow to Alice.
-
-In conclusion, streaming distributions offer a robust and scalable solution for distributing funds in web3, backed by the flexibility and efficiency of the underlying technology.
