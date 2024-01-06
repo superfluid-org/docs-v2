@@ -1,0 +1,72 @@
+@import "@site/src/css/custom.css";
+/* Common styles */
+.common {
+    -webkit-text-size-adjust: 100%;
+    font-family: 'GT Walsheim Pro', sans-serif;
+    letter-spacing: normal;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    translate: none;
+    rotate: none;
+    scale: none;
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+  
+  /* Grid container */
+  .stepList {
+    max-width: 1000px; /* Decrease this value to reduce horizontal space */
+    margin: 0 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Change to 3 items per row */
+    gap: 10px; /* Adjust as needed */
+  }
+  
+  /* Individual item */
+  .stepItem {
+    will-change: auto;
+    background: var(--ifm-color-cards-bg);
+    border: 1px solid #47559d;
+    border-radius: 40px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .stepItem:hover {
+    border: 1px solid var(--ifm-color-emphasis-400); /* Highlight border on hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05); /* Add shadow on hover */
+  }
+  
+  /* Content within each item */
+  .stepContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Icon */
+  .stepIcon {
+    width: 72px;
+    margin-bottom: 10px;
+  }
+  
+  /* Title */
+  .stepTitle {
+    color: var(--ifm-color-cards-title);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  
+  /* Text */
+  .stepText {
+    color: var(--ifm-color-cards-text);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+  }
+  

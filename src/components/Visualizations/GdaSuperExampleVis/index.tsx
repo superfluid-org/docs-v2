@@ -5,6 +5,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
   const ref = useRef();
 
   useEffect(() => {
+    const color = getComputedStyle(document.body).getPropertyValue('--ifm-color-text');
     const svg = d3.select(ref.current)
       .attr('width', width)
       .attr('height', height);
@@ -31,7 +32,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
       .attr('text-anchor', 'middle')
       .attr('dy', '0.3em')
       .text('Distribution Pool')
-      .style('fill', "white");
+      .style('fill', color);
 
     // Create higher streamer with label
     svg.append('circle')
@@ -45,7 +46,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
       .attr('y', higherStreamerPosition.y - memberRadius - 5)
       .attr('text-anchor', 'middle')
       .text('Higher Streamer')
-      .style('fill', "white");
+      .style('fill', color);
 
     // Pool Admin initially as blue, later becomes a member
     const poolAdmin = svg.append('circle')
@@ -59,7 +60,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
       .attr('y', adminPosition.y - memberRadius - 5)
       .attr('text-anchor', 'middle')
       .text('Initial Streamer/Pool Admin')
-      .style('fill', "white");
+      .style('fill', color);
 
     // Function to create moving units
     const createMovingUnits = (path, color, speedMultiplier, unitClass) => {
@@ -153,7 +154,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
         .attr('y', memberY - memberRadius - 5)
         .attr('text-anchor', 'middle')
         .text(`Member ${String.fromCharCode(65 + i)}`)
-        .style('fill', "white");;
+        .style('fill', color);
 
       // Create stream path
       const path = svg.append('path')

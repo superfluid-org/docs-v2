@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 Distributions allow for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable. There are two types of Distributions:
 
 - **Instant Distributions**: They allow one transaction distribution to any number of receivers with a fixed gas cost.
-- **Streaming Distributions**: They allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.
+- **Streaming Distributions**: They allow for continuous distribution of funds to receivers through [Money Streaming](../money-streaming/overview.mdx) to a Pool.
 
 ---
 <Tabs defaultValue="instant" values={[
@@ -43,7 +43,7 @@ Distributions allow for the creation of **pools** with a designated **pool admin
   </TabItem>
   <TabItem value="streaming">
 
-**Instant Distributions allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.**
+**Instant Distributions allow for continuous distribution of funds to receivers through [Money Streaming](../money-streaming/overview.mdx) to a Pool.**
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   *Watch how the continuous stream gets distributed automatically through the pool*
@@ -63,9 +63,9 @@ Distributions allow for the creation of **pools** with a designated **pool admin
 ---
 ### How It Works
 
-1. **Publishing an Index or a Pool**: A publisher creates a distribution channel.
-2. **Assigning Proportions**: The publisher sets proportions by allocating units to subscribers or pool members.
-3. **Distributing Tokens**: Subscribers receive tokens based on their unit holdings.
+1. **Create a Pool**: Deploying a pool contract creates a pool with a unique address.
+2. **Assigning Proportions**: The pool admin sets proportions by allocating units to pool members.
+3. **Distributing Tokens**: Pool members receive tokens based on their unit holdings.
 
 <Admonition type="info">
 Distributions are persistent, allowing multiple triggers with varying amounts. Units can be adjusted as needed.
@@ -73,9 +73,9 @@ Distributions are persistent, allowing multiple triggers with varying amounts. U
 
 ## Key Concepts
 
-- **Index/Pool**: Channels for proportional token distribution.
-- **Publisher/Pool Admin**: Initiates the distribution process.
-- **Subscribers/Pool Members**: Receivers allocated units for distribution.
+- **Pool**: Channels for proportional token distribution.
+- **Pool Admin**: Decides of the most important parameters of the distribution, including units.
+- **Pool Members**: Receivers allocated units for distribution.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <UnitsVisualization/>

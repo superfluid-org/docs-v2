@@ -24,7 +24,7 @@ const TokenPure = () => {
       .attr("x", width / 2)
       .attr("y", 30)
       .attr("text-anchor", "middle")
-      .style("fill", "white")
+      .style("fill", "gray")
       .style("font-size", "18px")
       .style("font-weight", "bold")
       .text("Click as quickly as possible on the Pure Super Token to create your first stream!");

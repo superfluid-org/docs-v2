@@ -58,15 +58,16 @@ const config: Config = {
   themeConfig: {
     colorMode: {
       defaultMode: 'dark',
-      disableSwitch: true,
-      respectPrefersColorScheme: false,
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
     },
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Docs',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo-black.svg',
+        srcDark: 'img/logo.svg',
       },
       items: [
         {
@@ -75,12 +76,12 @@ const config: Config = {
           position: 'left',
           label: 'Concepts',
         },
-        {
+        /*{
           type: 'docSidebar',
           sidebarId: 'UseCases',
           position: 'left',
           label: 'Use Cases',
-        },
+        },*/
         {
           type: 'docSidebar',
           sidebarId: 'Protocol',
@@ -100,20 +101,35 @@ const config: Config = {
           label: 'Technical Reference',
         },
         {
-          href: 'https://twitter.com/intent/follow?screen_name=Superfluid_HQ',
-          html: '<img src="/img/twitter.png" alt="Twitter" width="35" height="35" /> _x/twitter',
+          href: 'https://console.superfluid.finance/',
           position: 'right',
+          label: 'Console',
         },
         {
           href: 'https://github.com/superfluid-finance',
-          html: '<img src="/img/github.png" alt="Github" width="35" height="35" /> _github',
           position: 'right',
+          label: 'Github',
         },
         {
           href: 'https://discord.gg/pPzPEDMVua',
-          html: '<img src="/img/discord.png" alt="Discord" width="35" height="35" /> _discord',
           position: 'right',
+          label: 'Discord',
         },
+        {
+          type: 'dropdown',
+          label: 'Version',
+          position: 'right',
+          items: [
+            {
+              label: 'Current',
+              href: '#',
+            },
+            {
+              label: 'Legacy',
+              href: 'https://docs.superfluid.finance/',
+            },
+          ],
+        }
       ],
     },
     footer: {
@@ -189,6 +205,35 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
       additionalLanguages: ['solidity'],
+    },
+    algolia: {
+      // The application ID provided by Algolia
+      appId: 'O3JEVRIQUM',
+
+      // Public API key: it is safe to commit it
+      apiKey: '8de88a77f0d3ae7ea04ea6e10bd6b52c',
+
+      indexName: 'v2-omega',
+
+      // Optional: see doc section below
+      contextualSearch: true,
+
+      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+      //externalUrlRegex: 'external\\.com|domain\\.com',
+
+      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+      /*replaceSearchResultPathname: {
+        from: '/docs/', // or as RegExp: /\/docs\//
+        to: '/',
+      },*/
+
+      // Optional: Algolia search parameters
+      //searchParameters: {},
+
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: 'search',
+
+      //... other Algolia params
     },
     plugins:
       ['@saucelabs/theme-github-codeblock', {}],

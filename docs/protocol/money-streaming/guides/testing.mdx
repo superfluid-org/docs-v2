@@ -2,8 +2,8 @@
 sidebar_position: 4
 ---
 
-import TabItem from '@theme/TabItem';
-import Tabs from '@theme/Tabs';
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
 
 # Testing
 
@@ -15,11 +15,11 @@ Before diving into testing your Superfluid contracts with Foundry, make sure you
 
 1. **Creating and Navigating to Your Project Directory**:
 
-    ```bash
-    mkdir superfluid-example && cd superfluid-example
-    ```
+   ```bash
+   mkdir superfluid-example && cd superfluid-example
+   ```
 
-    This command creates a new directory named `foundry-example` and then changes your current working directory to it.
+   This command creates a new directory named `foundry-example` and then changes your current working directory to it.
 
 2. **Initializing a Foundry Project**:
 
@@ -35,7 +35,7 @@ Before diving into testing your Superfluid contracts with Foundry, make sure you
    forge install superfluid-protocol-monorepo=https://github.com/superfluid-finance/protocol-monorepo@dev --no-commit
    ```
 
-   Installs the `dev`branch of the Superfluid protocol from its GitHub repository.
+   Installs the `dev` branch of the Superfluid protocol from its GitHub repository.
 
 4. **Installing OpenZeppelin Contracts**:
 
@@ -43,9 +43,9 @@ Before diving into testing your Superfluid contracts with Foundry, make sure you
    forge install https://github.com/OpenZeppelin/openzeppelin-contracts@v4.9.3 --no-commit
    ```
 
-   Installs the necessary (4.9.3) of the OpenZeppelin contracts, which are widely used for secure smart contract development.
+   Installs the necessary (4.9.X) of the OpenZeppelin contracts, which are widely used for secure smart contract development.
 
-These steps ensure you have the necessary tools and dependencies installed to start developing and testing your Superfluid contracts with Foundry.
+These steps ensure you have the necessary tools and dependencies installed to start developing and testing your Superfluid-based contracts with Foundry.
 
 ## Contract and Key Functions
 
@@ -74,7 +74,7 @@ interface IFakeDAI is IERC20 {
 contract FlowSender {
 
     using SuperTokenV1Library for ISuperToken;
-    
+
     mapping (address => bool) public accountList;
 
     ISuperToken public daix;
@@ -91,7 +91,7 @@ contract FlowSender {
 
         // Get address of fDAI by getting underlying token address from DAIx token
         IFakeDAI fdai = IFakeDAI( daix.getUnderlyingToken() );
-        
+
         // Mint 10,000 fDAI
         fdai.mint(address(this), 10000e18);
 
@@ -129,7 +129,7 @@ contract FlowSender {
 
     /// @dev get flow rate between this contract to certain receiver
     function readFlowRate(address receiver) external view returns (int96 flowRate) {
-        
+
         // Get flow rate
         return daix.getFlowRate(address(this), receiver);
 
@@ -148,19 +148,18 @@ contract FlowSender {
 - **deleteStream**: Terminates an existing money stream.
 - **readFlowRate**: Reads the current flow rate of a stream.
 
-
 ## Writing Tests
 
 ### Setting Up Your Test Environment
 
-Your test environment will depend on where you would like to test your Superfluid application. 
-If you testing on a public testnet (e.g Polygon Mumbai), you do not need to deplot a new instance of the Superfluid protocol.
-However, if you are testing on a local testnet you may want to deploy a new instance of the Superfluid protocol.
+Your test environment will depend on where you would like to test your Superfluid application.
+You can fork a public testnet where an instance of the Superfluid Protocol already exists (e.g Polygon Mumbai). In this case, you do not need to deploy a new instance of the Superfluid protocol.
+However, if you are testing on a local testnet you would need to deploy a new instance of the Superfluid protocol.
 
 <Tabs
     defaultValue="testnet"
     values={[
-        { label: 'Public Testnet', value: 'testnet' },
+        { label: 'Forked Testnet', value: 'testnet' },
         { label: 'Local Net', value: 'localnet' },
     ]}
 >
@@ -175,18 +174,35 @@ However, if you are testing on a local testnet you may want to deploy a new inst
 ```solidity
 pragma solidity ^0.8.14;
 import "forge-std/Test.sol";
-import {ISuperfluid} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import {ISuperfluid, ISuperToken} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import {TestGovernance, Superfluid, ConstantFlowAgreementV1, CFAv1Library, SuperTokenFactory} from "@superfluid-finance/ethereum-contracts/contracts/utils/SuperfluidFrameworkDeploymentSteps.sol";
+import {SuperfluidFrameworkDeployer} from "@superfluid-finance/ethereum-contracts/contracts/utils/SuperfluidFrameworkDeployer.sol";
+import {SuperTokenV1Library} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
 
 contract FlowSenderTest is Test {
     // Test contract instance
     FlowSender flowSender;
+    // Mumbai fork parameters
+    uint256 mumbaiFork;
+    // Set up your environment variables and include MUMBAI_RPC_URL
+    string MUMBAI_RPC_URL = vm.envString("MUMBAI_RPC_URL");
 
     // Setup function to initialize test environment
     function setUp() public {
-        // Initialize your contract here
-        flowSender=FlowSender("YOUR_CONTRACT_ADDRESS_HERE");
-        //if your contract is not deployed on the testnet yet, you can deploy it
-        //flowSender=new FlowSender(FAKE_DAIX_CONTRACT_ADDRESS);
+
+        //Forking and selecting the Mumbai testnet
+        mumbaiFork = vm.createSelectFork(MUMBAI_RPC_URL);
+
+        //Pointing to the fake Daix contract on Mumbai
+        //For token and protocol addresses on all networks, check out the Superfluid console: https://console.superfluid.finance/
+        daix = ISuperToken(0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f);
+
+        //Deploy the contract
+        vm.prank(address(0x123)); // Simulate a different caller
+        flowSender=new FlowSender(daix);
+        vm.unprank(); // Restore the caller
+
+        //Add other functions and test contracts...
     }
 }
 ```
@@ -234,7 +250,7 @@ contract FlowSenderTest is Test {
 	    //DEPLOYING THE FRAMEWORK
         SuperfluidFrameworkDeployer sfDeployer = new SuperfluidFrameworkDeployer();
         sf = sfDeployer.getFramework();
-				
+
 	    // DEPLOYING DAI and DAI wrapper super token
 
 	    ISuperToken daix = sfDeployer.deployWrapperToken(
@@ -249,6 +265,7 @@ contract FlowSenderTest is Test {
     }
 }
 ```
+
 </TabItem>
 </Tabs>
 
@@ -357,5 +374,3 @@ Testing is crucial in blockchain development for ensuring contract reliability a
 ## Further Resources
 
 - [Foundry Book](https://foundry.readthedocs.io)
-
-

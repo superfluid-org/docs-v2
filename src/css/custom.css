@@ -1,168 +1,83 @@
 @import "superfluid.css";
 
 :root {
-  --ifm-color-primary: #168c1e; /* Vibrant teal for primary actions and highlights */
-  --ifm-color-text: #c9d1d9; /* Soft white for primary text */
-  --ifm-color-border: #30363d; /* Dark gray for borders and separators */
-  --ifm-font-family-base: 'GT Walsheim Pro', sans-serif; 
-  --ifm-font-family-heading: 'GT Walsheim Pro', sans-serif;
-  --ifm-font-family-monospace: 'GT Walsheim Pro', monospace;
-  --ifm-background-waves: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100px' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0V15.5C600 115.5 600 115.5 1200 15.5V0H0Z' fill='%230d1117'/%3E%3Cpath d='M0 15V31C300 81 900 81 1200 31V15H0Z' fill-opacity='0.1' fill='%23ffffff'/%3E%3Cpath d='M0 30V46.5C600 136.5 600 136.5 1200 46.5V30H0Z' fill-opacity='0.1' fill='%23ffffff'/%3E%3C/svg%3E");
+  --ifm-color-primary: #1db227;
+  --ifm-color-primary-dark: #1aa023;
+  --ifm-color-primary-darker: #199721;
+  --ifm-color-primary-darkest: #147d1b;
+  --ifm-color-primary-light: #20c42b;
+  --ifm-color-primary-lighter: #21cd2d;
+  --ifm-color-primary-lightest: #30dd3b;
+  --ifm-background-color: #ffffff;
+  --ifm-background-image: url('/img/green-glow.png');
+  --ifm-color-cards-bg: linear-gradient(137deg, #ffffff, #f2f2f2);
+  --ifm-color-cards-title:#000;
+  --ifm-color-cards-text:#333;
+  --ifm-color-logo: black;
+  --ifm-color-text: #000000;
 }
 
-body {
-
-
-  background-size: cover; /* Cover the entire page */
-  background-attachment: fixed; /* Fix the background image */
-  background-repeat: repeat-y; /* Prevent the background from repeating */
-  color: var(--ifm-color-text);
-  font-family: var(--ifm-font-family-base);
-  overflow-x: hidden; /* Prevents horizontal scrollbar due to background size */
+[data-theme='dark'] {
+  --ifm-color-primary: #1db227;
+  --ifm-color-primary-dark: #1aa023;
+  --ifm-color-primary-darker: #199721;
+  --ifm-color-primary-darkest: #147d1b;
+  --ifm-color-primary-light: #20c42b;
+  --ifm-color-primary-lighter: #21cd2d;
+  --ifm-color-primary-lightest: #30dd3b;
+  --ifm-background-color: #151619;
+  --ifm-background-image: url('/img/blue-glow-bg.png');
+  --ifm-color-cards-bg: linear-gradient(137deg, #21253a, #0c131a);
+  --ifm-color-cards-title:#fff;
+  --ifm-color-cards-text:#8995a1;
+  --ifm-color-logo: white;
+  --ifm-color-text: #ffffff;
+  
 }
 
-/* Headings styled with the futuristic Orbitron font */
-
-/* Links */
-a {
-  color: var(--ifm-color-primary);
-  transition: color 0.2s ease-in-out;
-}
-
-a:hover {
-  text-decoration: none;
-  color: var(--ifm-color-primary);
-  text-shadow: 0 0 8px var(--ifm-color-primary);
-}
-
-/* Navbar */
-.navbar {
-  background-color: #161b22;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-}
-
-/* Navbar links */
-.navbar__link {
-  color: var(--ifm-color-text);
-}
-
-.navbar__link--active,
-.navbar__link:hover {
-  color: var(--ifm-color-primary);
-}
-
-/* Buttons */
-.button {
-  background-color: var(--ifm-color-primary);
-  color: var(--ifm-color-background);
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.button:hover {
-  background-color: var(--ifm-color-primary);
-  box-shadow: 0 0 15px var(--ifm-color-primary);
-}
-
-/* Code blocks and inline code */
-code {
-  background-color: #0d1117;
-  color: var(--ifm-color-primary);
-  border-radius: 5px;
-  padding: 0.2rem 0.4rem;
-  font-family: var(--ifm-font-family-monospace);
-}
-
-/* Sidebar */
-.sidebar {
-  background-color: #161b22;
-  color: var(--ifm-color-text);
-}
-
-/* Sidebar links */
-.sidebar__link {
-  color: var(--ifm-color-text);
-}
-
-.sidebar__link--active,
-.sidebar__link:hover {
-  color: var(--ifm-color-primary);
-}
-
-/* Footer */
-.footer {
-  background-color: #161b22;
-  color: var(--ifm-color-text);
-}
-
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 8px;
-  background-color: #161b22;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--ifm-color-primary);
-  border-radius: 10px;
-}
-
-.customBackground {
-  background-image: url('/img/background.svg');
-  background-size: cover;
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: var(--ifm-background-image);
+  background-size: 50%;
   background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  overflow: hidden;
+  background-color:#ffffff;
+  background-repeat: repeat-x;
+  opacity: 0.5; /* Adjust to make the image more or less pale */
+  z-index: -1;
 }
 
-.button-50 {
-  appearance: button;
-  background-color: var(--ifm-color-primary);
-  background-image: none;
-  border: 1px solid #000;
-  border-radius: 4px;
-  box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-  margin: 0 5px 10px 0;
-  overflow: visible;
-  padding: 12px 40px;
-  text-align: center;
-  text-transform: none;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
+[data-theme='dark'] body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: var(--ifm-background-image);
+  background-size: 70%;
+  background-position: center;
+  background-color:#1b1b1d;
+  background-repeat: repeat-x;
+  opacity: 0.3; /* Adjust to make the image more or less pale */
+  z-index: -1;
 }
 
-.button-50:focus {
-  text-decoration: none;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-.button-50:hover {
-  text-decoration: none;
+[data-theme='dark'] html, body {
+  height: 100%;
+  margin: 0;
 }
 
-.button-50:active {
-  box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
-  outline: 0;
-}
 
-.button-50:not([disabled]):active {
-  box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
-  transform: translate(2px, 2px);
-}
 
-@media (min-width: 768px) {
-  .button-50 {
-    padding: 12px 50px;
-  }
-}
+
+/* Further styles and overrides as needed */
