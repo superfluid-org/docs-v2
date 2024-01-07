@@ -21,14 +21,203 @@ Tracking the balance of Super Tokens requires a more nuanced approach than tradi
 ### Challenges
 
 - **Event-Based Tracking Limitation**: Some applications, like Etherscan, use `transfer` events to track user balances. However, due to scalability concerns, Super Tokens don't emit `transfer` events with every balance change, leading to potential discrepancies in displayed balances.
+- **Multi-source updates**: Super Tokens can be updated from multiple sources, from [Money Streaming](/docs/protocol/money-streaming/overview.mdx), but also [Distributions](/docs/protocol/distributions/overview.mdx).
 
-### Solutions
+### Solution 1 (recommended): Using `balanceOf`
 
-- **AgreementStateUpdated Event**: To accurately track Super Token balances, applications should monitor the `AgreementStateUpdated` event, signaling changes in an account's state and likely their balance.
-- **Using balanceOf Function**: For the most accurate balance information, call the Superfluid `balanceOf` function, which accounts for various fund movement methods unique to Super Tokens.
+As we mentioned earlier, Super Tokens are ERC20 compatible, so you can use the `balanceOf` function from the token smart contract to get the real time aggregated balance of a user.
+The Superfluid Protocol modifies the `balanceOf` function to account for the various fund movement methods unique to Super Tokens including Money Streaming and Distributions.
+You can simply call this function to get the real time aggregated balance of a user like so:
 
-<Admonition type="tip" title="Real-Time Balance Tracking Tool">
+```jsx
+const fetchBlockchainBalance = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const provider = new ethers.providers.JsonRpcProvider(
+        "YOUR PROVIDER URL"
+      );
+      const contractAddress = "0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f"; //fake DAIx contract address on Mumbai
+      const contractABI = [
+        "function transferFrom(address from, address to, uint value)",
+        "function balanceOf(address owner) view returns (uint balance)",
+      ];
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        provider
+      );
+      const userAddress = liveAddress;
+      const balance = await contract.balanceOf(userAddress);
+      return(ethers.utils.formatEther(balance.toString()));
+    } catch (error) {
+      console.error("Error fetching blockchain balance:", error);
+    }
+  };
+```
 
-Check out the [Superfluid Console](https://console.superfluid.finance) for an open-source tool that provides real-time balance tracking of Super Tokens. This tool can be a valuable resource for applications integrating Superfluid functionalities.
+:::tip About Accuracy
+We recommend this solution because it guarantees the most accurate result. However, it is important to note that this method is not always possible depending on your application architecture design.
+:::
 
-</Admonition>
+### Solution 2: Using `accountTokenSnapshots` from the Subgraph
+
+To accurately track Super Token balances, you can query the `accountTokenSnapshots` object from Superfluid's [Subgraph](https://console.superfluid.finance/subgraph).
+Doing this allows you to do the following:
+- Get **the balance of a user at the last time there was an event** triggered on the blockchain (eg. a stream was created or updated).
+- Get **the net flow rate of a user** at that same time.
+- Get **the timestamp** of the last time there was an event triggered on the blockchain.
+
+From these three pieces of information, you can calculate the balance of a user at any given time.
+The following code snippet shows a component called `RealTimeBalance` that fetches the `accountTokenSnapshots` object from the Subgraph
+and calculates the balance of a user at the current time, then it compares it to the balance of the user on the blockchain:
+
+<div>
+<details>
+<summary>Click here to show `RealTimeBalance` component</summary>
+<p>
+```jsx
+
+const RealTimeBalance = ({liveAddress}) => {
+  const [realTimeBalance, setRealTimeBalance] = useState(null);
+  const [blockchainBalance, setBlockchainBalance] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const fetchRealTimeBalance = async () => {
+    setLoading(true);
+    setError("");
+    const endpoint = "https://polygon-mumbai.subgraph.x.superfluid.dev";
+
+    // Updated query to use GraphQL variables
+    const query = {
+      query: `query FetchBalance($id: String!) {
+        account(id: $id) {
+          accountTokenSnapshots {
+            balanceUntilUpdatedAt
+            totalCFANetFlowRate
+            updatedAtTimestamp
+          }
+        }
+      }`,
+      variables: { id: liveAddress },
+    };
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(query),
+      });
+
+      const { data } = await response.json();
+      const { balanceUntilUpdatedAt, totalCFANetFlowRate, updatedAtTimestamp } =
+        data.account.accountTokenSnapshots[0];
+
+      // Fetch current time from the provider
+      const provider = new ethers.providers.JsonRpcProvider(
+        "https://polygon-testnet.public.blastapi.io"
+      );
+      const currentTime = (await provider.getBlock("latest")).timestamp;
+
+      // Calculate streaming balance
+      const streamingBalance =
+        totalCFANetFlowRate * (currentTime - updatedAtTimestamp);
+
+      // Convert wei to ether and calculate full balance
+      const fullBalance =
+        parseFloat(ethers.utils.formatEther(streamingBalance.toString())) +
+        parseFloat(ethers.utils.formatEther(balanceUntilUpdatedAt.toString()));
+      setRealTimeBalance(fullBalance);
+    } catch (error) {
+      console.error("Error fetching real-time balance:", error);
+      setError("Failed to fetch real-time balance.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchBlockchainBalance = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const provider = new ethers.providers.JsonRpcProvider(
+        "https://polygon-testnet.public.blastapi.io"
+      );
+      const contractAddress = "0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f";
+      const contractABI = [
+        "function transferFrom(address from, address to, uint value)",
+        "function balanceOf(address owner) view returns (uint balance)",
+      ];
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        provider
+      );
+
+      const userAddress = liveAddress;
+      const balance = await contract.balanceOf(userAddress);
+      setBlockchainBalance(ethers.utils.formatEther(balance.toString()));
+    } catch (error) {
+      console.error("Error fetching blockchain balance:", error);
+      setError("Failed to fetch blockchain balance.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFetch = async () => {
+    await fetchRealTimeBalance();
+    await fetchBlockchainBalance();
+  };
+
+  return (
+    <div style={{ padding: "20px", fontFamily: "Arial", justifyContent:"center"}}>
+      <h1>Real-Time Balance</h1>
+      <button
+        onClick={handleFetch}
+        disabled={loading}
+        style={{
+          padding: "10px",
+          fontSize: "16px",
+          margin: "10px 0",
+          cursor: "pointer",
+        }}
+      >
+        {loading ? "Loading..." : "Fetch Balance"}
+      </button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {realTimeBalance !== null && (
+        <p>Real-Time Balance from Subgraph: {realTimeBalance} fake DAIx</p>
+      )}
+      {blockchainBalance !== null && (
+        <p>Balance from Blockchain: {blockchainBalance} fake DAIx</p>
+      )}
+    </div>
+  );
+};
+```
+</p>
+</details>
+</div>
+
+Furthermore, you can use the live code block below to see the `RealTimeBalance` component in action:
+- Enter your `liveAddress` in the code editor.
+- Click "Fetch Balance" to compare your real-time balance from the subgraph with the blockchain balance.
+
+```jsx live
+function UserBalance() {
+const yourAddress="0x5e48a37d34d93778807ef19d74e06128252bab45";
+
+return (
+    <div>
+      <RealTimeBalance liveAddress={yourAddress} />
+    </div>
+  );
+}
+```
+
+:::tip About this example
+Please keep in mind that in the example above we make the assumption that the user is only using Money Streaming, but not Distributions.
+If we would like to account for Distributions as well, we would need to add the `totalApprovedSubscriptions` to the `realTimeBalance`.
+:::
