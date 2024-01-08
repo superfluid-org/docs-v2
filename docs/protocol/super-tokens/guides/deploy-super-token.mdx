@@ -16,20 +16,28 @@ This guide offers detailed instructions for deploying different types of Super T
 Before you start, ensure you have:
 
 - Basic understanding of blockchain and smart contracts.
-- Access to a compatible cryptocurrency wallet (like MetaMask).
+- Access to a compatible cryptocurrency wallet (like [MetaMask](https://metamask.io/)).
 - ETH or relevant cryptocurrency for transaction fees.
 - Solidity knowledge for custom or self-governed Super Tokens.
 
 ---
 ## Super Tokens Factory Contract
 
-The [Super Token Factory contract](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperTokenFactory.sol) is used to create Super Tokens. It is permissionless and can be used by anyone to create Super Tokens. We will describe the steps for deploying each type of Super Token in the following chapters. For addresses of the Super Token Factory contract on different networks, refer to [The Superfluid Console](https://console.superfluid.finance/), the Protocol section.
+The [Super Token Factory contract](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperTokenFactory.sol) is used to create Super Tokens:
+- It is permissionless and can be used by anyone to create Super Tokens.
+- It is deployed on all the networks where you can find the Superfluid Protocol.
+
+We will describe the steps for deploying each type of Super Token in the following chapters.
+
+:::tip Contract addresses
+For addresses of the Super Token Factory contract on different networks, refer to [The Superfluid Console](https://console.superfluid.finance/), the Protocol section.
+:::
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     ![SuperFluidConsole](/assets/ScreenshotConsoleFactory.png)
 </div>
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <p>*SuperFluid Console*</p>
+    <p>*SuperFluid Console: Protocol Section*</p>
 </div>
 
 ---
@@ -61,9 +69,9 @@ Double-check the parameters to avoid deployment errors.
 
 </Admonition>
 
-### Verifying and Adding Token to Superfluid Dashboard
+### Verifying and Adding Token to Superfluid Console
 
-Locate the new Super Token's address in the "SuperTokenCreated" event log. To add your Super Token to the [Superfluid Dashboard](https://console.superfluid.finance), Submit your request through the [form](https://airtable.com/appxGogNpt64ImOFH/shrzOcdK9eveDmRWV).
+Locate the new Super Token's address in the "SuperTokenCreated" event log. To add your Super Token to the [Superfluid Console](https://console.superfluid.finance), Submit your request through this [form](https://airtable.com/appxGogNpt64ImOFH/shrzOcdK9eveDmRWV).
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     ![Super Token Address](/assets/image_(29).png)
