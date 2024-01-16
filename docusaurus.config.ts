@@ -143,10 +143,6 @@ const config: Config = {
               to: '/docs/concepts/superfluid',
             },
             {
-              label: 'UseCases',
-              to: '/docs/products/intro',
-            },
-            {
               label: 'Protocol',
               to: '/docs/protocol/quickstart',
             },
