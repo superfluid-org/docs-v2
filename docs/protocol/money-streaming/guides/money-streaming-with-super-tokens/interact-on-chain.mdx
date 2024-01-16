@@ -55,7 +55,7 @@ function getNetFlowRate(ISuperToken token, address account)
 `}
 </CodeBlock>
 
-**Usage**: Determine the net flow rate (inflow minus outflow) of a specific account. Essential for balancing and financial planning within the Superfluid ecosystem.
+**Usage**: Determine the net flow rate (inflow minus outflow) of a specific account. Essential for balancing and solvability assessment.
      
         </TabItem>
 </Tabs>
@@ -73,7 +73,7 @@ function createFlow(ISuperToken token, address receiver, int96 flowRate)
     internal returns (bool)
 ```
 
-**Usage**: Create a flow to a receiver white specifying a flowRate.
+**Usage**: Create a flow to a receiver while specifying a flowRate.
     
     </TabItem>
     <TabItem value="updateFlow" label="updateFlow">
@@ -140,7 +140,7 @@ function onFlowCreated(ISuperToken superToken, address sender, bytes calldata ct
 
 ## Access Control List Functions
 
-The Access Control List (ACL) in Superfluid allows any account (either a plain Ethereum account or a smart contract) to configure permissions for another account to manage streams on its behalf.
+The Access Control List (ACL) in Superfluid allows any account (either an external account or a smart contract) to configure permissions for another account to manage streams on its behalf.
  It's akin to the money streaming version of the ERC20 approval mechanism. For more details, check our [ACL guide](/docs/protocol/advanced-topics/advanced-money-streaming/access-control-list).
 
 <Tabs>

@@ -21,20 +21,20 @@ const FlowVisualization = ({ width = 800, height = 400 }) => {
 
     // Draw elements
     svg.append('circle').attr('cx', userPos.x).attr('cy', userPos.y).attr('r', 20).attr('fill', 'blue');
-    svg.append('text').attr('x', userPos.x).attr('y', userPos.y).attr('text-anchor', 'middle').attr('dy', -30).text('User').style('fill', 'white');
+    svg.append('text').attr('x', userPos.x).attr('y', userPos.y).attr('text-anchor', 'middle').attr('dy', -30).text('User').style('fill', 'grey');
 
     svg.append('circle').attr('cx', secondUserPos.x).attr('cy', userPos.y).attr('r', 20).attr('fill', 'orange');
-    svg.append('text').attr('x', secondUserPos.x).attr('y', userPos.y).attr('text-anchor', 'middle').attr('dy', -30).text('FlowSender Contract').style('fill', 'white');
+    svg.append('text').attr('x', secondUserPos.x).attr('y', userPos.y).attr('text-anchor', 'middle').attr('dy', -30).text('FlowSender Contract').style('fill', 'grey');
     
     svg.append('rect').attr('x', flowSenderPos.x - 30).attr('y', flowSenderPos.y - 30).attr('width', 60).attr('height', 60).attr('fill', 'orange');
-    svg.append('text').attr('x', flowSenderPos.x).attr('y', flowSenderPos.y).attr('text-anchor', 'middle').attr('dy', -30).text('FlowSender').style('fill', 'white');
+    svg.append('text').attr('x', flowSenderPos.x).attr('y', flowSenderPos.y).attr('text-anchor', 'middle').attr('dy', -30).text('FlowSender').style('fill', 'grey');
 
     svg.append('rect').attr('x', fDAIxPos.x - 30).attr('y', fDAIxPos.y - 30).attr('width', 60).attr('height', 60).attr('fill', 'green');
-    svg.append('text').attr('x', fDAIxPos.x).attr('y', fDAIxPos.y).attr('text-anchor', 'middle').attr('dy', -30).text('fDAIx').style('fill', 'white');
+    svg.append('text').attr('x', fDAIxPos.x).attr('y', fDAIxPos.y).attr('text-anchor', 'middle').attr('dy', -30).text('fDAIx').style('fill', 'grey');
 
     recipients.forEach((recipient, i) => {
       svg.append('circle').attr('cx', recipient.x).attr('cy', recipient.y).attr('r', 15).attr('fill', 'red');
-      svg.append('text').attr('x', recipient.x).attr('y', recipient.y).attr('text-anchor', 'middle').attr('dy', -20).text(`Receiver ${i + 1}`).style('fill', 'white');
+      svg.append('text').attr('x', recipient.x).attr('y', recipient.y).attr('text-anchor', 'middle').attr('dy', -20).text(`Receiver ${i + 1}`).style('fill', 'grey');
     });
 
     // Function to draw static arrow with label
@@ -49,7 +49,7 @@ const FlowVisualization = ({ width = 800, height = 400 }) => {
           .attr('y1', source.y)
           .attr('x2', source.x + arrowLength)
           .attr('y2', source.y)
-          .attr('stroke', 'white')
+          .attr('stroke', 'grey')
           .attr('stroke-width', 2)
           .attr('marker-end', 'url(#arrowhead)');
   
@@ -57,7 +57,7 @@ const FlowVisualization = ({ width = 800, height = 400 }) => {
           .attr('x', source.x + arrowLength / 2)
           .attr('y', source.y - 10)
           .text(label)
-            .style('fill', 'white')
+            .style('fill', 'grey')
           .attr('text-anchor', 'middle');
       };
   
@@ -73,7 +73,7 @@ const FlowVisualization = ({ width = 800, height = 400 }) => {
         .attr('xoverflow', 'visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
-        .attr('fill', 'white');
+        .attr('fill', 'grey');
   
       // Draw static arrows with labels
       drawArrow(userPos, flowSenderPos, 'Tx');
