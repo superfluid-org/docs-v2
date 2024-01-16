@@ -61,7 +61,7 @@ const config: Config = {
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/docusaurus-social-card.png',
     navbar: {
       title: 'Docs',
       logo: {
@@ -141,10 +141,6 @@ const config: Config = {
             {
               label: 'Concepts',
               to: '/docs/concepts/superfluid',
-            },
-            {
-              label: 'UseCases',
-              to: '/docs/products/intro',
             },
             {
               label: 'Protocol',

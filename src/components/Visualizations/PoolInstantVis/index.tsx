@@ -29,11 +29,11 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
 
         svg.append('text')
             .attr('x', poolCenter.x)
-            .attr('y', poolCenter.y)
+            .attr('y', poolCenter.y-60)
             .attr('text-anchor', 'middle')
             .attr('dy', '0.3em')
             .text('Distribution Pool')
-            .style('fill', color );
+            .style('fill', 'grey' );
 
         // Create pool admin with label
         const poolAdmin = svg.append('circle')
@@ -48,7 +48,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
             .attr('y', adminPosition.y - memberRadius - 5)
             .attr('text-anchor', 'middle')
             .text('Click to distribute a token')
-            .style('fill', color);
+            .style('fill', 'grey');
 
         // Function to emit a particle to the pool
         function emitParticleToPool() {
@@ -112,7 +112,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
                 .attr('y', memberY - memberRadius - 5)
                 .attr('text-anchor', 'middle')
                 .text(`Member ${String.fromCharCode(65 + i)}`)
-                .style('fill',color);
+                .style('fill','grey');
         }
     }, []);
 

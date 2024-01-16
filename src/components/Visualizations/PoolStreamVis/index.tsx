@@ -27,11 +27,11 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
   
       svg.append('text')
         .attr('x', poolCenter.x)
-        .attr('y', poolCenter.y)
+        .attr('y', poolCenter.y-60)
         .attr('text-anchor', 'middle')
         .attr('dy', '0.3em')
         .text('Distribution Pool')
-        .style('fill', color);
+        .style('fill', 'grey');
   
       // Create pool admin with label
       svg.append('circle')
@@ -45,7 +45,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
         .attr('y', adminPosition.y - memberRadius - 5)
         .attr('text-anchor', 'middle')
         .text('Pool Streamer')
-        .style('fill', color);
+        .style('fill', 'grey');
   
       // Create stream from admin to pool
       const adminPath = svg.append('path')
@@ -102,7 +102,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
         .attr('y', memberY - memberRadius - 5)
         .attr('text-anchor', 'middle')
         .text(`Member ${String.fromCharCode(65 + i)}`)
-        .style('fill', color);;
+        .style('fill', 'grey');;
 
       // Create stream path
       const path = svg.append('path')
