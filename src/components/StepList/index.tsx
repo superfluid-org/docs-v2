@@ -43,7 +43,7 @@ export const actions = [
   {
     title: "Technical Reference",
     icon: BookOpen,
-    to: "/technical-reference",
+    to: "/docs/technical-reference/CFAv1Forwarder",
     text: `A comprehensive reference for the most relevant Superfluid contracts.`,
   },
 ];
