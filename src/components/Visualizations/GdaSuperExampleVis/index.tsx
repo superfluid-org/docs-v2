@@ -5,7 +5,7 @@ const SuperfluidPoolVisualization = ({ width = 800, height = 600 }) => {
   const ref = useRef();
 
   useEffect(() => {
-    const color = getComputedStyle(document.body).getPropertyValue('--ifm-color-text');
+    const color = "grey";
     const svg = d3.select(ref.current)
       .attr('width', width)
       .attr('height', height);
