@@ -6,7 +6,7 @@ const config: Config = {
   title: 'Superfluid Docs',
   tagline: 'Docs but they hyper super fluid',
   favicon: 'img/favicon.ico',
-  themes: ['@docusaurus/theme-live-codeblock'],
+  themes: ['@docusaurus/theme-live-codeblock', '@markprompt/docusaurus-theme-search'],
 
   // Set the production url of your site here
   url: 'https://v2.docs.superfluid.finance/',
@@ -230,6 +230,21 @@ const config: Config = {
       searchPagePath: 'search',
 
       //... other Algolia params
+    },
+    markprompt: {
+      projectKey: 'sk_test_ubCqOlHANKE1H1teDc6ykbIV2asfKklN',
+      // By setting `floating` to false, use the standard
+      // navbar search component.
+      trigger: { floating: false },
+      search: {
+        enabled: true,
+        provider: {
+          name: 'algolia',
+          apiKey: '8de88a77f0d3ae7ea04ea6e10bd6b52c',
+          appId: 'O3JEVRIQUM',
+          indexName: 'v2-omega',
+        },
+      },
     },
     plugins:
       ['@saucelabs/theme-github-codeblock', {}],

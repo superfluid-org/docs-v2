@@ -201,12 +201,14 @@ contract DistributionContractTest is Test {
     }
 
     SuperfluidFrameworkDeployer.Framework sf;
+    
 
     // Setup function to initialize test environment
     function setUp() public {
         address public owner;
 	    //DEPLOYING THE FRAMEWORK
         SuperfluidFrameworkDeployer sfDeployer = new SuperfluidFrameworkDeployer();
+        sfDeployer.deployFramework();
         sf = sfDeployer.getFramework();
 				
 	    // DEPLOYING DAI and DAI wrapper super token

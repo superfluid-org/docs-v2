@@ -27,6 +27,50 @@ Check the [next section](#important-functions) for more information on pool conf
 
 :::
 
+## About Member Units
+
+### How is a member's share of the pool determined?
+
+A pool member's units determine their share of the pool's distributions.
+In the background, the calculation of each member's share is calculated following these two steps:
+
+1. **Calculating the flow rate per unit:** We calculate the flow rate or amount of tokens to be distributed *per unit* like so:
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/assets/flowrate-formula.png" alt="Superfluid with people" width="400" />
+</div>
+<br/>
+2. **Calculating the flow rate for each member:** We multiply the flow rate per unit by the number of units each member has to get the flow rate for each member, as follows:
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/assets/flowrate-member-units.png" alt="Superfluid with people" width="500" />
+</div>
+<br/>
+
+One of the limitations of Solidity is its incapacity to handle floating point numbers. 
+This makes it so that the flow rate per unit is calculated as an integer. If the result of the division is not an integer, the result is rounded down.
+
+### Examples
+
+The examples below show how the flow rate per unit is calculated in different scenarios where Distributions reach their limitations
+
+1. **Example 1:** Let's take a pool that has 100 wei/second as total flow rate and 3 members, each member has 1 unit.
+    - The flow rate per unit is 100 / 3 = 33.33
+    - However, since Solidity can't handle floating point numbers, the flow rate per unit is 33
+    - The pool distributes 33 tokens to each unit
+    - 1 token is left undistributed
+2. **Example 2:** Let's take a pool that has 100 wei/second as total flow rate and 200 members, each member has 1 units.
+    - The flow rate per unit is 100 / 200 = 0.5
+    - However, since Solidity can't handle floating point numbers, the flow rate per unit is 0
+    - The pool distributes 0 tokens to each unit
+    - 200 tokens are left undistributed
+
+These examples are extreme and almost never happen in practice. However, it is important to be aware of these limitations when designing your pools.
+
+:::tip How to design your pools?
+The best way to design your pools is to make sure that the total flow rate or the tokens distributed are always orders of magnitude higher than the number of total units in the pool.
+This way, you can be sure that the flow rate per unit will always be significantly higher than 0 and that all members will receive a share of the distribution.
+:::
+
 ## Important Functions
 
 Here are some of the most important functions provided by `SuperTokenV1Library.sol` for interacting with Superfluid pools:
@@ -58,6 +102,11 @@ function updateMemberUnits(ISuperToken token, ISuperfluidPool pool, address memb
 ```
 
 Updates the number of units a member has within a pool, effectively changing their share of future distributions.
+
+:::warning Important
+Keep in mind that the total amount of units in the pool needs to be significantly lower than the total flow rate or the total tokens distributed of the pool.
+To understand more why this is the case, please refer to the [Member Units](#about-member-units) section.
+:::
 
 ### claimAll
 

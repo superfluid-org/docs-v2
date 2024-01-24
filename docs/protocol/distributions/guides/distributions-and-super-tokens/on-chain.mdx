@@ -63,6 +63,11 @@ function distributeFlow(ISuperToken token, address from, ISuperfluidPool pool, i
 
 Initiates a distribution flow from a sender to a pool with the specified flow rate.
 
+:::warning Important
+Keep in mind that the total amount of units in the pool needs to be significantly lower than the total flow rate or the total tokens distributed of the pool.
+To understand more why this is the case, please refer to the [Member Units](/docs/protocol/distributions/guides/pools.mdx#about-member-units) section.
+:::
+
 ## Contract Example
 
 Here's a simple contract example using some of the functions from `SuperTokenV1Library.sol` to interact with distributions:
