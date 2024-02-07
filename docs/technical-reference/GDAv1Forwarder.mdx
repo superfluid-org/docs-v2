@@ -1,8 +1,323 @@
 # GDAv1Forwarder
 
-**GDAv1Forwarder**
+The **GDAv1Forwarder** contract is a Superfluid forwarder that implements the General Distribution Agreement (GDA) related functions.
+It is a contract specifically made immutable in order to facilitate the interaction with [Distributions](/docs/protocol/distributions/overview.mdx) through the General Distribution Agreement (GDA).
 
-## _gda
+This contract is optimized for interaction that would happen from ourside the blockchain (off-chain).
+For more information on the best practices regarding this interaction, please refer the [Interact Off-Chain](/docs/protocol/distributions/guides/distributions-and-super-tokens/off-chain.mdx) section of this documentation.
+
+# ABI
+In order to interact with the `GDAv1Forwarder` contract, you can use the following ABI:
+
+<div>
+<details>
+<summary>Click here to show `GDAv1Forwarder` ABI</summary>
+<p>
+
+```json
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluid",
+        "name": "host",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "memberAddress", "type": "address" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "claimAll",
+    "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "connectPool",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidToken",
+        "name": "token",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "admin", "type": "address" },
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "transferabilityForUnitsOwner",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "distributionFromAnyAddress",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct PoolConfig",
+        "name": "config",
+        "type": "tuple"
+      }
+    ],
+    "name": "createPool",
+    "outputs": [
+      { "internalType": "bool", "name": "success", "type": "bool" },
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "disconnectPool",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidToken",
+        "name": "token",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "from", "type": "address" },
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "requestedAmount",
+        "type": "uint256"
+      },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "distribute",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidToken",
+        "name": "token",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "from", "type": "address" },
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      },
+      { "internalType": "int96", "name": "requestedFlowRate", "type": "int96" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "distributeFlow",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidToken",
+        "name": "token",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "from", "type": "address" },
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "requestedAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "estimateDistributionActualAmount",
+    "outputs": [
+      { "internalType": "uint256", "name": "actualAmount", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidToken",
+        "name": "token",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "from", "type": "address" },
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "to",
+        "type": "address"
+      },
+      { "internalType": "int96", "name": "requestedFlowRate", "type": "int96" }
+    ],
+    "name": "estimateFlowDistributionActualFlowRate",
+    "outputs": [
+      { "internalType": "int96", "name": "actualFlowRate", "type": "int96" },
+      {
+        "internalType": "int96",
+        "name": "totalDistributionFlowRate",
+        "type": "int96"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidToken",
+        "name": "token",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "from", "type": "address" },
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "getFlowDistributionFlowRate",
+    "outputs": [{ "internalType": "int96", "name": "", "type": "int96" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidToken",
+        "name": "token",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "getNetFlow",
+    "outputs": [{ "internalType": "int96", "name": "", "type": "int96" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      }
+    ],
+    "name": "getPoolAdjustmentFlowInfo",
+    "outputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "bytes32", "name": "", "type": "bytes32" },
+      { "internalType": "int96", "name": "", "type": "int96" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "pool", "type": "address" }
+    ],
+    "name": "getPoolAdjustmentFlowRate",
+    "outputs": [{ "internalType": "int96", "name": "", "type": "int96" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "member", "type": "address" }
+    ],
+    "name": "isMemberConnected",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidToken",
+        "name": "token",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "isPool",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperfluidPool",
+        "name": "pool",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "memberAddress", "type": "address" },
+      { "internalType": "uint128", "name": "newUnits", "type": "uint128" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "updateMemberUnits",
+    "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+```
+
+</p>
+</details>
+</div>
+
+## \_gda
 
 ```solidity
 contract IGeneralDistributionAgreementV1 _gda
@@ -13,15 +328,15 @@ contract IGeneralDistributionAgreementV1 _gda
 ```solidity
 function constructor(
     contract ISuperfluid host
-) 
+)
     public
 ```
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `host` | contract ISuperfluid |  |
+| Name   | Type                 | Description |
+| :----- | :------------------- | :---------- |
+| `host` | contract ISuperfluid |             |
 
 ## Fn createPool
 
@@ -30,26 +345,27 @@ function createPool(
     contract ISuperfluidToken token,
     address admin,
     struct PoolConfig config
-) 
-    external 
+)
+    external
     returns (bool success, contract ISuperfluidPool pool)
 ```
+
 _Creates a new Superfluid Pool._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `token` | contract ISuperfluidToken | The Super Token address. |
-| `admin` | address | The pool admin address. |
-| `config` | struct PoolConfig | The pool configuration (see PoolConfig in IGeneralDistributionAgreementV1.sol) |
+| Name     | Type                      | Description                                                                    |
+| :------- | :------------------------ | :----------------------------------------------------------------------------- |
+| `token`  | contract ISuperfluidToken | The Super Token address.                                                       |
+| `admin`  | address                   | The pool admin address.                                                        |
+| `config` | struct PoolConfig         | The pool configuration (see PoolConfig in IGeneralDistributionAgreementV1.sol) |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `success` | bool | A boolean value indicating whether the pool was created successfully. |
-| `pool` | contract ISuperfluidPool | The address of the deployed Superfluid Pool |
+| Name      | Type                     | Description                                                           |
+| :-------- | :----------------------- | :-------------------------------------------------------------------- |
+| `success` | bool                     | A boolean value indicating whether the pool was created successfully. |
+| `pool`    | contract ISuperfluidPool | The address of the deployed Superfluid Pool                           |
 
 ## Fn updateMemberUnits
 
@@ -59,20 +375,21 @@ function updateMemberUnits(
     address memberAddress,
     uint128 newUnits,
     bytes userData
-) 
-    external 
+)
+    external
     returns (bool success)
 ```
+
 _Updates the units of a pool member._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `pool` | contract ISuperfluidPool | The Superfluid Pool to update. |
-| `memberAddress` | address | The address of the member to update. |
-| `newUnits` | uint128 | The new units of the member. |
-| `userData` | bytes | User-specific data. |
+| Name            | Type                     | Description                          |
+| :-------------- | :----------------------- | :----------------------------------- |
+| `pool`          | contract ISuperfluidPool | The Superfluid Pool to update.       |
+| `memberAddress` | address                  | The address of the member to update. |
+| `newUnits`      | uint128                  | The new units of the member.         |
+| `userData`      | bytes                    | User-specific data.                  |
 
 ## Fn claimAll
 
@@ -81,19 +398,20 @@ function claimAll(
     contract ISuperfluidPool pool,
     address memberAddress,
     bytes userData
-) 
-    external 
+)
+    external
     returns (bool success)
 ```
+
 _Claims all tokens from the pool._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `pool` | contract ISuperfluidPool | The Superfluid Pool to claim from. |
-| `memberAddress` | address | The address of the member to claim for. |
-| `userData` | bytes | User-specific data. |
+| Name            | Type                     | Description                             |
+| :-------------- | :----------------------- | :-------------------------------------- |
+| `pool`          | contract ISuperfluidPool | The Superfluid Pool to claim from.      |
+| `memberAddress` | address                  | The address of the member to claim for. |
+| `userData`      | bytes                    | User-specific data.                     |
 
 ## Fn connectPool
 
@@ -101,23 +419,24 @@ _Claims all tokens from the pool._
 function connectPool(
     contract ISuperfluidPool pool,
     bytes userData
-) 
-    external 
+)
+    external
     returns (bool)
 ```
+
 _Connects a pool member to `pool`._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `pool` | contract ISuperfluidPool | The Superfluid Pool to connect. |
-| `userData` | bytes | User-specific data. |
+| Name       | Type                     | Description                     |
+| :--------- | :----------------------- | :------------------------------ |
+| `pool`     | contract ISuperfluidPool | The Superfluid Pool to connect. |
+| `userData` | bytes                    | User-specific data.             |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type | Description                                                       |
+| :---- | :--- | :---------------------------------------------------------------- |
 | `[0]` | bool | A boolean value indicating whether the connection was successful. |
 
 ## Fn disconnectPool
@@ -126,23 +445,24 @@ _Connects a pool member to `pool`._
 function disconnectPool(
     contract ISuperfluidPool pool,
     bytes userData
-) 
-    external 
+)
+    external
     returns (bool)
 ```
+
 _Disconnects a pool member from `pool`._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `pool` | contract ISuperfluidPool | The Superfluid Pool to disconnect. |
-| `userData` | bytes | User-specific data. |
+| Name       | Type                     | Description                        |
+| :--------- | :----------------------- | :--------------------------------- |
+| `pool`     | contract ISuperfluidPool | The Superfluid Pool to disconnect. |
+| `userData` | bytes                    | User-specific data.                |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type | Description                                                          |
+| :---- | :--- | :------------------------------------------------------------------- |
 | `[0]` | bool | A boolean value indicating whether the disconnection was successful. |
 
 ## Fn distribute
@@ -154,26 +474,27 @@ function distribute(
     contract ISuperfluidPool pool,
     uint256 requestedAmount,
     bytes userData
-) 
-    external 
+)
+    external
     returns (bool)
 ```
+
 _Tries to distribute `requestedAmount` amount of `token` from `from` to `pool`._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `token` | contract ISuperfluidToken | The Super Token address. |
-| `from` | address | The address from which to distribute tokens. |
-| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
-| `requestedAmount` | uint256 | The amount of tokens to distribute. |
-| `userData` | bytes | User-specific data. |
+| Name              | Type                      | Description                                  |
+| :---------------- | :------------------------ | :------------------------------------------- |
+| `token`           | contract ISuperfluidToken | The Super Token address.                     |
+| `from`            | address                   | The address from which to distribute tokens. |
+| `pool`            | contract ISuperfluidPool  | The Superfluid Pool address.                 |
+| `requestedAmount` | uint256                   | The amount of tokens to distribute.          |
+| `userData`        | bytes                     | User-specific data.                          |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type | Description                                                         |
+| :---- | :--- | :------------------------------------------------------------------ |
 | `[0]` | bool | A boolean value indicating whether the distribution was successful. |
 
 ## Fn distributeFlow
@@ -185,26 +506,27 @@ function distributeFlow(
     contract ISuperfluidPool pool,
     int96 requestedFlowRate,
     bytes userData
-) 
-    external 
+)
+    external
     returns (bool)
 ```
+
 _Tries to distribute flow at `requestedFlowRate` of `token` from `from` to `pool`._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `token` | contract ISuperfluidToken | The Super Token address. |
-| `from` | address | The address from which to distribute tokens. |
-| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
-| `requestedFlowRate` | int96 | The flow rate of tokens to distribute. |
-| `userData` | bytes | User-specific data. |
+| Name                | Type                      | Description                                  |
+| :------------------ | :------------------------ | :------------------------------------------- |
+| `token`             | contract ISuperfluidToken | The Super Token address.                     |
+| `from`              | address                   | The address from which to distribute tokens. |
+| `pool`              | contract ISuperfluidPool  | The Superfluid Pool address.                 |
+| `requestedFlowRate` | int96                     | The flow rate of tokens to distribute.       |
+| `userData`          | bytes                     | User-specific data.                          |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type | Description                                                         |
+| :---- | :--- | :------------------------------------------------------------------ |
 | `[0]` | bool | A boolean value indicating whether the distribution was successful. |
 
 ## Fn isPool
@@ -213,23 +535,24 @@ _Tries to distribute flow at `requestedFlowRate` of `token` from `from` to `pool
 function isPool(
     contract ISuperfluidToken token,
     address account
-) 
-    external 
+)
+    external
     returns (bool)
 ```
+
 _Checks if the specified account is a pool._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `token` | contract ISuperfluidToken | The Super Token address. |
-| `account` | address | The account address to check. |
+| Name      | Type                      | Description                   |
+| :-------- | :------------------------ | :---------------------------- |
+| `token`   | contract ISuperfluidToken | The Super Token address.      |
+| `account` | address                   | The account address to check. |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type | Description                                               |
+| :---- | :--- | :-------------------------------------------------------- |
 | `[0]` | bool | A boolean value indicating whether the account is a pool. |
 
 ## Fn getNetFlow
@@ -238,23 +561,24 @@ _Checks if the specified account is a pool._
 function getNetFlow(
     contract ISuperfluidToken token,
     address account
-) 
-    external 
+)
+    external
     returns (int96)
 ```
+
 _Gets the GDA net flow rate for the specified account._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `token` | contract ISuperfluidToken | The Super Token address. |
-| `account` | address | The account address. |
+| Name      | Type                      | Description              |
+| :-------- | :------------------------ | :----------------------- |
+| `token`   | contract ISuperfluidToken | The Super Token address. |
+| `account` | address                   | The account address.     |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type  | Description                            |
+| :---- | :---- | :------------------------------------- |
 | `[0]` | int96 | The gda net flow rate for the account. |
 
 ## Fn getFlowDistributionFlowRate
@@ -264,24 +588,25 @@ function getFlowDistributionFlowRate(
     contract ISuperfluidToken token,
     address from,
     contract ISuperfluidPool to
-) 
-    external 
+)
+    external
     returns (int96)
 ```
+
 _Gets the flow rate of tokens between the specified accounts._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `token` | contract ISuperfluidToken | The Super Token address. |
-| `from` | address | The sender address. |
-| `to` | contract ISuperfluidPool | The receiver address (the pool address). |
+| Name    | Type                      | Description                              |
+| :------ | :------------------------ | :--------------------------------------- |
+| `token` | contract ISuperfluidToken | The Super Token address.                 |
+| `from`  | address                   | The sender address.                      |
+| `to`    | contract ISuperfluidPool  | The receiver address (the pool address). |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type  | Description                     |
+| :---- | :---- | :------------------------------ |
 | `[0]` | int96 | The flow distribution flow rate |
 
 ## Fn getPoolAdjustmentFlowRate
@@ -289,22 +614,23 @@ _Gets the flow rate of tokens between the specified accounts._
 ```solidity
 function getPoolAdjustmentFlowRate(
     address pool
-) 
-    external 
+)
+    external
     returns (int96)
 ```
+
 _Gets the pool adjustment flow rate for the specified pool._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name   | Type    | Description       |
+| :----- | :------ | :---------------- |
 | `pool` | address | The pool address. |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type  | Description                    |
+| :---- | :---- | :----------------------------- |
 | `[0]` | int96 | The pool adjustment flow rate. |
 
 ## Fn estimateFlowDistributionActualFlowRate
@@ -315,27 +641,28 @@ function estimateFlowDistributionActualFlowRate(
     address from,
     contract ISuperfluidPool to,
     int96 requestedFlowRate
-) 
-    external 
+)
+    external
     returns (int96 actualFlowRate, int96 totalDistributionFlowRate)
 ```
+
 _Estimates the actual flow rate for flow distribution to the specified pool._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `token` | contract ISuperfluidToken | The Super Token address. |
-| `from` | address | The sender address. |
-| `to` | contract ISuperfluidPool | The pool address. |
-| `requestedFlowRate` | int96 | The requested flow rate. |
+| Name                | Type                      | Description              |
+| :------------------ | :------------------------ | :----------------------- |
+| `token`             | contract ISuperfluidToken | The Super Token address. |
+| `from`              | address                   | The sender address.      |
+| `to`                | contract ISuperfluidPool  | The pool address.        |
+| `requestedFlowRate` | int96                     | The requested flow rate. |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `actualFlowRate` | int96 |  |
-| `totalDistributionFlowRate` | int96 |  |
+| Name                        | Type  | Description |
+| :-------------------------- | :---- | :---------- |
+| `actualFlowRate`            | int96 |             |
+| `totalDistributionFlowRate` | int96 |             |
 
 ## Fn estimateDistributionActualAmount
 
@@ -345,25 +672,26 @@ function estimateDistributionActualAmount(
     address from,
     contract ISuperfluidPool to,
     uint256 requestedAmount
-) 
-    external 
+)
+    external
     returns (uint256 actualAmount)
 ```
+
 _Estimates the actual amount for distribution to the specified pool._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `token` | contract ISuperfluidToken | The Super Token address. |
-| `from` | address | The sender address. |
-| `to` | contract ISuperfluidPool | The pool address. |
-| `requestedAmount` | uint256 | The requested amount. |
+| Name              | Type                      | Description              |
+| :---------------- | :------------------------ | :----------------------- |
+| `token`           | contract ISuperfluidToken | The Super Token address. |
+| `from`            | address                   | The sender address.      |
+| `to`              | contract ISuperfluidPool  | The pool address.        |
+| `requestedAmount` | uint256                   | The requested amount.    |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name           | Type    | Description                         |
+| :------------- | :------ | :---------------------------------- |
 | `actualAmount` | uint256 | The actual amount for distribution. |
 
 ## Fn isMemberConnected
@@ -372,23 +700,24 @@ _Estimates the actual amount for distribution to the specified pool._
 function isMemberConnected(
     contract ISuperfluidPool pool,
     address member
-) 
-    external 
+)
+    external
     returns (bool)
 ```
+
 _Checks if the specified member is connected to the pool._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
-| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
-| `member` | address | The member address. |
+| Name     | Type                     | Description                  |
+| :------- | :----------------------- | :--------------------------- |
+| `pool`   | contract ISuperfluidPool | The Superfluid Pool address. |
+| `member` | address                  | The member address.          |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type | Description                                                             |
+| :---- | :--- | :---------------------------------------------------------------------- |
 | `[0]` | bool | A boolean value indicating whether the member is connected to the pool. |
 
 ## Fn getPoolAdjustmentFlowInfo
@@ -396,23 +725,23 @@ _Checks if the specified member is connected to the pool._
 ```solidity
 function getPoolAdjustmentFlowInfo(
     contract ISuperfluidPool pool
-) 
-    external 
+)
+    external
     returns (address, bytes32, int96)
 ```
+
 _Gets the pool adjustment flow information for the specified pool._
 
 #### Parameters
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name   | Type                     | Description       |
+| :----- | :----------------------- | :---------------- |
 | `pool` | contract ISuperfluidPool | The pool address. |
 
 #### Return Values
 
-| Name | Type | Description |
-| :--- | :--- | :---------- |
+| Name  | Type    | Description                                             |
+| :---- | :------ | :------------------------------------------------------ |
 | `[0]` | address | The pool admin, pool ID, and pool adjustment flow rate. |
-| `[1]` | bytes32 |  |
-| `[2]` | int96 |  |
-
+| `[1]` | bytes32 |                                                         |
+| `[2]` | int96   |                                                         |
