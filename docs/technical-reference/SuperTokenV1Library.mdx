@@ -1,6 +1,3 @@
----
-sidebar_position: 2
----
 # SuperTokenV1Library
 
 **Library for Token Centric Interface**
@@ -20,29 +17,21 @@ function createFlow(
     contract ISuperToken token,
     address receiver,
     int96 flowRate
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Create flow without userData_ 
+_Create flow without userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn createFlow (w/ user data)
+## Fn createFlow
 
 ```solidity
 function createFlow(
@@ -50,29 +39,20 @@ function createFlow(
     address receiver,
     int96 flowRate,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Create flow with userData_ 
+_Create flow with userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
 | `userData` | bytes | The userdata passed along with call |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn updateFlow
 
@@ -81,29 +61,21 @@ function updateFlow(
     contract ISuperToken token,
     address receiver,
     int96 flowRate
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Update flow without userData_ 
+_Update flow without userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn updateFlow (w/ user data)
+## Fn updateFlow (w/userData)
 
 ```solidity
 function updateFlow(
@@ -111,29 +83,20 @@ function updateFlow(
     address receiver,
     int96 flowRate,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Update flow with userData_ 
+_Update flow with userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
 | `userData` | bytes | The userdata passed along with call |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn deleteFlow
 
@@ -142,29 +105,21 @@ function deleteFlow(
     contract ISuperToken token,
     address sender,
     address receiver
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Delete flow without userData_ 
+_Delete flow without userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn deleteFlow (w/ user data)
+## Fn deleteFlow (w/userData)
 
 ```solidity
 function deleteFlow(
@@ -172,29 +127,20 @@ function deleteFlow(
     address sender,
     address receiver,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Delete flow with userData_ 
+_Delete flow with userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `userData` | bytes | The userdata passed along with call |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn setFlowPermissions
 
@@ -206,33 +152,22 @@ function setFlowPermissions(
     bool allowUpdate,
     bool allowDelete,
     int96 flowRateAllowance
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Update permissions for flow operator_ 
+_Update permissions for flow operator_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address given flow permissions |
-|  |  |  |
 | `allowCreate` | bool | creation permissions |
-|  |  |  |
 | `allowUpdate` | bool |  |
-|  |  |  |
 | `allowDelete` | bool |  |
-|  |  |  |
 | `flowRateAllowance` | int96 | The allowance provided to flowOperator |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn setMaxFlowPermissions
 
@@ -240,25 +175,18 @@ function setFlowPermissions(
 function setMaxFlowPermissions(
     contract ISuperToken token,
     address flowOperator
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Update permissions for flow operator - give operator max permissions_ 
+_Update permissions for flow operator - give operator max permissions_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address given flow permissions |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn revokeFlowPermissions
 
@@ -266,25 +194,18 @@ function setMaxFlowPermissions(
 function revokeFlowPermissions(
     contract ISuperToken token,
     address flowOperator
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Update permissions for flow operator - revoke all permission_ 
+_Update permissions for flow operator - revoke all permission_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address given flow permissions |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn increaseFlowRateAllowance
 
@@ -293,31 +214,23 @@ function increaseFlowRateAllowance(
     contract ISuperToken token,
     address flowOperator,
     int96 addedFlowRateAllowance
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Increases the flow rate allowance for flow operator_ 
+_Increases the flow rate allowance for flow operator_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address whose flow rate allowance is increased |
-|  |  |  |
 | `addedFlowRateAllowance` | int96 | amount to increase allowance by |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+allowing userData to be a parameter here triggered stack too deep error
 
- allowing userData to be a parameter here triggered stack too deep error 
-
-## Fn increaseFlowRateAllowance (w/ user data)
+## Fn increaseFlowRateAllowance (w/userData)
 
 ```solidity
 function increaseFlowRateAllowance(
@@ -325,31 +238,22 @@ function increaseFlowRateAllowance(
     address flowOperator,
     int96 addedFlowRateAllowance,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Increases the flow rate allowance for flow operator_ 
+_Increases the flow rate allowance for flow operator_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address whose flow rate allowance is increased |
-|  |  |  |
 | `addedFlowRateAllowance` | int96 | amount to increase allowance by |
-|  |  |  |
 | `userData` | bytes | The userdata passed along with call |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
- allowing userData to be a parameter here triggered stack too deep error 
+allowing userData to be a parameter here triggered stack too deep error
 
 ## Fn decreaseFlowRateAllowance
 
@@ -358,31 +262,23 @@ function decreaseFlowRateAllowance(
     contract ISuperToken token,
     address flowOperator,
     int96 subtractedFlowRateAllowance
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Decreases the flow rate allowance for flow operator_ 
+_Decreases the flow rate allowance for flow operator_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address whose flow rate allowance is decreased |
-|  |  |  |
 | `subtractedFlowRateAllowance` | int96 | amount to decrease allowance by |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+allowing userData to be a parameter here triggered stack too deep error
 
- allowing userData to be a parameter here triggered stack too deep error 
-
-## Fn decreaseFlowRateAllowance (w/ user data)
+## Fn decreaseFlowRateAllowance (w/userData)
 
 ```solidity
 function decreaseFlowRateAllowance(
@@ -390,31 +286,22 @@ function decreaseFlowRateAllowance(
     address flowOperator,
     int96 subtractedFlowRateAllowance,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Decreases the flow rate allowance for flow operator_ 
+_Decreases the flow rate allowance for flow operator_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address whose flow rate allowance is decreased |
-|  |  |  |
 | `subtractedFlowRateAllowance` | int96 | amount to decrease allowance by |
-|  |  |  |
 | `userData` | bytes | The userdata passed along with call |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
- allowing userData to be a parameter here triggered stack too deep error 
+allowing userData to be a parameter here triggered stack too deep error
 
 ## Fn increaseFlowRateAllowanceWithPermissions
 
@@ -424,33 +311,24 @@ function increaseFlowRateAllowanceWithPermissions(
     address flowOperator,
     uint8 permissionsToAdd,
     int96 addedFlowRateAllowance
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Increases the flow rate allowance for flow operator and adds the permissions_ 
+_Increases the flow rate allowance for flow operator and adds the permissions_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address whose flow rate allowance is increased |
-|  |  |  |
 | `permissionsToAdd` | uint8 | The permissions to add for the flow operator |
-|  |  |  |
 | `addedFlowRateAllowance` | int96 | amount to increase allowance by |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+allowing userData to be a parameter here triggered stack too deep error
 
- allowing userData to be a parameter here triggered stack too deep error 
-
-## Fn increaseFlowRateAllowanceWithPermissions (w/ user data)
+## Fn increaseFlowRateAllowanceWithPermissions (w/userData)
 
 ```solidity
 function increaseFlowRateAllowanceWithPermissions(
@@ -459,33 +337,23 @@ function increaseFlowRateAllowanceWithPermissions(
     uint8 permissionsToAdd,
     int96 addedFlowRateAllowance,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Increases the flow rate allowance for flow operator and adds the permissions_ 
+_Increases the flow rate allowance for flow operator and adds the permissions_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address whose flow rate allowance is increased |
-|  |  |  |
 | `permissionsToAdd` | uint8 | The permissions to add for the flow operator |
-|  |  |  |
 | `addedFlowRateAllowance` | int96 | amount to increase allowance by |
-|  |  |  |
 | `userData` | bytes | The userdata passed along with call |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
- allowing userData to be a parameter here triggered stack too deep error 
+allowing userData to be a parameter here triggered stack too deep error
 
 ## Fn decreaseFlowRateAllowanceWithPermissions
 
@@ -495,33 +363,24 @@ function decreaseFlowRateAllowanceWithPermissions(
     address flowOperator,
     uint8 permissionsToRemove,
     int96 subtractedFlowRateAllowance
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Decreases the flow rate allowance for flow operator and removes the permissions_ 
+_Decreases the flow rate allowance for flow operator and removes the permissions_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address whose flow rate allowance is subtracted |
-|  |  |  |
 | `permissionsToRemove` | uint8 | The permissions to remove for the flow operator |
-|  |  |  |
 | `subtractedFlowRateAllowance` | int96 | amount to subtract allowance by |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+allowing userData to be a parameter here triggered stack too deep error
 
- allowing userData to be a parameter here triggered stack too deep error 
-
-## Fn decreaseFlowRateAllowanceWithPermissions (w/ user data)
+## Fn decreaseFlowRateAllowanceWithPermissions (w/userData)
 
 ```solidity
 function decreaseFlowRateAllowanceWithPermissions(
@@ -530,33 +389,23 @@ function decreaseFlowRateAllowanceWithPermissions(
     uint8 permissionsToRemove,
     int96 subtractedFlowRateAllowance,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Decreases the flow rate allowance for flow operator and removes the permissions_ 
+_Decreases the flow rate allowance for flow operator and removes the permissions_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address whose flow rate allowance is subtracted |
-|  |  |  |
 | `permissionsToRemove` | uint8 | The permissions to remove for the flow operator |
-|  |  |  |
 | `subtractedFlowRateAllowance` | int96 | amount to subtract allowance by |
-|  |  |  |
 | `userData` | bytes | The userdata passed along with call |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
- allowing userData to be a parameter here triggered stack too deep error 
+allowing userData to be a parameter here triggered stack too deep error
 
 ## Fn setFlowPermissionsWithCtx
 
@@ -569,37 +418,31 @@ function setFlowPermissionsWithCtx(
     bool allowDelete,
     int96 flowRateAllowance,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Update permissions for flow operator in callback_ 
+_Update permissions for flow operator in callback_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address given flow permissions |
-|  |  |  |
 | `allowCreate` | bool | creation permissions |
-|  |  |  |
 | `allowUpdate` | bool |  |
-|  |  |  |
 | `allowDelete` | bool |  |
-|  |  |  |
 | `flowRateAllowance` | int96 | The allowance provided to flowOperator |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
 
- allowing userData to be a parameter here triggered stack too deep error 
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
+
+allowing userData to be a parameter here triggered stack too deep error
 
 ## Fn setMaxFlowPermissionsWithCtx
 
@@ -608,27 +451,25 @@ function setMaxFlowPermissionsWithCtx(
     contract ISuperToken token,
     address flowOperator,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Update permissions for flow operator - give operator max permissions_ 
+_Update permissions for flow operator - give operator max permissions_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address given flow permissions |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn revokeFlowPermissionsWithCtx
 
@@ -637,27 +478,25 @@ function revokeFlowPermissionsWithCtx(
     contract ISuperToken token,
     address flowOperator,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Update permissions for flow operator - revoke all permission_ 
+_Update permissions for flow operator - revoke all permission_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowOperator` | address | The address given flow permissions |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn createFlowFrom
 
@@ -667,31 +506,22 @@ function createFlowFrom(
     address sender,
     address receiver,
     int96 flowRate
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Creates flow as an operator without userData_ 
+_Creates flow as an operator without userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn createFlowFrom (w/ user data)
+## Fn createFlowFrom (w/userData)
 
 ```solidity
 function createFlowFrom(
@@ -700,31 +530,21 @@ function createFlowFrom(
     address receiver,
     int96 flowRate,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Creates flow as an operator with userData_ 
+_Creates flow as an operator with userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
 | `userData` | bytes | The user provided data |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn updateFlowFrom
 
@@ -734,31 +554,22 @@ function updateFlowFrom(
     address sender,
     address receiver,
     int96 flowRate
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Updates flow as an operator without userData_ 
+_Updates flow as an operator without userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn updateFlowFrom (w/ user data)
+## Fn updateFlowFrom (w/userData)
 
 ```solidity
 function updateFlowFrom(
@@ -767,31 +578,21 @@ function updateFlowFrom(
     address receiver,
     int96 flowRate,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Updates flow as an operator with userData_ 
+_Updates flow as an operator with userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
 | `userData` | bytes | The user provided data |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn deleteFlowFrom
 
@@ -800,29 +601,21 @@ function deleteFlowFrom(
     contract ISuperToken token,
     address sender,
     address receiver
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Deletes flow as an operator without userData_ 
+_Deletes flow as an operator without userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn deleteFlowFrom (w/ user data)
+## Fn deleteFlowFrom (w/userData)
 
 ```solidity
 function deleteFlowFrom(
@@ -830,29 +623,20 @@ function deleteFlowFrom(
     address sender,
     address receiver,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Deletes flow as an operator with userData_ 
+_Deletes flow as an operator with userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `userData` | bytes | The user provided data |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn createFlowWithCtx
 
@@ -862,29 +646,26 @@ function createFlowWithCtx(
     address receiver,
     int96 flowRate,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Create flow with context and userData_ 
+_Create flow with context and userData_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn createFlowFromWithCtx
 
@@ -895,31 +676,27 @@ function createFlowFromWithCtx(
     address receiver,
     int96 flowRate,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Create flow by operator with context_ 
+_Create flow by operator with context_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn updateFlowWithCtx
 
@@ -929,29 +706,26 @@ function updateFlowWithCtx(
     address receiver,
     int96 flowRate,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Update flow with context_ 
+_Update flow with context_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn updateFlowFromWithCtx
 
@@ -962,31 +736,27 @@ function updateFlowFromWithCtx(
     address receiver,
     int96 flowRate,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Update flow by operator with context_ 
+_Update flow by operator with context_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The receiver of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `flowRate` | int96 | The desired flowRate |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn deleteFlowWithCtx
 
@@ -996,29 +766,26 @@ function deleteFlowWithCtx(
     address sender,
     address receiver,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Delete flow with context_ 
+_Delete flow with context_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn deleteFlowFromWithCtx
 
@@ -1028,29 +795,26 @@ function deleteFlowFromWithCtx(
     address sender,
     address receiver,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Delete flow by operator with context_ 
+_Delete flow by operator with context_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token to flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
 | `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
-|  |  |  |
-|  |  |  |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn getFlowRate
 
@@ -1059,34 +823,25 @@ function getFlowRate(
     contract ISuperToken token,
     address sender,
     address receiver
-)
-    internal
+) 
+    internal 
     returns (int96 flowRate)
 ```
-
- _get flow rate between two accounts for given token_ 
+_get flow rate between two accounts for given token_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `flowRate` | int96 | The flow rate |
-|  |  |  |
-|  |  |  |
 
 ## Fn getFlowInfo
 
@@ -1095,40 +850,28 @@ function getFlowInfo(
     contract ISuperToken token,
     address sender,
     address receiver
-)
-    internal
+) 
+    internal 
     returns (uint256 lastUpdated, int96 flowRate, uint256 deposit, uint256 owedDeposit)
 ```
-
- _get flow info between two accounts for given token_ 
+_get flow info between two accounts for given token_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `sender` | address | The sender of the flow |
-|  |  |  |
 | `receiver` | address | The receiver of the flow |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `lastUpdated` | uint256 | Timestamp of flow creation or last flowrate change |
-|  |  |  |
 | `flowRate` | int96 | The flow rate |
-|  |  |  |
 | `deposit` | uint256 | The amount of deposit the flow |
-|  |  |  |
 | `owedDeposit` | uint256 | The amount of owed deposit of the flow |
-|  |  |  |
-|  |  |  |
 
 ## Fn getNetFlowRate
 
@@ -1136,32 +879,24 @@ function getFlowInfo(
 function getNetFlowRate(
     contract ISuperToken token,
     address account
-)
-    internal
+) 
+    internal 
     returns (int96 flowRate)
 ```
-
- _get net flow rate for given account for given token (CFA + GDA)_ 
+_get net flow rate for given account for given token (CFA + GDA)_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super token address |
-|  |  |  |
 | `account` | address | Account to query |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `flowRate` | int96 | The net flow rate of the account |
-|  |  |  |
-|  |  |  |
 
 ## Fn getCFANetFlowRate
 
@@ -1169,32 +904,24 @@ function getNetFlowRate(
 function getCFANetFlowRate(
     contract ISuperToken token,
     address account
-)
-    internal
+) 
+    internal 
     returns (int96 flowRate)
 ```
-
- _get CFA net flow rate for given account for given token_ 
+_get CFA net flow rate for given account for given token_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super token address |
-|  |  |  |
 | `account` | address | Account to query |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `flowRate` | int96 | The net flow rate of the account |
-|  |  |  |
-|  |  |  |
 
 ## Fn getGDANetFlowRate
 
@@ -1202,32 +929,24 @@ function getCFANetFlowRate(
 function getGDANetFlowRate(
     contract ISuperToken token,
     address account
-)
-    internal
+) 
+    internal 
     returns (int96 flowRate)
 ```
-
- _get GDA net flow rate for given account for given token_ 
+_get GDA net flow rate for given account for given token_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super token address |
-|  |  |  |
 | `account` | address | Account to query |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `flowRate` | int96 | The net flow rate of the account |
-|  |  |  |
-|  |  |  |
 
 ## Fn getNetFlowInfo
 
@@ -1235,38 +954,27 @@ function getGDANetFlowRate(
 function getNetFlowInfo(
     contract ISuperToken token,
     address account
-)
-    internal
+) 
+    internal 
     returns (uint256 lastUpdated, int96 flowRate, uint256 deposit, uint256 owedDeposit)
 ```
-
- _get the aggregated flow info of the account_ 
+_get the aggregated flow info of the account_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super token address |
-|  |  |  |
 | `account` | address | Account to query |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `lastUpdated` | uint256 | Timestamp of the last change of the net flow |
-|  |  |  |
 | `flowRate` | int96 | The net flow rate of token for account |
-|  |  |  |
 | `deposit` | uint256 | The sum of all deposits for account's flows |
-|  |  |  |
 | `owedDeposit` | uint256 | The sum of all owed deposits for account's flows |
-|  |  |  |
-|  |  |  |
 
 ## Fn getBufferAmountByFlowRate
 
@@ -1274,32 +982,24 @@ function getNetFlowInfo(
 function getBufferAmountByFlowRate(
     contract ISuperToken token,
     int96 flowRate
-)
-    internal
+) 
+    internal 
     returns (uint256 bufferAmount)
 ```
-
- _calculate buffer for a flow rate_ 
+_calculate buffer for a flow rate_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `flowRate` | int96 | The flowrate to calculate the needed buffer for |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `bufferAmount` | uint256 | The buffer amount based on flowRate, liquidationPeriod and minimum deposit |
-|  |  |  |
-|  |  |  |
 
 ## Fn getFlowPermissions
 
@@ -1308,40 +1008,28 @@ function getFlowPermissions(
     contract ISuperToken token,
     address sender,
     address flowOperator
-)
-    internal
+) 
+    internal 
     returns (bool allowCreate, bool allowUpdate, bool allowDelete, int96 flowRateAllowance)
 ```
-
- _get existing flow permissions_ 
+_get existing flow permissions_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The token used in flow |
-|  |  |  |
 | `sender` | address | sender of a flow |
-|  |  |  |
 | `flowOperator` | address | the address we are checking permissions of for sender & token |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `allowCreate` | bool | is true if the flowOperator can create flows |
-|  |  |  |
 | `allowUpdate` | bool | is true if the flowOperator can update flows |
-|  |  |  |
 | `allowDelete` | bool | is true if the flowOperator can delete flows |
-|  |  |  |
 | `flowRateAllowance` | int96 | The flow rate allowance the flowOperator is granted (only goes down) |
-|  |  |  |
-|  |  |  |
 
 ## Fn getIndex
 
@@ -1350,40 +1038,28 @@ function getIndex(
     contract ISuperToken token,
     address publisher,
     uint32 indexId
-)
-    internal
+) 
+    internal 
     returns (bool exist, uint128 indexValue, uint128 totalUnitsApproved, uint128 totalUnitsPending)
 ```
-
- _Gets an index by its ID and publisher._ 
+_Gets an index by its ID and publisher._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `exist` | bool | True if the index exists. |
-|  |  |  |
 | `indexValue` | uint128 | Total value of the index. |
-|  |  |  |
 | `totalUnitsApproved` | uint128 | Units of the index approved by subscribers. |
-|  |  |  |
 | `totalUnitsPending` | uint128 | Units of teh index not yet approved by subscribers. |
-|  |  |  |
-|  |  |  |
 
 ## Fn calculateDistribution
 
@@ -1393,38 +1069,27 @@ function calculateDistribution(
     address publisher,
     uint32 indexId,
     uint256 amount
-)
-    internal
+) 
+    internal 
     returns (uint256 actualAmount, uint128 newIndexValue)
 ```
-
- _Calculates the distribution amount based on the amount of tokens desired to distribute._ 
+_Calculates the distribution amount based on the amount of tokens desired to distribute._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `amount` | uint256 | Amount of tokens desired to distribute. |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `actualAmount` | uint256 | Amount to be distributed with correct rounding. |
-|  |  |  |
 | `newIndexValue` | uint128 | The index value after the distribution would be called. |
-|  |  |  |
-|  |  |  |
 
 ## Fn listSubscriptions
 
@@ -1432,36 +1097,26 @@ function calculateDistribution(
 function listSubscriptions(
     contract ISuperToken token,
     address subscriber
-)
-    internal
+) 
+    internal 
     returns (address[] publishers, uint32[] indexIds, uint128[] unitsList)
 ```
-
- _List all subscriptions of an address_ 
+_List all subscriptions of an address_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super token used in the indexes listed. |
-|  |  |  |
 | `subscriber` | address | Subscriber address. |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `publishers` | address[] | Publishers of the indices. |
-|  |  |  |
 | `indexIds` | uint32[] | IDs of the indices. |
-|  |  |  |
 | `unitsList` | uint128[] | Units owned of the indices. |
-|  |  |  |
-|  |  |  |
 
 ## Fn getSubscription
 
@@ -1471,42 +1126,29 @@ function getSubscription(
     address publisher,
     uint32 indexId,
     address subscriber
-)
-    internal
+) 
+    internal 
     returns (bool exist, bool approved, uint128 units, uint256 pendingDistribution)
 ```
-
- _Gets subscription by publisher, index id, and subscriber._ 
+_Gets subscription by publisher, index id, and subscriber._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber to the index. |
-|  |  |  |
-|  |  |  |
 
 #### Return Values
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `exist` | bool | True if the subscription exists. |
-|  |  |  |
 | `approved` | bool | True if the subscription has been approved by the subscriber. |
-|  |  |  |
 | `units` | uint128 | Units held by the subscriber |
-|  |  |  |
 | `pendingDistribution` | uint256 | If not approved, the amount to be claimed on approval. |
-|  |  |  |
-|  |  |  |
 
 ## Fn getSubscriptionByID
 
@@ -1514,23 +1156,17 @@ function getSubscription(
 function getSubscriptionByID(
     contract ISuperToken token,
     bytes32 agreementId
-)
-    internal
+) 
+    internal 
     returns (address publisher, uint32 indexId, bool approved, uint128 units, uint256 pendingDistribution)
 ```
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken |  |
-|  |  |  |
 | `agreementId` | bytes32 |  |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn getFlowDistributionFlowRate
 
@@ -1539,27 +1175,20 @@ function getFlowDistributionFlowRate(
     contract ISuperToken token,
     address from,
     contract ISuperfluidPool to
-)
-    internal
+) 
+    internal 
     returns (int96)
 ```
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken |  |
-|  |  |  |
 | `from` | address |  |
-|  |  |  |
 | `to` | contract ISuperfluidPool |  |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
- GDA VIEW FUNCTIONS ************************************* 
+GDA VIEW FUNCTIONS *************************************
 
 ## Fn estimateFlowDistributionActualFlowRate
 
@@ -1569,27 +1198,19 @@ function estimateFlowDistributionActualFlowRate(
     address from,
     contract ISuperfluidPool to,
     int96 requestedFlowRate
-)
-    internal
+) 
+    internal 
     returns (int96 actualFlowRate, int96 totalDistributionFlowRate)
 ```
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken |  |
-|  |  |  |
 | `from` | address |  |
-|  |  |  |
 | `to` | contract ISuperfluidPool |  |
-|  |  |  |
 | `requestedFlowRate` | int96 |  |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn estimateDistributionActualAmount
 
@@ -1599,27 +1220,19 @@ function estimateDistributionActualAmount(
     address from,
     contract ISuperfluidPool to,
     uint256 requestedAmount
-)
-    internal
+) 
+    internal 
     returns (uint256 actualAmount)
 ```
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken |  |
-|  |  |  |
 | `from` | address |  |
-|  |  |  |
 | `to` | contract ISuperfluidPool |  |
-|  |  |  |
 | `requestedAmount` | uint256 |  |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn isMemberConnected
 
@@ -1628,25 +1241,18 @@ function isMemberConnected(
     contract ISuperToken token,
     address pool,
     address member
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken |  |
-|  |  |  |
 | `pool` | address |  |
-|  |  |  |
 | `member` | address |  |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn createIndex
 
@@ -1654,54 +1260,39 @@ function isMemberConnected(
 function createIndex(
     contract ISuperToken token,
     uint32 indexId
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Creates a new index._ 
+_Creates a new index._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn createIndex (w/ user data)
+## Fn createIndex
 
 ```solidity
 function createIndex(
     contract ISuperToken token,
     uint32 indexId,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Creates a new index with userData._ 
+_Creates a new index with userData._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `userData` | bytes | Arbitrary user data field. |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn updateIndexValue
 
@@ -1710,30 +1301,22 @@ function updateIndexValue(
     contract ISuperToken token,
     uint32 indexId,
     uint128 indexValue
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Updates an index value. This distributes an amount of tokens equal to
-`indexValue - lastIndexValue`. See `distribute` for another way to distribute._ 
+_Updates an index value. This distributes an amount of tokens equal to
+`indexValue - lastIndexValue`. See `distribute` for another way to distribute._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `indexValue` | uint128 | New TOTAL index value, this will equal the total amount distributed. |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn updateIndexValue (w/ user data)
+## Fn updateIndexValue
 
 ```solidity
 function updateIndexValue(
@@ -1741,30 +1324,21 @@ function updateIndexValue(
     uint32 indexId,
     uint128 indexValue,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Updates an index value with userData. This distributes an amount of tokens equal to
-`indexValue - lastIndexValue`. See `distribute` for another way to distribute._ 
+_Updates an index value with userData. This distributes an amount of tokens equal to
+`indexValue - lastIndexValue`. See `distribute` for another way to distribute._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `indexValue` | uint128 | New TOTAL index value, this will equal the total amount distributed. |
-|  |  |  |
 | `userData` | bytes | Arbitrary user data field. |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn distribute
 
@@ -1773,23 +1347,19 @@ function distribute(
     contract ISuperToken token,
     uint32 indexId,
     uint256 amount
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Distributes tokens in a more developer friendly way than `updateIndex`. Instead of
-passing the new total index value, you pass the amount of tokens desired to be distributed._ 
+_Distributes tokens in a more developer friendly way than `updateIndex`. Instead of
+passing the new total index value, you pass the amount of tokens desired to be distributed._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `amount` | uint256 | - total number of tokens desired to be distributed
 NOTE in many cases, there can be some precision loss
      This may cause a slight difference in the amount param specified and the actual amount distributed.
@@ -1806,12 +1376,8 @@ NOTE Solidity does not support floating point numbers
 NOTE due to rounding, there may be a small amount of tokens left in the publisher's account
      This amount is equal to the 'distributionModulo' value
      // |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn distribute (w/ user data)
+## Fn distribute (w/userData)
 
 ```solidity
 function distribute(
@@ -1819,31 +1385,22 @@ function distribute(
     uint32 indexId,
     uint256 amount,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Distributes tokens in a more developer friendly way than `updateIndex` (w user data). Instead of
+_Distributes tokens in a more developer friendly way than `updateIndex` (w user data). Instead of
 passing the new total index value, this function will increase the index value by `amount`.
-This takes arbitrary user data._ 
+This takes arbitrary user data._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `amount` | uint256 | Amount by which the index value should increase. |
-|  |  |  |
 | `userData` | bytes | Arbitrary user data field. |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn approveSubscription
 
@@ -1852,31 +1409,23 @@ function approveSubscription(
     contract ISuperToken token,
     address publisher,
     uint32 indexId
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Approves a subscription to an index. The subscriber's real time balance will not update
+_Approves a subscription to an index. The subscriber's real time balance will not update
 until the subscription is approved, but once approved, the balance will be updated with
-prior distributions._ 
+prior distributions._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn approveSubscription (w/ user data)
+## Fn approveSubscription (w/userData)
 
 ```solidity
 function approveSubscription(
@@ -1884,31 +1433,22 @@ function approveSubscription(
     address publisher,
     uint32 indexId,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Approves a subscription to an index with user data. The subscriber's real time balance will not update
+_Approves a subscription to an index with user data. The subscriber's real time balance will not update
 until the subscription is approved, but once approved, the balance will be updated with
-prior distributions._ 
+prior distributions._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `userData` | bytes | Arbitrary user data field. |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn revokeSubscription
 
@@ -1917,29 +1457,21 @@ function revokeSubscription(
     contract ISuperToken token,
     address publisher,
     uint32 indexId
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Revokes a previously approved subscription._ 
+_Revokes a previously approved subscription._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn revokeSubscription (w/ user data)
+## Fn revokeSubscription (w/userData)
 
 ```solidity
 function revokeSubscription(
@@ -1947,29 +1479,20 @@ function revokeSubscription(
     address publisher,
     uint32 indexId,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Revokes a previously approved subscription. This takes arbitrary user data._ 
+_Revokes a previously approved subscription. This takes arbitrary user data._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `userData` | bytes | Arbitrary user data field. |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn updateSubscriptionUnits
 
@@ -1979,31 +1502,22 @@ function updateSubscriptionUnits(
     uint32 indexId,
     address subscriber,
     uint128 units
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Updates the units of a subscription. This changes the number of shares the subscriber holds_ 
+_Updates the units of a subscription. This changes the number of shares the subscriber holds_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address whose units are to be updated. |
-|  |  |  |
 | `units` | uint128 | New number of units the subscriber holds. |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn updateSubscriptionUnits (w/ user data)
+## Fn updateSubscriptionUnits (w/userData)
 
 ```solidity
 function updateSubscriptionUnits(
@@ -2012,32 +1526,22 @@ function updateSubscriptionUnits(
     address subscriber,
     uint128 units,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Updates the units of a subscription. This changes the number of shares the subscriber
-holds. This takes arbitrary user data._ 
+_Updates the units of a subscription. This changes the number of shares the subscriber
+holds. This takes arbitrary user data._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address whose units are to be updated. |
-|  |  |  |
 | `units` | uint128 | New number of units the subscriber holds. |
-|  |  |  |
 | `userData` | bytes | Arbitrary user data field. |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn deleteSubscription
 
@@ -2047,31 +1551,22 @@ function deleteSubscription(
     address publisher,
     uint32 indexId,
     address subscriber
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Deletes a subscription, setting a subcriber's units to zero_ 
+_Deletes a subscription, setting a subcriber's units to zero_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address whose units are to be deleted. |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn deleteSubscription (w/ user data)
+## Fn deleteSubscription (w/userData)
 
 ```solidity
 function deleteSubscription(
@@ -2080,31 +1575,21 @@ function deleteSubscription(
     uint32 indexId,
     address subscriber,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Deletes a subscription, setting a subcriber's units to zero. This takes arbitrary userdata._ 
+_Deletes a subscription, setting a subcriber's units to zero. This takes arbitrary userdata._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address whose units are to be deleted. |
-|  |  |  |
 | `userData` | bytes | Arbitrary user data field. |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn claim
 
@@ -2114,31 +1599,22 @@ function claim(
     address publisher,
     uint32 indexId,
     address subscriber
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Claims pending distribution. Subscription should not be approved_ 
+_Claims pending distribution. Subscription should not be approved_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address that receives the claim. |
-|  |  |  |
-|  |  |  |
 
- |  |  |
-
-## Fn claim (w/ user data)
+## Fn claim (w/userData)
 
 ```solidity
 function claim(
@@ -2147,31 +1623,21 @@ function claim(
     uint32 indexId,
     address subscriber,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
-
- _Claims pending distribution. Subscription should not be approved. This takes arbitrary user data._ 
+_Claims pending distribution. Subscription should not be approved. This takes arbitrary user data._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address that receives the claim. |
-|  |  |  |
 | `userData` | bytes | Arbitrary user data field. |
-|  |  |  |
-|  |  |  |
-
- |  |  |
 
 ## Fn createIndexWithCtx
 
@@ -2180,28 +1646,26 @@ function createIndexWithCtx(
     contract ISuperToken token,
     uint32 indexId,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Creates a new index with ctx.
-Meant for usage in super app callbacks_ 
+_Creates a new index with ctx.
+Meant for usage in super app callbacks_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
-| `ctx` | bytes | from super app callback |
-|  |  |  |
-|  |  |  |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn updateIndexValueWithCtx
 
@@ -2211,31 +1675,28 @@ function updateIndexValueWithCtx(
     uint32 indexId,
     uint128 indexValue,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Updates an index value with ctx. This distributes an amount of tokens equal to
+_Updates an index value with ctx. This distributes an amount of tokens equal to
 `indexValue - lastIndexValue`. See `distribute` for another way to distribute.
-Meant for usage in super app callbakcs_ 
+Meant for usage in super app callbakcs_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `indexValue` | uint128 | New TOTAL index value, this will equal the total amount distributed. |
-|  |  |  |
-| `ctx` | bytes | from super app callback |
-|  |  |  |
-|  |  |  |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn distributeWithCtx
 
@@ -2245,30 +1706,27 @@ function distributeWithCtx(
     uint32 indexId,
     uint256 amount,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Distributes tokens in a more developer friendly way than `updateIndex`.Instead of
-passing the new total index value, this function will increase the index value by `amount`._ 
+_Distributes tokens in a more developer friendly way than `updateIndex`.Instead of
+passing the new total index value, this function will increase the index value by `amount`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `amount` | uint256 | Amount by which the index value should increase. |
-|  |  |  |
-| `ctx` | bytes | from super app callback |
-|  |  |  |
-|  |  |  |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn approveSubscriptionWithCtx
 
@@ -2278,31 +1736,28 @@ function approveSubscriptionWithCtx(
     address publisher,
     uint32 indexId,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Approves a subscription to an index. The subscriber's real time balance will not update
+_Approves a subscription to an index. The subscriber's real time balance will not update
 until the subscription is approved, but once approved, the balance will be updated with
-prior distributions._ 
+prior distributions._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
-| `ctx` | bytes | from super app callback |
-|  |  |  |
-|  |  |  |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn revokeSubscriptionWithCtx
 
@@ -2312,29 +1767,26 @@ function revokeSubscriptionWithCtx(
     address publisher,
     uint32 indexId,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Revokes a previously approved subscription. Meant for usage in super apps_ 
+_Revokes a previously approved subscription. Meant for usage in super apps_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
-| `ctx` | bytes | from super app callback |
-|  |  |  |
-|  |  |  |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn updateSubscriptionUnitsWithCtx
 
@@ -2345,32 +1797,28 @@ function updateSubscriptionUnitsWithCtx(
     address subscriber,
     uint128 units,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Updates the units of a subscription. This changes the number of shares the subscriber
-holds. Meant for usage in super apps_ 
+_Updates the units of a subscription. This changes the number of shares the subscriber
+holds. Meant for usage in super apps_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address whose units are to be updated. |
-|  |  |  |
 | `units` | uint128 | New number of units the subscriber holds. |
-|  |  |  |
-| `ctx` | bytes | from super app callback |
-|  |  |  |
-|  |  |  |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn deleteSubscriptionWithCtx
 
@@ -2381,32 +1829,28 @@ function deleteSubscriptionWithCtx(
     uint32 indexId,
     address subscriber,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Deletes a subscription, setting a subcriber's units to zero.
-Meant for usage in super apps_ 
+_Deletes a subscription, setting a subcriber's units to zero.
+Meant for usage in super apps_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address whose units are to be deleted. |
-|  |  |  |
-| `ctx` | bytes | from super app callback |
-|  |  |  |
-|  |  |  |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn claimWithCtx
 
@@ -2417,32 +1861,28 @@ function claimWithCtx(
     uint32 indexId,
     address subscriber,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
-
- _Claims pending distribution. Subscription should not be approved.
-Meant for usage in super app callbacks_ 
+_Claims pending distribution. Subscription should not be approved.
+Meant for usage in super app callbacks_
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
+| :--- | :--- | :---------- |
 | `token` | contract ISuperToken | Super Token used with the index. |
-|  |  |  |
 | `publisher` | address | Publisher of the index. |
-|  |  |  |
 | `indexId` | uint32 | ID of the index. |
-|  |  |  |
 | `subscriber` | address | Subscriber address that receives the claim. |
-|  |  |  |
-| `ctx` | bytes | from super app callback |
-|  |  |  |
-|  |  |  |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn createPool
 
@@ -2451,27 +1891,25 @@ function createPool(
     contract ISuperToken token,
     address admin,
     struct PoolConfig poolConfig
-)
-    internal
+) 
+    internal 
     returns (contract ISuperfluidPool pool)
 ```
+_Creates a new Superfluid Pool._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `admin` | address |  |
-|  |  |  |
-| `poolConfig` | struct PoolConfig |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `admin` | address | The pool admin address. |
+| `poolConfig` | struct PoolConfig | The pool configuration (see PoolConfig in IGeneralDistributionAgreementV1.sol) |
 
- |  |  |
+#### Return Values
 
- GDA BASE FUNCTIONS ************************************* 
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `pool` | contract ISuperfluidPool | The address of the deployed Superfluid Pool |
 
 ## Fn updateMemberUnits
 
@@ -2481,29 +1919,28 @@ function updateMemberUnits(
     contract ISuperfluidPool pool,
     address memberAddress,
     uint128 newUnits
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Updates the units of a pool member._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `memberAddress` | address |  |
-|  |  |  |
-| `newUnits` | uint128 |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to update. |
+| `memberAddress` | address | The address of the member to update. |
+| `newUnits` | uint128 | The new units of the member. |
 
- |  |  |
+#### Return Values
 
-## Fn updateMemberUnits (w/ user data)
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | bool A boolean value indicating whether the pool was created successfully. |
+
+## Fn updateMemberUnits (w/userData)
 
 ```solidity
 function updateMemberUnits(
@@ -2512,29 +1949,27 @@ function updateMemberUnits(
     address memberAddress,
     uint128 newUnits,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Updates the units of a pool member._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `memberAddress` | address |  |
-|  |  |  |
-| `newUnits` | uint128 |  |
-|  |  |  |
-| `userData` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to update. |
+| `memberAddress` | address | The address of the member to update. |
+| `newUnits` | uint128 | The new units of the member. |
+| `userData` | bytes | User-specific data. |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the pool was created successfully. |
 
 ## Fn claimAll
 
@@ -2543,27 +1978,27 @@ function claimAll(
     contract ISuperToken token,
     contract ISuperfluidPool pool,
     address memberAddress
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Claims all tokens from the pool._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `memberAddress` | address |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to claim from. |
+| `memberAddress` | address | The address of the member to claim for. |
 
- |  |  |
+#### Return Values
 
-## Fn claimAll (w/ user data)
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the claim was successful. |
+
+## Fn claimAll (w/userData)
 
 ```solidity
 function claimAll(
@@ -2571,27 +2006,26 @@ function claimAll(
     contract ISuperfluidPool pool,
     address memberAddress,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Claims all tokens from the pool._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `memberAddress` | address |  |
-|  |  |  |
-| `userData` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to claim from. |
+| `memberAddress` | address | The address of the member to claim for. |
+| `userData` | bytes | User-specific data. |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the claim was successful. |
 
 ## Fn connectPool
 
@@ -2599,50 +2033,51 @@ function claimAll(
 function connectPool(
     contract ISuperToken token,
     contract ISuperfluidPool pool
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Connects a pool member to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to connect. |
 
- |  |  |
+#### Return Values
 
-## Fn connectPool (w/ user data)
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the connection was successful. |
+
+## Fn connectPool (w/userData)
 
 ```solidity
 function connectPool(
     contract ISuperToken token,
     contract ISuperfluidPool pool,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Connects a pool member to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `userData` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to connect. |
+| `userData` | bytes | User-specific data. |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the connection was successful. |
 
 ## Fn disconnectPool
 
@@ -2650,50 +2085,51 @@ function connectPool(
 function disconnectPool(
     contract ISuperToken token,
     contract ISuperfluidPool pool
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Disconnects a pool member from `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to disconnect. |
 
- |  |  |
+#### Return Values
 
-## Fn disconnectPool (w/ user data)
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the disconnection was successful. |
+
+## Fn disconnectPool (w/userData)
 
 ```solidity
 function disconnectPool(
     contract ISuperToken token,
     contract ISuperfluidPool pool,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Disconnects a pool member from `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `userData` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to disconnect. |
+| `userData` | bytes | User-specific data. |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the disconnection was successful. |
 
 ## Fn distributeToPool
 
@@ -2703,29 +2139,28 @@ function distributeToPool(
     address from,
     contract ISuperfluidPool pool,
     uint256 requestedAmount
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Tries to distribute `requestedAmount` amount of `token` from `from` to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `from` | address |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `requestedAmount` | uint256 |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `from` | address | The address from which to distribute tokens. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
+| `requestedAmount` | uint256 | The amount of tokens to distribute. |
 
- |  |  |
+#### Return Values
 
-## Fn distribute (w/ user data)
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the distribution was successful. |
+
+## Fn distribute (w/userData)
 
 ```solidity
 function distribute(
@@ -2734,29 +2169,27 @@ function distribute(
     contract ISuperfluidPool pool,
     uint256 requestedAmount,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Tries to distribute `requestedAmount` amount of `token` from `from` to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `from` | address |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `requestedAmount` | uint256 |  |
-|  |  |  |
-| `userData` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `from` | address | The address from which to distribute tokens. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
+| `requestedAmount` | uint256 | The amount of tokens to distribute. |
+| `userData` | bytes | User-specific data. |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the distribution was successful. |
 
 ## Fn distributeFlow
 
@@ -2766,29 +2199,28 @@ function distributeFlow(
     address from,
     contract ISuperfluidPool pool,
     int96 requestedFlowRate
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Tries to distribute flow at `requestedFlowRate` of `token` from `from` to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `from` | address |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `requestedFlowRate` | int96 |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `from` | address | The address from which to distribute tokens. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
+| `requestedFlowRate` | int96 | The flow rate of tokens to distribute. |
 
- |  |  |
+#### Return Values
 
-## Fn distributeFlow (w/ user data)
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the distribution was successful. |
+
+## Fn distributeFlow (w/userData)
 
 ```solidity
 function distributeFlow(
@@ -2797,29 +2229,27 @@ function distributeFlow(
     contract ISuperfluidPool pool,
     int96 requestedFlowRate,
     bytes userData
-)
-    internal
+) 
+    internal 
     returns (bool)
 ```
+_Tries to distribute flow at `requestedFlowRate` of `token` from `from` to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `from` | address |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `requestedFlowRate` | int96 |  |
-|  |  |  |
-| `userData` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `from` | address | The address from which to distribute tokens. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
+| `requestedFlowRate` | int96 | The flow rate of tokens to distribute. |
+| `userData` | bytes | User-specific data. |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `[0]` | bool | A boolean value indicating whether the distribution was successful. |
 
 ## Fn updateMemberUnitsWithCtx
 
@@ -2830,31 +2260,27 @@ function updateMemberUnitsWithCtx(
     address memberAddress,
     uint128 newUnits,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
+_Updates the units of a pool member._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `memberAddress` | address |  |
-|  |  |  |
-| `newUnits` | uint128 |  |
-|  |  |  |
-| `ctx` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to update. |
+| `memberAddress` | address | The address of the member to update. |
+| `newUnits` | uint128 | The new units of the member. |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
 
- GDA WITH CTX FUNCTIONS ************************************* 
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn claimAllWithCtx
 
@@ -2864,27 +2290,26 @@ function claimAllWithCtx(
     contract ISuperfluidPool pool,
     address memberAddress,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
+_Claims all tokens from the pool._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `memberAddress` | address |  |
-|  |  |  |
-| `ctx` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to claim from. |
+| `memberAddress` | address | The address of the member to claim for. |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn connectPoolWithCtx
 
@@ -2893,25 +2318,25 @@ function connectPoolWithCtx(
     contract ISuperToken token,
     contract ISuperfluidPool pool,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
+_Connects a pool member to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `ctx` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to connect. |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn disconnectPoolWithCtx
 
@@ -2920,89 +2345,85 @@ function disconnectPoolWithCtx(
     contract ISuperToken token,
     contract ISuperfluidPool pool,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
+_Disconnects a pool member from `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `ctx` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool to disconnect. |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn distributeWithCtx
 
 ```solidity
 function distributeWithCtx(
     contract ISuperToken token,
-    contract ISuperfluidPool pool,
     address from,
+    contract ISuperfluidPool pool,
     uint256 requestedAmount,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
+_Tries to distribute `requestedAmount` amount of `token` from `from` to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `from` | address |  |
-|  |  |  |
-| `requestedAmount` | uint256 |  |
-|  |  |  |
-| `ctx` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `from` | address | The address from which to distribute tokens. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
+| `requestedAmount` | uint256 | The amount of tokens to distribute. |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
 ## Fn distributeFlowWithCtx
 
 ```solidity
 function distributeFlowWithCtx(
     contract ISuperToken token,
-    contract ISuperfluidPool pool,
     address from,
+    contract ISuperfluidPool pool,
     int96 requestedFlowRate,
     bytes ctx
-)
-    internal
+) 
+    internal 
     returns (bytes newCtx)
 ```
+_Tries to distribute flow at `requestedFlowRate` of `token` from `from` to `pool`._
 
 #### Parameters
 
 | Name | Type | Description |
-| --- | --- | --- |
-|  |  |  |
-| `token` | contract ISuperToken |  |
-|  |  |  |
-| `pool` | contract ISuperfluidPool |  |
-|  |  |  |
-| `from` | address |  |
-|  |  |  |
-| `requestedFlowRate` | int96 |  |
-|  |  |  |
-| `ctx` | bytes |  |
-|  |  |  |
-|  |  |  |
+| :--- | :--- | :---------- |
+| `token` | contract ISuperToken | The Super Token address. |
+| `from` | address | The address from which to distribute tokens. |
+| `pool` | contract ISuperfluidPool | The Superfluid Pool address. |
+| `requestedFlowRate` | int96 | The flow rate of tokens to distribute. |
+| `ctx` | bytes | Context bytes (see ISuperfluid.sol for Context struct) |
 
- |  |  |
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `newCtx` | bytes | The updated context after the execution of the agreement function |
 
