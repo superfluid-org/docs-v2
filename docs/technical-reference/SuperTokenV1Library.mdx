@@ -1,14 +1,35 @@
+---
+sidebar_position: 1
+---
 # SuperTokenV1Library
 
 **Library for Token Centric Interface**
 
-Set `using for ISuperToken` in including file, and call any of these functions on an instance
-of ISuperToken.
-Note that it is important to "warm up" the cache and cache the host, cfa, ida before calling,
+The `SuperTokenV1Library` is a solidity library that allows you to interact with the Superfluid Protocol.
+It is a comprehensive library for Superfluid protocol. It includes all the functions that are
+required to interact with the Superfluid protocol. It includes functions for interacting with Money Streaming and Distributions.
+In order to have access to the library, you need to:
+
+- Import the library in your contract as such:
+
+    `import "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";`
+
+- Make sure that you include the `using` statement in your contract:
+
+    `using SuperTokenV1Library for ISuperToken;`
+
+
+:::note Note 1
+In the case of interacting with Native Super Tokens you should use `using SuperTokenV1Library for ISETH;` instead.
+:::
+
+:::note Note 2
+It is important to "warm up" the cache and cache the host, cfa, ida before calling,
 this is only applicable to Foundry tests where the vm.expectRevert() will not work as expected.
 You must use vm.startPrank(account) instead of vm.prank when executing functions if the cache
 isn't "warmed up" yet. vm.prank impersonates the account only for the first call, which will be
 used for caching.
+:::
 
 ## Fn createFlow
 
