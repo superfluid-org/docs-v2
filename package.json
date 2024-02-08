@@ -29,6 +29,7 @@
     "d3": "^7.8.5",
     "ethers": "^5.7.2",
     "prism-react-renderer": "^2.1.0",
+    "raw-loader": "^4.0.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-feather": "^2.0.10"

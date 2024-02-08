@@ -5,12 +5,14 @@ sidebar_position: 2
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CodeBlock from "@theme/CodeBlock";
+import gdaForwarder from "!!raw-loader!@site/src/abis/gdaForwarder.json";
 
 # Off-Chain
 
 ## Introduction
 
 The [GDAv1Forwarder](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/utils/GDAv1Forwarder.sol) contract is a crucial component of the Superfluid protocol, enabling users to easily interact with Instant and Streaming Distributions (_formerly known as_ General Distribution Agreement - GDA) through Super Tokens. This guide will walk you through the most important functions of the `GDAv1Forwarder.sol` contract and show you how to use them with ethers.js.
+
 
 <div>
 <details>
@@ -290,7 +292,7 @@ Install the necessary packages for either ethers.js or wagmi, depending on your 
 
 ```bash
 npm install ethers
-````
+```
 
 </TabItem> <TabItem value="wagmi">
 
@@ -339,6 +341,22 @@ const cfaForwarder = useContract({
 ```
 
 </TabItem> </Tabs>
+
+:::tip Where to find contract addresses?
+You can find the addresses of the deployed GDAv1Forwarder contracts on the [Console](https://console.superfluid.finance/) with all the addresses of all the public Superfluid contracts.
+:::
+
+:::tip Where to find the contract ABI?
+You can find the ABI of the GDAv1Forwarder contracts below:
+<div>
+<details>
+<summary>Click here to show `GDAv1Forwarder` ABI</summary>
+<p>
+<CodeBlock language="json">{gdaForwarder}</CodeBlock>
+</p>
+</details>
+</div>
+:::
 
 ## Key Functions
 
@@ -424,4 +442,4 @@ async function disconnectPool(pool, userData) {
 ```
 ---
 
-This guide provides an overview of how to interact with the GDAv1Forwarder contract using ethers.js or Wagmi. For more information, check out the [GDAv1Forwarder Technical Reference](/docs/technical-reference/CFAv1Library)
+This guide provides an overview of how to interact with the GDAv1Forwarder contract using ethers.js or Wagmi. For more information, check out the [GDAv1Forwarder Technical Reference](/docs/technical-reference/GDAv1Library)
