@@ -60,82 +60,183 @@ const fetchBlockchainBalance = async () => {
 We recommend this solution because it guarantees the most accurate result. However, it is important to note that this method is not always possible depending on your application architecture design.
 :::
 
-### Solution 2: Using `accountTokenSnapshots` from the Subgraph
+### Solution 2: Using queries from the Subgraph
 
-To accurately track Super Token balances, you can query the `accountTokenSnapshots` object from Superfluid's [Subgraph](https://console.superfluid.finance/subgraph).
+To accurately track Super Token balances, you can use the queries below to get inflows and ouflow object from Superfluid's [Subgraph](https://console.superfluid.finance/subgraph).
+
+#### Getting all the inflows for user
+```graphql
+query allReceivedStreams($receiver: String) {
+  cfaStreams: streams(where: {receiver: $receiver}) {
+    currentFlowRate
+    streamedUntilUpdatedAt
+    updatedAtTimestamp
+  }
+  gdaStreams: poolMembers(where: {account: $receiver}) {
+    pool {
+      totalUnits
+      flowRate
+      totalAmountDistributedUntilUpdatedAt
+      updatedAtTimestamp
+    }
+    units
+    totalAmountReceivedUntilUpdatedAt
+    poolTotalAmountDistributedUntilUpdatedAt
+    updatedAtTimestamp
+  }
+}
+```
+#### Getting all the outflows for user
+```graphql
+query allSentStreams($sender: String) {
+  cfaStreams: streams(where: {sender: $sender}) {
+    currentFlowRate
+    streamedUntilUpdatedAt
+    updatedAtTimestamp
+  }
+  gdaStreams: poolDistributors(where: {account: $sender}) {
+    flowRate
+    updatedAtTimestamp
+    totalAmountDistributedUntilUpdatedAt
+  }
+}
+```
 Doing this allows you to do the following:
-- Get **the balance of a user at the last time there was an event** triggered on the blockchain (eg. a stream was created or updated).
-- Get **the net flow rate of a user** at that same time.
-- Get **the timestamp** of the last time there was an event triggered on the blockchain.
+- Get **the data related to each stream a user is receiving** : This allows us to calculate the positive balance associated with each stream they receive.
+- Get **the data related to each pool where the user is connected** : This allows us to calculate the positive balance associated with each membership in a pool.
+- Get **tthe data related to each stream a user is sending** : This allows us to calculate the negative balance associated with each stream they send.
+- Get **the data related to each pool where the user is distributing** : This allows us to calculate the negative balance associated with each distribution they make.
 
-From these three pieces of information, you can calculate the balance of a user at any given time.
-The following code snippet shows a component called `RealTimeBalance` that fetches the `accountTokenSnapshots` object from the Subgraph
-and calculates the balance of a user at the current time, then it compares it to the balance of the user on the blockchain:
+:::tip How to calculate each balance?
+The rule of thumb for calculating each one of these balances is the following:
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    **The Balance = FlowRate * (CurrentTime - LastUpdatedAtTime) + StreamedUntilUpdatedAt**.
+</div>
+:::
+
+
+Once we have the balance from each stream and each pool/distribution, we can sum them up to get the net aggregated balance of a user.
+An implementation of this can be seen in the `NetBalance` component below.
 
 <div>
 <details>
-<summary>Click here to show `RealTimeBalance` component</summary>
+<summary>Click here to show `NetBalance` component</summary>
 <p>
 ```jsx
-
-const RealTimeBalance = ({liveAddress}) => {
+const NetBalance = ({ liveAddress }) => {
   const [realTimeBalance, setRealTimeBalance] = useState(null);
   const [blockchainBalance, setBlockchainBalance] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const fetchRealTimeBalance = async () => {
-    setLoading(true);
-    setError("");
+  async function fetchSubgraphBalance() {
+    setLoading(true); // Assuming setLoading is a function that updates loading state
+    setError(""); // Assuming setError is a function that clears any previous errors
     const endpoint = "https://polygon-mumbai.subgraph.x.superfluid.dev";
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://polygon-testnet.public.blastapi.io"
+    );
+    const currentTimestamp = (await provider.getBlock("latest")).timestamp;
 
-    // Updated query to use GraphQL variables
-    const query = {
-      query: `query FetchBalance($id: String!) {
-        account(id: $id) {
-          accountTokenSnapshots {
-            balanceUntilUpdatedAt
-            totalCFANetFlowRate
+    const inflowQuery = {
+      query: `query allReceivedStreams($receiver: String) {
+        cfaStreams: streams(where: {receiver: $receiver}) {
+          currentFlowRate
+          streamedUntilUpdatedAt
+          updatedAtTimestamp
+        }
+        gdaStreams: poolMembers(where: {account: $receiver}) {
+          pool {
+            totalUnits
+            flowRate
+            totalAmountDistributedUntilUpdatedAt
             updatedAtTimestamp
           }
+          units
+          totalAmountReceivedUntilUpdatedAt
+          poolTotalAmountDistributedUntilUpdatedAt
+          updatedAtTimestamp
         }
       }`,
-      variables: { id: liveAddress },
+      variables: { receiver: liveAddress },
+    };
+
+    const outflowQuery = {
+      query: `query allSentStreams($sender: String) {
+        cfaStreams: streams(where: {sender: $sender}) {
+          currentFlowRate
+          streamedUntilUpdatedAt
+          updatedAtTimestamp
+        }
+        gdaStreams: poolDistributors(where: {account: $sender}) {
+          flowRate
+          updatedAtTimestamp
+          totalAmountDistributedUntilUpdatedAt
+        }
+      }`,
+      variables: { sender: liveAddress },
     };
 
     try {
-      const response = await fetch(endpoint, {
+      const inflowResponse = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(query),
+        body: JSON.stringify(inflowQuery),
       });
 
-      const { data } = await response.json();
-      const { balanceUntilUpdatedAt, totalCFANetFlowRate, updatedAtTimestamp } =
-        data.account.accountTokenSnapshots[0];
+      const outflowResponse = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(outflowQuery),
+      });
 
-      // Fetch current time from the provider
-      const provider = new ethers.providers.JsonRpcProvider(
-        "https://polygon-testnet.public.blastapi.io"
-      );
-      const currentTime = (await provider.getBlock("latest")).timestamp;
+      const inflowData = await inflowResponse.json();
+      const outflowData = await outflowResponse.json();
 
-      // Calculate streaming balance
-      const streamingBalance =
-        totalCFANetFlowRate * (currentTime - updatedAtTimestamp);
+      let netBalance = 0;
 
-      // Convert wei to ether and calculate full balance
-      const fullBalance =
-        parseFloat(ethers.utils.formatEther(streamingBalance.toString())) +
-        parseFloat(ethers.utils.formatEther(balanceUntilUpdatedAt.toString()));
-      setRealTimeBalance(fullBalance);
+      // Calculate inflow balance
+      inflowData.data.cfaStreams.forEach((stream) => {
+        netBalance +=
+          parseInt(stream.currentFlowRate) *
+            (currentTimestamp - parseInt(stream.updatedAtTimestamp)) +
+          parseInt(stream.streamedUntilUpdatedAt);
+      });
+
+      inflowData.data.gdaStreams.forEach((pool) => {
+        const balance =
+          (parseInt(pool.units) / parseInt(pool.pool.totalUnits)) *
+            parseInt(pool.pool.flowRate) *
+            (currentTimestamp - parseInt(pool.updatedAtTimestamp)) +
+          parseInt(pool.totalAmountReceivedUntilUpdatedAt);
+        netBalance += balance;
+      });
+
+      // Calculate outflow balance (as negative)
+      outflowData.data.cfaStreams.forEach((stream) => {
+        netBalance -=
+          parseInt(stream.currentFlowRate) *
+            (currentTimestamp - parseInt(stream.updatedAtTimestamp)) +
+          parseInt(stream.streamedUntilUpdatedAt);
+      });
+
+      outflowData.data.gdaStreams.forEach((pool) => {
+        const balance =
+          parseInt(pool.flowRate) *
+            (currentTimestamp - parseInt(pool.updatedAtTimestamp)) -
+          parseInt(pool.totalAmountDistributedUntilUpdatedAt);
+        netBalance -= balance;
+      });
+
+      setRealTimeBalance(ethers.utils.formatEther(netBalance.toString())); // Assuming setRealTimeBalance is a function that updates the balance state
     } catch (error) {
-      console.error("Error fetching real-time balance:", error);
-      setError("Failed to fetch real-time balance.");
+      console.error("Error calculating net balance:", error);
+      setError("Failed to calculate net balance."); // Assuming setError is a function that sets error state
     } finally {
-      setLoading(false);
+      setLoading(false); // Assuming setLoading is a function that updates loading state
     }
-  };
+  }
 
   const fetchBlockchainBalance = async () => {
     setLoading(true);
@@ -144,7 +245,7 @@ const RealTimeBalance = ({liveAddress}) => {
       const provider = new ethers.providers.JsonRpcProvider(
         "https://polygon-testnet.public.blastapi.io"
       );
-      const contractAddress = "0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f";
+      const contractAddress = "0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f"; //fake DAIx contract address on Mumbai
       const contractABI = [
         "function transferFrom(address from, address to, uint value)",
         "function balanceOf(address owner) view returns (uint balance)",
@@ -167,13 +268,35 @@ const RealTimeBalance = ({liveAddress}) => {
   };
 
   const handleFetch = async () => {
-    await fetchRealTimeBalance();
+    await fetchSubgraphBalance();
     await fetchBlockchainBalance();
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial", justifyContent:"center"}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "Arial",
+      }}
+    >
       <h1>Real-Time Balance</h1>
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "20px",
+          borderRadius: "5px",
+          marginBottom: "20px",
+        }}
+      >
+        <p>
+          Enter your <strong>liveAddress</strong> in the code editor, then click
+          "Fetch Balance" to compare your real-time balance from the subgraph
+          with the blockchain balance.
+        </p>
+      </div>
       <button
         onClick={handleFetch}
         disabled={loading}
@@ -181,7 +304,12 @@ const RealTimeBalance = ({liveAddress}) => {
           padding: "10px",
           fontSize: "16px",
           margin: "10px 0",
-          cursor: "pointer",
+          cursor: loading ? "not-allowed" : "pointer",
+          backgroundColor: "#4CAF50",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          outline: "none",
         }}
       >
         {loading ? "Loading..." : "Fetch Balance"}
@@ -201,7 +329,7 @@ const RealTimeBalance = ({liveAddress}) => {
 </details>
 </div>
 
-Furthermore, you can use the live code block below to see the `RealTimeBalance` component in action:
+Furthermore, you can use the live code block below to see the `NetBalance` component in action:
 - Enter your `liveAddress` in the code editor.
 - Click "Fetch Balance" to compare your real-time balance from the subgraph with the blockchain balance.
 
@@ -218,6 +346,6 @@ return (
 ```
 
 :::tip About this example
-Please keep in mind that in the example above we make the assumption that the user is only using Money Streaming, but not Distributions.
-If we would like to account for Distributions as well, we would need to add the `totalApprovedSubscriptions` to the `realTimeBalance`.
+Please keep in mind that in the example above we make the assumption that the user is only using Money Streaming and Distributions in the form of the GDA,
+but not Distributions in the form of the IDA. If you are using IDA, you will need to add a new query to get the data related to each transfer a user is distributing.
 :::

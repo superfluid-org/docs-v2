@@ -231,64 +231,119 @@ const FlowSenderComponent = ({ contractAddress }) => {
   );
 };
 
-const RealTimeBalance = ({liveAddress}) => {
+const RealTimeBalance = ({ liveAddress }) => {
   const [realTimeBalance, setRealTimeBalance] = useState(null);
   const [blockchainBalance, setBlockchainBalance] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const fetchRealTimeBalance = async () => {
-    setLoading(true);
-    setError("");
+  async function fetchSubgraphBalance() {
+    setLoading(true); // Assuming setLoading is a function that updates loading state
+    setError(""); // Assuming setError is a function that clears any previous errors
     const endpoint = "https://polygon-mumbai.subgraph.x.superfluid.dev";
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://polygon-testnet.public.blastapi.io"
+    );
+    const currentTimestamp = (await provider.getBlock("latest")).timestamp;
 
-    // Updated query to use GraphQL variables
-    const query = {
-      query: `query FetchBalance($id: String!) {
-        account(id: $id) {
-          accountTokenSnapshots {
-            balanceUntilUpdatedAt
-            totalCFANetFlowRate
+    const inflowQuery = {
+      query: `query allReceivedStreams($receiver: String) {
+        cfaStreams: streams(where: {receiver: $receiver}) {
+          currentFlowRate
+          streamedUntilUpdatedAt
+          updatedAtTimestamp
+        }
+        gdaStreams: poolMembers(where: {account: $receiver}) {
+          pool {
+            totalUnits
+            flowRate
+            totalAmountDistributedUntilUpdatedAt
             updatedAtTimestamp
           }
+          units
+          totalAmountReceivedUntilUpdatedAt
+          poolTotalAmountDistributedUntilUpdatedAt
+          updatedAtTimestamp
         }
       }`,
-      variables: { id: liveAddress },
+      variables: { receiver: liveAddress },
+    };
+
+    const outflowQuery = {
+      query: `query allSentStreams($sender: String) {
+        cfaStreams: streams(where: {sender: $sender}) {
+          currentFlowRate
+          streamedUntilUpdatedAt
+          updatedAtTimestamp
+        }
+        gdaStreams: poolDistributors(where: {account: $sender}) {
+          flowRate
+          updatedAtTimestamp
+          totalAmountDistributedUntilUpdatedAt
+        }
+      }`,
+      variables: { sender: liveAddress },
     };
 
     try {
-      const response = await fetch(endpoint, {
+      const inflowResponse = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(query),
+        body: JSON.stringify(inflowQuery),
       });
 
-      const { data } = await response.json();
-      const { balanceUntilUpdatedAt, totalCFANetFlowRate, updatedAtTimestamp } =
-        data.account.accountTokenSnapshots[0];
+      const outflowResponse = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(outflowQuery),
+      });
 
-      // Fetch current time from the provider
-      const provider = new ethers.providers.JsonRpcProvider(
-        "https://polygon-testnet.public.blastapi.io"
-      );
-      const currentTime = (await provider.getBlock("latest")).timestamp;
+      const inflowData = await inflowResponse.json();
+      const outflowData = await outflowResponse.json();
 
-      // Calculate streaming balance
-      const streamingBalance =
-        totalCFANetFlowRate * (currentTime - updatedAtTimestamp);
+      let netBalance = 0;
 
-      // Convert wei to ether and calculate full balance
-      const fullBalance =
-        parseFloat(ethers.utils.formatEther(streamingBalance.toString())) +
-        parseFloat(ethers.utils.formatEther(balanceUntilUpdatedAt.toString()));
-      setRealTimeBalance(fullBalance);
+      // Calculate inflow balance
+      inflowData.data.cfaStreams.forEach((stream) => {
+        netBalance +=
+          parseInt(stream.currentFlowRate) *
+            (currentTimestamp - parseInt(stream.updatedAtTimestamp)) +
+          parseInt(stream.streamedUntilUpdatedAt);
+      });
+
+      inflowData.data.gdaStreams.forEach((pool) => {
+        const balance =
+          (parseInt(pool.units) / parseInt(pool.pool.totalUnits)) *
+            parseInt(pool.pool.flowRate) *
+            (currentTimestamp - parseInt(pool.updatedAtTimestamp)) +
+          parseInt(pool.totalAmountReceivedUntilUpdatedAt);
+        netBalance += balance;
+      });
+
+      // Calculate outflow balance (as negative)
+      outflowData.data.cfaStreams.forEach((stream) => {
+        netBalance -=
+          parseInt(stream.currentFlowRate) *
+            (currentTimestamp - parseInt(stream.updatedAtTimestamp)) +
+          parseInt(stream.streamedUntilUpdatedAt);
+      });
+
+      outflowData.data.gdaStreams.forEach((pool) => {
+        const balance =
+          parseInt(pool.flowRate) *
+            (currentTimestamp - parseInt(pool.updatedAtTimestamp)) -
+          parseInt(pool.totalAmountDistributedUntilUpdatedAt);
+        netBalance -= balance;
+      });
+
+      setRealTimeBalance(ethers.utils.formatEther(netBalance.toString())); // Assuming setRealTimeBalance is a function that updates the balance state
     } catch (error) {
-      console.error("Error fetching real-time balance:", error);
-      setError("Failed to fetch real-time balance.");
+      console.error("Error calculating net balance:", error);
+      setError("Failed to calculate net balance."); // Assuming setError is a function that sets error state
     } finally {
-      setLoading(false);
+      setLoading(false); // Assuming setLoading is a function that updates loading state
     }
-  };
+  }
 
   const fetchBlockchainBalance = async () => {
     setLoading(true);
@@ -320,47 +375,55 @@ const RealTimeBalance = ({liveAddress}) => {
   };
 
   const handleFetch = async () => {
-    await fetchRealTimeBalance();
+    await fetchSubgraphBalance();
     await fetchBlockchainBalance();
   };
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      fontFamily: 'Arial' 
-    }}>
-      <h1>Real-Time Balance</h1>
-      <div style={{ 
-        border: '1px solid #ccc', 
-        padding: '20px', 
-        borderRadius: '5px', 
-        marginBottom: '20px', 
-      }}>
-        <p>Enter your <strong>liveAddress</strong> in the code editor, then click "Fetch Balance" to compare your real-time balance from the subgraph with the blockchain balance.</p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "Arial",
+      }}
+    >
+      <h1>Net Balance</h1>
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "20px",
+          borderRadius: "5px",
+          marginBottom: "20px",
+        }}
+      >
+        <p>
+          Enter your <strong>liveAddress</strong> in the code editor, then click
+          "Fetch Balance" to compare your net balance from the subgraph
+          with the blockchain balance.
+        </p>
       </div>
       <button
         onClick={handleFetch}
         disabled={loading}
         style={{
-          padding: '10px',
-          fontSize: '16px',
-          margin: '10px 0',
-          cursor: loading ? 'not-allowed' : 'pointer',
-          backgroundColor: '#4CAF50',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          outline: 'none',
+          padding: "10px",
+          fontSize: "16px",
+          margin: "10px 0",
+          cursor: loading ? "not-allowed" : "pointer",
+          backgroundColor: "#4CAF50",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          outline: "none",
         }}
       >
         {loading ? "Loading..." : "Fetch Balance"}
       </button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {realTimeBalance !== null && (
-        <p>Real-Time Balance from Subgraph: {realTimeBalance} fake DAIx</p>
+        <p>Net Balance from Subgraph: {realTimeBalance} fake DAIx</p>
       )}
       {blockchainBalance !== null && (
         <p>Balance from Blockchain: {blockchainBalance} fake DAIx</p>
