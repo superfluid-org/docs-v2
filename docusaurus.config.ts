@@ -126,7 +126,7 @@ const config: Config = {
             },
             {
               label: 'Legacy',
-              href: 'https://v1.docs.superfluid.finance/',
+              href: 'https://superfluid.gitbook.io/',
             },
           ],
         }
