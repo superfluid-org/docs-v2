@@ -1,0 +1,5 @@
+{
+    "redirects": [
+      { "source": "/superfluid/protocol-overview/in-depth-overview", "destination": "/docs/concepts/superfluid", "permanent": true }
+    ]
+  }

@@ -252,17 +252,6 @@ const config: Config = {
     },
     plugins: [
       ["@saucelabs/theme-github-codeblock", {}],
-      [
-        "@docusaurus/plugin-client-redirects",
-        {
-          redirects: [
-            {
-              to: "/docs/concepts/superfluid",
-              from: "/superfluid/protocol-overview/in-depth-overview",
-            },
-          ],
-        },
-      ],
     ],
   } satisfies Preset.ThemeConfig,
 };
