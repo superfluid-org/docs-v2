@@ -1,5 +1,9 @@
 {
     "redirects": [
-      { "source": "/superfluid/protocol-overview/in-depth-overview", "destination": "/docs/concepts/superfluid", "permanent": true }
+      { "source": "/superfluid/protocol-overview/in-depth-overview", "destination": "/docs/concepts/superfluid", "permanent": true },
+      { "source": "/superfluid/developers/interactive-tutorials/money-streaming-1", "destination": "/docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain", "permanent": true },
+      { "source": "/superfluid/developers/solidity-examples/solidity-libraries/cfav1-library#the-cfa-library", "destination": "/docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-on-chain", "permanent": true },
+      { "source": "/superfluid/developers/networks", "destination": "https://console.superfluid.finance/"},
+      { "source": "/superfluid/developers/sdk-initialization/sdk-core", "destination": "/docs/sdk/overview", "permanent": true}
     ]
   }
