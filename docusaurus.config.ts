@@ -251,30 +251,12 @@ const config: Config = {
       [
         '@docusaurus/plugin-client-redirects',
         {
-          fromExtensions: ['html', 'htm'], // /myPage.html -> /myPage
-          toExtensions: ['exe', 'zip'], // /myAsset -> /myAsset.zip (if latter exists)
           redirects: [
-            // /docs/oldDoc -> /docs/newDoc
             {
-              to: '/docs/newDoc',
-              from: '/docs/oldDoc',
-            },
-            // Redirect from multiple old paths to the new path
-            {
-              to: '/docs/newDoc2',
-              from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
+              to: '/docs/concepts/superfluid',
+              from: '/superfluid/protocol-overview/in-depth-overview',
             },
           ],
-          createRedirects(existingPath) {
-            if (existingPath.includes('/community')) {
-              // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
-              return [
-                existingPath.replace('/community', '/docs/team'),
-                existingPath.replace('/community', '/docs/support'),
-              ];
-            }
-            return undefined; // Return a falsy value: no redirect created
-          },
         },
       ],
     ],
