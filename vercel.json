@@ -1,9 +1,36 @@
 {
   "redirects": [
-    { "source": "/superfluid/", "destination": "/", "permanent": true },
+    { "source": "/superfluid/", "destination": "/#", "permanent": true },
     { "source": "/superfluid/protocol-overview/what-is-superfluid", "destination": "/docs/concepts/superfluid", "permanent": true },
     { "source": "/superfluid/protocol-overview/in-depth-overview/(.*)", "destination": "/docs/category/overview" },
-    { "source": "/superfluid/protocol-overview/use-cases/(.*)", "destination": "/docs/category/use-cases" }
-
+    { "source": "/superfluid/protocol-overview/use-cases/(.*)", "destination": "/docs/category/use-cases" },
+    { "source": "/superfluid/protocol-overview/glossary-of-terms", "destination": "/docs/concepts/glossary", "permanent": true },
+    { "source": "/superfluid/developers/quickstart", "destination": "/docs/protocol/quickstart", "permanent": true },
+    { "source": "superfluid/developers/super-tokens/(.*)", "destination": "/docs/category/super-tokens" },
+    { "source": "/superfluid/developers/constant-flow-agreement-cfa/(.*)", "destination": "/docs/category/money-streaming" },
+    { "source": "/superfluid/developers/constant-flow-agreement-cfa/(.*)", "destination": "/docs/category/money-streaming" },
+    { "source": "/superfluid/developers/instant-distribution-agreement-ida/(.*)", "destination": "/docs/category/distributions" },
+    { "source": "/superfluid/developers/super-apps/(.*)", "destination": "/docs/category/super-apps" },
+    { "source": "/superfluid/developers/batch-calls/(.*)", "destination": "/docs/sdk/batch-calls" },
+    { "source": "/superfluid/developers/automations/(.*)", "destination": "/docs/category/automations" },
+    { "source": "/superfluid/developers/integration-guides/(.*)", "destination": "/docs/protocol/quickstart" },
+    { "source": "/superfluid/developers/integration-guides/(.*)", "destination": "/docs/protocol/quickstart" },
+    { "source": "/superfluid/developers/superfluid-subscriptions/(.*)", "destination": "https://checkout-docs.superfluid.finance/" },
+    { "source": "/superfluid/developers/sdk-core/(.*)", "destination": "/docs/sdk/overview" },
+    { "source": "/superfluid/developers/solidity-examples/(.*)", "destination": "/docs/protocol/quickstart" },
+    { "source": "/superfluid/developers/testing-guide/(.*)", "destination": "/docs/protocol/money-streaming/guides/testing" },
+    { "source": "/superfluid/developers/subgraph", "destination": "/docs/protocol/money-streaming/guides/subgraph", "permanent": true },
+    { "source": "/superfluid/developers/reference-documentations/(.*)", "destination": "/docs/technical-reference/Architecture" },
+    { "source": "/superfluid/developers/networks", "destination": "https://console.superfluid.finance/ethereum/protocol" },
+    { "source": "/superfluid/sentinels/liquidations-and-toga", "destination": "/docs/protocol/advanced-topics/solvency/liquidations-and-toga", "permanent": true },
+    { "source": "/superfluid/sentinels/running-a-sentinel", "destination": "/docs/protocol/advanced-topics/solvency/running-a-sentinnel", "permanent": true },
+    { "source": "/superfluid/sentinels/solvency-dashboard", "destination": "/docs/protocol/advanced-topics/solvency/solvency-dashboard", "permanent": true },
+    { "source": "/superfluid/resources/superfluid-wave-pool", "destination": "https://www.superfluid.finance/wave-pool"},
+    { "source": "/superfluid/resources/superfluid-on-ethereum-mainnet", "destination": "/docs/protocol/advanced-topics/solvency/liquidations-and-toga", "permanent": true },
+    { "source": "/superfluid/resources/bounty-program", "destination": "/docs/protocol/contribute/bounty-program", "permanent": true },
+    { "source": "/superfluid/resources/security-and-bug-bounties", "destination": "/docs/protocol/contribute/bug-bounties", "permanent": true },
+    { "source": "/superfluid/resources/token-dashboard-submission", "destination": "/docs/protocol/contribute/submit-token-dashboard", "permanent": true },
+    { "source": "/superfluid/resources/learn-about-ethereum", "destination": "https://ethereum.org/developers"},
+    { "source": "/superfluid/resources/code-of-conduct", "destination": "https://github.com/superfluid-finance/protocol-monorepo?tab=coc-ov-file"}
   ]
 }
