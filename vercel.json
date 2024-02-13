@@ -33,7 +33,7 @@
     { "source": "/superfluid/resources/token-dashboard-submission", "destination": "/docs/protocol/contribute/submit-token-dashboard", "permanent": true },
     { "source": "/superfluid/resources/learn-about-ethereum", "destination": "https://ethereum.org/developers"},
     { "source": "/superfluid/resources/code-of-conduct", "destination": "https://github.com/superfluid-finance/protocol-monorepo?tab=coc-ov-file"},
-    { "source": "/superfluid/docs/subgraph", "destination": "/docs/protocol/money-streaming/guides/subgraph", "permanent": true }
-
+    { "source": "/superfluid/docs/subgraph", "destination": "/docs/protocol/money-streaming/guides/subgraph", "permanent": true },
+    { "source": "superfluid/protocol-developers(.*)", "destination": "/docs/protocol/quickstart" }
   ]
 }
