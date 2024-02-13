@@ -1,6 +1,6 @@
 {
   "redirects": [
-    { "source": "/superfluid/", "destination": "/#", "permanent": true },
+    { "source": "/superfluid", "destination": "/#", "permanent": true },
     { "source": "/superfluid/protocol-overview/what-is-superfluid", "destination": "/docs/concepts/superfluid", "permanent": true },
     { "source": "/superfluid/protocol-overview/in-depth-overview/(.*)", "destination": "/docs/category/overview" },
     { "source": "/superfluid/protocol-overview/use-cases/(.*)", "destination": "/docs/category/use-cases" },
