@@ -73,7 +73,12 @@ This way, you can be sure that the flow rate per unit will always be significant
 
 ## Important Functions
 
-Here are some of the most important functions provided by `SuperTokenV1Library.sol` for interacting with Superfluid pools:
+Here are some of the most important functions provided by [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) for interacting with Superfluid pools:
+
+:::note Reminder
+These functions are meant to be called from contracts that import `SuperTokenV1Library.sol`
+and are not directly accessible as external calls on the blockchain.
+:::
 
 ### createPool
 
@@ -91,8 +96,8 @@ struct PoolConfig {
     bool distributionFromAnyAddress;
 }
 ```
-`transferabilityForUnitsOwner`: If true, the pool members can transfer their owned units, else, only the pool admin can manipulate the units for pool members
-`distributionFromAnyAddress`: If true, anyone can execute distributions via the pool, else, only the pool admin can execute distributions via the pool
+- `transferabilityForUnitsOwner`: If true, the pool members can transfer their owned units, else, only the pool admin can manipulate the units for pool members
+- `distributionFromAnyAddress`: If true, anyone can execute distributions via the pool, else, only the pool admin can execute distributions via the pool
 
 
 ### updateMemberUnits
@@ -124,13 +129,19 @@ function connectPool(ISuperToken token, ISuperfluidPool pool)
 
 Connects a pool member to a pool.
 
+:::tip About pool connections
+The pool member needs to connect to a pool before the distribution balance is reflected in their net balance.
+If the disribution starts before the user is connected to the pool, the user will still receive the tokens
+when they connect to the pool eventually.
+:::
+
 ### disconnectPool
 
 ```solidity
 function disconnectPool(ISuperToken token, ISuperfluidPool pool)
 ```
 
-Connects a pool member from a pool.
+Disconnects a pool member from a pool.
 
 ### distributeToPool
 
@@ -139,8 +150,6 @@ function distributeToPool(ISuperToken token, address from, ISuperfluidPool pool,
 ```
 
 Distributes a specified amount of tokens to the pool, to be shared among members according to their units.
-
-<Admonition type="note"> These functions are meant to be called from contracts that import `SuperTokenV1Library.sol` and are not directly accessible as external calls on the blockchain. </Admonition>
 
 ## Example Usage
 

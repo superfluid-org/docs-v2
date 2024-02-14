@@ -24,7 +24,7 @@ In the case of interacting with Native Super Tokens you should use `using SuperT
 :::
 
 :::note Note 2
-It is important to "warm up" the cache and cache the host, cfa, ida before calling,
+It is important to "warm up" the cache and cache the `host`, `cfa`, `gda` before calling,
 this is only applicable to Foundry tests where the vm.expectRevert() will not work as expected.
 You must use vm.startPrank(account) instead of vm.prank when executing functions if the cache
 isn't "warmed up" yet. vm.prank impersonates the account only for the first call, which will be
