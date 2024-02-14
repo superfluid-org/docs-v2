@@ -21,7 +21,7 @@ export default function NotFoundContent({className}) {
               We just transitioned to a new version of our technical documentation. If you cannot find the content you were looking for,
               please use the search function or check out our 
             </Translate>
-             <a href="https://superfluid.gitbook.io"> legacy docs</a>.
+             <a href="https://superfluid.gitbook.io" target="_blank"> legacy docs</a>.
           </p>
           <p>
             <Translate
