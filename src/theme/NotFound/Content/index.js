@@ -18,15 +18,15 @@ export default function NotFoundContent({className}) {
             <Translate
               id="theme.NotFound.p1"
               description="The first paragraph of the 404 page">
-              We just transitioned to a new version of our technical documentation.
+              We just transitioned to a new version of our technical documentation. If you cannot find the content you were looking for,
+              please use the search function or check out our 
             </Translate>
+             <a href="https://superfluid.gitbook.io"> legacy docs</a>.
           </p>
           <p>
             <Translate
               id="theme.NotFound.p2"
               description="The 2nd paragraph of the 404 page">
-              If you cannot find the content you were looking for,
-              please use the search function or check out our Legacy Docs: https://superfluid.gitbook.io .
               Thank you for understanding!
             </Translate>
           </p>
