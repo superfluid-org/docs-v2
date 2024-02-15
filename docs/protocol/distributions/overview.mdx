@@ -15,10 +15,17 @@ import TabItem from '@theme/TabItem';
 
 ## Introduction
 
-Distributions allow for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable. There are two types of Distributions:
+Distributions is a Superfluid primitive that allows scalable are one-to-many or many-to-many transfer of value, in the form of discreet transfers or [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
+Superfluid's implementation of this concept allows for the creation of **Pools** with a designated **pool admin** who manages **units** for **pool members**.
+Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable.
+We make the difference between two types of Distributions:
 
-- **Instant Distributions**: They allow one transaction distribution to any number of receivers with a fixed gas cost.
-- **Streaming Distributions**: They allow for continuous distribution of funds to receivers through [Money Streaming](../money-streaming/overview.mdx) to a Pool.
+- **Instant Distribution**: They allow one discreet transfer of Super Tokens to any number of receivers with a fixed gas cost.
+- **Streaming Distribution**: They allow for continuous distribution of funds to receivers through [Money Streaming](/docs/protocol/money-streaming/overview.mdx) to a Pool.
+
+:::note About Pools
+The same pool can be used to distribute any Super Token, be it for Instant or Streaming Distributions.
+:::
 
 ---
 <Tabs defaultValue="instant" values={[
@@ -117,3 +124,8 @@ Pool admins manage units and distributions, while members receive distributions 
 - **Pool Administration**: Admins have control over unit management and token distribution.
 - **Member Participation**: Members receive distributions proportionate to their units.
 - **ERC20 Compatibility**: The Pool interacts seamlessly with ERC20 standards.
+
+## Learn More about Disribution Pools
+- [What is a Distribution Pool?](/docs/protocol/distributions/guides/pools.mdx#what-is-a-pool)
+- [Important Pools related Functions](/docs/protocol/distributions/guides/pools#important-functions)
+- [Example: Advertisement Auction DApp](/docs/protocol/distributions/examples/example1)

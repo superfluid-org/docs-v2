@@ -4,9 +4,18 @@ sidebar_position: 1
 import Admonition from '@theme/Admonition';
 import PoolsVisualization from '@site/src/components/Visualizations/PoolStreamVis';
 
-# Pools
+# Distribution Pools
 
-Superfluid's [`SuperTokenV1Library.sol`](/docs/technical-reference/intro) is a comprehensive library that enables interactions with all of the Superfluid components (including Pools) through the SuperToken interface. In this page we will show you the most relevant functions from this library to interact with Pools through the Super Token interface.
+In this page we will explain Distribution Pools and show you the most relevant ways to interact with them through the Super Token interface.
+To do this, we will go through some key concepts, and show you how to leverage Superfluid's [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) for your Distribution Pools smart contracts.
+
+:::note About `SuperTokenV1Library.sol`
+The [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) is a comprehensive library that enables interactions with all of the Superfluid components (including Pools) through the SuperToken interface.
+:::
+
+:::warning About the General Distributions Agreement - GDA
+At times, we use "Distribution Pools" or the "General Distributions Agreement (GDA)" interchangeably due to "GDA" being the name of the implmentation in our [codebase](https://github.com/superfluid-finance/protocol-monorepo). 
+:::
 
 ## What is a Pool?
 
@@ -21,7 +30,7 @@ A pool is a smart contract that facilitates the distribution of tokens to multip
 
 :::note
 
-The Superfluid Pool implements basic ERC20 functionality, allowing it to interact seamlessly with [ERC20](https://docs.openzeppelin.com/contracts/4.x/erc20) standards.
+The Superfluid pool implements basic ERC20 functionality, allowing it to interact seamlessly with [ERC20](https://docs.openzeppelin.com/contracts/4.x/erc20) standards.
 This allows you to interact with the pool units as if they were ERC20 tokens, including transferring them to other addresses, if it is allowed by the pool configuration.
 Check the [next section](#important-functions) for more information on pool configurations.
 
@@ -158,25 +167,37 @@ Here's how you might use these functions within a smart contract to set up and m
 ```solidity
 // Assume ISuperToken and SuperfluidPool interfaces are imported and available.
 
-contract MyContract {
+contract MyPool {
+    Using SuperTokenV1Library for ISuperToken;
     ISuperToken private superToken;
     ISuperfluidPool private pool;
+    PoolConfig private poolConfig = PoolConfig({
+        transferabilityForUnitsOwner: true,
+        distributionFromAnyAddress: true
+    });
 
     constructor(ISuperToken _superToken) {
         superToken = _superToken;
-        pool = SuperTokenV1Library.createPool(_superToken, address(this), poolConfig);
+        pool = superToken.createPool(address(this), poolConfig);
     }
 
-    function addMember(address member, uint128 units) public {
-        superToken.updateMemberUnits(_superToken, _pool, member, units);
+    // Use updateMemberUnits to assign units to a member
+    function updateMemberUnits(address member, uint128 units) public {
+        superToken.updateMemberUnits(pool, member, units);
     }
 
     function distribute(uint256 amount) public {
-        superToken.distributeToPool(_superToken, address(this), _pool, amount);
+        superToken.distributeToPool(address(this), pool, amount);
+    }
+
+    function distributeFlow(uint256 amount) public {
+        superToken.distributeFlow(address(this), pool, amount);
     }
 }
 ```
 
-In this example, `MyContract` creates a pool, adds a member, and distributes tokens using the functions from `SuperTokenV1Library.sol`.
+In this example, `MyPool` creates a pool, adds a member, and makes an Instant Distribution (discreet transfer - through `distribute`) and a Streaming Distribution (continuous flow - through `distributeFlow`) using the functions from `SuperTokenV1Library.sol`.
 
-<Admonition type="info"> For more detailed information on the implementation and usage of `SuperTokenV1Library.sol`, refer to the [Technical Reference](/docs/technical-reference/SuperTokenV1Library). </Admonition> 
+:::info Learn more about the `SuperTokenV1Library`
+For more detailed information on the implementation and usage of `SuperTokenV1Library.sol`, refer to the [Technical Reference](/docs/technical-reference/SuperTokenV1Library).
+:::

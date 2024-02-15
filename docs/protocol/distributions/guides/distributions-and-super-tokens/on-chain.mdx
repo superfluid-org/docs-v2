@@ -6,14 +6,25 @@ import Admonition from '@theme/Admonition';
 
 # On-chain
 
-Building on top of the Superfluid protocol involves interacting with Super Tokens and Distributions, which are essential concepts within the Superfluid ecosystem. Distributions, sometimes known as the General Distribution Agreement (GDA), allow for scalable and efficient one-to-many token distributions at a fixed gas cost.
+Building on top of the Superfluid's Distribution Pools protocol involves interacting with Super Tokens. Remember, Superfluid is a token-centric protocol, and all of the primitives are centered around [Super Tokens](/docs/protocol/super-tokens/overview).
+Distribution Pools allow for scalable and efficient one-to-many token distributions at a fixed gas cost.
 
-## Importance of Distributions
+:::warning About the General Distributions Agreement
+At times, we use "Distribution Pools" or the "General Distributions Agreement" (GDA) interchangeably.
+The GDA is the name of the impelmentation in our codebase. If you are interesed in the technical details, you can find the full Superfluid Architecture [here](/docs/technical-reference/Architecture).
+:::
 
-Distributions are at the core of Superfluid's functionality, enabling a multitude of applications such as subscription services, salary payments, and rewards distribution. They are designed to be flexible, allowing for both instant and streaming distributions.
+## Importance of Distribution Pools
+
+Distribution Pools are at the core of Superfluid's functionality, enabling a multitude of applications such as subscription services, salary payments, and rewards distribution. They are designed to be flexible, allowing for both instant and streaming distributions.
 
 - **Instant Distributions**: Allow for a one-time distribution of a specified amount of tokens to all members of a pool instantly.
 - **Streaming Distributions**: Enable a continuous flow of tokens to pool members over time.
+
+:::note About Pools
+The same pool can be used to distribute any Super Token, be it for Instant or Streaming Distributions.
+:::
+
 
 ## Key Functions of SuperTokenV1Library.sol
 
