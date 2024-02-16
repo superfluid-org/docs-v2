@@ -3,8 +3,8 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: "Superfluid Docs",
-  tagline: "Docs but they hyper super fluid",
+  title: "Superfluid | Stream Money Every Second",
+  tagline: "Superfluid is the leading asset streaming protocol that brings subscriptions, salaries and rewards to DAOs and crypto-native businesses.",
   favicon: "img/favicon.ico",
   themes: [
     "@docusaurus/theme-live-codeblock",
@@ -67,9 +67,9 @@ const config: Config = {
     },
     image: "img/docusaurus-social-card.png",
     navbar: {
-      title: "Docs",
+      title: "Superfluid Docs | Stream Money Every Second",
       logo: {
-        alt: "My Site Logo",
+        alt: "Superfluid Logo",
         src: "img/logo-black.svg",
         srcDark: "img/logo.svg",
       },
