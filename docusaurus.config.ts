@@ -65,7 +65,7 @@ const config: Config = {
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
-    image: "img/docusaurus-social-card.png",
+    image: "img/superfluid-social-card.png",
     navbar: {
       title: "Docs",
       logo: {
