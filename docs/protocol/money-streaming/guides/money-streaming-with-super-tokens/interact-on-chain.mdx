@@ -12,11 +12,16 @@ import CodeBlock from '@theme/CodeBlock';
 This guide delves into the specifics of Superfluid's smart contract functions, offering step-by-step guidance and practical insights for developers
 looking to integrate Superfluid Money Streaming into their applications.
 
+Building on top of the Superfluid's Money Streaming involves interacting with Super Tokens.
+Remember, Superfluid is a token-centric protocol, and all of the primitives are centered around [Super Tokens](/docs/protocol/super-tokens/overview).
+
+When interacting with Super Tokens on-chain, you can use the Superfluid's [SuperTokenV1Library](/docs/technical-reference/SuperTokenV1Library) to access the core functions.
+
 ## Direct Interaction Functions
 
 ### Read functions
 
-These functions allow direct interactions with Super Tokens, providing real-time information about ongoing flows.
+These functions from the [SuperTokenV1Library](/docs/technical-reference/SuperTokenV1Library) allow direct interactions with Super Tokens, providing real-time information about ongoing flows.
 
 <Tabs>
   <TabItem value="getFlowInfo" label="getFlowInfo">
