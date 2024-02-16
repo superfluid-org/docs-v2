@@ -67,7 +67,7 @@ const config: Config = {
     },
     image: "img/docusaurus-social-card.png",
     navbar: {
-      title: "Superfluid Docs | Stream Money Every Second",
+      title: "Docs",
       logo: {
         alt: "Superfluid Logo",
         src: "img/logo-black.svg",
