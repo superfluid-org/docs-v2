@@ -35,6 +35,7 @@
     { "source": "/superfluid/resources/code-of-conduct", "destination": "https://github.com/superfluid-finance/protocol-monorepo?tab=coc-ov-file"},
     { "source": "/superfluid/docs/subgraph", "destination": "/docs/protocol/money-streaming/guides/subgraph", "permanent": true },
     { "source": "/superfluid/protocol-developers(.*)", "destination": "/docs/protocol/quickstart"},
-    { "source": "/superfluid/developers/interactive-tutorials/money-streaming-1", "destination": "/docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain", "permanent": true }
+    { "source": "/superfluid/developers/interactive-tutorials/money-streaming-1", "destination": "/docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain", "permanent": true },
+    { "source": "/docs/protocol/advanced-topics/advanced-money-streaming/building-batch-streams-safe", "destination": "/docs/protocol/advanced-topics/batching/building-batch-streams-safe", "permanent": true }
   ]
 }
