@@ -400,8 +400,8 @@ const RealTimeBalance = ({ liveAddress }) => {
       >
         <p>
           Enter your <strong>liveAddress</strong> in the code editor, then click
-          "Fetch Balance" to compare your net balance from the subgraph
-          with the blockchain balance.
+          "Fetch Balance" to compare your net balance from the subgraph with the
+          blockchain balance.
         </p>
       </div>
       <button
@@ -432,10 +432,214 @@ const RealTimeBalance = ({ liveAddress }) => {
   );
 };
 
+const MacroForwarderComponent = ({
+  macroForwarderAddress,
+  userDefinedMacroAddress,
+}) => {
+  const [walletAddress, setWalletAddress] = useState("");
+  const [superToken, setSuperToken] = useState("");
+  const [receivers, setReceivers] = useState("");
+  const [message, setMessage] = useState("");
+
+  // ABI for MacroForwarder contract including `runMacro`
+  const macroForwarderABI = [
+    {
+      inputs: [
+        { internalType: "contract ISuperfluid", name: "host", type: "address" },
+      ],
+      stateMutability: "nonpayable",
+      type: "constructor",
+    },
+    {
+      inputs: [
+        {
+          internalType: "contract IUserDefinedMacro",
+          name: "m",
+          type: "address",
+        },
+        { internalType: "bytes", name: "params", type: "bytes" },
+      ],
+      name: "buildBatchOperations",
+      outputs: [
+        {
+          components: [
+            { internalType: "uint32", name: "operationType", type: "uint32" },
+            { internalType: "address", name: "target", type: "address" },
+            { internalType: "bytes", name: "data", type: "bytes" },
+          ],
+          internalType: "struct ISuperfluid.Operation[]",
+          name: "operations",
+          type: "tuple[]",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "contract IUserDefinedMacro",
+          name: "m",
+          type: "address",
+        },
+        { internalType: "bytes", name: "params", type: "bytes" },
+      ],
+      name: "runMacro",
+      outputs: [{ internalType: "bool", name: "", type: "bool" }],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+  ];
+
+  // ABI for IUserDefinedMacro including `getParams`
+  const iUserDefinedMacroABI = [
+    {
+      inputs: [
+        {
+          internalType: "contract ISuperfluid",
+          name: "host",
+          type: "address",
+        },
+        { internalType: "bytes", name: "params", type: "bytes" },
+        { internalType: "address", name: "msgSender", type: "address" },
+      ],
+      name: "buildBatchOperations",
+      outputs: [
+        {
+          components: [
+            { internalType: "uint32", name: "operationType", type: "uint32" },
+            { internalType: "address", name: "target", type: "address" },
+            { internalType: "bytes", name: "data", type: "bytes" },
+          ],
+          internalType: "struct ISuperfluid.Operation[]",
+          name: "operations",
+          type: "tuple[]",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+  ];
+
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        setWalletAddress(address);
+        console.log("Connected to MetaMask");
+      } catch (error) {
+        console.error("Error connecting to MetaMask", error);
+        setMessage("Error connecting to MetaMask");
+      }
+    } else {
+      console.log("Ethereum wallet is not connected or not installed.");
+      setMessage("Ethereum wallet is not connected or not installed.");
+    }
+  };
+
+  const executeMacro = async () => {
+    try {
+      if (!walletAddress) throw new Error("Wallet not connected.");
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+
+      const userDefinedMacroContract = new ethers.Contract(
+        userDefinedMacroAddress,
+        iUserDefinedMacroABI,
+        signer
+      );
+      const receiversArray = receivers
+        .split(",")
+        .map((address) => address.trim());
+      const params = await userDefinedMacroContract.getParams(
+        superToken,
+        receiversArray
+      );
+
+      const macroForwarderContract = new ethers.Contract(
+        macroForwarderAddress,
+        macroForwarderABI,
+        signer
+      );
+      const tx = await macroForwarderContract.runMacro(
+        userDefinedMacroAddress,
+        params
+      );
+      await tx.wait();
+      setMessage("Macro executed successfully.");
+    } catch (error) {
+      console.error("Error executing macro", error);
+      setMessage(`Error: ${error.message}`);
+    }
+  };
+
+  return (
+    <div
+      style={{
+        textAlign: "center",
+        padding: "20px",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <h2>Macro Forwarder Interface</h2>
+      <h3>Connect Wallet to your chosen testnet (e.g. OP Sepolia)</h3>
+      {walletAddress ? (
+        <p>
+          Connected Wallet: <strong>{walletAddress}</strong>
+        </p>
+      ) : (
+        <button
+          onClick={connectWallet}
+          style={{
+            backgroundColor: "#168c1e",
+            color: "white",
+            padding: "10px 15px",
+            borderRadius: "5px",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Connect Wallet
+        </button>
+      )}
+      <div style={{ margin: "10px" }}>
+        {walletAddress && (
+          <>
+            <div>
+              <input
+                type="text"
+                placeholder="SuperToken Address"
+                value={superToken}
+                onChange={(e) => setSuperToken(e.target.value)}
+                style={{ margin: "5px", padding: "5px" }}
+              />
+              <input
+                type="text"
+                placeholder="Receiver Addresses (comma separated)"
+                value={receivers}
+                onChange={(e) => setReceivers(e.target.value)}
+                style={{ margin: "5px", padding: "5px" }}
+              />
+            </div>
+            <button onClick={executeMacro} style={{ margin: "10px" }}>
+              Execute Macro
+            </button>
+            <p style={{ marginTop: "20px" }}>{message}</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const ReactLiveScope = {
   React,
   ...React,
   RealTimeBalance,
   FlowSenderComponent,
+  MacroForwarderComponent,
 };
 export default ReactLiveScope;
