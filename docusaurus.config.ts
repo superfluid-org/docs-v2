@@ -250,8 +250,15 @@ const config: Config = {
         },
       },
     },
+    matomo: {
+      matomoUrl: 'https://your.matomo.instance/',
+      siteId: 'ID',
+      phpLoader: 'matomo.php',
+      jsLoader: 'matomo.js',
+    },
     plugins: [
       ["@saucelabs/theme-github-codeblock", {}],
+      'docusaurus-plugin-matomo',
     ],
   } satisfies Preset.ThemeConfig,
 };

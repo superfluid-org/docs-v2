@@ -28,6 +28,7 @@
     "@saucelabs/theme-github-codeblock": "^0.2.3",
     "clsx": "^1.2.1",
     "d3": "^7.8.5",
+    "docusaurus-plugin-matomo": "^0.0.8",
     "ethers": "^5.7.2",
     "prism-react-renderer": "^2.1.0",
     "raw-loader": "^4.0.2",
