@@ -2,13 +2,19 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import Logo from "@site/src/components/Logo";
 import StepList from "@site/src/components/StepList";
-import {useState,useEffect} from "react";
-
+import { useState, useEffect } from "react";
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
-  
+  useEffect(() => {
+    var _mtm = window._mtm = window._mtm || [];
+    _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = 'https://cdn.matomo.cloud/docsv2superfluidfinancevercelapp.matomo.cloud/container_7FU30Xu7.js';
+    s.parentNode.insertBefore(g, s);
+  }, []);
+
   return (
     <>
       <div>
@@ -29,7 +35,7 @@ export default function Home(): JSX.Element {
             >
               <Logo />
               <br />
-              <span style={{ fontSize: "20px"}}>
+              <span style={{ fontSize: "20px" }}>
                 Technical Documentation for the Superfluid Protocol
               </span>
               <br />
