@@ -65,31 +65,6 @@ const config: Config = {
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
-    headTags: [
-      {
-        tagName: 'script',
-        innerHTML: `
-        <!-- Matomo -->
-        <script>
-          var _paq = window._paq = window._paq || [];
-          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-          _paq.push(['trackPageView']);
-          _paq.push(['enableLinkTracking']);
-          (function() {
-            var u="https://docsv2superfluidfinancevercelapp.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u+'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.async=true; g.src='https://cdn.matomo.cloud/docsv2superfluidfinancevercelapp.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-          })();
-        </script>
-        <!-- End Matomo Code -->        
-        `,
-        attributes: {
-          async: true,
-        },
-      },
-    ],
     image: "img/superfluid-social-card.png",
     navbar: {
       title: "Docs",
@@ -275,15 +250,8 @@ const config: Config = {
         },
       },
     },
-    matomo: {
-      matomoUrl: 'https://docsv2superfluidfinancevercelapp.matomo.cloud/',
-      siteId: '1',
-      phpLoader: 'matomo.php',
-      jsLoader: 'matomo.js',
-    },
     plugins: [
-      ["@saucelabs/theme-github-codeblock", {}],
-      'docusaurus-plugin-matomo',
+      ["@saucelabs/theme-github-codeblock", {}]
     ],
   } satisfies Preset.ThemeConfig,
 };
