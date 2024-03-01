@@ -251,8 +251,8 @@ const config: Config = {
       },
     },
     matomo: {
-      matomoUrl: 'https://your.matomo.instance/',
-      siteId: 'ID',
+      matomoUrl: 'https://docsv2superfluidfinancevercelapp.matomo.cloud/',
+      siteId: '1',
       phpLoader: 'matomo.php',
       jsLoader: 'matomo.js',
     },
