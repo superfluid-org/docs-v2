@@ -251,7 +251,7 @@ const config: Config = {
       },
     },
     plugins: [
-      ["@saucelabs/theme-github-codeblock", {}],
+      ["@saucelabs/theme-github-codeblock", {}]
     ],
   } satisfies Preset.ThemeConfig,
 };
