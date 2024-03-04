@@ -4,6 +4,7 @@ sidebar_position: 4
 
 import CodeBlock from "@theme/CodeBlock";
 import gdaForwarder from "!!raw-loader!@site/src/abis/gdaForwarder.json";
+import BonadocsWidget from "@bonadocs/widget";
 
 # GDAv1Forwarder
 
@@ -14,6 +15,7 @@ This contract is optimized for interaction that would happen from ourside the bl
 For more information on the best practices regarding this interaction, please refer the [Interact Off-Chain](/docs/protocol/distributions/guides/distributions-and-super-tokens/off-chain.mdx) section of this documentation.
 
 # ABI
+
 In order to interact with the `GDAv1Forwarder` contract, you can use the following ABI:
 
 <div>
@@ -50,15 +52,11 @@ function constructor(
 
 ## Fn createPool
 
-```solidity
-function createPool(
-    contract ISuperfluidToken token,
-    address admin,
-    struct PoolConfig config
-)
-    external
-    returns (bool success, contract ISuperfluidPool pool)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x0779d365"
+/>
 
 _Creates a new Superfluid Pool._
 
@@ -79,16 +77,11 @@ _Creates a new Superfluid Pool._
 
 ## Fn updateMemberUnits
 
-```solidity
-function updateMemberUnits(
-    contract ISuperfluidPool pool,
-    address memberAddress,
-    uint128 newUnits,
-    bytes userData
-)
-    external
-    returns (bool success)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x398c74e1"
+/>
 
 _Updates the units of a pool member._
 
@@ -103,15 +96,11 @@ _Updates the units of a pool member._
 
 ## Fn claimAll
 
-```solidity
-function claimAll(
-    contract ISuperfluidPool pool,
-    address memberAddress,
-    bytes userData
-)
-    external
-    returns (bool success)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0xd2c0d542"
+/>
 
 _Claims all tokens from the pool._
 
@@ -125,14 +114,11 @@ _Claims all tokens from the pool._
 
 ## Fn connectPool
 
-```solidity
-function connectPool(
-    contract ISuperfluidPool pool,
-    bytes userData
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0xf0b7b915"
+/>
 
 _Connects a pool member to `pool`._
 
@@ -151,14 +137,11 @@ _Connects a pool member to `pool`._
 
 ## Fn disconnectPool
 
-```solidity
-function disconnectPool(
-    contract ISuperfluidPool pool,
-    bytes userData
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x30925b79"
+/>
 
 _Disconnects a pool member from `pool`._
 
@@ -177,17 +160,11 @@ _Disconnects a pool member from `pool`._
 
 ## Fn distribute
 
-```solidity
-function distribute(
-    contract ISuperfluidToken token,
-    address from,
-    contract ISuperfluidPool pool,
-    uint256 requestedAmount,
-    bytes userData
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x6d1007a6"
+/>
 
 _Tries to distribute `requestedAmount` amount of `token` from `from` to `pool`._
 
@@ -209,17 +186,11 @@ _Tries to distribute `requestedAmount` amount of `token` from `from` to `pool`._
 
 ## Fn distributeFlow
 
-```solidity
-function distributeFlow(
-    contract ISuperfluidToken token,
-    address from,
-    contract ISuperfluidPool pool,
-    int96 requestedFlowRate,
-    bytes userData
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x5a6c6dbc"
+/>
 
 _Tries to distribute flow at `requestedFlowRate` of `token` from `from` to `pool`._
 
@@ -241,14 +212,11 @@ _Tries to distribute flow at `requestedFlowRate` of `token` from `from` to `pool
 
 ## Fn isPool
 
-```solidity
-function isPool(
-    contract ISuperfluidToken token,
-    address account
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x7b2cc0da"
+/>
 
 _Checks if the specified account is a pool._
 
@@ -267,14 +235,11 @@ _Checks if the specified account is a pool._
 
 ## Fn getNetFlow
 
-```solidity
-function getNetFlow(
-    contract ISuperfluidToken token,
-    address account
-)
-    external
-    returns (int96)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0xe8e7e2d1"
+/>
 
 _Gets the GDA net flow rate for the specified account._
 
@@ -293,15 +258,11 @@ _Gets the GDA net flow rate for the specified account._
 
 ## Fn getFlowDistributionFlowRate
 
-```solidity
-function getFlowDistributionFlowRate(
-    contract ISuperfluidToken token,
-    address from,
-    contract ISuperfluidPool to
-)
-    external
-    returns (int96)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x44999ff7"
+/>
 
 _Gets the flow rate of tokens between the specified accounts._
 
@@ -321,13 +282,11 @@ _Gets the flow rate of tokens between the specified accounts._
 
 ## Fn getPoolAdjustmentFlowRate
 
-```solidity
-function getPoolAdjustmentFlowRate(
-    address pool
-)
-    external
-    returns (int96)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x4e9ced57"
+/>
 
 _Gets the pool adjustment flow rate for the specified pool._
 
@@ -345,16 +304,11 @@ _Gets the pool adjustment flow rate for the specified pool._
 
 ## Fn estimateFlowDistributionActualFlowRate
 
-```solidity
-function estimateFlowDistributionActualFlowRate(
-    contract ISuperfluidToken token,
-    address from,
-    contract ISuperfluidPool to,
-    int96 requestedFlowRate
-)
-    external
-    returns (int96 actualFlowRate, int96 totalDistributionFlowRate)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x4d5c91ec"
+/>
 
 _Estimates the actual flow rate for flow distribution to the specified pool._
 
@@ -376,16 +330,11 @@ _Estimates the actual flow rate for flow distribution to the specified pool._
 
 ## Fn estimateDistributionActualAmount
 
-```solidity
-function estimateDistributionActualAmount(
-    contract ISuperfluidToken token,
-    address from,
-    contract ISuperfluidPool to,
-    uint256 requestedAmount
-)
-    external
-    returns (uint256 actualAmount)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0xeccfc6a5"
+/>
 
 _Estimates the actual amount for distribution to the specified pool._
 
@@ -406,14 +355,11 @@ _Estimates the actual amount for distribution to the specified pool._
 
 ## Fn isMemberConnected
 
-```solidity
-function isMemberConnected(
-    contract ISuperfluidPool pool,
-    address member
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0xc782eb9c"
+/>
 
 _Checks if the specified member is connected to the pool._
 
@@ -432,13 +378,11 @@ _Checks if the specified member is connected to the pool._
 
 ## Fn getPoolAdjustmentFlowInfo
 
-```solidity
-function getPoolAdjustmentFlowInfo(
-    contract ISuperfluidPool pool
-)
-    external
-    returns (address, bytes32, int96)
-```
+<BonadocsWidget
+  widgetConfigUri="ipfs://bafkreihiu63jpljsuycq3se6pq6jiconnlu6ewrmuzusacws5wpmmwbgye"
+  contract="GDAv1Forwarder"
+  functionKey="0x37bd42e0"
+/>
 
 _Gets the pool adjustment flow information for the specified pool._
 
