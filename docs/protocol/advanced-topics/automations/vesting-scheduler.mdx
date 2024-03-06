@@ -2,6 +2,9 @@
 sidebar_position: 3
 ---
 
+import Button from '@mui/material/Button';
+import Link from '@docusaurus/Link';
+
 # Vesting Scheduler
 
 ## What’s the Vesting Scheduler?
@@ -9,6 +12,10 @@ sidebar_position: 3
 The Vesting Scheduler is a sophisticated smart contract designed for setting up token vesting schedules. It's non-custodial and operates by moving tokens directly from your wallet or Safe to a specified recipient. The contract includes options for adding cliffs, after which it initiates a linear vesting process through a Superfluid stream, ensuring the recipient receives tokens directly in their wallet without any need for claiming.
 
 While the integration of the Vesting Scheduler into the Superfluid Dashboard is forthcoming, it's already possible to interact directly with the contract alongside off-chain automations. Detailed instructions for setting up automated vesting can be found in the documentation.
+
+<div style={{ textAlign: 'center', margin: '20px' }}>
+   <Button variant="contained" style={{ backgroundColor: 'green', fontSize: '16px', padding: '10px 20px' }} component={Link} to="https://www.notion.so/superfluidhq/Setting-Up-Automated-Vesting-f3e11a257a2d4b0b89210def54a59278">Click here for a full guide on Setting Up Automated Vesting</Button>
+</div>
 
 ## Why Automate Vesting with Superfluid?
 
@@ -46,7 +53,5 @@ The scheduler's integration with Superfluid streams adds an extra layer of conve
 If you're interested in setting up automated vesting, you can find detailed instructions in the link below.
 
 <div style={{ textAlign: 'center', margin: '20px' }}>
-  <a href="https://www.notion.so/superfluidhq/Setting-Up-Automated-Vesting-f3e11a257a2d4b0b89210def54a59278" target="_blank" rel="noopener noreferrer">
-    <button class="button-50" role="button">Click here for a full guide on Setting Up Automated Vesting</button>
-  </a>
+   <Button variant="contained" style={{ backgroundColor: 'green', fontSize: '16px', padding: '10px 20px' }} component={Link} to="https://www.notion.so/superfluidhq/Setting-Up-Automated-Vesting-f3e11a257a2d4b0b89210def54a59278">Click here for a full guide on Setting Up Automated Vesting</Button>
 </div>
