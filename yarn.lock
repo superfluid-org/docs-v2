@@ -1190,10 +1190,10 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@bonadocs/widget@^1.0.5-alpha.2":
-  version "1.0.5-alpha.2"
-  resolved "https://registry.yarnpkg.com/@bonadocs/widget/-/widget-1.0.5-alpha.2.tgz#a1f67f6e200eef97ae3361c55e18200b241af3a2"
-  integrity sha512-QWqDL/5Q4feamjuXh+al657Z5gvsJlOJXDpMrQP6m6lW36jVEOO2Qxun6EVayJOfHUFVjmxOrL5nrspKL2+9SQ==
+"@bonadocs/widget@^1.0.5-alpha.4":
+  version "1.0.5-alpha.4"
+  resolved "https://registry.yarnpkg.com/@bonadocs/widget/-/widget-1.0.5-alpha.4.tgz#6a9d8f3811d0aea2454b05f81406886a371cc7eb"
+  integrity sha512-RlhdRHJHdw3GKe9rxBQq0gh4ek89kwRsYJTmIMahLhwnf/IEGhfgK8EJN+VJq7+T7Xb2u+GA8PUVqJCBcxBgHQ==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -3230,9 +3230,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "18.2.69"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.69.tgz#313ec21891b22bb7646a54cb4bdb8cddb0880271"
-  integrity sha512-W1HOMUWY/1Yyw0ba5TkCV+oqynRjG7BnteBB+B7JmAK7iw3l2SW+VGOxL+akPweix6jk2NNJtyJKpn4TkpfK3Q==
+  version "18.2.70"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.70.tgz#89a37f9e0a6a4931f4259c598f40fd44dd6abf71"
+  integrity sha512-hjlM2hho2vqklPhopNkXkdkeq6Lv8WSZTpr7956zY+3WS5cfYUewtCzsJLsbW5dEv3lfSeQ4W14ZFeKC437JRQ==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
