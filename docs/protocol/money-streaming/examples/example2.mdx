@@ -1,0 +1,198 @@
+---
+sidebar_position: 2
+---
+
+# StreamYoink! : A Farcaster game based on Superfluid
+
+## Introduction
+
+StreamYoink! is a capture-the-flag game based on Superfluid.
+The game is played in Farcaster Frame where players can click on the button in order to Yoink (catch) a stream of [🎩$DEGEN](https://www.degen.tips/) tokens.
+Whoever has the Flag, keeps the stream of [🎩$DEGEN](https://www.degen.tips/) tokens.
+Whoever manages to keep the stream for the longest time wins the game.
+
+To see what the game looks like in action checkout this farcaster cast: https://warpcast.com/vijay/0xbf609fe5
+
+In this guide, we will walk you through the steps to set up the game on your local machine, and create your own version of the game using a different Super Token or a different game mechanic.
+
+## Prerequisites
+- Clone the [frames.js](https://framesjs.org/) [repo](https://github.com/framesjs/frames.js/tree/main/examples/framesjs-starter) for debugging. For further information on this, please refer to the frames.js [quickstart](https://framesjs.org/#quickstart).
+- Start by installing the dependencies using `npm install` or `yarn add`.
+- Run the frames.js debugger using `npm run dev` or `yarn dev`.
+
+Congratulations! You are now ready to start debugging frames using [frames.js](https://framesjs.org/)!
+
+## Quickstart
+
+### Step 1: Clone the StreamYoink! repo
+Start by cloning the StreamYoink! repository from [here](https://github.com/youssefea/stream-yoink):
+    
+```bash
+$ git clone https://github.com/youssefea/stream-yoink
+```
+### Step 2: Install the dependencies
+Navigate to the StreamYoink! directory and install the dependencies using `npm install` or `yarn add`.
+```bash
+$ cd stream-yoink
+$ npm install
+```
+
+### Step 3: Configure your environment variables
+Check out the `.env.template` [file](https://github.com/youssefea/stream-yoink/blob/main/.env.template) and create a `.env` file in the root directory of the project.
+
+#### URL Variables
+For local testing and debugging, you can use the following variables and ignore `PROD_URL`:
+```bash
+ENVIRONMENT="local"
+LOCALHOST="http://localhost:3001"
+PROD_URL=""
+```
+When you deploy to production, you will need to fill in the `PROD_URL` variable with the URL of your deployed project, and change the `ENVIRONMENT` variable to `prod`.
+
+#### KV Store variables:
+To get your KV Store variables, you need to create a [KV Store](https://vercel.com/docs/storage/vercel-kv/quickstart) on Vercel:
+- Open your [vercel](https://vercel.com) account and create a new project.
+- Create a new deployment and deploy your project from your repository (_don't worry about the deployment failing, we just need to create a vercel store_).
+- Follow the vercel KV [quickstart](https://vercel.com/docs/storage/vercel-kv/quickstart) to create a new KV store.
+- Once your KV Store is created copy variables you get to fill in the `.env` file:
+
+```bash
+KV_URL=
+KV_REST_API_URL=
+KV_REST_API_TOKEN=
+KV_REST_API_READ_ONLY_TOKEN=
+```
+
+#### Other variables:
+You will also need to fill in the following variables:
+
+- `AIRSTACK_KEY`: Your API Key from [Airstack](https://app.airstack.xyz/):
+```bash
+#Airstack key
+AIRSTACK_KEY=
+```
+- `WK`: The private key of the wallet you will use to sponsor the streams:
+```bash
+#Pvt key of the wallet
+WK=
+```
+- `RPC_URL`: The RPC URL of the network you are using:
+```bash
+#RPC URL
+RPC_URL=
+```
+- `SUPER_TOKEN_ADDRESS`: The address of the Super Token you will use in the game:
+```bash
+# Super token (DEGENx) address
+SUPER_TOKEN_ADDRESS=
+```
+- `FID`: The Farcaster ID of the profile you want users to follow before they play StreamYoink!:
+```bash
+# FID of the profile to follow
+FID=
+```
+
+### Step 4: Run the project
+You can now run the project using `npm run dev` or `yarn dev`.
+```bash
+$ npm run dev
+```
+Congratulations! You are successfully running StreamYoink! on your local machine.
+
+### Step 5: Test and debug
+You can now test and debug the game by opening the URL `http://localhost:3000/debug?url=http://localhost:3001` in your browser.
+
+:::info Debugging using other frameworks
+In this guide, we used [frames.js](https://framesjs.org/) for debugging. Check out the [frames.js documentation](https://framesjs.org/) for further guidance on that.
+You can use any other debugging framework you are comfortable with.
+:::
+
+## Customizing the game
+### Changing the images
+The game has a few images that are static. While the static images are hardcoded in `app/start` and `app/check`, the images that are generated dynamically use an API endpoint that is part of the repo at `app/imgen`.
+This API allows you to generate PNG images with the following parameters:
+- `text`: The text you want to display on the image. "_" will be replaced with a skip line.
+- `color`: The color of the text for each line of the text. Line colors are separated by a comma.
+- `size`: The size of the text for each line of the text. Line sizes are separated by a comma.
+- `background`: The background color of the image.
+
+#### Example
+To generate an image with the text "Hello World" in red and blue with a white background, you can use the following URL:
+```bash
+http://localhost:3001/imgen?text=Hello_World&color=red,blue&size=20,30&background=grey
+```
+This will generate an image with the text "Hello" in red and "World" in blue with a grey background like the one below:
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+   ![Hello World](/assets/helloworld.png)
+</div>
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <p>*An example of an image generated using the `imgen` API*</p>
+</div>
+
+:::tip customize your logo
+Everything is made customizable in the `imgen` api, from the colors to the text and the images.
+You can change also change the logo by replacing the `logo.svg` file in the `public` directory.
+:::
+
+### Changing the game mechanics
+The game mechanics are defined in the `app/start` and `app/check` directories. You can change the game mechanics by modifying the `route.ts` and `config.ts` files under these directories.
+- **Change the chain of your Super Token**: You can change the chain of the Super Token by changing the `chain` variable of `walletClient` and `publicClient` in the `config.ts` files.
+
+```typescript title="/app/check/config.ts or /app/start/config.ts"
+// Change the chain of the Super Token here
+export const walletClient = createWalletClient({
+  chain: base,
+  transport:  http(process.env.RPC_URL)
+})
+
+export const account = privateKeyToAccount(`0x${process.env.WK}`)
+```
+
+- **Change the flow rate of the stream**: You can change the flow rate of your stream by modifying the `route.ts` file in the `app/check` directory and changing the `flowRate` variable.
+Flow rates are defined in the Superfluid framework as a number of weis per second. For example, a flow rate of 1 token/second means that 10^18 wei will be transferred every second.
+
+```typescript title="/app/check/route.ts"
+/*Imports and other constants*/
+/*...*/
+
+const reyoinkedString ="https://i.imgur.com/jfySrCh.png";
+const flowRate = 327245050000000000;
+
+/* Remaining code */
+/*...*/
+```
+- **Change the minimum balance in the pot to keep the game going**: You can change the minimum balance in the pot to keep the game going by modifying the `route.ts` file in the `app/start` directory and changing the `minBalance` variable.
+
+```typescript title="/app/start/route.ts"
+/*Imports and other constants*/
+/*...*/
+const minBalance = 5000;
+/* Remaining code */
+/*...*/
+```
+- **Change the cool down time limit for the game**: You can change the time limit for the game by modifying the `route.ts` file in the `app/check` directory and changing the `coolDown` variable.
+
+```typescript title="/app/check/route.ts"
+/*Imports and other constants*/
+/*...*/
+const coolDown = 3600;
+/* Remaining code */
+/*...*/
+```
+
+## Understanding the architecture
+Most of the relevant parts of the game are in the `app` directory. The `app` directory contains the following subdirectories and files:
+
+- **`page.tsx`**: This directory contains the code for the initial frame of the game. It is responsible for displaying the game's name and a CTA to start the game.
+- **`start`**: This directory contains the code for the first post call `{URL}/start`. It is responsible for checking if the user is following the account specified in the env variables
+and displaying the current yoinker, as well as the balance of the token left to yoink.
+- **`check`**: This directory contains the code for the second post call `{URL}/check`. It is responsible for checking if the user has a connected account and
+and then it manages all the logic of closing the previous stream and creating a new one
+- **`imgen`**: This directory contains the code for the image generator API. It is responsible for generating PNG images with the specified text, color, size, and background.
+- **`totalYoinked`**: This directory contains the code for the total yoinked API. It is responsible for returning the total amount of tokens yoinked in the game.
+- **`currentYoinkerApi`**: This directory contains the code for the current yoinker API. It is responsible for returning the current yoinker and its farcaster associated address.
+- **`currentYoinkerPost`**: This directory contains the code for the current yoinker post API. It is responsible for updating the current yoinker, its farcaster associated address and the balance of the older yoinker.
+- **`flowingBalance`**: This is an API that we used to generated the flowing balance at the last frame. It's an SVG image and it cannot be used as is.
+- **`leaderboardApi`**: This directory contains the code for the leaderboard API. It is responsible for returning the leaderboard data of the game.
+- **`leaderboard`**: This directory contains the code for the leaderboard page. It is responsible for displaying the leaderboard data.
