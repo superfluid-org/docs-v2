@@ -190,8 +190,8 @@ contract MyPool {
         superToken.distributeToPool(address(this), pool, amount);
     }
 
-    function distributeFlow(uint256 amount) public {
-        superToken.distributeFlow(address(this), pool, amount);
+    function distributeFlow(int96 flowRate) public {
+        superToken.distributeFlow(address(this), pool, flowRate);
     }
 }
 ```
