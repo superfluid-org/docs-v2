@@ -157,6 +157,7 @@ const flowRate = 327245050000000000;
 /*...*/
 ```
 - **Change the minimum balance in the pot to keep the game going**: You can change the minimum balance in the pot to keep the game going by modifying the `route.ts` file in the `app/start` directory and changing the `minBalance` variable.
+If the *$DEGENx* balance of the wallet sponsoring the streams falls below this value, the game will stop.
 
 ```typescript title="/app/start/route.ts"
 /*Imports and other constants*/
@@ -165,7 +166,7 @@ const minBalance = 5000;
 /* Remaining code */
 /*...*/
 ```
-- **Change the cooldown time limit for the game**: You can change the time limit for the game by modifying the `route.ts` file in the `app/check` directory and changing the `coolDown` variable.
+- **Change the cool down time limit for the game**: You can change the time limit for the game by modifying the `route.ts` file in the `app/check` directory and changing the `coolDown` variable.
 
 ```typescript title="/app/check/route.ts"
 /*Imports and other constants*/
