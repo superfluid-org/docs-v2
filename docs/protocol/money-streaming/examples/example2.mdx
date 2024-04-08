@@ -137,7 +137,7 @@ This will generate an image with the text "Hello" in red and "World" in blue wit
 
 :::tip customize your logo
 Everything is made customizable in the `imgen` api, from the colors to the text and the images.
-You can change also change the logo by replacing the `logo.svg` file in the `public` directory.
+You can also change the logo by replacing the `logo.svg` file in the `public` directory.
 :::
 
 ### Changing the game mechanics
@@ -165,7 +165,7 @@ const minBalance = 5000;
 /* Remaining code */
 /*...*/
 ```
-- **Change the cool down time limit for the game**: You can change the time limit for the game by modifying the `route.ts` file in the `app/check` directory and changing the `coolDown` variable.
+- **Change the cooldown time limit for the game**: You can change the time limit for the game by modifying the `route.ts` file in the `app/check` directory and changing the `coolDown` variable.
 
 ```typescript title="/app/check/route.ts"
 /*Imports and other constants*/
@@ -207,11 +207,11 @@ Most of the relevant parts of the game are in the `app` directory. The `app` dir
 - **`start`**: This directory contains the code for the first post call `{URL}/start`. It is responsible for checking if the user is following the account specified in the env variables
 and displaying the current yoinker, as well as the balance of the token left to yoink.
 - **`check`**: This directory contains the code for the second post call `{URL}/check`. It is responsible for checking if the user has a connected account and
-and then it manages all the logic of closing the previous stream and creating a new one
+then it manages all the logic of closing the previous stream and creating a new one
 - **`imgen`**: This directory contains the code for the image generator API. It is responsible for generating PNG images with the specified text, color, size, and background.
 - **`totalYoinked`**: This directory contains the code for the total yoinked API. It is responsible for returning the total amount of tokens yoinked in the game.
 - **`currentYoinkerApi`**: This directory contains the code for the current yoinker API. It is responsible for returning the current yoinker and its farcaster associated address.
 - **`currentYoinkerPost`**: This directory contains the code for the current yoinker post API. It is responsible for updating the current yoinker, its farcaster associated address and the balance of the older yoinker.
-- **`flowingBalance`**: This is an API that we used to generated the flowing balance at the last frame. It's an SVG image and it cannot be used as is.
+- **`flowingBalance`**: This is an API that we used to generate the flowing balance at the last frame. It's an SVG image and it cannot be used as is.
 - **`leaderboardApi`**: This directory contains the code for the leaderboard API. It is responsible for returning the leaderboard data of the game.
 - **`leaderboard`**: This directory contains the code for the leaderboard page. It is responsible for displaying the leaderboard data.

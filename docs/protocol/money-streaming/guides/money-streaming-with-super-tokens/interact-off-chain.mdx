@@ -276,7 +276,7 @@ contract CFAv1Forwarder is ForwarderBase {
     /**
      * @notice Get the currently set permissions granted to the given flowOperator by the given sender account.
      * @param token Super token address
-     * @param sender The account which (possiby) granted permissions
+     * @param sender The account which (possibly) granted permissions
      * @param flowOperator Account to which (possibly) permissions were granted
      * @return permissions A bitmask of the permissions currently granted (or not) by `sender` to `flowOperator`
      * @return flowrateAllowance Max. flowrate in wad/second the flowOperator can set for individual flows.
@@ -626,4 +626,4 @@ async function getAccountFlowrate(contract, token, account) {
 
 This guide covers the basics of interacting with the `CFAv1Forwarder` contract using Ethers.js.
 
-For more detailed information and advanced use cases, refer to the The CFAv1Forwarder [Technical Reference](/docs/technical-reference/CFAv1Forwarder).
+For more detailed information and advanced use cases, refer to the CFAv1Forwarder [Technical Reference](/docs/technical-reference/CFAv1Forwarder).

@@ -73,7 +73,7 @@ There are many ways to contribute to the Superfluid documentation, including but
     
 2. **Adhere to the Style Guide**: We aim for a consistent and accessible writing style across our documentation. Please refer to the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for general guidelines. Look for opportunities to use an active voice and first-person where appropriate.
     
-3. **Write a an Example Guide**: If built something using Superfluid, you are welcome to contribute to our documentation by adding a guide to illustrate your example.
+3. **Write an Example Guide**: If built something using Superfluid, you are welcome to contribute to our documentation by adding a guide to illustrate your example.
 
 Your contributions, whether big or small, are greatly appreciated and help make Superfluid's documentation a valuable resource for the community.
 

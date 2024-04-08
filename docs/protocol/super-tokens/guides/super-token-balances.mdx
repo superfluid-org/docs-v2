@@ -65,7 +65,7 @@ We recommend this solution because it guarantees the most accurate result. Howev
 
 ### Solution 2: Using queries from the Subgraph
 
-To accurately track Super Token balances, you can use the queries below to get inflows and ouflow object from Superfluid's [Subgraph](https://console.superfluid.finance/subgraph).
+To accurately track Super Token balances, you can use the queries below to get inflows and outflow object from Superfluid's [Subgraph](https://console.superfluid.finance/subgraph).
 
 #### Getting all the inflows for user
 ```graphql
@@ -107,7 +107,7 @@ query allSentStreams($sender: String) {
 Doing this allows you to do the following:
 - Get **the data related to each stream a user is receiving** : This allows us to calculate the positive balance associated with each stream they receive.
 - Get **the data related to each pool where the user is connected** : This allows us to calculate the positive balance associated with each membership in a pool.
-- Get **tthe data related to each stream a user is sending** : This allows us to calculate the negative balance associated with each stream they send.
+- Get **the data related to each stream a user is sending** : This allows us to calculate the negative balance associated with each stream they send.
 - Get **the data related to each pool where the user is distributing** : This allows us to calculate the negative balance associated with each distribution they make.
 
 :::tip How to calculate each balance?
