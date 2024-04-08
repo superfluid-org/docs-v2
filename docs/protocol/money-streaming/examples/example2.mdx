@@ -86,6 +86,11 @@ RPC_URL=
 # Super token (DEGENx) address
 SUPER_TOKEN_ADDRESS=
 ```
+:::warning About the chain
+The default chain in the repo is Base. If you are using a different chain, you will need to change the chain of the game in the `api.ts`, `app/start/config.ts` and `app/check/config.ts` files.
+For further information on this, please refer to the [Changing the chain](#changing-the-chain) section.
+:::
+
 - `FID`: The Farcaster ID of the profile you want users to follow before they play StreamYoink!:
 ```bash
 # FID of the profile to follow
@@ -136,18 +141,7 @@ You can change also change the logo by replacing the `logo.svg` file in the `pub
 :::
 
 ### Changing the game mechanics
-The game mechanics are defined in the `app/start` and `app/check` directories. You can change the game mechanics by modifying the `route.ts` and `config.ts` files under these directories.
-- **Change the chain of your Super Token**: You can change the chain of the Super Token by changing the `chain` variable of `walletClient` and `publicClient` in the `config.ts` files.
-
-```typescript title="/app/check/config.ts or /app/start/config.ts"
-// Change the chain of the Super Token here
-export const walletClient = createWalletClient({
-  chain: base,
-  transport:  http(process.env.RPC_URL)
-})
-
-export const account = privateKeyToAccount(`0x${process.env.WK}`)
-```
+The game mechanics are defined in the `app/start` and `app/check` directories. You can change the game mechanics by modifying the `route.ts` files under these directories.
 
 - **Change the flow rate of the stream**: You can change the flow rate of your stream by modifying the `route.ts` file in the `app/check` directory and changing the `flowRate` variable.
 Flow rates are defined in the Superfluid framework as a number of weis per second. For example, a flow rate of 1 token/second means that 10^18 wei will be transferred every second.
@@ -180,6 +174,31 @@ const coolDown = 3600;
 /* Remaining code */
 /*...*/
 ```
+### Changing the chain
+The chain variables are defined in `api.ts`, `app/start/config.ts` and `app/check/config.ts` files:
+- **Change the chain of your Super Token**: You can change the chain of the Super Token by changing the `chain` variable of `walletClient` and `publicClient` in the `config.ts` files.
+
+```typescript title="/app/check/config.ts or /app/start/config.ts"
+// Change the chain of the Super Token here
+export const walletClient = createWalletClient({
+  chain: base,
+  transport:  http(process.env.RPC_URL)
+})
+
+export const account = privateKeyToAccount(`0x${process.env.WK}`)
+```
+- **Change the subgraph endpoint to match the chain**: You can change the subgraph endpoint of the Super Token by changing the `subgraphURL` variable in the `api.ts` file.
+```typescript title="/api.ts"
+/*Imports and other constants*/
+/*...*/
+const subgraphURL = "https://base-mainnet.subgraph.x.superfluid.dev/";
+/* Remaining code */
+/*...*/
+```
+
+:::tip Where to find the subgraph endpoints?
+You can find all the subgraph endpoints of Superfluid from [the console](https://console.superfluid.finance/subgraph) or from the [metadata file](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/metadata/main/networks/list.cjs) of the [Superfluid Protocol Monorepo](https://github.com/superfluid-finance/protocol-monorepo/tree/dev).
+:::
 
 ## Understanding the architecture
 Most of the relevant parts of the game are in the `app` directory. The `app` directory contains the following subdirectories and files:
