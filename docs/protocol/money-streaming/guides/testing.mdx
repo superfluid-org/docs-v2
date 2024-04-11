@@ -249,6 +249,7 @@ contract FlowSenderTest is Test {
         address public owner;
 	    //DEPLOYING THE FRAMEWORK
         SuperfluidFrameworkDeployer sfDeployer = new SuperfluidFrameworkDeployer();
+        sfDeployer.deployTestFramework();
         sf = sfDeployer.getFramework();
 
 	    // DEPLOYING DAI and DAI wrapper super token
