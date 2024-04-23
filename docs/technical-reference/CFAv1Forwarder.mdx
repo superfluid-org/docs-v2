@@ -2,6 +2,8 @@
 sidebar_position: 3
 ---
 
+import BonadocsWidget from "@bonadocs/widget"
+
 # CFAv1Forwarder
 
 The **CFAv1Forwarder** contract is a Superfluid forwarder that implements the Constant Flow Agreement (CFA) related functions.
@@ -299,15 +301,7 @@ function constructor(
 
 ## Fn setFlowrate
 
-```solidity
-function setFlowrate(
-    contract ISuperToken token,
-    address receiver,
-    int96 flowrate
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x57e6aa36" />
 
 #### Parameters
 
@@ -333,16 +327,7 @@ If the sender account is solvent when the flow is deleted, this buffer is redeem
 
 ## Fn setFlowrateFrom
 
-```solidity
-function setFlowrateFrom(
-    contract ISuperToken token,
-    address sender,
-    address receiver,
-    int96 flowrate
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0xc5ad5c1a" />
 
 #### Parameters
 
@@ -364,15 +349,7 @@ on behalf of the sender account.
 
 ## Fn getFlowrate
 
-```solidity
-function getFlowrate(
-    contract ISuperToken token,
-    address sender,
-    address receiver
-)
-    external
-    returns (int96 flowrate)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x1d8b6526" />
 
 _Currently, only 0 or 1 flows can exist between 2 accounts. This may change in the future._
 
@@ -394,15 +371,7 @@ Get the flowrate of the flow between 2 accounts if exists.
 
 ## Fn getFlowInfo
 
-```solidity
-function getFlowInfo(
-    contract ISuperToken token,
-    address sender,
-    address receiver
-)
-    external
-    returns (uint256 lastUpdated, int96 flowrate, uint256 deposit, uint256 owedDeposit)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x2860fd93" />
 
 #### Parameters
 
@@ -434,6 +403,7 @@ function getBufferAmountByFlowrate(
     external
     returns (uint256 bufferAmount)
 ```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x09f0b495" />
 
 #### Parameters
 
@@ -456,14 +426,7 @@ Changes of the required buffer amount affect only flows created or updated after
 
 ## Fn getAccountFlowrate
 
-```solidity
-function getAccountFlowrate(
-    contract ISuperToken token,
-    address account
-)
-    external
-    returns (int96 flowrate)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x22c904d9" />
 
 #### Parameters
 
@@ -482,14 +445,7 @@ Get the net flowrate of an account.
 
 ## Fn getAccountFlowInfo
 
-```solidity
-function getAccountFlowInfo(
-    contract ISuperToken token,
-    address account
-)
-    external
-    returns (uint256 lastUpdated, int96 flowrate, uint256 deposit, uint256 owedDeposit)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x0f1ac495" />
 
 #### Parameters
 
@@ -512,17 +468,7 @@ If only the net flowrate is needed, consider using `getAccountFlowrate` instead.
 
 ## Fn createFlow
 
-```solidity
-function createFlow(
-    contract ISuperToken token,
-    address sender,
-    address receiver,
-    int96 flowrate,
-    bytes userData
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0xe15536b6" />
 
 #### Parameters
 
@@ -548,17 +494,7 @@ Currently, only 1 flow can exist between 2 accounts, thus `createFlow` will fail
 
 ## Fn updateFlow
 
-```solidity
-function updateFlow(
-    contract ISuperToken token,
-    address sender,
-    address receiver,
-    int96 flowrate,
-    bytes userData
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x0c033991" />
 
 #### Parameters
 
@@ -583,16 +519,7 @@ on behalf of the given sender account with sufficient flowRateAllowance.
 
 ## Fn deleteFlow
 
-```solidity
-function deleteFlow(
-    contract ISuperToken token,
-    address sender,
-    address receiver,
-    bytes userData
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0xb4b333c6" />
 
 #### Parameters
 
@@ -615,14 +542,7 @@ to delete flows on behalf of the given sender account.
 
 ## Fn grantPermissions
 
-```solidity
-function grantPermissions(
-    contract ISuperToken token,
-    address flowOperator
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x7243fb93" />
 
 #### Parameters
 
@@ -643,14 +563,7 @@ should be a contract implementing the desired restrictions.
 
 ## Fn revokePermissions
 
-```solidity
-function revokePermissions(
-    contract ISuperToken token,
-    address flowOperator
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x0bd0728d" />
 
 #### Parameters
 
@@ -672,16 +585,7 @@ either in the same transaction or after this transaction.
 
 ## Fn updateFlowOperatorPermissions
 
-```solidity
-function updateFlowOperatorPermissions(
-    contract ISuperToken token,
-    address flowOperator,
-    uint8 permissions,
-    int96 flowrateAllowance
-)
-    external
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x30885591" />
 
 #### Parameters
 
@@ -704,15 +608,7 @@ In order to restrict that, flowOperator needs to be a contract implementing the 
 
 ## Fn getFlowOperatorPermissions
 
-```solidity
-function getFlowOperatorPermissions(
-    contract ISuperToken token,
-    address sender,
-    address flowOperator
-)
-    external
-    returns (uint8 permissions, int96 flowrateAllowance)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x4d3f60f9" />
 
 #### Parameters
 
@@ -733,16 +629,7 @@ Get the currently set permissions granted to the given flowOperator by the given
 
 ## Fn \_setFlowrateFrom
 
-```solidity
-function _setFlowrateFrom(
-    contract ISuperToken token,
-    address sender,
-    address receiver,
-    int96 flowrate
-)
-    internal
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0xc5ad5c1a" />
 
 #### Parameters
 
@@ -755,17 +642,7 @@ function _setFlowrateFrom(
 
 ## Fn \_createFlow
 
-```solidity
-function _createFlow(
-    contract ISuperToken token,
-    address sender,
-    address receiver,
-    int96 flowrate,
-    bytes userData
-)
-    internal
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0xe15536b6" />
 
 #### Parameters
 
@@ -779,17 +656,7 @@ function _createFlow(
 
 ## Fn \_updateFlow
 
-```solidity
-function _updateFlow(
-    contract ISuperToken token,
-    address sender,
-    address receiver,
-    int96 flowrate,
-    bytes userData
-)
-    internal
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x0c033991" />
 
 #### Parameters
 
@@ -803,16 +670,7 @@ function _updateFlow(
 
 ## Fn \_deleteFlow
 
-```solidity
-function _deleteFlow(
-    contract ISuperToken token,
-    address sender,
-    address receiver,
-    bytes userData
-)
-    internal
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0xb4b333c6" />
 
 #### Parameters
 
@@ -825,16 +683,7 @@ function _deleteFlow(
 
 ## Fn \_updateFlowOperatorPermissions
 
-```solidity
-function _updateFlowOperatorPermissions(
-    contract ISuperToken token,
-    address flowOperator,
-    uint8 permissions,
-    int96 flowrateAllowance
-)
-    internal
-    returns (bool)
-```
+<BonadocsWidget widgetConfigUri="ipfs://bafkreie4jxs6zvo6xwdjdkfhxuks6efmpag2ywyz5kr24ztqyqvd2duqjy" contract="CFAv1Forwarder" functionKey="0x30885591" />
 
 #### Parameters
 
