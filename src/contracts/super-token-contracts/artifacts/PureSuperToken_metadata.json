@@ -1,0 +1,302 @@
+{
+	"compiler": {
+		"version": "0.8.22+commit.4fc1097e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "Initialized",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ZeroAddress",
+				"type": "error"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "factory",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "symbol",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "initialSupply",
+						"type": "uint256"
+					}
+				],
+				"name": "initialize",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "initialAddress",
+						"type": "address"
+					}
+				],
+				"name": "initializeProxy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "jtriley.eth",
+			"kind": "dev",
+			"methods": {
+				"initialize(address,string,string,address,uint256)": {
+					"details": "Upgrades the super token with the factory, then initializes.",
+					"params": {
+						"factory": "super token factory for initialization",
+						"initialSupply": "Initial token supply to pre-mint",
+						"name": "super token name",
+						"receiver": "Receiver of pre-mint",
+						"symbol": "super token symbol"
+					}
+				},
+				"initializeProxy(address)": {
+					"details": "Called by the SuperTokenFactory contract on upgrade",
+					"params": {
+						"initialAddress": "logic contract address"
+					}
+				}
+			},
+			"title": "Minimal Pure Super Token",
+			"version": 1
+		},
+		"userdoc": {
+			"errors": {
+				"Initialized()": [
+					{
+						"notice": "Thrown when the logic contract has been set"
+					}
+				],
+				"ZeroAddress()": [
+					{
+						"notice": "Thrown when the logic contract address is zero"
+					}
+				]
+			},
+			"kind": "user",
+			"methods": {
+				"initializeProxy(address)": {
+					"notice": "Stores the logic contract address only once."
+				}
+			},
+			"notice": "Pre-minted supply. This is includes no custom logic. Used in `PureSuperTokenDeployer`",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"PureSuperToken.sol": "PureSuperToken"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/proxy/Proxy.sol": {
+			"keccak256": "0xc3f2ec76a3de8ed7a7007c46166f5550c72c7709e3fc7e8bb3111a7191cdedbd",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e73efb4c2ca655882dc237c6b4f234a9bd36d97159d8fcaa837eb01171f726ac",
+				"dweb:/ipfs/QmTNnnv7Gu5fs5G1ZMh7Fexp8N4XUs3XrNAngjcxgiss3e"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0ea104e577e63faea3b69c415637e99e755dcbf64c5833d7140c35a714d6d90c",
+				"dweb:/ipfs/Qmau6x4Ns9XdyynRCNNp3RhLqijJjFm7z5fyZazfYFGYdq"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+			"keccak256": "0xaa761817f6cd7892fcf158b3c776b34551cde36f48ff9703d53898bc45a94ea2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0ad7c8d4d08938c8dfc43d75a148863fb324b80cf53e0a36f7e5a4ac29008850",
+				"dweb:/ipfs/QmcrhfPgVNf5mkdhQvy1pMv51TFokD3Y4Wa5WZhFqVh8UV"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+			"keccak256": "0x5ef46daa3b58ef2702279d514780316efaa952915ee1aa3396f041ee2982b0b4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2f8f2a76e23b02fc69e8cd24c3cb47da6c7af3a2d6c3a382f8ac25c6e094ade7",
+				"dweb:/ipfs/QmPV4ZS4tPVv4mTCf9ejyZ1ai57EEibDRj7mN2ARDCLV5n"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+			"keccak256": "0x37d1aaaa5a2908a09e9dcf56a26ddf762ecf295afb5964695937344fc6802ce1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ed0bfc1b92153c5000e50f4021367b931bbe96372ac6facec3c4961b72053d02",
+				"dweb:/ipfs/Qmbwp8VDerjS5SV1quwHH1oMXxPQ93fzfLVqJ2RCqbowGE"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC777/IERC777.sol": {
+			"keccak256": "0x79e6094047e40d49efa3c725b7a1519e16c28c46944884b5f6d0fbe89b450f03",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2570d04d0b74df414fa33f9f7da6442419a07909ece7baeecd7147d9c7d6a432",
+				"dweb:/ipfs/QmRDQM1kzddwCk8ateQgnogu495fWb4L9Xwr42DAQhHzi5"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x4296879f55019b23e135000eb36896057e7101fb7fb859c5ef690cf14643757b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://87b3541437c8c443ccd36795e56a338ed12855eec17f8da624511b8d1a7e14df",
+				"dweb:/ipfs/QmeJQCtZrQjtJLr6u7ZHWeH3pBnjtLWzvRrKViAi7UZqxL"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/gdav1/IPoolAdminNFT.sol": {
+			"keccak256": "0x114cbccfd652231eb5454ab9c4cfe0d3a7427943dee0cce72d88160f12ed8505",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0837cc47bcd635ab470e336e9448fc1160531220aa8a1d55cea39bbee43af6ab",
+				"dweb:/ipfs/QmbpaZcVmSsCeoE3j494TmbWzFriKgUR4TsTK5BwjvxRCw"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/gdav1/IPoolMemberNFT.sol": {
+			"keccak256": "0x5a52452b00db96398759f1a2017ed8d76390730cb16a0d3e143b1fc7c5b99bed",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9f3a7c1f327fde03f63058d196f48472f69c0314e77214c6d3661f4b1b85ff99",
+				"dweb:/ipfs/Qmf8mJJnPqDPqmDKiofqEhrDFwo9d4zWt5NsToqSH5F6mL"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/gdav1/IPoolNFTBase.sol": {
+			"keccak256": "0x1e5604256c5dd52f969b46feea0d708bde11c1a481bf7c50e33c67fd5dbf4262",
+			"license": "AGPLv3",
+			"urls": [
+				"bzz-raw://6c7c6c57094abc70ef32b2844b9df403e2c0ca7cee57a90f87038f2f071f7683",
+				"dweb:/ipfs/QmSfBSuh3LWKJ3CcfPkVVnxy4uUsaXhgFMU1X7CA5Ym7wS"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/IConstantInflowNFT.sol": {
+			"keccak256": "0xb219bf31e236fe6c2968ecf0f6c3eb24cb6774aaf4fcc83252e9b06bba718f33",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c09b0ffff8630ba6a86cdcd17f1ac65f8ba4e5b296e0320d945943e156fdf839",
+				"dweb:/ipfs/QmPkBBJBYyYg1xxM4wRKdEpGK3b1beYeKoM6THzYb3qjM7"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/IConstantOutflowNFT.sol": {
+			"keccak256": "0x15799c1552fa7aad4c1a7197451cd02422a6c768b236ab2904e72f7158a4a2c2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c62bb88c0c43ad162c8c226aede16a75c352738aaaf6794fa0c2881dcf59ad42",
+				"dweb:/ipfs/QmeWQdFDvzbN8JrCRSRRnZEuw5EbWVzRLM2duhJ515QUXK"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/IFlowNFTBase.sol": {
+			"keccak256": "0xa1600ee907288d7852678cc43f995498a039710a4f025a8785de288c4a4ceced",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d317bab758d3b73005ac27b87e2410a087ca8507538795f555d37bd2d97a028d",
+				"dweb:/ipfs/QmSHDBjGYTC64LkDaTQj38DZUGNV9mzxhUYAAfaDLQYEmS"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperAgreement.sol": {
+			"keccak256": "0xba0407c47917aee8b6e7cea745332d2f7244cc3b91d249426f0105b365feb0ee",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4e8c38994af84e123476f8de8b81fe466e9a575374b13c38a4dc30bdd2d12c06",
+				"dweb:/ipfs/QmfHrSyeMQN7wVn7qmD6aPH1wX4ugkhQXiR8te6xhADGaK"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperToken.sol": {
+			"keccak256": "0xb37442187735f9a8d6e18d736a5418b1ef6cf8c811fa694d6605ba27a0b9268e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://23d7b247a89335a222271af46a62e139aaaa96ba8f74efb03a2bf20d3437e69b",
+				"dweb:/ipfs/QmcBn8zmLuDhZDsNydLhx3oJ1vYri2vQKWdDF4KQn2oFi6"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperTokenFactory.sol": {
+			"keccak256": "0x85b2cae18114b9253080a6f237eb10b5bd47b696ea4ac6f2c6fde17ab09758e3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0c1324d63067436949c181c27b9fff9f29b4ec4ae142d57a6a8b6eeee481c548",
+				"dweb:/ipfs/QmVBdQZEa6icdz4wabr3LDD7BifebmjnvtBDZTGSy2EMds"
+			]
+		},
+		"@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluidToken.sol": {
+			"keccak256": "0x18ea972421ff57ce62103f90c820ee039f170f0189a4b3c73fd0ff09452d1dbf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://dd24799269920b4b7925362b41650b5b968bb957dc0dec50b451f5382fe573c1",
+				"dweb:/ipfs/QmbL19zzZZSbVu2gYA3FtJLu4kbCtk9BybxCU7oJfpUbE7"
+			]
+		},
+		"PureSuperToken.sol": {
+			"keccak256": "0x9f97ffdff3cb0cbc193d79f7e867873f75d51d3d8e5e78c1455fe5a2954f9053",
+			"license": "AGPLv3",
+			"urls": [
+				"bzz-raw://3d4ff79dae62f26f719cf7285546ca7c62fe987d4e03b357d7dbcd8f58509001",
+				"dweb:/ipfs/QmPQjFiWWBBbpvFerYRLKrVvd5pMrybjPxFm1QEqnJwBKe"
+			]
+		},
+		"base/SuperTokenBase.sol": {
+			"keccak256": "0x20ad0c53399cd71f9e2af49c7f2f99a423bacdf7da4c64dfa65e5aca40dac571",
+			"license": "AGPLv3",
+			"urls": [
+				"bzz-raw://1c6ab8fe1ae02242871cf5d805fbd8b753f5a1df9515658802cdea7b44c3914c",
+				"dweb:/ipfs/QmfWFs8zVLnpDMZBRQTTLgmT9VdSmEchZhR2SoAzrdygzq"
+			]
+		},
+		"base/SuperTokenStorage.sol": {
+			"keccak256": "0x8e08c8b78f0e7fbdbcd378bf2fa2d518deba7d9591d20a9457571fceb9f95687",
+			"license": "AGPLv3",
+			"urls": [
+				"bzz-raw://5f0323df5e91e7fafd940ea9a8f808c61b5cd6f30974d6d071b25b350ce1ef26",
+				"dweb:/ipfs/Qmd5qFWZsW8NGuswNJW3dLkiktNu1MymbZ26VjVRypy3A8"
+			]
+		},
+		"base/UUPSProxy.sol": {
+			"keccak256": "0xd3e51b5fc04238364c4ed9068e31e88bd44e20546089e4fb76422ea1c2eac1ca",
+			"license": "AGPLv3",
+			"urls": [
+				"bzz-raw://041548f8c5c4bf62fcf02677272196f953f320774ff784a7a93351e4c45956aa",
+				"dweb:/ipfs/QmPvKxXbCFrWcHnwbTbSdEa96j4No8DHeuzXG1ftKPHwf1"
+			]
+		}
+	},
+	"version": 1
+}

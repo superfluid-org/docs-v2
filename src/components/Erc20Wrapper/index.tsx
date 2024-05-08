@@ -1,0 +1,211 @@
+import React, { useState, useEffect } from "react";
+import { ethers } from "ethers";
+
+interface ERC20WrapperProps {
+  // No props are needed as chain IDs and addresses are handled internally
+}
+
+const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
+  const [underlyingToken, setUnderlyingToken] = useState<string>("");
+  const [upgradability, setUpgradability] = useState<number>(1);
+  const [name, setName] = useState<string>("");
+  const [symbol, setSymbol] = useState<string>("");
+  const [connected, setConnected] = useState<boolean>(false);
+  const [chainId, setChainId] = useState<string>("1"); // Default to Ethereum Mainnet
+  const [contractAddress, setContractAddress] = useState<string>("");
+
+  const chainAddresses: { [key: string]: { address: string; name: string } } = {
+    "1": {
+      address: "0x0422689cc4087b6B7280e0a7e7F655200ec86Ae1",
+      name: "Ethereum Mainnet",
+    },
+    "100": {
+      address: "0x23410e2659380784498509698ed70E414D384880",
+      name: "Gnosis Chain",
+    },
+    "137": {
+      address: "0x2C90719f25B10Fc5646c82DA3240C76Fa5BcCF34",
+      name: "Polygon",
+    },
+    "10": {
+      address: "0x8276469A443D5C6B7146BED45e2abCaD3B6adad9",
+      name: "Optimism",
+    },
+    "42161": {
+      address: "0x1C21Ead77fd45C84a4c916Db7A6635D0C6FF09D6",
+      name: "Arbitrum One",
+    },
+    "43114": {
+      address: "0x464AADdBB2B80f3Cb666522EB7381bE610F638b4",
+      name: "Avalanche C-Chain",
+    },
+    "56": {
+      address: "0x8bde47397301F0Cd31b9000032fD517a39c946Eb",
+      name: "BNB Smart Chain",
+    },
+    "42220": {
+      address: "0x36be86dEe6BC726Ed0Cbd170ccD2F21760BC73D9",
+      name: "Celo",
+    },
+    "8453": {
+      address: "0xe20B9a38E0c96F61d1bA6b42a61512D56Fea1Eb3",
+      name: "Base Mainnet",
+    },
+    "666666666": {
+      address: "0x184D999ea60e9b16fE4cCC1f756422114E9B663f",
+      name: "Degen Chain",
+    },
+    "534352": {
+      address: "0xacFBED2bC9344C158DD3dC229b84Bd7220e7c673",
+      name: "Scroll",
+    },
+    "43113": {
+      address: "0x1C92042426B6bAAe497bEf461B6d8342D03aEc92",
+      name: "Avalanche Fuji",
+    },
+    "11155111": {
+      address: "0x254C2e152E8602839D288A7bccdf3d0974597193",
+      name: "Ethereum Sepolia",
+    },
+    "11155420": {
+      address: "0xfcF0489488397332579f35b0F711BE570Da0E8f5",
+      name: "Optimism Sepolia",
+    },
+    "534351": {
+      address: "0x87560833d59Be057aFc63cFFa3fc531589Ba428F",
+      name: "Scroll Sepolia",
+    },
+  };
+
+  useEffect(() => {
+    setContractAddress(chainAddresses[chainId].address);
+  }, [chainId]);
+
+  const connectWallet = async (): Promise<ethers.Signer | null> => {
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        setConnected(true);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const network = await provider.getNetwork();
+        setChainId(network.chainId.toString());
+        return provider.getSigner();
+      } catch (error) {
+        console.error("Connection failed:", error);
+      }
+    } else {
+      console.error("Please install MetaMask!");
+    }
+    return null;
+  };
+
+  const createWrapper = async () => {
+    const signer = await connectWallet();
+    if (signer && contractAddress) {
+      const contract = new ethers.Contract(
+        contractAddress,
+        [
+          "function createERC20Wrapper(address underlyingToken, uint8 upgradability, string memory name, string memory symbol) returns (bool)",
+        ],
+        signer
+      );
+
+      try {
+        const transaction = await contract.createERC20Wrapper(
+          underlyingToken,
+          upgradability,
+          name,
+          symbol
+        );
+        console.log("Transaction:", transaction);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
+
+  return (
+    <div
+      style={{
+        maxWidth: "400px",
+        margin: "auto",
+        padding: "20px",
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+      }}
+    >
+      <h2>Create your Wrapped Super Token</h2>
+      <button
+        onClick={connectWallet}
+        style={{ padding: "10px", fontSize: "16px", cursor: "pointer" }}
+        disabled={connected}
+      >
+        Connect Wallet
+      </button>
+      <div>
+        <label>Chain ID:</label>
+        <select
+          value={chainId}
+          onChange={(e) => setChainId(e.target.value)}
+          style={{ padding: "10px", width: "100%" }}
+          disabled={!connected}
+        >
+          {Object.entries(chainAddresses).map(([id, details]) => (
+            <option key={id} value={id}>{`${details.name} (${id})`}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label>Contract Address:</label>
+        <input
+          type="text"
+          value={contractAddress}
+          readOnly
+          style={{ padding: "10px", width: "100%" }}
+          disabled={!connected}
+        />
+      </div>
+      <input
+        value={underlyingToken}
+        onChange={(e) => setUnderlyingToken(e.target.value)}
+        placeholder="Underlying Token Address"
+        style={{ padding: "10px" }}
+        disabled={!connected}
+      />
+      <input
+        type="number"
+        value={upgradability.toString()}
+        onChange={(e) => setUpgradability(parseInt(e.target.value))}
+        placeholder="Upgradability (0, 1, 2)"
+        style={{ padding: "10px" }}
+        disabled={!connected}
+      />
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Token Name"
+        style={{ padding: "10px" }}
+        disabled={!connected}
+      />
+      <input
+        value={symbol}
+        onChange={(e) => setSymbol(e.target.value)}
+        placeholder="Token Symbol"
+        style={{ padding: "10px" }}
+        disabled={!connected}
+      />
+      <button
+        onClick={createWrapper}
+        style={{ padding: "10px", fontSize: "16px", cursor: "pointer" }}
+        disabled={!connected}
+      >
+        Create Wrapper
+      </button>
+    </div>
+  );
+};
+
+export default ERC20WrapperComponent;
