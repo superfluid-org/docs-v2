@@ -36,6 +36,7 @@
     { "source": "/superfluid/docs/subgraph", "destination": "/docs/protocol/money-streaming/guides/subgraph", "permanent": true },
     { "source": "/superfluid/protocol-developers(.*)", "destination": "/docs/protocol/quickstart"},
     { "source": "/superfluid/developers/interactive-tutorials/money-streaming-1", "destination": "/docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain", "permanent": true },
-    { "source": "/docs/protocol/advanced-topics/advanced-money-streaming/building-batch-streams-safe", "destination": "/docs/protocol/advanced-topics/batching/building-batch-streams-safe", "permanent": true }
+    { "source": "/docs/protocol/advanced-topics/advanced-money-streaming/building-batch-streams-safe", "destination": "/docs/protocol/advanced-topics/batching/building-batch-streams-safe", "permanent": true },
+    { "source": "/docs/protocol/super-tokens/guides/deploy-super-token", "destination": "/docs/category/deploy-a-super-token", "permanent": true }
   ]
 }

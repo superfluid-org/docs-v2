@@ -28,43 +28,13 @@ Before you start, ensure you have:
 - ETH or relevant cryptocurrency for transaction fees.
 
 ---
-## Taking a look at the Pure Super Token Contract (Easy)
+## Deploy a Pure Super Token from the interface (Easy)
 
-The [Super Token Factory contract](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperTokenFactory.sol) is used to create Super Tokens:
-- It is permissionless and can be used by anyone to create Super Tokens.
-- It is deployed on all the networks where you can find the Superfluid Protocol.
-
-We will describe the steps for deploying each type of Super Token in the following chapters.
-
-:::tip Contract addresses
-For addresses of the Super Token Factory contract on different networks, refer to [The Superfluid Console](https://console.superfluid.finance/), the Protocol section.
-:::
-
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-    ![SuperFluidConsole](/assets/ScreenshotConsoleFactory.png)
-</div>
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-    <p>*SuperFluid Console: Protocol Section*</p>
-</div>
-
----
-
-## Deploying a Wrapper Super Token
-
-You can deploy your own Wrapper Super Token using the Super Token Factory contract through the interface below. Please ensure you have the required parameters ready before proceeding:
-- **Underlying Token**: The address of the ERC20 token to wrap.
-- **Upgradability**: We recommend to keep this parameter as '1'. This allows Superfluid Protocol Governance to upgrade the Super Token contract in the future and stay compatible with the latest features.
-    - '0': Not Upgradable: The contract cannot be upgraded.
-    - '1': Semi-Upgradability: The contract can be upgraded by Superfluid Protocol Governance but only under certain [conditions](https://github.com/superfluid-finance/protocol-monorepo/wiki/About-Super-Token-Classification).
-    - '2': Fully Upgradable: The contract can be upgraded by Superfluid Protocol Governance without any restrictions.
-- **Name**: The name of the underlying token. We always recommend using the same name as the underlying token prefexed with 'Super' (eg. 'Super DAI').
-- **Symbol**: The symbol of the Super token. We recommend using the same symbol as the underlying token suffixed with 'x' (eg. 'DAIx').
-
-You can choose to deploy your Wrapper Super Token using the interface on your favourite scanner (eg. [Etherscan](https://etherscan.io/)).
-You can also use the interface below to deploy your Wrapper Super Token:
+You can use the interface below to deploy a Pure Super Token:
 <PureSuperTokenDeployer/>
 
-then PureSuperTokenInitializer
+<br/>
+Once the contract is deployed, you can use the address to initialize the Pure Super Token.
 <PureSuperTokenInitializer/>
 
 <br/>
@@ -74,44 +44,9 @@ Double-check the parameters to avoid deployment errors.
 
 </Admonition>
 
-### Verifying and Adding Token to Superfluid Console
-
-Locate the new Super Token's address in the "SuperTokenCreated" event log. To add your Super Token to the [Superfluid Console](https://console.superfluid.finance), Submit your request through this [form](https://airtable.com/appxGogNpt64ImOFH/shrzOcdK9eveDmRWV).
-
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-    ![Super Token Address](/assets/SuperTokenEvent.png)
-</div>
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-    <p>*Super Token Address on Etherscan*</p>
-</div>
-
 ---
 
-## Deploying a Self-Governed Super Token
-
-Self-Governed Super Tokens give you the ability to control and update Super Token logic.
-
-### Deployment Process
-
-1. **Using SuperTokenFactory**: Interact with the `createERC20Wrapper` function with the `admin` parameter on the SuperTokenFactory contract.
-2. **Updating Logic**: Use `updateCode` to apply custom logic or update to the latest Superfluid token contract.
-
-<Admonition type="tip">
-
-For more information, see the [Self-Governed Super Token Wiki](https://github.com/superfluid-finance/protocol-monorepo/wiki/Self-Governed-Super-Token) or seek assistance on [Superfluid Discord](https://discord.superfluid.finance/).
-
-</Admonition>
-
-<Admonition type="warning" title="Check Parameters">
-
-Unless you know what you are doing, deploying a self-governed Super Token is not recommended.
-
-</Admonition>
-
-
----
-
-## Deploying a Pure Super Token
+## Deploying a Custom Pure Super Token (Advanced)
 
 Deploying a Pure Super Token allows for custom non-Superfluid logic integration.
 
