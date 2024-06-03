@@ -6,6 +6,18 @@ import CodeBlock from '@theme/CodeBlock';
 
 # Overview
 
+:::warning
+IT IS NOT RECOMMENDED TO USE THE SDK UNLESS YOU NEED TO USE [BATCH CALLS](/docs/sdk/batch-calls).
+:::
+
+:::warning
+The SDK section is left in these docs for historical reasons.
+All developers relying on the SDK are encouraged to fully rely on the forwarder contracts directly.
+To interact with the protocol off-chain, the CURRENT RECOMMENDED way is to use the following contracts:
+- [`CFAv1Forwarder.sol`](/docs/technical-reference/CFAv1Forwarder): If you are looking to build using Money Streaming, this is the contract you would need to use. More information about how to use it can be found at [Interact Off-Chain Section](/docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain) as well as the [Technical Reference](/docs/technical-reference/CFAv1Forwarder). Contract addresses can be found at the [console](console.superfluid.finance).
+- [`GDAv1Forwarder.sol`](/docs/technical-reference/GDAv1Forwarder): If you are looking to build using Distribution Pools, this is the contract you would need to use. More information about how to use it can be found at [Interact Off-Chain Section](/docs/protocol/distributions/guides/distributions-and-super-tokens/off-chain) as well as the [Technical Reference](/docs/technical-reference/GDAv1Forwarder). Contract addresses can be found at the [console](console.superfluid.finance).
+:::
+
 ## What is the Superfluid SDK?
 
 The Superfluid SDK-Core is a wrapper library around `@superfluid-finance/ethereum-contracts` which allows 
