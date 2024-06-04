@@ -80,6 +80,55 @@ The best way to design your pools is to make sure that the total flow rate or th
 This way, you can be sure that the flow rate per unit will always be significantly higher than 0 and that all members will receive a share of the distribution.
 :::
 
+## About Pool Connections and Claiming
+
+### What is the difference between connecting to a pool and claiming tokens?
+After creating a pool and assigning units to pool members,
+they need to connect to the pool or claim their Super Tokens in order for it to show on their balance.
+Simply assigning units (shares) to a member does not automatically reflect in their balance.
+The accumulated tokens NEED to be claimed by the member (or a different address), or the member needs to connect to the pool
+to start receiving their share of the Super Token Distributions.
+
+### How can members collect their Distributions from the pool?
+
+There are two ways for members to get their streamed or transfered Super Tokens from a pool:
+- **Connecting to the Pool (Recommended)**: Members should connect to the pool to start receiving their share of the Super Token Distributions in real time to their balance.
+This includes both Instant Distributions and Streaming Distributions. In order to connect to the pool, the member should call the `connectPool` function from the [`SuperTokenV1Library`](/docs/technical-reference/SuperTokenV1Library) or [`GDAv1Forwarder`](/docs/technical-reference/GDAv1Forwarder#fn-connectpool).
+The address calling the function should be the address of the member. Other addresses will not be able to connect a member to the pool.
+
+- **Claiming the Tokens**: Members can claim their share of the Super Token Distributions accumulated from the pool at any time,
+even if they are not connected to the pool. As a matter of fact, anyone can claim the tokens on behalf of the member. To do so, the function
+`claimAll` from the [`SuperTokenV1Library`](/docs/technical-reference/SuperTokenV1Library) or [`GDAv1Forwarder`](/docs/technical-reference/GDAv1Forwarder#fn-claimall) should be called with the address of the member as the argument.
+
+:::note Connecting to the pool includes claiming
+When a member connects to the pool, they automatically claim the accumulated tokens and start receiving the distributions in real time.
+:::
+
+:::tip Reminder
+We use the `SuperTokenV1Library` to interact with the Superfluid protocol [on-chain](/docs/protocol/distributions/guides/distributions-and-super-tokens/on-chain) (from your smart contracts),
+while we use the forwarders (eg. `GDAv1Forwarder`) to interact with the Superfluid protocol [off-chain](/docs/protocol/distributions/guides/distributions-and-super-tokens/off-chain) (from your web3 frontend applications).
+:::
+
+:::tip Recommendation
+It is recommended to prompt users to connect to the pool as soon as possible to start receiving the distributions in real time.
+Depending on your use case, periodic claiming may also offer the best UX, however pool connections usually offer
+the best UX for real-time distributions.
+:::
+
+### How can members disconnect from the pool?
+Members can always disconnect from the pool to stop receiving distributions in real time by calling the function `disconnectPool` from the [`SuperTokenV1Library`](/docs/technical-reference/SuperTokenV1Library) or [`GDAv1Forwarder`](/docs/technical-reference/GDAv1Forwarder#fn-disconnectpool).
+
+### Example
+- **Jake** creates a pool and assigns 100 units to **Alice**, 200 units to **Bob**, and 200 units to **Charlie**.
+- **Alice** connects to the pool before any Distribution is made. Thus, she's able to receive her share of the Distributions in real time when they start.
+- **Jake** starts a stream of 100 tokens/second to the pool.
+- **Alice** receives 33 tokens/second directly into her balance, **Bob** and **Charlie** each accumulate 66 tokens/second in the pool.
+- After 100 seconds, **Alice** can already see 3300 tokens on her balance. **Bob** and **Charlie** are each eligible to get 6600 tokens, but they cannot see them on their balance just yet.
+- **Bob** chooses to claim every 100 seconds, while **Charlie** chooses to connect to the pool.
+- **Bob** receives periodically 6600 tokens every 100 seconds.
+- By connecting to the pool, **Charlie** automatically claims the accumulated tokens, but also starts receiving tokens in real time.
+
+
 ## Important Functions
 
 Here are some of the most important functions provided by [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) for interacting with Superfluid pools:
