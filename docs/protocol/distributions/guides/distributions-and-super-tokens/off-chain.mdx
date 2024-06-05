@@ -358,11 +358,17 @@ You can find the ABI of the GDAv1Forwarder contracts below:
 </div>
 :::
 
-## Key Functions
+## Key steps to build your app
 
-### 1. `createPool`
+### 1. Creating the pool
 
-Creates a new Superfluid Pool.
+For most of the applications build using Distribution Pools, pool creation happens
+[on-chain](/docs/protocol/distributions/guides/distributions-and-super-tokens/on-chain)
+using the [SuperTokenV1Library](/docs/technical-reference/SuperTokenV1Library).
+However, in case your pool is not created through your smart contract,
+you can always use the external function `createPool` on the GDAv1Forwarder in order to create a Pool.
+
+The `createPool` function is used to create a new Superfluid Pool and assign an admin and a config to the pool.
 
 - **Parameters**:
   - `token`: Super Token address (ISuperfluidToken).
@@ -378,9 +384,27 @@ async function createPool(token, admin, config) {
 }
 ```
 
-### 2. `updateMemberUnits`
+:::note What is a pool config?
+The `PoolConfig` struct is defined in the [IGeneralDistributionAgreementV1.sol](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/interfaces/agreements/gdav1/IGeneralDistributionAgreementV1.sol) interface as such:
+    
+```solidity
+    struct PoolConfig {
+    /// @dev if true, the pool members can transfer their owned units
+    /// else, only the pool admin can manipulate the units for pool members
+    bool transferabilityForUnitsOwner;
+    /// @dev if true, anyone can execute distributions via the pool
+    /// else, only the pool admin can execute distributions via the pool
+    bool distributionFromAnyAddress;
+    }
+```
+It is used to configure the pool's transferability and distribution permissions.
+:::
 
-Updates the units of a pool member.
+### 2. Setting the units of a pool member
+
+Once your pool is created, the admin can also interact with it off-chain using the `updateMemberUnits` function from the [GDAv1Forwarder](/docs/technical-reference/GDAv1Forwarder) contract.
+
+The function `updateMemberUnits` updates the units of a specific pool member.
 
 * **Parameters**:
     * `pool`: Superfluid Pool address (ISuperfluidPool).
@@ -395,9 +419,54 @@ async function updateMemberUnits(pool, memberAddress, newUnits, userData) {
 }
 ```
 
-### 3. `claimAll`
+### 3. Distributing the tokens
 
-Claims all tokens from the pool.
+Once you have set up your pool and updated the units of the pool members,
+you can distribute tokens to the pool members using the `distribute` function in the case of Instant Distributions and the `distributeFlow` function in the case of Streaming Distributions.
+
+The function `distribute` distributes a specified amount of tokens from one address to a pool.
+
+* **Parameters**:
+    * `token`: Super Token address (ISuperfluidToken).
+    * `from`: Address from which to distribute tokens.
+    * `pool`: Superfluid Pool address (ISuperfluidPool).
+    * `requestedAmount`: Amount of tokens to distribute.
+    * `userData`: User-specific data.
+
+```javascript
+async function distribute(token, from, pool, requestedAmount, userData) {
+  const tx = await gdaForwarder.distribute(token, from, pool, requestedAmount, userData);
+  await tx.wait();
+}
+```
+
+The function `distributeFlow` distributes a specified flow rate of tokens from one address to a pool.
+* **Parameters**:
+    * `token`: Super Token address (ISuperfluidToken).
+    * `from`: Address from which to distribute tokens.
+    * `pool`: Superfluid Pool address (ISuperfluidPool).
+    * `requestedFlowRate`: Flow rate of tokens to distribute.
+    * `userData`: User-specific data.
+
+```javascript
+async function distributeFlow(token, from, pool, requestedFlowRate, userData) {
+  const tx = await gdaForwarder.distributeFlow(token, from, pool, requestedFlowRate, userData);
+  await tx.wait();
+}
+```
+### 4. Claiming the tokens
+
+Pool members can claim their tokens from the pool using the `claimAll` function at any time.
+Tokens accumulate in the pool until they are claimed by the members.
+The `claimAll` function can be called by any address to claim the tokens from the pool to any member.
+
+:::tip What happens if a member is already connected to the pool?
+If a member is already connected to the pool, the `claimAll` function is probably redundant.
+As we will see in the next section, the `connectPool` function is used to connect a member to a pool
+and automatically claim the previously accumulated tokens.
+:::
+
+The `claimAll` function claims all the tokens from the pool.
 
 * **Parameters**:
     * `pool`: Superfluid Pool address (ISuperfluidPool).
@@ -411,9 +480,14 @@ async function claimAll(pool, memberAddress, userData) {
 }
 ```
 
-### 4. `connectPool`
+### 5. Connecting to the pool
 
-Connects a pool member to a pool.
+In order to avoid periodic claims, a pool member can connect to a pool using the `connectPool` function.
+Connecting to a pool makes it so the member's balance gets updated automatically with distributions.
+It also automatically claims the accumulated tokens from the pool.
+As opposed to claiming, only the pool member themselves can connect to the pool.
+
+The `connectPool` function connects a pool member to a pool.
 
 * **Parameters**:
     * `pool`: Superfluid Pool address (ISuperfluidPool).
@@ -426,9 +500,12 @@ async function connectPool(pool, userData) {
 }
 ```
 
-### 5. `disconnectPool`
+### 6. Disonnecting from the pool
 
-Disconnects a pool member from a pool.
+If a pool member wants to stop receiving distributions automatically from a pool,
+they can disconnect from the pool using the `disconnectPool` function.
+
+The function `disconnectPool` disconnects a pool member from a pool.
 
 * **Parameters**:
     * `pool`: Superfluid Pool address (ISuperfluidPool).
@@ -442,4 +519,4 @@ async function disconnectPool(pool, userData) {
 ```
 ---
 
-This guide provides an overview of how to interact with the GDAv1Forwarder contract using ethers.js or Wagmi. For more information, check out the [GDAv1Forwarder Technical Reference](/docs/technical-reference/GDAv1Library)
+This guide provides an overview of how to interact with the GDAv1Forwarder contract using ethers.js or Wagmi. For more information, check out the [GDAv1Forwarder Technical Reference](/docs/technical-reference/GDAv1Forwarder)
