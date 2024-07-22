@@ -1924,7 +1924,18 @@ _Creates a new Superfluid Pool._
 | :--- | :--- | :---------- |
 | `token` | contract ISuperToken | The Super Token address. |
 | `admin` | address | The pool admin address. |
-| `poolConfig` | struct PoolConfig | The pool configuration (see PoolConfig in IGeneralDistributionAgreementV1.sol) |
+| `poolConfig` | struct PoolConfig | The pool configuration (see below) |
+
+The `PoolConfig` struct is defined as follows:
+
+```solidity
+struct PoolConfig {
+    bool transferabilityForUnitsOwner;
+    bool distributionFromAnyAddress;
+}
+```
+- `transferabilityForUnitsOwner`: If true, the pool members can transfer their owned units, else, only the pool admin can manipulate the units for pool members (**not recommended**)
+- `distributionFromAnyAddress`: If true, anyone can execute distributions via the pool, else, only the pool admin can execute distributions via the pool
 
 #### Return Values
 
