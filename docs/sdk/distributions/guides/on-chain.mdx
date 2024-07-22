@@ -1,0 +1,123 @@
+---
+sidebar_position: 2
+---
+
+import Admonition from '@theme/Admonition';
+
+# Create Update and Connect your Pools
+
+Building on top of the Superfluid's Distribution Pools protocol involves interacting with Super Tokens. Remember, Superfluid is a token-centric protocol, and all of the primitives are centered around [Super Tokens](/docs/protocol/super-tokens/overview).
+Distribution Pools allow for scalable and efficient one-to-many token distributions at a fixed gas cost.
+
+When interacting with Super Tokens on-chain, you can use the Superfluid's [SuperTokenV1Library](/docs/technical-reference/SuperTokenV1Library) to access the core functions.
+
+:::warning About the General Distributions Agreement
+At times, we use "Distribution Pools" or the "General Distributions Agreement" (GDA) interchangeably.
+The GDA is the name of the implementation in our codebase. If you are interested in the technical details, you can find the full Superfluid Architecture [here](/docs/technical-reference/Architecture).
+:::
+
+## Importance of Distribution Pools
+
+Distribution Pools are at the core of Superfluid's functionality, enabling a multitude of applications such as subscription services, salary payments, and rewards distribution. They are designed to be flexible, allowing for both instant and streaming distributions.
+
+- **Instant Distributions**: Allow for a one-time distribution of a specified amount of tokens to all members of a pool instantly.
+- **Streaming Distributions**: Enable a continuous flow of tokens to pool members over time.
+
+:::note About Pools
+The same pool can be used to distribute any Super Token, be it for Instant or Streaming Distributions.
+:::
+
+
+## Key Functions of SuperTokenV1Library.sol
+
+[`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) provides several functions to interact with pools and distributions:
+
+### getFlowDistributionFlowRate
+
+```solidity
+function getFlowDistributionFlowRate(ISuperToken token, address from, ISuperfluidPool to) internal view returns (int96)
+```
+
+Retrieves the flow rate of a distribution from a sender to a pool.
+
+### estimateFlowDistributionActualFlowRate
+
+```solidity
+function estimateFlowDistributionActualFlowRate(ISuperToken token, address from, ISuperfluidPool to, int96 requestedFlowRate) internal view returns (int96 actualFlowRate, int96 totalDistributionFlowRate)
+```
+
+Estimates the actual flow rate that will be distributed based on the requested flow rate.
+
+### estimateDistributionActualAmount
+
+```solidity
+function estimateDistributionActualAmount(ISuperToken token, address from, ISuperfluidPool to, uint256 requestedAmount) internal view returns (uint256 actualAmount)
+```
+
+Estimates the actual distribution amount that will be allocated to the pool based on the requested amount.
+
+### isMemberConnected
+
+```solidity
+function isMemberConnected(ISuperToken token, address pool, address member) internal view returns (bool)
+```
+
+Checks whether a member is connected to a pool and eligible to receive distributions.
+
+## Working with Streaming Distributions
+
+To interact with streaming distributions, you can use functions such as:
+
+### distributeFlow
+
+```solidity
+function distributeFlow(ISuperToken token, address from, ISuperfluidPool pool, int96 requestedFlowRate) internal returns (bool)
+```
+
+Initiates a distribution flow from a sender to a pool with the specified flow rate.
+
+:::warning Important
+Keep in mind that the total amount of units in the pool needs to be significantly lower than the total flow rate or the total tokens distributed of the pool.
+To understand more why this is the case, please refer to the [Member Units](/docs/protocol/distributions/guides/pools.mdx#about-member-units) section.
+:::
+
+## Contract Example
+
+Here's a simple contract example using some of the functions from `SuperTokenV1Library.sol` to interact with distributions:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@superfluid-finance/ethereum-contracts/contracts/superfluid/SuperTokenV1Library.sol";
+
+contract MyDistributionsContract {
+    using SuperTokenV1Library for ISuperToken;
+
+    ISuperToken private _superToken;
+
+    constructor(ISuperToken superToken) {
+        _superToken = superToken;
+    }
+
+    function distributeInstantly(ISuperfluidPool pool, uint256 amount) public {
+        _superToken.estimateDistributionActualAmount(address(this), pool, amount);
+        // Additional logic for distribution
+    }
+
+    function startStreamingDistribution(ISuperfluidPool pool, int96 flowRate) public {
+        _superToken.distributeFlow(address(this), pool, flowRate);
+        // Additional logic for streaming distribution
+    }
+}
+```
+
+This contract demonstrates how to estimate the amount for an instant distribution and start a streaming distribution using the `SuperTokenV1Library`.
+
+:::tip
+When using the `SuperTokenV1Library.sol`, you don't need to include the `SuperToken` as a parameter in your method call.
+Simply call `SuperToken.[Method]` and the library will handle the rest.
+:::
+
+## Further Reading
+For more detailed information on the implementation and usage of `SuperTokenV1Library.sol`, refer to the [SuperTokenV1Library Technical reference](/docs/technical-reference/SuperTokenV1Library).

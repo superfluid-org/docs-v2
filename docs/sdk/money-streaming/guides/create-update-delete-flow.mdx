@@ -1,0 +1,151 @@
+---
+sidebar_position: 1
+---
+
+# Create, Update, and Delete Flows
+
+This guide covers various methods for managing flows in Superfluid, including direct management by the sender and management via Access Control List (ACL), both on-chain and off-chain.
+
+## Prerequisites
+
+Before proceeding, ensure you have:
+
+* Familiarity with Solidity and/or JavaScript (for ethers.js or wagmi).
+* Basic understanding of Superfluid and its functionalities.
+* Access to a development environment for deploying or interacting with Smart Contracts.
+
+## Understanding Access Control List (ACL)
+
+The Access Control List in Superfluid allows an account to set permissions for another account to manage flows on its behalf. It's similar to the ERC20 approval mechanism and crucial for managing flows where the sender is not the direct operator.
+
+### ACL Parameters
+
+* **`flowRateAllowance`**: This parameter acts as a 'tank' of allowance, limiting the flow rate an operator can manage.
+* **`permissions`**: Determines the operator's level of access over your streams, with values from 1 (Create) to 7 (Create, Update, or Delete).
+
+## On-Chain Flow Management
+
+### Creating Flows Directly
+
+#### Function: `createFlow`
+
+```solidity
+/**
+ * @dev Create flow without userData
+ * @param token The token used in flow
+ * @param receiver The receiver of the flow
+ * @param flowRate The desired flowRate
+ */
+function createFlow(ISuperToken token, address receiver, int96 flowRate)
+    internal returns (bool)
+```
+
+### Updating Flows Directly
+
+#### Function: `updateFlow`
+
+```solidity
+/**
+ * @dev Update flow without userData
+ * @param token The token used in flow
+ * @param receiver The receiver of the flow
+ * @param flowRate The desired flowRate
+ */
+function updateFlow(ISuperToken token, address receiver, int96 flowRate)
+    internal returns (bool)
+```
+
+### Deleting Flows Directly
+
+#### Function: `deleteFlow`
+
+```solidity
+/**
+ * @dev Delete flow without userData
+ * @param token The token used in flow
+ * @param sender The sender of the flow
+ * @param receiver The receiver of the flow
+ */
+function deleteFlow(ISuperToken token, address sender, address receiver)
+    internal returns (bool)
+```
+
+:::info
+Using the [`SuperTokenV1Library`](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol), you can create, update, and delete flows directly by interacting with the Super Token Contract. Following this [link](https://github.com/superfluid-finance/super-examples/blob/0b90a34602dc9cab4a10ac59aefebef1bf5384cd/projects/tradeable-cashflow/contracts/RedirectAll.sol#L148) you will find an example of how this is done.
+:::
+
+## Managing Flows via ACL
+
+### Creating Flows via ACL
+
+#### Function: `createFlowFrom`
+
+```solidity
+/**
+ * @dev Creates flow as an operator without userData
+ * @param token The token to flow
+ * @param sender The sender of the flow
+ * @param receiver The receiver of the flow
+ * @param flowRate The desired flowRate
+ */
+function createFlowFrom(
+    ISuperToken token,
+    address sender,
+    address receiver,
+    int96 flowRate
+) internal returns (bool)
+```
+
+### Updating Flows via ACL
+
+#### Function: `updateFlowFrom`
+
+```solidity
+/**
+ * @dev Updates flow as an operator without userData
+ * @param token The token to flow
+ * @param sender The sender of the flow
+ * @param receiver The receiver of the flow
+ * @param flowRate The desired flowRate
+ */
+function updateFlowFrom(
+    ISuperToken token,
+    address sender,
+    address receiver,
+    int96 flowRate
+) internal returns (bool)
+```
+
+### Deleting Flows via ACL
+
+#### Function: `deleteFlowFrom`
+
+```solidity
+/**
+ * @dev Deletes flow as an operator without userData
+ * @param token The token to flow
+ * @param sender The sender of the flow
+ * @param receiver The receiver of the flow
+ */
+function deleteFlowFrom(
+    ISuperToken token,
+    address sender,
+    address receiver
+) internal returns (bool)
+```
+
+## Off-Chain Flow Management
+
+For off-chain interactions, use the Money Streaming Forwarder contract, deployed on all networks. You can find addresses of said contract on the [Superfluid Console](https://console.superfluid.finance/matic/protocol). This contract allows managing flows through JavaScript libraries like ethers.js or wagmi.
+
+### Interacting with the Money Streaming Forwarder Contract
+
+You can interact with the Money Streaming Forwarder contract using its contract ABI, available [here](https://github.com/superfluid-finance/superfluid-club-monorepo/blob/master/apps/app/src/abis/CFAv1Forwarder.ts). This method is suitable for applications that require a more flexible and user-friendly way to manage flows.
+
+### Using ethers.js or wagmi for Off-Chain Management
+
+Ethers.js or wagmi libraries can be used for off-chain interactions with the Money Streaming Forwarder contract. These libraries provide a convenient way to interact with Ethereum smart contracts.
+
+---
+
+This guide provides a detailed approach to managing flows in Superfluid, covering both on-chain and off-chain methods, direct management, and ACL-based scenarios. It aims to equip developers with the knowledge and tools necessary for effective flow management in the Superfluid ecosystem.
