@@ -32,7 +32,7 @@ For more details on the SuperTokenV1Library, refer to the page [Using the SuperT
 ## Access Control in Superfluid
 
 Access control is a crucial aspect of smart contract security, allowing certain addresses to perform specific actions.
-In the context of Superfluid and money streaming, access control enables one address (the flow operator) to manage streams on behalf of another address.
+In the context of Superfluid and money streaming, Access Control Lists (ACLs) enables one address (the Flow Operator) to manage streams on behalf of another address.
 
 ### How Access Control Works in Superfluid
 
@@ -43,6 +43,10 @@ Superfluid implements a flexible permission system for flow management:
 2. **Flow Rate Allowance**: This is the maximum net flow rate that the operator can create on behalf of the account.
 
 3. **Operator Actions**: Once granted permissions, the operator can perform the allowed actions within the specified flow rate allowance.
+
+:::tip Access Control for [Distribution Pools](/docs/protocol/distributions/overview)
+In this document, we address Access Control for Money Streaming (CFA). Currently, there are no access control functions for [Distribution Pools](/docs/protocol/distributions/overview). However, you can build your own access control system using the SuperTokenV1Library functions.
+:::
 
 ### Key Functions for Access Control
 
@@ -78,6 +82,10 @@ function revokeFlowPermissions(
     address flowOperator
 ) internal returns (bool)
 ```
+
+:::tip Full list of functions
+For a full list of functions related to access control, refer to the [SuperTokenV1Library technical reference](/docs/technical-reference/SuperTokenV1Library).
+:::
 
 ## User Data in Superfluid
 
