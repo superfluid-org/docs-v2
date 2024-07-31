@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import abi from "./abi.json";
 import Logo from "/src/components/Logo";
+import { Button, Input, Box, Text, Flex, VStack, HStack, useToast } from '@chakra-ui/react';
 
 const FlowSenderComponent = ({ contractAddress }) => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -641,5 +642,14 @@ const ReactLiveScope = {
   RealTimeBalance,
   FlowSenderComponent,
   MacroForwarderComponent,
+  Button,
+  Input,
+  Box,
+  Text,
+  Flex,
+  VStack,
+  HStack,
+  useToast,
+  ethers
 };
 export default ReactLiveScope;
