@@ -116,6 +116,10 @@ const createFlow = async (tokenAddress, receiver, flowRate) => {
   }
 };
 ```
+:::tip using setFlowrate instead
+You can also use the `setFlowrate` function to update the flow rate of an existing flow.
+For a full list of functions available in the `CFAv1Forwarder` contract, refer to the [CFAv1Forwarder technical reference](/docs/technical-reference/CFAv1Forwarder).
+:::
 
 ## Updating a Flow
 
@@ -156,6 +160,10 @@ const updateFlow = async (tokenAddress, receiver, newFlowRate) => {
   }
 };
 ```
+:::tip using setFlowrate instead
+You can also use the `setFlowrate` function to update the flow rate of an existing flow.
+For a full list of functions available in the `CFAv1Forwarder` contract, refer to the [CFAv1Forwarder technical reference](/docs/technical-reference/CFAv1Forwarder).
+:::
 
 ## Deleting a Flow
 
@@ -198,6 +206,12 @@ const deleteFlow = async (tokenAddress, receiver) => {
 };
 ```
 
+:::tip using setFlowrate instead
+You can also use the `setFlowrate` function to update the flow rate of an existing flow.
+For a full list of functions available in the `CFAv1Forwarder` contract, refer to the [CFAv1Forwarder technical reference](/docs/technical-reference/CFAv1Forwarder).
+:::
+
+
 ## Building a Simple UI
 
 Here's an example of how you might build a simple UI to interact with these functions:
@@ -212,8 +226,7 @@ function FlowManager() {
   const toast = useToast();
 
   const forwarderAddress = '0xcfA132E353cB4E398080B9700609bb008eceB125';
-  const forwarderABI = []; // Insert the ABI here
-
+  const forwarderABI = CFAv1ForwarderABI; // You will need to import the ABI in your code. You can do that from: https://docs.superfluid.finance/docs/technical-reference/CFAv1Forwarder
 
   const connectWallet = async () => {
     if (typeof window.ethereum !== 'undefined') {
@@ -341,8 +354,9 @@ function FlowManager() {
 
 This UI provides input fields for the token address, receiver address, and flow rate, along with buttons to create, update, and delete flows. You would need to implement the `createFlow`, `updateFlow`, and `deleteFlow` functions as shown in the previous examples.
 
-:::tip the example does not work?
-The example above is a live example and requires the ABI.
-In order to make it work, head to the [CFAv1Forwarder technical reference](/docs/technical-reference/CFAv1Forwarder) and copy the ABI.
+:::tip the example does not work on your developer environment?
+The example above is a live example and requires the ABI to be imported. In the case of this example, the ABI has already been imported through the live coder.
+
+In order to make it work on your developer environment, head to the [CFAv1Forwarder technical reference](/docs/technical-reference/CFAv1Forwarder) and copy the ABI.
 Then, replace the `forwarderABI` variable in the example with the ABI you copied.
 :::
