@@ -9,8 +9,16 @@ import BonadocsWidget from "@bonadocs/widget"
 The **CFAv1Forwarder** contract is a Superfluid forwarder that implements the Constant Flow Agreement (CFA) related functions.
 It is a contract specifically made immutable in order to facilitate the interaction with [Money Streaming](/docs/protocol/money-streaming/overview.mdx) through the Constant Flow Agreement (CFA).
 
-This contract is optimized for interaction that would happen from outside the blockchain (off-chain).
-For more information on the best practices regarding this interaction, please refer to the [Interact Off-Chain](docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain.mdx) section of this documentation.
+This contract is optimized for interaction that would happen from your client application.
+For more information on the best practices regarding this interaction, please refer to the [Create, Update and Delete Flows](/docs/sdk/money-streaming/create-update-delete-flow) or [Manage Access Control and User Data](/docs/sdk/money-streaming/acl-user-data).
+
+## Contract Address
+
+The `CFAv1Forwarder` contract address is the same on all networks:
+
+```
+0xcfA132E353cB4E398080B9700609bb008eceB125
+```
 
 ## ABI
 
