@@ -652,7 +652,6 @@ const ReactLiveScope = {
   VStack,
   HStack,
   useToast,
-  ChakraProvider,
   ethers,
   CFAv1ForwarderABI,
   GDAv1ForwarderABI,

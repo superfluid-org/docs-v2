@@ -1,41 +1,51 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 import Admonition from '@theme/Admonition';
 import CodeBlock from '@theme/CodeBlock';
 
-# Deploy a Super App
+# Quickstart
 
-## Deploying a Super App
+## Inroduction
 
-Deploying a Super App involves integration with the Superfluid Protocol and compliance with its governance for activation. For mainnet deployment, you have two options for registration:
+Super Apps are smart contracts registered with the Superfluid Protocol, allowing them to **react to actions of the Superfluid protocol** (like flow creations, flow updates and flow deletions).
 
-1. **Registration Key**: Request a key associated with a deployer account. This key, possibly with an expiry, can be used multiple times via `ISuperfluid.registerAppWithKey()`.
-2. **Factory Contract Whitelisting**: Use a factory contract to register an unlimited number of Super Apps via `ISuperfluid.registerAppByFactory()`.
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    ![The Tradeable Cashflow NFT](/assets/image_(29)_(1).png)
+</div>
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <p>*Super App Illustration*</p>
+</div>
 
-For further guidance and mainnet deployment, refer to these resources:
+This guide provides a simple example of how to deploy a Super App using the [CFASuperAppBase](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/apps/CFASuperAppBase.sol).
 
-- [Super App Whitelisting Guide](https://github.com/superfluid-finance/protocol-monorepo/wiki/Super-App-White-listing-Guide)
-- [Mainnet Deployment Guide by Omnifient](https://mirror.xyz/0x52EF1F3c4A1068d0079093cD2DCAe9eBE9Edcb8F/z2uHwWCZcphEnEHhDJ15UZGw_dMwm-uVD2Iy4Dp76M0)
+:::tip About this Guide
+This guide provides a basic example of deploying a Super App using the CFASuperAppBase contract. For more advanced Super App development, refer to the [Super Apps in Depth](/docs/protocol/advanced-topics/super-apps/understand-super-apps).
+:::
 
-## SuperAppBaseFlow - Simplifying Super App Development
+:::warning Dont overcomplicate it !
+For most use cases, the CFASuperAppBase is sufficient. It simplifies the callback process and reduces redundancy.
+:::
 
-### What is SuperAppBaseFlow?
+## CFASuperAppBase - Simplifying Super App Development
 
-SuperAppBaseFlow is an inheritable base contract designed to streamline the development of Super Apps. It abstracts the complexities involved in writing callbacks and reduces redundancy.
+### What is [CFASuperAppBase](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/apps/CFASuperAppBase.sol)?
+
+[CFASuperAppBase](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/apps/CFASuperAppBase.sol) is an inheritable base contract designed to streamline the development of Super Apps.
+It abstracts the complexities involved in writing callbacks and reduces redundancy.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     ![SuperAppBaseFlow Illustration](/assets/image_(30)_(2).png)
 </div>
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <p>*SuperAppBaseFlow Illustration*</p>
+    <p>*CFASuperAppBase Illustration*</p>
 </div>
 
 :::info Example
 onFlowCreated is a more intuitive function than afterAgreementCreated.
 :::
 
-### Key Features of SuperAppBaseFlow
+### Key Features of CFASuperAppBase
 
 - **Intuitive Callback Functions**: SuperAppBaseFlow consolidates callback development into three functions (`onFlowCreated`, `onFlowUpdated`, `onFlowDeleted`) with user-friendly parameters.
 - **Ease of Use**: Simplifies the callback process compared to the original SuperAppBase, making it more accessible for developers.
@@ -44,7 +54,7 @@ onFlowCreated is a more intuitive function than afterAgreementCreated.
 
 ```solidity
 // Example Code
-import { SuperAppBaseFlow } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperAppBaseFlow.sol";
+import { CFASuperAppBase } from "@superfluid-finance/ethereum-contracts/contracts/apps/CFASuperAppBase.sol";
 
 contract SomeSuperAppContract is SuperAppBaseFlow {
     // Your contract implementation
@@ -125,6 +135,22 @@ function onFlowDeleted(
 }
 ```
 
-## Conclusion
+## Registering a Super App
 
-SuperAppBaseFlow is a recommended and easier way to deploy Super Apps, offering a more straightforward approach to developing with Superfluid's innovative features. Its intuitive design and simplified callback functions make it an ideal starting point for developers diving into programmable cash flows.
+Deploying a Super App involves integration with the Superfluid Protocol and compliance with its governance for activation.
+For your Super App to be recognized by the protocol, you must register it with the Superfluid Host contract.
+If you deploy your Super App on a testnet, you can call the function `selfRegister` to register it.
+
+This is how the function looks on the CFASuperAppBase:
+
+```solidity
+function selfRegister(
+        bool activateOnCreated,
+        bool activateOnUpdated,
+        bool activateOnDeleted
+    ) public {
+        HOST.registerApp(getConfigWord(activateOnCreated, activateOnUpdated, activateOnDeleted));
+    }
+```
+
+If you are deploying on a mainnet or a network with permissioned registration, you will need to follow the registration process outlined in [Registering a Super App](/docs/protocol/advanced-topics/super-apps/register).
