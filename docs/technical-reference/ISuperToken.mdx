@@ -2,10 +2,34 @@
 sidebar_position: 5
 ---
 
+
+import CodeBlock from "@theme/CodeBlock";
+import ISuperToken from "!!raw-loader!@site/src/abis/ISuperToken.json";
+
 # ISuperToken
 
-**Super token (Superfluid Token + ERC20 + ERC777) interface**
+This is the technical reference related to the interface for Super Tokens.
 
+## Implementation addresses
+Super Token deployments work in a proxy pattern with the original implementation being comon between all super tokens for each chain.
+The implementation address for the SuperToken is different for each network and can be found in the SuperTokenFactory at the method `getSuperTokenLogic`.
+
+To get the addresses of all the SuperTokenFactory contracts, you can use the [Superfluid Console](https://console.superfluid.finance/), section Protocol.
+
+## ABI
+
+In order to interact with any contract satistying the `ISuperToken` interface, you can use the following ABI:
+
+<div>
+<details>
+<summary>Click here to show `ISuperToken` ABI</summary>
+<p>
+
+<CodeBlock language="json">{ISuperToken}</CodeBlock>
+
+</p>
+</details>
+</div>
 
 ## Functions
 
