@@ -1,1 +1,254 @@
+---
+sidebar_position: 1
+---
+
 # Quickstart
+
+## How to Interact with the Superfluid Protocol
+
+When interacting with the Superfluid protocol from a client application, you'll use one of two contracts depending on the functionality you need:
+
+1. For Money Streaming: Use the `CFAv1Forwarder` contract
+2. For Distribution Pools: Use the `GDAv1Forwarder` contract
+
+We use these forwarder contracts instead of building an SDK because:
+- It simplifies the integration process
+- It reduces the need for frequent updates to the SDK
+- It allows for more flexibility and direct interaction with the protocol
+
+## Contract Addresses and ABIs
+
+Here are the addresses for each contract across all Superfluid-supported chains:
+
+- `CFAv1Forwarder`: `0xcfA132E353cB4E398080B9700609bb008eceB125`
+- `GDAv1Forwarder`: `0x6DA13Bde224A05a288748d857b9e7DDEffd1dE08`
+
+You can find the full ABIs for these contracts in the following technical references:
+- [CFAv1Forwarder ABI](/docs/technical-reference/CFAv1Forwarder)
+- [GDAv1Forwarder ABI](/docs/technical-reference/GDAv1Forwarder)
+
+## Creating a React App (Next.js)
+
+To create a new Next.js app, follow these steps:
+
+1. Open your terminal and run:
+   ```
+   npx create-next-app@latest my-superfluid-app
+   ```
+2. Navigate to your new app directory:
+   ```
+   cd my-superfluid-app
+   ```
+3. Install necessary dependencies:
+   ```
+   npm install ethers@5.7.2 @chakra-ui/react @emotion/react @emotion/styled framer-motion
+   ```
+
+## Superfluid Interaction Component
+
+Here's a React component that allows you to create a stream and a pool. You can copy and paste this into a new file in your Next.js app's `pages` directory (e.g., `pages/superfluid-demo.js`):
+
+```jsx live
+// Don't forget to import React, useState, ethers, and Chakra components
+//import React, { useState } from 'react';
+//import { ethers } from 'ethers';
+//import { ChakraProvider, Box, VStack, HStack, Input, Button, Text, useToast } from '@chakra-ui/react';
+
+function SuperfluidDemo() {
+  const [provider, setProvider] = useState(null);
+  const [account, setAccount] = useState('');
+  const [tokenAddress, setTokenAddress] = useState('');
+  const [receiverAddress, setReceiverAddress] = useState('');
+  const [flowRate, setFlowRate] = useState('');
+  const [adminAddress, setAdminAddress] = useState('');
+  const toast = useToast();
+
+
+const CFAv1ForwarderAddress = '0xcfA132E353cB4E398080B9700609bb008eceB125';
+const GDAv1ForwarderAddress = '0x6DA13Bde224A05a288748d857b9e7DDEffd1dE08';
+
+// Simplified ABIs with only the functions we need
+const CFAv1ForwarderABI = [
+  "function createFlow(address token, address sender, address receiver, int96 flowRate, bytes memory userData) external returns (bool)"
+];
+
+const GDAv1ForwarderABI = [
+  "function createPool(address token, address admin, (uint32 transferabilityForUnitsOwner, bool distributionFromAnyAddress) memory poolConfig) external returns (bool, address)"
+];
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(provider);
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        setAccount(address);
+        toast({
+          title: 'Wallet connected',
+          description: `Connected to ${address}`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      } catch (error) {
+        console.error('Failed to connect wallet:', error);
+        toast({
+          title: 'Connection failed',
+          description: 'Failed to connect wallet. Please try again.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } else {
+      toast({
+        title: 'Metamask not detected',
+        description: 'Please install Metamask to use this feature.',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const createStream = async () => {
+    if (!provider) {
+      toast({
+        title: 'Wallet not connected',
+        description: 'Please connect your wallet first.',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(CFAv1ForwarderAddress, CFAv1ForwarderABI, signer);
+
+    try {
+      const tx = await contract.createFlow(
+        tokenAddress,
+        account,
+        receiverAddress,
+        flowRate,
+        "0x"
+      );
+      await tx.wait();
+      toast({
+        title: 'Stream created',
+        description: 'The stream has been created successfully.',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error('Error creating stream:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to create stream. Please try again.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const createPool = async () => {
+    if (!provider) {
+      toast({
+        title: 'Wallet not connected',
+        description: 'Please connect your wallet first.',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(GDAv1ForwarderAddress, GDAv1ForwarderABI, signer);
+
+    try {
+      const poolConfig = {
+        transferabilityForUnitsOwner: false,
+        distributionFromAnyAddress: false
+      };
+      const tx = await contract.createPool(tokenAddress, adminAddress, poolConfig);
+      const receipt = await tx.wait();
+      const [success, poolAddress] = receipt.events.find(e => e.event === 'PoolCreated').args;
+      toast({
+        title: 'Pool created',
+        description: `Pool created successfully at ${poolAddress}`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error('Error creating pool:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to create pool. Please try again.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  return (
+    <ChakraProvider>
+      <Box maxWidth="500px" margin="auto" padding="20px">
+        <VStack spacing={4} align="stretch">
+          <Text fontSize="2xl" fontWeight="bold" textAlign="center">Superfluid Demo</Text>
+          
+          {!account ? (
+            <Button colorScheme="blue" onClick={connectWallet}>Connect Wallet</Button>
+          ) : (
+            <Text>Connected: {account}</Text>
+          )}
+          
+          <Input
+            placeholder="Token Address"
+            value={tokenAddress}
+            onChange={(e) => setTokenAddress(e.target.value)}
+          />
+          
+          <Text fontSize="xl" fontWeight="bold">Create Stream</Text>
+          <Input
+            placeholder="Receiver Address"
+            value={receiverAddress}
+            onChange={(e) => setReceiverAddress(e.target.value)}
+          />
+          <Input
+            placeholder="Flow Rate"
+            value={flowRate}
+            onChange={(e) => setFlowRate(e.target.value)}
+          />
+          <Button colorScheme="green" onClick={createStream}>Create Stream</Button>
+          
+          <Text fontSize="xl" fontWeight="bold">Create Pool</Text>
+          <Input
+            placeholder="Admin Address"
+            value={adminAddress}
+            onChange={(e) => setAdminAddress(e.target.value)}
+          />
+          <Button colorScheme="blue" onClick={createPool}>Create Pool</Button>
+        </VStack>
+      </Box>
+    </ChakraProvider>
+  );
+}
+```
+
+To use this component:
+
+1. Copy the above code into a new file in your Next.js app's `pages` directory (e.g., `pages/superfluid-demo.js`).
+2. Uncomment the necessary import statements at the top of the file.
+3. Run your Next.js app with `npm run dev`.
+4. Navigate to `http://localhost:3000/superfluid-demo` in your browser.
+5. Connect your wallet, then you can create streams and pools using the Superfluid protocol.
+
+This component provides a basic interface for creating streams and pools. In a production environment, you would want to add more error checking, input validation, and additional features.

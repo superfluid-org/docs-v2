@@ -336,6 +336,11 @@ To use this component:
 2. To create a pool, enter the token address and admin address, then click "Create Pool".
 3. To update member units, enter the pool address, member address, and new units, then click "Update Member Units".
 
-Remember to replace the `forwarderABI` placeholder with the actual ABI of the `GDAv1Forwarder` contract.
-
 This example provides a starting point for building a user interface to manage distribution pools in Superfluid. In a production environment, you would want to add more robust error checking, input validation, and additional features like displaying pool information or listing pool members.
+
+:::tip the example does not work on your developer environment?
+The example above is a live example and requires the ABI to be imported. In the case of this example, the ABI has already been imported through the live coder.
+
+In order to make it work on your developer environment, head to the [GDAv1Forwarder technical reference](/docs/technical-reference/GDAv1Forwarder) and copy the ABI.
+Then, replace the `forwarderABI` variable in the example with the ABI you copied.
+:::
