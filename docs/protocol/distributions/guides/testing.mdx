@@ -10,7 +10,41 @@ In this guide, we'll walk through the process of testing the `DistributionContra
 
 ## Prerequisites
 
-Ensure your development environment is set up as per the previous guide. The steps are similar, involving creating a project directory, initializing a Foundry project, and installing necessary dependencies like the Superfluid protocol and OpenZeppelin contracts.
+Before diving into testing your Superfluid contracts with Foundry, make sure you have set up your development environment properly. Here's a brief explanation of each step required:
+
+1. **Creating and Navigating to Your Project Directory**:
+
+   ```bash
+   mkdir superfluid-example && cd superfluid-example
+   ```
+
+   This command creates a new directory named `foundry-example` and then changes your current working directory to it.
+
+2. **Initializing a Foundry Project**:
+
+   ```bash
+   forge init
+   ```
+
+   This initializes a new Foundry project in your directory, setting up the necessary structure and configuration for Ethereum smart contract development.
+
+3. **Installing Superfluid Protocol Dependencies**:
+
+   ```bash
+   forge install superfluid-protocol-monorepo=https://github.com/superfluid-finance/protocol-monorepo@dev --no-commit
+   ```
+
+   Installs the `dev` branch of the Superfluid protocol from its GitHub repository.
+
+4. **Installing OpenZeppelin Contracts**:
+
+   ```bash
+   forge install https://github.com/OpenZeppelin/openzeppelin-contracts@v4.9.3 --no-commit
+   ```
+
+   Installs the necessary (4.9.X) of the OpenZeppelin contracts, which are widely used for secure smart contract development.
+
+These steps ensure you have the necessary tools and dependencies installed to start developing and testing your Superfluid-based contracts with Foundry.
 
 ## Contract and Key Functions
 
