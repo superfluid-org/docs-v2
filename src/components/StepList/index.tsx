@@ -29,16 +29,16 @@ export const actions = [
     text: `Start building very quickly with Superfluid.`,
   },
   {
-    title: "Protocol",
+    title: "Contracts",
     icon: MousePointer,
     to: "/docs/protocol/quickstart",
-    text: `Learn about the core concepts of the Superfluid Protocol, and how to integrate it into your dApp.`,
+    text: `Learn about the core concepts of the Superfluid Protocol, and how to build your smart contracts.`,
   },
   {
     title: "SDK",
     icon: AtSign,
     to: "/docs/sdk/overview",
-    text: `Learn about how to use the Superfluid SDK in your JavaScript/TypeScript project.`,
+    text: `Learn about how to interact with Superfluid to build your client-side SDK.`,
   },
   {
     title: "Technical Reference",

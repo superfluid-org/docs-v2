@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Admonition from '@theme/Admonition';
@@ -20,8 +24,6 @@ Before diving into subgraph queries, familiarize yourself with GraphQL basics:
 ### Superfluid Console
 
 The Superfluid Console is an interactive interface for exploring the Superfluid Protocol and interacting with its Subgraph. It provides an intuitive way to query on-chain data, get contract addresses, and manage your Superfluid finances. The console supports various blockchain networks, allowing you to seamlessly switch between them and access specific data sets. Whether you're analyzing streams, checking balances, or staying up to date with the new deployments. The Superfluid Console makes these tasks accessible and straightforward.
-
-### Subgraph Networks
 
 Explore Superfluid data across various networks using the Superfluid Console. Select a network to start querying:
 
@@ -49,12 +51,17 @@ Explore Superfluid data across various networks using the Superfluid Console. Se
   </TabItem>
 </Tabs>
 
+### Subgraph Networks
+
+You can have the full list of available subgraph endpoints in the [Subgraph Endpoints](/docs/technical-reference/subgraph) page.
+
 ## Resources
 
 - **Subgraph Queries**: [Guide on Querying the Graph](https://thegraph.com/docs/en/developer/query-the-graph/)
 - **Deploy a Subgraph**: [Creating a Subgraph](https://thegraph.com/docs/en/developer/create-subgraph-hosted/)
 - **GraphQL Schema**: [Superfluid Schema](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/subgraph/schema.graphql)
-- **Apollo Client**: [For Frontend Queries](https://www.apollographql.com/docs/)
+- **Our Subgraph Endpoints**: [Subgraph Endpoints](/docs/technical-reference/subgraph)
+
 
 ## Helpful Tips
 
@@ -90,7 +97,7 @@ HOL entities represent entities over their lifetime and may be updated.
 
 - **`Account`**: Represents any address interacting with Superfluid.
 - **`Token`**: Represents valid SuperTokens.
-- **`Pool`**, **`PoolMember`**, **`Stream`**, **`StreamPeriod`**: Related to Superfluid streams and [pools](/docs/protocol/distributions/guides/pools).
+- **`Pool`**, **`PoolMember`**, **`Stream`**, **`StreamPeriod`**: Related to Superfluid streams and [pools](/docs/protocol/distributions/guides/pools.mdx).
 
 ### Aggregate Entities
 
@@ -100,8 +107,6 @@ Aggregate entities store cumulative data at both account-token and global token 
 - **`AccountTokenSnapshot`**: Aggregates data on an account's interaction with a token.
 
 ## Query Examples
-
-Here are examples to help you get started with Superfluid subgraphs:
 
 ### Super Token Data Query
 
@@ -115,149 +120,62 @@ Here are examples to help you get started with Superfluid subgraphs:
   }
 }
 ```
+### Get the pools that a user is a member of
 
-### Get All Streams for a Given Account
-
-To list all streams that an account is currently receiving (swap 'receiver' for 'sender' to see streams being sent):
+To list all pools that an account is currently a member (insert the ethereum address in the query below):
 
 ```javascript
 query MyQuery {
-  streams(where: {receiver: "YOUR_ADDRESS_HERE"}) {
-    currentFlowRate
-    token {
-      symbol
-    }
-    sender {
-      id
-    }
-    receiver {
-      id
-    }
-  }
-}
-```
-
-### Getting Stream Data Between 2 Parties
-
-Query active streams between two parties, such as Alice ("0x658...") and Bob ("0xd66..."):
-
-```javascript
-{
-  streams(where:{
-    sender: "0x658e1b019f2f30c8089a9ae3ae5820f335bd9ce4"
-    receiver: "0xd66e40b0c30595bec72153b502ac1e0c4785991b"
-  }) {
-    token {
-      id
-      symbol
-    }
-    createdAtTimestamp
-    updatedAtTimestamp
-    currentFlowRate
-    streamedUntilUpdatedAt
-  }
-}
-```
-
-<Admonition type="note">
-
-To calculate the current total amount streamed, use: _**streamedUntilUpdatedAt + ((current time in seconds) - updatedAtTimestamp) * currentFlowRate**_.
-
-</Admonition>
-
-### Get The Most Recently Updated Flows
-
-Query the 10 most recently updated flows using the `FlowUpdatedEvent` type:
-
-```javascript
-{
-  flowUpdatedEvents(first: 10, orderBy: timestamp, orderDirection: desc) {
-    oldFlowRate
+  pools(
+    first: 10
+    where: {poolMembers_: {account: "YOUR_ADDRESS_HERE", account_: {}}}
+  ) {
+    totalUnits
+    totalMembers
     flowRate
-    userData
-    stream {
-      token {
-        symbol
-      }
-      sender {
-        id
-      }
-      receiver {
-        id
-      }
-    }
+    createdAtBlockNumber
   }
 }
 ```
 
-<Admonition type="info">
+### Get all the pools for a specific token
 
-Understand the difference between a Flow and a Stream. A new stream is created each time a stream is terminated and restarted.
-
-</Admonition>
-
-### Get Aggregate Flow Data For a Given Token
-
-Query aggregate data for a specific token, such as Super DAI on Polygon:
+To list all pools for a token (insert the token address in the query below):
 
 ```javascript
-{
-  tokenStatistics(where: {
-    id: "0x1305f6b6df9dc47159d12eb7ac2804d4a33173c2" // DAIx address on Matic
-  }) {
-    totalNumberOfActiveStreams
-    totalNumberOfActiveIndexes
-    totalAmountStreamedUntilUpdatedAt
-    totalOutflowRate
-    totalAmountDistributedUntilUpdatedAt
+query MyQuery {
+  pools(where: {token: "YOUR_TOKEN_ADDRESS_HERE"}) {
+    createdAtBlockNumber
+    createdAtTimestamp
+    flowRate
+    id
+    totalMembers
+    totalUnits
+    admin {
+      isSuperApp
+    }
   }
 }
 ```
+### Get all the pools for a specific pool admin
 
-### Get Data On a Specific Account
-
-Query data on a specific account using both the `Account` and `AccountTokenSnapshot` entities:
+To list all pools for a pool admin (insert the pool admin address in the query below):
 
 ```javascript
-{
-  accounts(where: {
-    id: "0x..." // Enter an address below
-  }) {
-    isSuperApp
-    inflows {
-      currentFlowRate
-      token {
-        symbol
-      }
-      sender {
-        id
-      }
-    }
-    outflows {
-      currentFlowRate
-      token {
-        symbol
-      }
-      receiver {
-        id
-      }
-    }
-    accountTokenSnapshots {
-      token {
-        id
-      }
-      totalNumberOfActiveStreams
-      totalNetFlowRate
+query MyQuery {
+  pools(first: 10, where: {admin: "YOUR_POOL_ADMIN_ADDRESS_HERE"}) {
+    totalUnits
+    totalMembers
+    flowRate
+    createdAtBlockNumber
+    token {
+      id
+      isSuperToken
+      symbol
     }
   }
 }
 ```
-
-<Admonition type="tip">
-
-Use `AccountTokenSnapshot` to get activity data for a specific token associated with an account.
-
-</Admonition> 
 
 ## Explore more queries
 

@@ -4,7 +4,7 @@ sidebar_position: 1
 import Admonition from '@theme/Admonition';
 import PoolsVisualization from '@site/src/components/Visualizations/PoolStreamVis';
 
-# Distribution Pools
+# How to Design your Distribution Pools?
 
 In this page we will explain Distribution Pools and show you the most relevant ways to interact with them through the Super Token interface.
 To do this, we will go through some key concepts, and show you how to leverage Superfluid's [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) for your Distribution Pools smart contracts.
@@ -157,6 +157,9 @@ struct PoolConfig {
 - `transferabilityForUnitsOwner`: If true, the pool members can transfer their owned units, else, only the pool admin can manipulate the units for pool members
 - `distributionFromAnyAddress`: If true, anyone can execute distributions via the pool, else, only the pool admin can execute distributions via the pool
 
+:::warning Strong recommendation
+We don't recommend setting `transferabilityForUnitsOwner` to `true` unless you have a specific use case that absolutely requires it. This can sometimes lead to unexpected behavior and security risks.
+:::
 
 ### updateMemberUnits
 

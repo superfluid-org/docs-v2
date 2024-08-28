@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
+import ERC20ABI from './erc20.abi.json';
 
 interface ERC20WrapperProps {
   // No props are needed as chain IDs and addresses are handled internally
@@ -13,6 +14,9 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
   const [connected, setConnected] = useState<boolean>(false);
   const [chainId, setChainId] = useState<string>("1"); // Default to Ethereum Mainnet
   const [contractAddress, setContractAddress] = useState<string>("");
+  const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
+  const [error, setError] = useState<string>("");
+  const [manualInput, setManualInput] = useState<boolean>(false);
 
   const chainAddresses: { [key: string]: { address: string; name: string } } = {
     "1": {
@@ -81,27 +85,61 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
     setContractAddress(chainAddresses[chainId].address);
   }, [chainId]);
 
-  const connectWallet = async (): Promise<ethers.Signer | null> => {
+  useEffect(() => {
+    if (provider && underlyingToken) {
+      fetchTokenInfo();
+    }
+  }, [underlyingToken, provider]);
+
+  const connectWallet = async (): Promise<void> => {
     if (typeof window.ethereum !== "undefined") {
       try {
         await window.ethereum.request({ method: "eth_requestAccounts" });
+        const newProvider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(newProvider);
         setConnected(true);
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const network = await provider.getNetwork();
+        const network = await newProvider.getNetwork();
         setChainId(network.chainId.toString());
-        return provider.getSigner();
       } catch (error) {
         console.error("Connection failed:", error);
       }
     } else {
       console.error("Please install MetaMask!");
     }
-    return null;
   };
 
+  const fetchTokenInfo = async () => {
+    if (provider && ethers.utils.isAddress(underlyingToken) && !manualInput) {
+      const contract = new ethers.Contract(underlyingToken, ERC20ABI, provider);
+      try {
+        const tokenName = await contract.name();
+        const tokenSymbol = await contract.symbol();
+        
+        if (!tokenName || !tokenSymbol) {
+          throw new Error("Token name or symbol not found");
+        }
+        
+        setName(`Super ${tokenName}`);
+        setSymbol(`${tokenSymbol}x`);
+        setError("");
+      } catch (error) {
+        console.error("Error fetching token info:", error);
+        setName("");
+        setSymbol("");
+        setError("Error: Unable to fetch token name or symbol. Please ensure the contract implements these functions or use manual input.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (provider && underlyingToken) {
+      fetchTokenInfo();
+    }
+  }, [underlyingToken, provider, manualInput]);  
+
   const createWrapper = async () => {
-    const signer = await connectWallet();
-    if (signer && contractAddress) {
+    if (provider && contractAddress) {
+      const signer = provider.getSigner();
       const contract = new ethers.Contract(
         contractAddress,
         [
@@ -159,7 +197,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         </select>
       </div>
       <div>
-        <label>Contract Address:</label>
+        <label>Factory Contract Address:</label>
         <input
           type="text"
           value={contractAddress}
@@ -168,6 +206,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
           disabled={!connected}
         />
       </div>
+      <label>Underlying Token:</label>
       <input
         value={underlyingToken}
         onChange={(e) => setUnderlyingToken(e.target.value)}
@@ -175,6 +214,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         style={{ padding: "10px" }}
         disabled={!connected}
       />
+      <label>Upgradability:</label>
       <input
         type="number"
         value={upgradability.toString()}
@@ -183,24 +223,38 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         style={{ padding: "10px" }}
         disabled={!connected}
       />
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={manualInput}
+            onChange={() => setManualInput(!manualInput)}
+          />
+          Name & Symbol (toggle for manual input)
+        </label>
+      </div>
+
       <input
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Token Name"
-        style={{ padding: "10px" }}
-        disabled={!connected}
+        style={{ padding: "10px", backgroundColor: manualInput ? "white" : "#f0f0f0", color: "black" }}
+        disabled={!manualInput}
       />
       <input
         value={symbol}
         onChange={(e) => setSymbol(e.target.value)}
         placeholder="Token Symbol"
-        style={{ padding: "10px" }}
-        disabled={!connected}
+        style={{ padding: "10px", backgroundColor: manualInput ? "white" : "#f0f0f0", color: "black" }}
+        disabled={!manualInput}
       />
+      
+      {error && <div style={{ color: "red", fontSize: "14px" }}>{error}</div>}
+      
       <button
         onClick={createWrapper}
         style={{ padding: "10px", fontSize: "16px", cursor: "pointer" }}
-        disabled={!connected}
+        disabled={!connected || !name || !symbol}
       >
         Create Wrapper
       </button>

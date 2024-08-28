@@ -4,30 +4,38 @@ sidebar_position: 1
 
 # Create, Update, and Delete Flows
 
-This guide covers various methods for managing flows in Superfluid, including direct management by the sender and management via Access Control List (ACL), both on-chain and off-chain.
+This guide covers various methods for managing flows directly on the Superfluid protocol. It includes creating, updating, and deleting flows, **on chain, from another smart contracts**.
+This guide does NOT cover:
+- How to create a flow by an operator on behalf of another account. For that, please refer to the [ACL and User Data guide](/docs/protocol/money-streaming/guides/acl-user-data).
+- How to manage flows with user data. For that, please refer to the [ACL and User Data guide](/docs/protocol/money-streaming/guides/acl-user-data).
+- How to create flows by interacting with the Money Streaming Forwarder contract from client applications. For that please refer to the [SDK section](/docs/sdk/money-streaming/create-update-delete-flow).
 
 ## Prerequisites
 
 Before proceeding, ensure you have:
 
-* Familiarity with Solidity and/or JavaScript (for ethers.js or wagmi).
-* Basic understanding of Superfluid and its functionalities.
-* Access to a development environment for deploying or interacting with Smart Contracts.
+- Familiarity with Solidity.
+- Basic understanding of Superfluid and its functionalities.
+- Access to a development environment for deploying or interacting with Smart Contracts.
+- Importing the SuperTokenV1Library in your smart contract. For more details, refer to the [Using the SuperTokenV1Library](/docs/protocol/super-tokens/guides/using-library).
 
-## Understanding Access Control List (ACL)
+## What is a flow?
+In Superfluid terminology, a flow is a continuous stream of tokens from one account to another.
+It is a fundamental concept in the Superfluid protocol, enabling real-time, continuous payments between accounts.
 
-The Access Control List in Superfluid allows an account to set permissions for another account to manage flows on its behalf. It's similar to the ERC20 approval mechanism and crucial for managing flows where the sender is not the direct operator.
+:::tip What is the difference between a "Stream" and a "Flow"?
+This is a small technicality which is not necessarily important to understand.
+However, in Superfluid, a "Flow" is a more general term than a "Stream".
+A Stream is a non-zero flow, while a zero flow is not considered a Stream.
+:::
 
-### ACL Parameters
+## Create a flow
 
-* **`flowRateAllowance`**: This parameter acts as a 'tank' of allowance, limiting the flow rate an operator can manage.
-* **`permissions`**: Determines the operator's level of access over your streams, with values from 1 (Create) to 7 (Create, Update, or Delete).
+To create a flow, you need to call `createFlow`by specifying the token, sender, receiver, and flow rate.
 
-## On-Chain Flow Management
+### Function: `createFlow`
 
-### Creating Flows Directly
-
-#### Function: `createFlow`
+This function creates a flow without user data.
 
 ```solidity
 /**
@@ -40,9 +48,20 @@ function createFlow(ISuperToken token, address receiver, int96 flowRate)
     internal returns (bool)
 ```
 
-### Updating Flows Directly
+:::note About "setFlowrate" function
+The CFAv1Forwarder contract has a function called `setFlowrate` which is used to create or update flows.
+This function does not exist in the [SuperTokenV1Library](/docs/technical-reference/SuperTokenV1Library) for a reason.
 
-#### Function: `updateFlow`
+In short, the main contributors to the Superfluid Protocol believe that the best practice of building on-chain contracts is
+to not abstract away the creation and update of flows through a wrapper. The developer using the library should be aware of
+the difference between creating and updating flows, and should call the appropriate function accordingly.
+:::
+
+## Update a flow
+
+For an existing flow, you can update the flow rate through the `updateFlow` function.
+
+### Function: `updateFlow`
 
 ```solidity
 /**
@@ -55,9 +74,11 @@ function updateFlow(ISuperToken token, address receiver, int96 flowRate)
     internal returns (bool)
 ```
 
-### Deleting Flows Directly
+## Deleting a flow
 
-#### Function: `deleteFlow`
+To delete an eisting, you need to call `deleteFlow` and  specify the token, sender, and receiver.
+
+### Function: `deleteFlow`
 
 ```solidity
 /**
@@ -70,82 +91,122 @@ function deleteFlow(ISuperToken token, address sender, address receiver)
     internal returns (bool)
 ```
 
-:::info
-Using the [`SuperTokenV1Library`](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol), you can create, update, and delete flows directly by interacting with the Super Token Contract. Following this [link](https://github.com/superfluid-finance/super-examples/blob/0b90a34602dc9cab4a10ac59aefebef1bf5384cd/projects/tradeable-cashflow/contracts/RedirectAll.sol#L148) you will find an example of how this is done.
+:::warning Can I update or delete a non-existent flow?
+No, you cannot update or delete a non-existent flow. If a flow does not exist, the function will revert.
 :::
 
-## Managing Flows via ACL
+:::tip Full list of functions
+For a full list of functions related to creating, updating, and deleting flows, refer to the [SuperTokenV1Library technical reference](/docs/technical-reference/SuperTokenV1Library).
+:::
 
-### Creating Flows via ACL
+## Example: Creating, Updating, and Deleting Flows
 
-#### Function: `createFlowFrom`
+For this example, we'll use the `FlowSender` contract described in the [Quickstart](/docs/protocol/quickstart.mdx) as our example to demonstrate how to write a contract with creates, updates, deletes and reads flow data.
 
-```solidity
-/**
- * @dev Creates flow as an operator without userData
- * @param token The token to flow
- * @param sender The sender of the flow
- * @param receiver The receiver of the flow
- * @param flowRate The desired flowRate
- */
-function createFlowFrom(
-    ISuperToken token,
-    address sender,
-    address receiver,
-    int96 flowRate
-) internal returns (bool)
-```
 
-### Updating Flows via ACL
-
-#### Function: `updateFlowFrom`
+<div>
+<details>
+<summary>Click here to show `FlowSender` contract</summary>
+<p>
 
 ```solidity
-/**
- * @dev Updates flow as an operator without userData
- * @param token The token to flow
- * @param sender The sender of the flow
- * @param receiver The receiver of the flow
- * @param flowRate The desired flowRate
- */
-function updateFlowFrom(
-    ISuperToken token,
-    address sender,
-    address receiver,
-    int96 flowRate
-) internal returns (bool)
+//SPDX-License-Identifier: Unlicensed
+pragma solidity ^0.8.14;
+
+import { ISuperfluid, ISuperToken } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+
+import { SuperTokenV1Library } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+// For deployment on Mumbai Testnet
+
+interface IFakeDAI is IERC20 {
+
+    function mint(address account, uint256 amount) external;
+
+}
+
+contract FlowSender {
+
+    using SuperTokenV1Library for ISuperToken;
+
+    mapping (address => bool) public accountList;
+
+    ISuperToken public daix;
+
+    // fDAIx address on Polygon Mumbai = 0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f
+    constructor(ISuperToken _daix) {
+
+        daix = _daix;
+
+    }
+
+    /// @dev Mints 10,000 fDAI to this contract and wraps it all into fDAIx
+    function gainDaiX() external {
+
+        // Get address of fDAI by getting underlying token address from DAIx token
+        IFakeDAI fdai = IFakeDAI( daix.getUnderlyingToken() );
+
+        // Mint 10,000 fDAI
+        fdai.mint(address(this), 10000e18);
+
+        // Approve fDAIx contract to spend fDAI
+        fdai.approve(address(daix), 20000e18);
+
+        // Wrap the fDAI into fDAIx
+        daix.upgrade(10000e18);
+
+    }
+
+    /// @dev creates a stream from this contract to desired receiver at desired rate
+    function createStream(int96 flowRate, address receiver) external {
+
+        // Create stream
+        daix.createFlow(receiver, flowRate);
+
+    }
+
+    /// @dev updates a stream from this contract to desired receiver to desired rate
+    function updateStream(int96 flowRate, address receiver) external {
+
+        // Update stream
+        daix.updateFlow(receiver, flowRate);
+
+    }
+
+    /// @dev deletes a stream from this contract to desired receiver
+    function deleteStream(address receiver) external {
+
+        // Delete stream
+        daix.deleteFlow(address(this), receiver);
+
+    }
+
+    /// @dev get flow rate between this contract to certain receiver
+    function readFlowRate(address receiver) external view returns (int96 flowRate) {
+
+        // Get flow rate
+        return daix.getFlowRate(address(this), receiver);
+
+    }
+
+}
 ```
 
-### Deleting Flows via ACL
+</p>
+</details>
+</div>
 
-#### Function: `deleteFlowFrom`
+This contract has a few functions:
 
-```solidity
-/**
- * @dev Deletes flow as an operator without userData
- * @param token The token to flow
- * @param sender The sender of the flow
- * @param receiver The receiver of the flow
- */
-function deleteFlowFrom(
-    ISuperToken token,
-    address sender,
-    address receiver
-) internal returns (bool)
-```
+- **gainDaiX**: Mints and wraps fDAI into fDAIx (Superfluid's wrapped token).
+- **createStream**: Initiates a new money stream to a specified receiver.
+- **updateStream**: Updates an existing money stream's flow rate.
+- **deleteStream**: Terminates an existing money stream.
+- **readFlowRate**: Reads the current flow rate of a stream.
 
-## Off-Chain Flow Management
-
-For off-chain interactions, use the Money Streaming Forwarder contract, deployed on all networks. You can find addresses of said contract on the [Superfluid Console](https://console.superfluid.finance/matic/protocol). This contract allows managing flows through JavaScript libraries like ethers.js or wagmi.
-
-### Interacting with the Money Streaming Forwarder Contract
-
-You can interact with the Money Streaming Forwarder contract using its contract ABI, available [here](https://github.com/superfluid-finance/superfluid-club-monorepo/blob/master/apps/app/src/abis/CFAv1Forwarder.ts). This method is suitable for applications that require a more flexible and user-friendly way to manage flows.
-
-### Using ethers.js or wagmi for Off-Chain Management
-
-Ethers.js or wagmi libraries can be used for off-chain interactions with the Money Streaming Forwarder contract. These libraries provide a convenient way to interact with Ethereum smart contracts.
-
----
-
-This guide provides a detailed approach to managing flows in Superfluid, covering both on-chain and off-chain methods, direct management, and ACL-based scenarios. It aims to equip developers with the knowledge and tools necessary for effective flow management in the Superfluid ecosystem.
+:::tip About the `SuperTokenV1Library`
+As you can see, the `FlowSender` contract uses the [`SuperTokenV1Library`](/docs/technical-reference/SuperTokenV1Library) to interact with the Superfluid protocol.
+Instead of passing the token address to the functions, the contract uses `using SuperTokenV1Library for ISuperToken;` to access the functions directly.
+You can learn more about how to use the `SuperTokenV1Library` in the [Using the SuperTokenV1Library](/docs/protocol/super-tokens/guides/using-library) guide.
+:::

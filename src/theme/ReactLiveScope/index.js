@@ -1,8 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import abi from "./abi.json";
+import SuperTokenABI from "./SuperTokenABI.json";
+import CFAv1ForwarderABI from "./CFAv1ForwarderABI.json";
+import GDAv1ForwarderABI from "./GDAv1ForwarderABI.json";
 import Logo from "/src/components/Logo";
+import { Button, Input, Box, Text, Flex, VStack, HStack, useToast, ChakraProvider } from '@chakra-ui/react';
 
 const FlowSenderComponent = ({ contractAddress }) => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -11,7 +14,7 @@ const FlowSenderComponent = ({ contractAddress }) => {
   const [flowRate, setFlowRate] = useState("");
   const [message, setMessage] = useState("");
 
-  const contractABI = abi;
+  const contractABI = SuperTokenABI;
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -641,5 +644,16 @@ const ReactLiveScope = {
   RealTimeBalance,
   FlowSenderComponent,
   MacroForwarderComponent,
+  Button,
+  Input,
+  Box,
+  Text,
+  Flex,
+  VStack,
+  HStack,
+  useToast,
+  ethers,
+  CFAv1ForwarderABI,
+  GDAv1ForwarderABI,
 };
 export default ReactLiveScope;

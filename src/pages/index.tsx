@@ -2,6 +2,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import Logo from "@site/src/components/Logo";
 import StepList from "@site/src/components/StepList";
+import Cards from "@site/src/components/Cards";
 import { useState, useEffect } from "react";
 
 export default function Home(): JSX.Element {
@@ -39,6 +40,9 @@ export default function Home(): JSX.Element {
               </span>
               <br />
               <StepList />
+              <br />
+              <br />
+              <Cards />
               <br />
             </div>
           </div>

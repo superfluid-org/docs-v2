@@ -49,29 +49,39 @@ For addresses of the Super Token Factory contract on different networks, refer t
 
 ## Deploying a Wrapper Super Token
 
+:::tip Are you looking for a Super Token?
+Are you looking for a specific token? It may already exist.
+
+Check the [Console](https://console.superfluid.finance/) to see if someone else has already created and listed a wrapper for the token you are looking for.
+:::
+
 You can deploy your own Wrapper Super Token using the Super Token Factory contract through the interface below. Please ensure you have the required parameters ready before proceeding:
 - **Underlying Token**: The address of the ERC20 token to wrap.
 - **Upgradability**: We recommend to keep this parameter as '1'. This allows Superfluid Protocol Governance to upgrade the Super Token contract in the future and stay compatible with the latest features.
     - '0': Not Upgradable: The contract cannot be upgraded.
     - '1': Semi-Upgradability: The contract can be upgraded by Superfluid Protocol Governance but only under certain [conditions](https://github.com/superfluid-finance/protocol-monorepo/wiki/About-Super-Token-Classification).
     - '2': Fully Upgradable: The contract can be upgraded by Superfluid Protocol Governance without any restrictions.
-- **Name**: The name of the underlying token. We always recommend using the same name as the underlying token prefexed with 'Super' (eg. 'Super DAI').
-- **Symbol**: The symbol of the Super token. We recommend using the same symbol as the underlying token suffixed with 'x' (eg. 'DAIx').
+- **Name**: The name of the Super Token. We always recommend using the same name as the underlying token prefexed with 'Super' (eg. 'Super DAI').
+- **Symbol**: The symbol of the Super Token. We recommend using the same symbol as the underlying token suffixed with 'x' (eg. 'DAIx').
 
 You can choose to deploy your Wrapper Super Token using the interface on your favourite scanner (eg. [Etherscan](https://etherscan.io/)).
 You can also use the interface below to deploy your Wrapper Super Token:
 <ERC20Wrapper/>
 
 <br/>
-<Admonition type="warning" title="Check Parameters">
 
+:::warning Manual name and symbol
+Manual name and symbol input is not recommended unless the deployer above gives you an error and is unable to detect the underlying token name and symbol. The recommended format is always 'Super' + 'Underlying Token Name' and 'Underlying Token Symbol' + 'x'.
+:::
+
+:::warning Check Parameters
 Double-check the parameters to avoid deployment errors.
+:::
 
-</Admonition>
+### Verifying and Adding Token to Superfluid Dashboard
 
-### Verifying and Adding Token to Superfluid Console
-
-Locate the new Super Token's address in the "SuperTokenCreated" event log. To add your Super Token to the [Superfluid Console](https://console.superfluid.finance), Submit your request through this [form](https://airtable.com/appxGogNpt64ImOFH/shrzOcdK9eveDmRWV).
+After you token has been deployed, you can follow these steps in order to add your token to the Superfluid Dashboard:
+- Locate the new Super Token's address in the "SuperTokenCreated" event log. This will allow you to retrieve the Super Token address.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     ![Super Token Address](/assets/SuperTokenEvent.png)
@@ -79,6 +89,8 @@ Locate the new Super Token's address in the "SuperTokenCreated" event log. To ad
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <p>*Super Token Address on Etherscan*</p>
 </div>
+
+- Follow [these steps](/docs/protocol/contribute/submit-token-dashboard) to submit your request. You will need to provide the Super Token address and some other information.
 
 ---
 
@@ -102,4 +114,3 @@ For more information, see the [Self-Governed Super Token Wiki](https://github.co
 Unless you know what you are doing, deploying a self-governed Super Token is not recommended.
 
 </Admonition>
-

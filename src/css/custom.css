@@ -1,4 +1,9 @@
 @import "superfluid.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom CSS here */
 
 :root {
   --ifm-color-primary: #1db227;
@@ -63,7 +68,7 @@ body::before {
   background-position: center;
   background-color:#1b1b1d;
   background-repeat: repeat-x;
-  opacity: 0.3; /* Adjust to make the image more or less pale */
+  opacity: 0.3;
   z-index: -1;
 }
 
@@ -78,6 +83,3 @@ html, body {
 }
 
 
-
-
-/* Further styles and overrides as needed */
