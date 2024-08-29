@@ -218,7 +218,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
           ))}
         </select>
       </div>
-      <div>
+      {/*<div>
         <label>Factory Contract Address:</label>
         <input
           type="text"
@@ -227,7 +227,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
           style={{ padding: "10px", width: "100%" }}
           disabled={!connected}
         />
-      </div>
+      </div>*/}
       <label>Underlying Token:</label>
       <input
         value={underlyingToken}

@@ -57,12 +57,19 @@ Check the [Console](https://console.superfluid.finance/) to see if someone else 
 
 You can deploy your own Wrapper Super Token using the Super Token Factory contract through the interface below. Please ensure you have the required parameters ready before proceeding:
 - **Underlying Token**: The address of the ERC20 token to wrap.
-- **Upgradability**: We recommend to keep this parameter as '1'. This allows Superfluid Protocol Governance to upgrade the Super Token contract in the future and stay compatible with the latest features.
+- **Name**: The name of the Super Token. We always recommend using the same name as the underlying token prefexed with 'Super' (eg. 'Super DAI').
+- **Symbol**: The symbol of the Super Token. We recommend using the same symbol as the underlying token suffixed with 'x' (eg. 'DAIx').
+
+:::tip What is Upgradability?
+If you look at the `CreateERC20Wrapper` method at the [Super Token Factory contract](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperTokenFactory.sol), you'll see a parameter called `Upgradability`.
+
+This allows Superfluid Protocol Governance to upgrade the Super Token contract in the future and stay compatible with the latest features.
     - '0': Not Upgradable: The contract cannot be upgraded.
     - '1': Semi-Upgradability: The contract can be upgraded by Superfluid Protocol Governance but only under certain [conditions](https://github.com/superfluid-finance/protocol-monorepo/wiki/About-Super-Token-Classification).
     - '2': Fully Upgradable: The contract can be upgraded by Superfluid Protocol Governance without any restrictions.
-- **Name**: The name of the Super Token. We always recommend using the same name as the underlying token prefexed with 'Super' (eg. 'Super DAI').
-- **Symbol**: The symbol of the Super Token. We recommend using the same symbol as the underlying token suffixed with 'x' (eg. 'DAIx').
+
+For the purpose of simplicity, we always recommend using '1'. This is why this parameter is not included in the interface below and is set to 1 by default.
+:::
 
 You can choose to deploy your Wrapper Super Token using the interface on your favourite scanner (eg. [Etherscan](https://etherscan.io/)).
 You can also use the interface below to deploy your Wrapper Super Token:
