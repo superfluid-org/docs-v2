@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 import ERC20ABI from './erc20.abi.json';
 
@@ -17,6 +17,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
   const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
   const [error, setError] = useState<string>("");
   const [manualInput, setManualInput] = useState<boolean>(false);
+
 
   const chainAddresses: { [key: string]: { address: string; name: string } } = {
     "1": {
@@ -81,25 +82,48 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
     },
   };
 
+  // Helper function to update provider based on the chain ID
+  const updateProvider = useCallback(async () => {
+    if (window.ethereum) {
+      const newProvider = new ethers.providers.Web3Provider(window.ethereum);
+      const network = await newProvider.getNetwork();
+      setChainId(network.chainId.toString());
+      setProvider(newProvider);
+    }
+  }, []);
+
+  // Update contract address when the chain ID changes
   useEffect(() => {
-    setContractAddress(chainAddresses[chainId].address);
+    setContractAddress(chainAddresses[chainId]?.address || "");
   }, [chainId]);
 
+  // Update provider when the chain ID changes from the dropdown
   useEffect(() => {
-    if (provider && underlyingToken) {
-      fetchTokenInfo();
+    if (connected) {
+      updateProvider();
     }
-  }, [underlyingToken, provider]);
+  }, [connected, chainId, updateProvider]);
+
+  // Set up listener for chain changes
+  useEffect(() => {
+    const handleChainChanged = async () => {
+      await updateProvider();
+    };
+
+    if (window.ethereum) {
+      window.ethereum.on("chainChanged", handleChainChanged);
+      return () => {
+        window.ethereum.removeListener("chainChanged", handleChainChanged);
+      };
+    }
+  }, [updateProvider]);
 
   const connectWallet = async (): Promise<void> => {
     if (typeof window.ethereum !== "undefined") {
       try {
         await window.ethereum.request({ method: "eth_requestAccounts" });
-        const newProvider = new ethers.providers.Web3Provider(window.ethereum);
-        setProvider(newProvider);
+        await updateProvider();
         setConnected(true);
-        const network = await newProvider.getNetwork();
-        setChainId(network.chainId.toString());
       } catch (error) {
         console.error("Connection failed:", error);
       }
@@ -114,11 +138,11 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
       try {
         const tokenName = await contract.name();
         const tokenSymbol = await contract.symbol();
-        
+
         if (!tokenName || !tokenSymbol) {
           throw new Error("Token name or symbol not found");
         }
-        
+
         setName(`Super ${tokenName}`);
         setSymbol(`${tokenSymbol}x`);
         setError("");
@@ -135,16 +159,14 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
     if (provider && underlyingToken) {
       fetchTokenInfo();
     }
-  }, [underlyingToken, provider, manualInput]);  
+  }, [underlyingToken, provider, manualInput]);
 
   const createWrapper = async () => {
     if (provider && contractAddress) {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
         contractAddress,
-        [
-          "function createERC20Wrapper(address underlyingToken, uint8 upgradability, string memory name, string memory symbol) returns (bool)",
-        ],
+        ["function createERC20Wrapper(address underlyingToken, uint8 upgradability, string memory name, string memory symbol) returns (bool)"],
         signer
       );
 
