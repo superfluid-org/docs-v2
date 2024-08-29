@@ -236,7 +236,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         style={{ padding: "10px" }}
         disabled={!connected}
       />
-      <label>Upgradability:</label>
+      {/*<label>Upgradability:</label>
       <input
         type="number"
         value={upgradability.toString()}
@@ -244,7 +244,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         placeholder="Upgradability (0, 1, 2)"
         style={{ padding: "10px" }}
         disabled={!connected}
-      />
+      />*/}
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <label>
           <input
