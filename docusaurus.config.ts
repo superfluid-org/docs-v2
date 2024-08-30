@@ -120,11 +120,15 @@ const config: Config = {
           position: "right",
           items: [
             {
-              label: "Current",
+              label: "Current(V2.5)",
               href: "#",
             },
             {
-              label: "Legacy",
+              label: "Old(V2.0)",
+              href: "https://v2.docs.superfluid.finance/",
+            },
+            {
+              label: "Legacy(V1.0)",
               href: "https://superfluid.gitbook.io/",
             },
           ],
