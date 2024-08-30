@@ -76,7 +76,7 @@ export default function GuideCards() {
     { title: "Smart Contracts Quick Start", description: "Quickly integrate Superfluid in your contracts", link: "/docs/protocol/quickstart" },
     { title: "SDK Quick Start", description: "Quickly build your Superfluid SDK", link: "/docs/sdk/quickstart" },
     { title: "Integrate Streams in your contract", description: "Learn how to create, update and delete flows from your contracts", link: "/docs/protocol/money-streaming/guides/create-update-delete-flow" },
-    { title: "Integrate Distribution Pools in your contracts", description: "Learn how to create and manage Pools from your contracts", link: "/docs/developers/super-app-tutorial/intro" },
+    { title: "Integrate Distribution Pools in your contracts", description: "Learn how to create and manage Pools from your contracts", link: "/docs/protocol/distributions/guides/pools" },
   ];
 
   return (
