@@ -21,7 +21,7 @@
     { "source": "/superfluid/developers/sdk(.*)", "destination": "/docs/sdk/quickstart" },
     { "source": "/superfluid/developers/solidity-examples(.*)", "destination": "/docs/protocol/quickstart" },
     { "source": "/superfluid/developers/testing-guide(.*)", "destination": "/docs/protocol/money-streaming/guides/testing" },
-    { "source": "/superfluid/developers/subgraph", "destination": "/docs/protocol/money-streaming/guides/subgraph", "permanent": true },
+    { "source": "/superfluid/developers/subgraph", "destination": "/docs/sdk/money-streaming/subgraph", "permanent": true },
     { "source": "/superfluid/developers/reference-documentations(.*)", "destination": "/docs/technical-reference/Architecture" },
     { "source": "/superfluid/developers/networks", "destination": "https://console.superfluid.finance/ethereum/protocol" },
     { "source": "/superfluid/sentinels/liquidations-and-toga", "destination": "/docs/protocol/advanced-topics/solvency/liquidations-and-toga", "permanent": true },
@@ -34,10 +34,14 @@
     { "source": "/superfluid/resources/token-dashboard-submission", "destination": "/docs/protocol/contribute/submit-token-dashboard", "permanent": true },
     { "source": "/superfluid/resources/learn-about-ethereum", "destination": "https://ethereum.org/developers"},
     { "source": "/superfluid/resources/code-of-conduct", "destination": "https://github.com/superfluid-finance/protocol-monorepo?tab=coc-ov-file"},
-    { "source": "/superfluid/docs/subgraph", "destination": "/docs/protocol/money-streaming/guides/subgraph", "permanent": true },
+    { "source": "/superfluid/docs/subgraph", "destination": "/docs/sdk/money-streaming/subgraph", "permanent": true },
     { "source": "/superfluid/protocol-developers(.*)", "destination": "/docs/protocol/quickstart"},
     { "source": "/superfluid/developers/interactive-tutorials/money-streaming-1", "destination": "/docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain", "permanent": true },
     { "source": "/docs/protocol/advanced-topics/advanced-money-streaming/building-batch-streams-safe", "destination": "/docs/protocol/advanced-topics/batching/building-batch-streams-safe", "permanent": true },
-    { "source": "/docs/protocol/super-tokens/guides/deploy-super-token", "destination": "/docs/category/deploy-a-super-token", "permanent": true }
+    { "source": "/docs/protocol/super-tokens/guides/deploy-super-token", "destination": "/docs/category/deploy-a-super-token", "permanent": true },
+    { "source": "/docs/protocol/advanced-topics/advanced-money-streaming/access-control-list", "destination": "/docs/protocol/money-streaming/guides/acl-user-data", "permanent": true }
+    { "source": "/docs/protocol/advanced-topics/advanced-money-streaming/access-control-list", "destination": "/docs/protocol/money-streaming/guides/acl-user-data", "permanent": true }
+    
+
   ]
 }
