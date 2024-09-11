@@ -23,7 +23,7 @@
     { "source": "/superfluid/developers/testing-guide(.*)", "destination": "/docs/protocol/money-streaming/guides/testing" },
     { "source": "/superfluid/developers/subgraph", "destination": "/docs/sdk/money-streaming/subgraph", "permanent": true },
     { "source": "/superfluid/developers/reference-documentations(.*)", "destination": "/docs/technical-reference/Architecture" },
-    { "source": "/superfluid/developers/networks", "destination": "https://console.superfluid.finance/ethereum/protocol" },
+    { "source": "/superfluid/developers/networks", "destination": "https://Explorer.superfluid.finance/ethereum/protocol" },
     { "source": "/superfluid/sentinels/liquidations-and-toga", "destination": "/docs/protocol/advanced-topics/solvency/liquidations-and-toga", "permanent": true },
     { "source": "/superfluid/sentinels/running-a-sentinel", "destination": "/docs/protocol/advanced-topics/solvency/running-a-sentinnel", "permanent": true },
     { "source": "/superfluid/sentinels/solvency-dashboard", "destination": "/docs/protocol/advanced-topics/solvency/solvency-dashboard", "permanent": true },

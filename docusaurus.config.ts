@@ -100,9 +100,9 @@ const config: Config = {
           label: "Technical Reference",
         },
         {
-          href: "https://console.superfluid.finance/",
+          href: "https://Explorer.superfluid.finance/",
           position: "right",
-          label: "Console",
+          label: "Explorer",
         },
         {
           href: "https://github.com/superfluid-finance",
