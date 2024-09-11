@@ -47,16 +47,16 @@ onFlowCreated is a more intuitive function than afterAgreementCreated.
 
 ### Key Features of CFASuperAppBase
 
-- **Intuitive Callback Functions**: SuperAppBaseFlow consolidates callback development into three functions (`onFlowCreated`, `onFlowUpdated`, `onFlowDeleted`) with user-friendly parameters.
+- **Intuitive Callback Functions**: CFASuperAppBase consolidates callback development into three functions (`onFlowCreated`, `onFlowUpdated`, `onFlowDeleted`) with user-friendly parameters.
 - **Ease of Use**: Simplifies the callback process compared to the original SuperAppBase, making it more accessible for developers.
 
-#### Importing and Using SuperAppBaseFlow
+#### Importing and Using CFASuperAppBase
 
 ```solidity
 // Example Code
 import { CFASuperAppBase } from "@superfluid-finance/ethereum-contracts/contracts/apps/CFASuperAppBase.sol";
 
-contract SomeSuperAppContract is SuperAppBaseFlow {
+contract SomeSuperAppContract is CFASuperAppBase {
     // Your contract implementation
 }
 ```
