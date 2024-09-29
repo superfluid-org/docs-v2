@@ -32,41 +32,22 @@ The same pool can be used to distribute any Super Token, be it for Instant or St
 
 [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) provides several functions to interact with pools and distributions:
 
-### getFlowDistributionFlowRate
+
+### createPool
 
 ```solidity
-function getFlowDistributionFlowRate(ISuperToken token, address from, ISuperfluidPool to) internal view returns (int96)
+function createPool(contract ISuperToken token,address admin,struct PoolConfig poolConfig) internal returns (contract ISuperfluidPool pool)
 ```
 
-Retrieves the flow rate of a distribution from a sender to a pool.
+Creates a new Superfluid Distribution Pool.
 
-### estimateFlowDistributionActualFlowRate
+### updateMemberUnits
 
 ```solidity
-function estimateFlowDistributionActualFlowRate(ISuperToken token, address from, ISuperfluidPool to, int96 requestedFlowRate) internal view returns (int96 actualFlowRate, int96 totalDistributionFlowRate)
+function updateMemberUnits( contract ISuperToken token, contract ISuperfluidPool pool, address memberAddress, uint128 newUnits) internal returns (bool)
 ```
 
-Estimates the actual flow rate that will be distributed based on the requested flow rate.
-
-### estimateDistributionActualAmount
-
-```solidity
-function estimateDistributionActualAmount(ISuperToken token, address from, ISuperfluidPool to, uint256 requestedAmount) internal view returns (uint256 actualAmount)
-```
-
-Estimates the actual distribution amount that will be allocated to the pool based on the requested amount.
-
-### isMemberConnected
-
-```solidity
-function isMemberConnected(ISuperToken token, address pool, address member) internal view returns (bool)
-```
-
-Checks whether a member is connected to a pool and eligible to receive distributions.
-
-## Working with Streaming Distributions
-
-To interact with streaming distributions, you can use functions such as:
+Updates the units of a pool member.
 
 ### distributeFlow
 
@@ -80,6 +61,34 @@ Initiates a distribution flow from a sender to a pool with the specified flow ra
 Keep in mind that the total amount of units in the pool needs to be significantly lower than the total flow rate or the total tokens distributed of the pool.
 To understand more why this is the case, please refer to the [Member Units](/docs/protocol/distributions/guides/pools.mdx#about-member-units) section.
 :::
+
+### connectPool
+
+```solidity
+function connectPool( contract ISuperToken token, contract ISuperfluidPool pool) internal returns (bool)
+```
+
+Connects a pool member to pool.
+
+:::tip About Pool Connections
+Learn more about claiming units and connecting to pools in the [How to design your pools section](/docs/protocol/distributions/guides/pools#about-pool-connections-and-claiming).
+:::
+
+### getFlowDistributionFlowRate
+
+```solidity
+function getFlowDistributionFlowRate(ISuperToken token, address from, ISuperfluidPool to) internal view returns (int96)
+```
+
+Gets the flow rate of a distribution from a sender to a pool.
+
+### isMemberConnected
+
+```solidity
+function isMemberConnected(ISuperToken token, address pool, address member) internal view returns (bool)
+```
+
+Checks whether a member is connected to a pool and eligible to receive distributions.
 
 ## Contract Example
 
@@ -100,7 +109,7 @@ contract MyDistributionsContract {
         _superToken = superToken;
     }
 
-    function distributeInstantly(ISuperfluidPool pool, uint256 amount) public {
+    function estimateDistribution(ISuperfluidPool pool, uint256 amount) public {
         _superToken.estimateDistributionActualAmount(address(this), pool, amount);
         // Additional logic for distribution
     }
@@ -112,7 +121,7 @@ contract MyDistributionsContract {
 }
 ```
 
-This contract demonstrates how to estimate the amount for an instant distribution and start a streaming distribution using the `SuperTokenV1Library`.
+This contract demonstrates how to use the `SuperTokenV1Library` in order to interact with Distribution Pools.
 
 :::tip
 When using the `SuperTokenV1Library.sol`, you don't need to include the `SuperToken` as a parameter in your method call.
