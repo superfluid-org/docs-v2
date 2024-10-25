@@ -25,6 +25,7 @@ const chainAddresses = {
     '11155111': 'Ethereum Sepolia',
     '11155420': 'Optimism Sepolia',
     '534351': 'Scroll Sepolia',
+    '84532': 'Base Sepolia',
 };
 
   const connectWallet = async () => {

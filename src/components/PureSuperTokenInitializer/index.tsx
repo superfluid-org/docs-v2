@@ -71,6 +71,10 @@ const InitializeContractComponent = () => {
       address: "0x87560833d59Be057aFc63cFFa3fc531589Ba428F",
       name: "Scroll Sepolia",
     },
+    "84532": {
+      address: "0x7447E94Dfe3d804a9f46Bf12838d467c912C8F6C",
+      name: "Base Sepolia",
+    },
   };
 
   const connectWallet = async () => {
