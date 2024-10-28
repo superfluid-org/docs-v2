@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './StepItem.module.css';
 import {
-  ArrowUpRight as LinkIcon,
+  ArrowUpRight,
   BookOpen,
   HelpCircle,
   Info,
@@ -24,7 +24,7 @@ export const actions = [
   },*/
   {
     title: "Get started",
-    icon: LinkIcon,
+    icon: ArrowUpRight,
     to: "/docs/protocol/quickstart",
     text: `Start building very quickly with Superfluid.`,
   },
