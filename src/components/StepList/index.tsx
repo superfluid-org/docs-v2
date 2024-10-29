@@ -16,14 +16,8 @@ export const actions = [
     to: "/docs/concepts/superfluid",
     text: `Learn about the core concepts of the Superfluid Protocol.`,
   },
-  /*{
-    title: "Use Cases",
-    icon: Info,
-    to: "/docs/use-cases/vesting",
-    text: `Learn about our use cases and how to implement them for your users.`,
-  },*/
   {
-    title: "Get started",
+    title: "Get Started",
     icon: ArrowUpRight,
     to: "/docs/protocol/quickstart",
     text: `Start building very quickly with Superfluid.`,
@@ -55,7 +49,7 @@ const StepList = () => {
         <a href={action.to} key={index} className={styles.stepItem} style={{ textDecoration: 'none' }}>
           <div className={styles.stepContent}>
             <div className={styles.stepIcon}>
-              <action.icon size={20} /> {/* Assuming you're using React Icons or similar */}
+              <action.icon size={20} />
             </div>
             <div className={styles.stepTitle}>
               <h3>{action.title}</h3>
