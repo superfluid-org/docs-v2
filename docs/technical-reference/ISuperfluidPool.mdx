@@ -24,28 +24,6 @@ In order to interact with the `ISuperfluidPool` contract, you can use the follow
 </details>
 </div>
 
-## struct PoolIndexData
-
-```solidity
-struct PoolIndexData {
-  uint128 totalUnits;
-  uint32 wrappedSettledAt;
-  int96 wrappedFlowRate;
-  int256 wrappedSettledValue;
-}
-```
-## struct MemberData
-
-```solidity
-struct MemberData {
-  uint128 ownedUnits;
-  uint32 syncedSettledAt;
-  int96 syncedFlowRate;
-  int256 syncedSettledValue;
-  int256 settledValue;
-  int256 claimedValue;
-}
-```
 ## SUPERFLUID_POOL_INVALID_TIME
 
 ```solidity
@@ -80,6 +58,12 @@ error SUPERFLUID_POOL_NOT_GDA()
 
 ```solidity
 error SUPERFLUID_POOL_TRANSFER_UNITS_NOT_ALLOWED()
+```
+
+## SUPERFLUID_POOL_SELF_TRANSFER_NOT_ALLOWED
+
+```solidity
+error SUPERFLUID_POOL_SELF_TRANSFER_NOT_ALLOWED()
 ```
 
 ## Event MemberUnitsUpdated
@@ -204,7 +188,7 @@ The total number of units of disconnected members
 
 ```solidity
 function getUnits(
-    address memberAddress
+    address memberAddr
 ) 
     external 
     returns (uint128)
@@ -214,9 +198,9 @@ function getUnits(
 
 | Name | Type | Description |
 | :--- | :--- | :---------- |
-| `memberAddress` | address | The address of the member |
+| `memberAddr` | address | The address of the member |
 
-The total number of units for `memberAddress`
+The total number of units for `memberAddr`
 
 ## Fn getTotalFlowRate
 
@@ -269,11 +253,35 @@ function getDisconnectedBalance(
 
 The balance of all the disconnected members at `time`
 
+## Fn getTotalAmountReceivedByMember
+
+```solidity
+function getTotalAmountReceivedByMember(
+    address memberAddr
+) 
+    external 
+    returns (uint256 totalAmountReceived)
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `memberAddr` | address | The address of the member |
+
+#### Return Values
+
+| Name | Type | Description |
+| :--- | :--- | :---------- |
+| `totalAmountReceived` | uint256 | The total amount received by the member |
+
+The total amount received by `memberAddr` in the pool
+
 ## Fn getMemberFlowRate
 
 ```solidity
 function getMemberFlowRate(
-    address memberAddress
+    address memberAddr
 ) 
     external 
     returns (int96)
@@ -283,7 +291,7 @@ function getMemberFlowRate(
 
 | Name | Type | Description |
 | :--- | :--- | :---------- |
-| `memberAddress` | address | The address of the member |
+| `memberAddr` | address | The address of the member |
 
 The flow rate a member is receiving from the pool
 
@@ -425,4 +433,3 @@ function decreaseAllowance(
 | `[0]` | bool | true if successful |
 
 Decreases the allowance of `spender` by `subtractedValue`
-
