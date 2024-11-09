@@ -18,96 +18,258 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
   const [error, setError] = useState<string>("");
   const [manualInput, setManualInput] = useState<boolean>(false);
 
-
-  const chainAddresses: { [key: string]: { address: string; name: string } } = {
+  const chainAddresses: { [key: string]: { address: string; name: string; chainParams?: any } } = {
     "1": {
       address: "0x0422689cc4087b6B7280e0a7e7F655200ec86Ae1",
       name: "Ethereum Mainnet",
+      chainParams: {
+        chainId: "0x1",
+        chainName: "Ethereum Mainnet",
+        nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+        rpcUrls: ["https://mainnet.infura.io/v3/"],
+        blockExplorerUrls: ["https://etherscan.io"],
+      },
     },
     "100": {
       address: "0x23410e2659380784498509698ed70E414D384880",
       name: "Gnosis Chain",
+      chainParams: {
+        chainId: "0x64",
+        chainName: "Gnosis Chain",
+        nativeCurrency: { name: "xDAI", symbol: "xDAI", decimals: 18 },
+        rpcUrls: ["https://rpc.gnosischain.com"],
+        blockExplorerUrls: ["https://gnosisscan.io"],
+      },
     },
     "137": {
       address: "0x2C90719f25B10Fc5646c82DA3240C76Fa5BcCF34",
       name: "Polygon",
+      chainParams: {
+        chainId: "0x89",
+        chainName: "Polygon",
+        nativeCurrency: { name: "Polygon", symbol: "POL", decimals: 18 },
+        rpcUrls: ["https://polygon-rpc.com"],
+        blockExplorerUrls: ["https://polygonscan.com"],
+      },
     },
     "10": {
       address: "0x8276469A443D5C6B7146BED45e2abCaD3B6adad9",
-      name: "Optimism",
+      name: "OP Mainnet",
+      chainParams: {
+        chainId: "0xa",
+        chainName: "Optimism",
+        nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+        rpcUrls: ["https://mainnet.optimism.io"],
+        blockExplorerUrls: ["https://optimistic.etherscan.io"],
+      },
     },
     "42161": {
       address: "0x1C21Ead77fd45C84a4c916Db7A6635D0C6FF09D6",
       name: "Arbitrum One",
+      chainParams: {
+        chainId: "0xa4b1",
+        chainName: "Arbitrum One",
+        nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+        rpcUrls: ["https://arb1.arbitrum.io/rpc"],
+        blockExplorerUrls: ["https://arbiscan.io"],
+      },
     },
     "43114": {
       address: "0x464AADdBB2B80f3Cb666522EB7381bE610F638b4",
       name: "Avalanche C-Chain",
+      chainParams: {
+        chainId: "0xa86a",
+        chainName: "Avalanche C-Chain",
+        nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
+        rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+        blockExplorerUrls: ["https://snowtrace.io"],
+      },
     },
     "56": {
       address: "0x8bde47397301F0Cd31b9000032fD517a39c946Eb",
       name: "BNB Smart Chain",
+      chainParams: {
+        chainId: "0x38",
+        chainName: "BNB Smart Chain",
+        nativeCurrency: { name: "Binance Coin", symbol: "BNB", decimals: 18 },
+        rpcUrls: ["https://bsc-dataseed.binance.org"],
+        blockExplorerUrls: ["https://bscscan.com"],
+      },
     },
     "42220": {
       address: "0x36be86dEe6BC726Ed0Cbd170ccD2F21760BC73D9",
       name: "Celo",
+      chainParams: {
+        chainId: "0xa4ec",
+        chainName: "Celo",
+        nativeCurrency: { name: "Celo", symbol: "CELO", decimals: 18 },
+        rpcUrls: ["https://forno.celo.org"],
+        blockExplorerUrls: ["https://explorer.celo.org"],
+      },
     },
     "8453": {
       address: "0xe20B9a38E0c96F61d1bA6b42a61512D56Fea1Eb3",
       name: "Base Mainnet",
+      chainParams: {
+        chainId: "0x2105",
+        chainName: "Base Mainnet",
+        nativeCurrency: { name: "Base ETH", symbol: "ETH", decimals: 18 },
+        rpcUrls: ["https://mainnet.base.org"],
+        blockExplorerUrls: ["https://basescan.org"],
+      },
     },
     "666666666": {
       address: "0x184D999ea60e9b16fE4cCC1f756422114E9B663f",
       name: "Degen Chain",
+      chainParams: {
+        chainId: "0x27d8d8d8",
+        chainName: "Degen Chain",
+        nativeCurrency: { name: "Degen", symbol: "DEGEN", decimals: 18 },
+        rpcUrls: ["https://rpc.degenchain.com"],
+        blockExplorerUrls: ["https://degenscan.com"],
+      },
     },
     "534352": {
       address: "0xacFBED2bC9344C158DD3dC229b84Bd7220e7c673",
       name: "Scroll",
+      chainParams: {
+        chainId: "0x82888",
+        chainName: "Scroll",
+        nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+        rpcUrls: ["https://scroll.io/rpc"],
+        blockExplorerUrls: ["https://scrollscan.io"],
+      },
     },
     "43113": {
       address: "0x1C92042426B6bAAe497bEf461B6d8342D03aEc92",
       name: "Avalanche Fuji",
+      chainParams: {
+        chainId: "0xa869",
+        chainName: "Avalanche Fuji",
+        nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
+        rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+        blockExplorerUrls: ["https://testnet.snowtrace.io"],
+      },
     },
     "11155111": {
       address: "0x254C2e152E8602839D288A7bccdf3d0974597193",
       name: "Ethereum Sepolia",
+      chainParams: {
+        chainId: "0xaa36a7",
+        chainName: "Ethereum Sepolia",
+        nativeCurrency: { name: "Sepolia Ether", symbol: "ETH", decimals: 18 },
+        rpcUrls: ["https://rpc.sepolia.org"],
+        blockExplorerUrls: ["https://sepolia.etherscan.io"],
+      },
     },
     "11155420": {
       address: "0xfcF0489488397332579f35b0F711BE570Da0E8f5",
       name: "Optimism Sepolia",
+      chainParams: {
+        chainId: "0xaa36a8",
+        chainName: "Optimism Sepolia",
+        nativeCurrency: { name: "Sepolia Ether", symbol: "ETH", decimals: 18 },
+        rpcUrls: ["https://rpc.optimism.sepolia.org"],
+        blockExplorerUrls: ["https://optimism.sepolia.etherscan.io"],
+      },
     },
     "534351": {
       address: "0x87560833d59Be057aFc63cFFa3fc531589Ba428F",
       name: "Scroll Sepolia",
+      chainParams: {
+        chainId: "0x82887",
+        chainName: "Scroll Sepolia",
+        nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+        rpcUrls: ["https://rpc.scroll.sepolia.org"],
+        blockExplorerUrls: ["https://scroll.sepolia.etherscan.io"],
+      },
     },
   };
 
-  // Helper function to update provider based on the chain ID
-  const updateProvider = useCallback(async () => {
-    if (window.ethereum) {
+  // Helper function to switch chains
+  const switchChain = async (newChainId: string) => {
+    if (!window.ethereum) return;
+
+    const hexChainId = `0x${Number(newChainId).toString(16)}`;
+    
+    try {
+      // Try to switch to the chain
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: hexChainId }],
+      });
+      
+      // Update provider after successful switch
       const newProvider = new ethers.providers.Web3Provider(window.ethereum);
-      const network = await newProvider.getNetwork();
-      setChainId(network.chainId.toString());
       setProvider(newProvider);
+      setChainId(newChainId);
+      setContractAddress(chainAddresses[newChainId]?.address || "");
+      
+    } catch (error: any) {
+      // If the chain hasn't been added to MetaMask, try to add it
+      if (error.code === 4902) {
+        try {
+          const chainConfig = chainAddresses[newChainId]?.chainParams;
+          if (chainConfig) {
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [chainConfig],
+            });
+          }
+        } catch (addError) {
+          console.error("Error adding chain:", addError);
+          setError("Failed to add the network to your wallet.");
+        }
+      } else {
+        console.error("Error switching chain:", error);
+        setError("Failed to switch networks. Please try again.");
+      }
     }
-  }, []);
+  };
 
-  // Update contract address when the chain ID changes
-  useEffect(() => {
-    setContractAddress(chainAddresses[chainId]?.address || "");
-  }, [chainId]);
-
-  // Update provider when the chain ID changes from the dropdown
-  useEffect(() => {
+  // Handle chain selection from dropdown
+  const handleChainChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newChainId = e.target.value;
     if (connected) {
-      updateProvider();
+      await switchChain(newChainId);
+    } else {
+      setChainId(newChainId);
     }
-  }, [connected, chainId, updateProvider]);
+  };
 
-  // Set up listener for chain changes
+  const connectWallet = async (): Promise<void> => {
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const newProvider = new ethers.providers.Web3Provider(window.ethereum);
+        const network = await newProvider.getNetwork();
+        
+        // If the wallet's chain doesn't match the selected chain, switch to the selected chain
+        if (network.chainId.toString() !== chainId) {
+          await switchChain(chainId);
+        } else {
+          setProvider(newProvider);
+        }
+        
+        setConnected(true);
+      } catch (error) {
+        console.error("Connection failed:", error);
+        setError("Failed to connect wallet. Please try again.");
+      }
+    } else {
+      setError("Please install MetaMask!");
+    }
+  };
+
+  // Set up listener for chain changes in wallet
   useEffect(() => {
-    const handleChainChanged = async () => {
-      await updateProvider();
+    const handleChainChanged = async (newChainId: string) => {
+      const decimalChainId = parseInt(newChainId).toString();
+      setChainId(decimalChainId);
+      setContractAddress(chainAddresses[decimalChainId]?.address || "");
+      
+      const newProvider = new ethers.providers.Web3Provider(window.ethereum);
+      setProvider(newProvider);
     };
 
     if (window.ethereum) {
@@ -116,22 +278,9 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         window.ethereum.removeListener("chainChanged", handleChainChanged);
       };
     }
-  }, [updateProvider]);
+  }, []);
 
-  const connectWallet = async (): Promise<void> => {
-    if (typeof window.ethereum !== "undefined") {
-      try {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        await updateProvider();
-        setConnected(true);
-      } catch (error) {
-        console.error("Connection failed:", error);
-      }
-    } else {
-      console.error("Please install MetaMask!");
-    }
-  };
-
+  // Rest of your component code remains the same...
   const fetchTokenInfo = async () => {
     if (provider && ethers.utils.isAddress(underlyingToken) && !manualInput) {
       const contract = new ethers.Contract(underlyingToken, ERC20ABI, provider);
@@ -180,6 +329,7 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         console.log("Transaction:", transaction);
       } catch (error) {
         console.error("Error:", error);
+        setError("Failed to create wrapper. Please try again.");
       }
     }
   };
@@ -209,25 +359,14 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         <label>Chain ID:</label>
         <select
           value={chainId}
-          onChange={(e) => setChainId(e.target.value)}
+          onChange={handleChainChange}
           style={{ padding: "10px", width: "100%" }}
-          disabled={!connected}
         >
           {Object.entries(chainAddresses).map(([id, details]) => (
             <option key={id} value={id}>{`${details.name} (${id})`}</option>
           ))}
         </select>
       </div>
-      {/*<div>
-        <label>Factory Contract Address:</label>
-        <input
-          type="text"
-          value={contractAddress}
-          readOnly
-          style={{ padding: "10px", width: "100%" }}
-          disabled={!connected}
-        />
-      </div>*/}
       <label>Underlying Token:</label>
       <input
         value={underlyingToken}
@@ -236,15 +375,6 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
         style={{ padding: "10px" }}
         disabled={!connected}
       />
-      {/*<label>Upgradability:</label>
-      <input
-        type="number"
-        value={upgradability.toString()}
-        onChange={(e) => setUpgradability(parseInt(e.target.value))}
-        placeholder="Upgradability (0, 1, 2)"
-        style={{ padding: "10px" }}
-        disabled={!connected}
-      />*/}
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <label>
           <input
