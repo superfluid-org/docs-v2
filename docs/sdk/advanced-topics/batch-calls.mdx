@@ -174,7 +174,7 @@ The `MacroForwarder` contract is used to batch call the transactions. It is a si
 
 The `runMacro` method is called by the user and it will batch call the transactions defined in the `buildBatchOperations` method of the `IUserDefinedMacro` contract.
 
-To showcase how this works, we have a [`MacroFowarder` contract](https://sepolia-optimism.etherscan.io/address/0xfd017dbc8acf18b06cff9322fa6caae2243a5c95) deployed on OP Sepolia.
+To showcase how this works, we use the [`MacroFowarder` contract](https://sepolia-optimism.etherscan.io/address/0xFD0268E33111565dE546af2675351A4b1587F89F) deployed on OP Sepolia.
 We deployed an example of our [`MultiFlowDeleteMacro` contract](https://sepolia-optimism.etherscan.io/address/0x997b37Fb47c489CF067421aEeAf7Be0543fA5362) on the same network.
 We will use the `MacroForwarder` contract to batch call the transactions.
 
@@ -332,7 +332,7 @@ the `MacroForwarder` and `MultiFlowDeleteMacro` contract addresses in the playgr
 ```jsx live
 function MacroComponentExample() {
 
-const macroForwarderAddress="0xfd017dbc8acf18b06cff9322fa6caae2243a5c95";
+const macroForwarderAddress="0xFD0268E33111565dE546af2675351A4b1587F89F";
 const userMacroAddress="0x997b37Fb47c489CF067421aEeAf7Be0543fA5362";
 return (
     <div>
