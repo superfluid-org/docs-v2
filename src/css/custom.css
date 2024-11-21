@@ -6,7 +6,7 @@
 /* Your custom CSS here */
 
 :root {
-  --ifm-color-primary: #96D700;
+  --ifm-color-primary: #0A6643;
   --ifm-color-primary-dark: #87C200;
   --ifm-color-primary-darker: #7FB600;
   --ifm-color-primary-darkest: #689600;
@@ -32,7 +32,7 @@
   --ifm-color-primary-lightest: #BEFF1A;
   --ifm-background-color: #2D2D2D;
   --ifm-background-image: url('/img/blue-glow-bg.png');
-  --ifm-color-cards-bg: linear-gradient(137deg, #2D2D2D, #1A1A1A);
+  --ifm-color-cards-bg: linear-gradient(137deg, #2D2D2D, #21014D);
   --ifm-color-cards-title: #ffffff;
   --ifm-color-cards-text: #919191;
   --ifm-color-logo: white;
@@ -66,9 +66,9 @@ body::before {
   background-image: var(--ifm-background-image);
   background-size: 100%;
   background-position: center;
-  background-color:#1b1b1d;
+  background-color:#000000;
   background-repeat: repeat-x;
-  opacity: 0.5;
+  opacity: 0.1;
   z-index: -1;
   mask-image: linear-gradient(to bottom, black 30%, transparent);
   -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent);

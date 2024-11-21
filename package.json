@@ -30,6 +30,7 @@
     "@openzeppelin/contracts": "^4.7.3",
     "@saucelabs/theme-github-codeblock": "^0.2.3",
     "@superfluid-finance/ethereum-contracts": "^1.9.1",
+    "@types/three": "^0.170.0",
     "clsx": "^1.2.1",
     "d3": "^7.8.5",
     "docusaurus-plugin-matomo": "^0.0.8",
@@ -40,6 +41,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-feather": "^2.0.10",
+    "three": "^0.170.0",
     "viem": "^2.7.14"
   },
   "devDependencies": {

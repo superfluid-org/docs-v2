@@ -3,6 +3,7 @@ import Layout from "@theme/Layout";
 import Logo from "@site/src/components/Logo";
 import StepList from "@site/src/components/StepList";
 import Cards from "@site/src/components/Cards";
+import WavyBackground from "@site/src/components/WavyBackground";
 import { useState, useEffect } from "react";
 
 export default function Home(): JSX.Element {
@@ -17,7 +18,8 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <div>
+      <div style={{ position: 'relative' }}>
+        <WavyBackground />
         <Layout
           title={`${siteConfig.title}`}
           description="What is Superfluid and How can I build on it? <head />"
@@ -31,6 +33,8 @@ export default function Home(): JSX.Element {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                position: "relative",
+                zIndex: 1,
               }}
             >
               <Logo />
