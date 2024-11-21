@@ -6,38 +6,37 @@
 /* Your custom CSS here */
 
 :root {
-  --ifm-color-primary: #1db227;
-  --ifm-color-primary-dark: #1aa023;
-  --ifm-color-primary-darker: #199721;
-  --ifm-color-primary-darkest: #147d1b;
-  --ifm-color-primary-light: #20c42b;
-  --ifm-color-primary-lighter: #21cd2d;
-  --ifm-color-primary-lightest: #30dd3b;
+  --ifm-color-primary: #96D700;
+  --ifm-color-primary-dark: #87C200;
+  --ifm-color-primary-darker: #7FB600;
+  --ifm-color-primary-darkest: #689600;
+  --ifm-color-primary-light: #A5EC00;
+  --ifm-color-primary-lighter: #ADF500;
+  --ifm-color-primary-lightest: #BEFF1A;
   --ifm-background-color: #ffffff;
   --ifm-background-image: url('/img/green-glow.png');
-  --ifm-color-cards-bg: linear-gradient(137deg, #ffffff, #f2f2f2);
-  --ifm-color-cards-title:#000;
-  --ifm-color-cards-text:#333;
-  --ifm-color-logo: black;
-  --ifm-color-text: #000000;
+  --ifm-color-cards-bg: linear-gradient(137deg, #ffffff, #E5E5E5);
+  --ifm-color-cards-title: #2D2D2D;
+  --ifm-color-cards-text: #919191;
+  --ifm-color-logo: #2D2D2D;
+  --ifm-color-text: #2D2D2D;
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #1db227;
-  --ifm-color-primary-dark: #1aa023;
-  --ifm-color-primary-darker: #199721;
-  --ifm-color-primary-darkest: #147d1b;
-  --ifm-color-primary-light: #20c42b;
-  --ifm-color-primary-lighter: #21cd2d;
-  --ifm-color-primary-lightest: #30dd3b;
-  --ifm-background-color: #151619;
+  --ifm-color-primary: #96D700;
+  --ifm-color-primary-dark: #87C200;
+  --ifm-color-primary-darker: #7FB600;
+  --ifm-color-primary-darkest: #689600;
+  --ifm-color-primary-light: #A5EC00;
+  --ifm-color-primary-lighter: #ADF500;
+  --ifm-color-primary-lightest: #BEFF1A;
+  --ifm-background-color: #2D2D2D;
   --ifm-background-image: url('/img/blue-glow-bg.png');
-  --ifm-color-cards-bg: linear-gradient(137deg, #21253a, #0c131a);
-  --ifm-color-cards-title:#fff;
-  --ifm-color-cards-text:#8995a1;
+  --ifm-color-cards-bg: linear-gradient(137deg, #2D2D2D, #1A1A1A);
+  --ifm-color-cards-title: #ffffff;
+  --ifm-color-cards-text: #919191;
   --ifm-color-logo: white;
   --ifm-color-text: #ffffff;
-  
 }
 
 body::before {
@@ -48,12 +47,13 @@ body::before {
   bottom: 0;
   left: 0;
   background-image: var(--ifm-background-image);
-  background-size: 50%;
-  background-position: center;
-  background-color:#ffffff;
+  background-size: 100%;
+  background-position: top center;
   background-repeat: repeat-x;
-  opacity: 0.5; /* Adjust to make the image more or less pale */
+  opacity: 0.2;
   z-index: -1;
+  mask-image: linear-gradient(to bottom, black 60%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
 }
 
 [data-theme='dark'] body::before {
@@ -64,12 +64,14 @@ body::before {
   bottom: 0;
   left: 0;
   background-image: var(--ifm-background-image);
-  background-size: 70%;
+  background-size: 100%;
   background-position: center;
   background-color:#1b1b1d;
   background-repeat: repeat-x;
-  opacity: 0.3;
+  opacity: 0.5;
   z-index: -1;
+  mask-image: linear-gradient(to bottom, black 30%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent);
 }
 
 html, body {
