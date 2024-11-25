@@ -16,7 +16,7 @@ const WavyBackground = () => {
                 top: '-20%',
                 left: 0,
                 objectFit: 'cover',
-                opacity: 0.5,
+                opacity: 0.1,
                 zIndex: 0,
                 backgroundColor: 'transparent',
             }}

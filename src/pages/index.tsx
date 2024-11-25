@@ -39,8 +39,12 @@ export default function Home(): JSX.Element {
             >
               <Logo />
               <br />
-              <span style={{ fontSize: "20px" }}>
-                Technical Documentation for the Superfluid Protocol
+              <span style={{ 
+                fontSize: "20px",
+                textAlign: "center"
+              }}>
+                Technical Documentation for
+                The Most Advanced Money Streaming Protocol
               </span>
               <br />
               <StepList />

@@ -46,10 +46,10 @@ const StepList = () => {
   return (
     <div className={styles.stepList}>
       {actions.map((action, index) => (
-        <a href={action.to} key={index} className={styles.stepItem} style={{ textDecoration: 'none' }}>
+        <a href={action.to} key={index} className={styles.stepItem}>
           <div className={styles.stepContent}>
-            <div className={styles.stepIcon}>
-              <action.icon size={20} />
+            <div className={styles.stepNumber}>
+              {String(index + 1).padStart(3, '0')}
             </div>
             <div className={styles.stepTitle}>
               <h3>{action.title}</h3>
