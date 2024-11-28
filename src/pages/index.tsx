@@ -19,7 +19,6 @@ export default function Home(): JSX.Element {
   return (
     <>
       <div style={{ position: 'relative' }}>
-        <WavyBackground />
         <Layout
           title={`${siteConfig.title}`}
           description="What is Superfluid and How can I build on it? <head />"

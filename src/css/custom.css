@@ -14,7 +14,7 @@
   --ifm-color-primary-lighter: #ADF500;
   --ifm-color-primary-lightest: #BEFF1A;
   --ifm-background-color: #ffffff;
-  --ifm-background-image: url('/img/green-glow.png');
+  --ifm-background-image: url('/img/light-mode-bg.png');
   --ifm-color-cards-bg: linear-gradient(137deg, #ffffff, #E5E5E5);
   --ifm-color-cards-title: #2D2D2D;
   --ifm-color-cards-text: #919191;
@@ -50,10 +50,10 @@ body::before {
   background-size: 100%;
   background-position: top center;
   background-repeat: repeat-x;
-  opacity: 0.2;
+  opacity: O.2;
   z-index: -1;
-  mask-image: linear-gradient(to bottom, black 60%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
+  mask-image: linear-gradient(to bottom, black 30%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent);
 }
 
 [data-theme='dark'] body::before {
