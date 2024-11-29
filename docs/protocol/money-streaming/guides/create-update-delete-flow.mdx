@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Create, Update, and Delete Flows
+# Control Flows
 
 This guide covers various methods for managing flows directly on the Superfluid protocol. It includes creating, updating, and deleting flows, **on chain, from another smart contracts**.
 This guide does NOT cover:
@@ -29,17 +29,45 @@ However, in Superfluid, a "Flow" is a more general term than a "Stream".
 A Stream is a non-zero flow, while a zero flow is not considered a Stream.
 :::
 
-## Create a flow
+## Set the flowrate
 
-To create a flow, you need to call `createFlow`by specifying the token, sender, receiver, and flow rate.
+### Function `flow`
+
+This function sets the specified flowrate between sender and receiver.
+
+```
+/**
+    * @dev Sets the given CFA flowrate between the caller and a given receiver.
+    * If there's no pre-existing flow and `flowRate` non-zero, a new flow is created.
+    * If there's an existing flow and `flowRate` non-zero, the flowRate of that flow is updated.
+    * If there's an existing flow and `flowRate` zero, the flow is deleted.
+    * If the existing and given flowRate are equal, no action is taken.
+    * On creation of a flow, a "buffer" amount is automatically detracted from the sender account's available balance.
+    * If the sender account is solvent when the flow is deleted, this buffer is redeemed to it.
+    * @param token Super token address
+    * @param receiver The receiver of the flow
+    * @param flowRate The wanted flowrate in wad/second. Only positive values are valid here.
+    * @return bool
+    */
+function flow(ISuperToken token, address receiver, int96 flowRate)
+    internal returns (bool)
+```
+
+:::note when not using the lib
+The CFAv1Forwarder contract has a function called `setFlowrate` which does the same.
+:::
+
+## CRUD methods
+
+If you want to be more explicit when changing the state of flows, you can use the following CRUD methods:
 
 ### Function: `createFlow`
 
-This function creates a flow without user data.
+To create a flow, you need to call `createFlow` by specifying the token, sender, receiver, and flow rate.
 
 ```solidity
 /**
- * @dev Create flow without userData
+ * @dev Create flow
  * @param token The token used in flow
  * @param receiver The receiver of the flow
  * @param flowRate The desired flowRate
@@ -48,24 +76,13 @@ function createFlow(ISuperToken token, address receiver, int96 flowRate)
     internal returns (bool)
 ```
 
-:::note About "setFlowrate" function
-The CFAv1Forwarder contract has a function called `setFlowrate` which is used to create or update flows.
-This function does not exist in the [SuperTokenV1Library](/docs/technical-reference/SuperTokenV1Library) for a reason.
-
-In short, the main contributors to the Superfluid Protocol believe that the best practice of building on-chain contracts is
-to not abstract away the creation and update of flows through a wrapper. The developer using the library should be aware of
-the difference between creating and updating flows, and should call the appropriate function accordingly.
-:::
-
-## Update a flow
+### Function: `updateFlow`
 
 For an existing flow, you can update the flow rate through the `updateFlow` function.
 
-### Function: `updateFlow`
-
 ```solidity
 /**
- * @dev Update flow without userData
+ * @dev Update flow
  * @param token The token used in flow
  * @param receiver The receiver of the flow
  * @param flowRate The desired flowRate
@@ -74,11 +91,9 @@ function updateFlow(ISuperToken token, address receiver, int96 flowRate)
     internal returns (bool)
 ```
 
-## Deleting a flow
+### Function: `deleteFlow`
 
 To delete an eisting, you need to call `deleteFlow` and  specify the token, sender, and receiver.
-
-### Function: `deleteFlow`
 
 ```solidity
 /**
@@ -99,10 +114,9 @@ No, you cannot update or delete a non-existent flow. If a flow does not exist, t
 For a full list of functions related to creating, updating, and deleting flows, refer to the [SuperTokenV1Library technical reference](/docs/technical-reference/SuperTokenV1Library).
 :::
 
-## Example: Creating, Updating, and Deleting Flows
+## Example: Control Flows
 
 For this example, we'll use the `FlowSender` contract described in the [Quickstart](/docs/protocol/quickstart.mdx) as our example to demonstrate how to write a contract with creates, updates, deletes and reads flow data.
-
 
 <div>
 <details>
@@ -110,35 +124,26 @@ For this example, we'll use the `FlowSender` contract described in the [Quicksta
 <p>
 
 ```solidity
-//SPDX-License-Identifier: Unlicensed
-pragma solidity ^0.8.14;
-
-import { ISuperfluid, ISuperToken } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
-
-import { SuperTokenV1Library } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.23;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-// For deployment on Mumbai Testnet
+import { ISuperfluid, ISuperToken } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import { SuperTokenV1Library } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
 
 interface IFakeDAI is IERC20 {
-
     function mint(address account, uint256 amount) external;
-
 }
 
 contract FlowSender {
-
     using SuperTokenV1Library for ISuperToken;
 
     mapping (address => bool) public accountList;
-
     ISuperToken public daix;
 
     // fDAIx address on Polygon Mumbai = 0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f
     constructor(ISuperToken _daix) {
-
         daix = _daix;
-
     }
 
     /// @dev Mints 10,000 fDAI to this contract and wraps it all into fDAIx
@@ -155,41 +160,17 @@ contract FlowSender {
 
         // Wrap the fDAI into fDAIx
         daix.upgrade(10000e18);
-
     }
 
-    /// @dev creates a stream from this contract to desired receiver at desired rate
-    function createStream(int96 flowRate, address receiver) external {
-
-        // Create stream
-        daix.createFlow(receiver, flowRate);
-
+    /// @dev controls a stream with the given flowrate between this contract and the desired receiver
+    function setStream(address receiver, int96 flowRate) external {
+        daix.flow(receiver, flowRate);
     }
 
-    /// @dev updates a stream from this contract to desired receiver to desired rate
-    function updateStream(int96 flowRate, address receiver) external {
-
-        // Update stream
-        daix.updateFlow(receiver, flowRate);
-
-    }
-
-    /// @dev deletes a stream from this contract to desired receiver
-    function deleteStream(address receiver) external {
-
-        // Delete stream
-        daix.deleteFlow(address(this), receiver);
-
-    }
-
-    /// @dev get flow rate between this contract to certain receiver
-    function readFlowRate(address receiver) external view returns (int96 flowRate) {
-
-        // Get flow rate
+    /// @dev get flow rate between this contract and the given receiver
+    function getFlowRate(address receiver) external view returns (int96 flowRate) {
         return daix.getFlowRate(address(this), receiver);
-
     }
-
 }
 ```
 
@@ -200,10 +181,8 @@ contract FlowSender {
 This contract has a few functions:
 
 - **gainDaiX**: Mints and wraps fDAI into fDAIx (Superfluid's wrapped token).
-- **createStream**: Initiates a new money stream to a specified receiver.
-- **updateStream**: Updates an existing money stream's flow rate.
-- **deleteStream**: Terminates an existing money stream.
-- **readFlowRate**: Reads the current flow rate of a stream.
+- **setStream**: Controls a stream between the contract and a receiver
+- **getFlowRate**: Reads the current flow rate of a stream.
 
 :::tip About the `SuperTokenV1Library`
 As you can see, the `FlowSender` contract uses the [`SuperTokenV1Library`](/docs/technical-reference/SuperTokenV1Library) to interact with the Superfluid protocol.

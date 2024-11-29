@@ -10,7 +10,7 @@ In this page we will explain Distribution Pools and show you the most relevant w
 To do this, we will go through some key concepts, and show you how to leverage Superfluid's [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) for your Distribution Pools smart contracts.
 
 :::note About `SuperTokenV1Library.sol`
-The [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) is a comprehensive library that enables interactions with all of the Superfluid components (including Pools) through the SuperToken interface.
+The [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) is a comprehensive library which makes it more convenient to use invoke Superfluid specific functionality on Super Tokens.
 :::
 
 :::warning About the General Distributions Agreement - GDA
@@ -131,11 +131,10 @@ Members can always disconnect from the pool to stop receiving distributions in r
 
 ## Important Functions
 
-Here are some of the most important functions provided by [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) for interacting with Superfluid pools:
+Here are some of the most important functions for interacting with Superfluid pools:
 
 :::note Reminder
-These functions are meant to be called from contracts that import `SuperTokenV1Library.sol`
-and are not directly accessible as external calls on the blockchain.
+Some of this functions are available via [`SuperTokenV1Library.sol`](/docs/technical-reference/SuperTokenV1Library) (contracts using that lib) only.
 :::
 
 ### createPool
@@ -161,10 +160,14 @@ struct PoolConfig {
 We don't recommend setting `transferabilityForUnitsOwner` to `true` unless you have a specific use case that absolutely requires it. This can sometimes lead to unexpected behavior and security risks.
 :::
 
+SuperTokenV1Library also provides overloaded variants setting default values for `admin` (default: `msg.sender`) and/or `poolConfig` (default: `{ transferabilityForUnitsOwner: false, distributionFromAnyAddress: true }`).
+
 ### updateMemberUnits
 
+This function is part of `ISuperfluidPool`, can thus be invoked on pool contracts.
+
 ```solidity
-function updateMemberUnits(ISuperToken token, ISuperfluidPool pool, address memberAddress, uint128 newUnits)
+function updateMemberUnits(address memberAddress, uint128 newUnits)
 ```
 
 Updates the number of units a member has within a pool, effectively changing their share of future distributions.
@@ -204,13 +207,21 @@ function disconnectPool(ISuperToken token, ISuperfluidPool pool)
 
 Disconnects a pool member from a pool.
 
-### distributeToPool
+### distribute
 
 ```solidity
-function distributeToPool(ISuperToken token, address from, ISuperfluidPool pool, uint256 requestedAmount)
+function distribute(ISuperToken token, ISuperfluidPool pool, uint256 requestedAmount)
 ```
 
 Distributes a specified amount of tokens to the pool, to be shared among members according to their units.
+
+### distributeFlow
+
+```solidity
+function distributeFlow(ISuperToken token, ISuperfluidPool pool, int96 requestedFlowRate)
+```
+
+Flow-distributes with the specified flowrate to the pool, with the flow going to members according to their units.
 
 ## Example Usage
 
@@ -221,29 +232,31 @@ Here's how you might use these functions within a smart contract to set up and m
 
 contract MyPool {
     Using SuperTokenV1Library for ISuperToken;
+    
     ISuperToken private superToken;
     ISuperfluidPool private pool;
-    PoolConfig private poolConfig = PoolConfig({
-        transferabilityForUnitsOwner: true,
-        distributionFromAnyAddress: true
-    });
-
+    
     constructor(ISuperToken _superToken) {
         superToken = _superToken;
-        pool = superToken.createPool(address(this), poolConfig);
+        // create a pool with default settings:
+        // msg.sender is admin, non-transferrable units, anybody can distribute to it
+        pool = superToken.createPool();
     }
 
-    // Use updateMemberUnits to assign units to a member
+    // Use updateMemberUnits to assign units to a member.
+    // (This will typically be a permissioned operation, it's akin to minting tokens)
     function updateMemberUnits(address member, uint128 units) public {
-        superToken.updateMemberUnits(pool, member, units);
+        pool.updateMemberUnits(member, units);
     }
 
+    // Instant distribution of tokens to pool members proportional to their current units
     function distribute(uint256 amount) public {
-        superToken.distributeToPool(address(this), pool, amount);
+        superToken.distribute(pool, amount);
     }
 
+    // Flow distribution of tokens to pool members proportional to their current units
     function distributeFlow(int96 flowRate) public {
-        superToken.distributeFlow(address(this), pool, flowRate);
+        superToken.distributeFlow(pool, flowRate);
     }
 }
 ```
