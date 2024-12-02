@@ -1,4 +1,17 @@
-.guide_cards_wrapper {
+:root {
+  --guide-card-bg-light: rgba(14, 26, 3, 0.9);
+  --guide-card-bg-dark: rgba(8, 9, 9, 0.7);
+}
+
+html[data-theme='light'] .guide_cards_container {
+  background: var(--guide-card-bg-light);
+}
+
+html[data-theme='dark'] .guide_cards_container {
+  background: var(--guide-card-bg-dark);
+}
+  
+  .guide_cards_wrapper {
     width: auto;
     padding: 60px 0;
     display: flex;

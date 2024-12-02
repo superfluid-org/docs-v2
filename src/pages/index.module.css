@@ -41,9 +41,9 @@
 
 [data-theme='dark'] .landingPageWrapper::before {
   background: 
-    url('/img/stream.png'),
-    url('/img/dots.png'),
-    linear-gradient(180deg, #465660 0%, #858D97 100%);
+    url('/img/stream-dark.png'),
+    url('/img/dots-dark.png'),
+    linear-gradient(180deg, #080909 0%, #0E1A03 100%);
   background-size: contain, contain, 100%;
   background-position: center, center, center;
   background-repeat: no-repeat, repeat, no-repeat;
