@@ -14,8 +14,7 @@
   --ifm-color-primary-lighter: #ADF500;
   --ifm-color-primary-lightest: #BEFF1A;
   --ifm-background-color: #ffffff;
-  --ifm-background-image: url('/img/light-mode-bg.png');
-  --ifm-color-cards-bg: linear-gradient(137deg, #ffffff, #E5E5E5);
+  --ifm-color-cards-bg: #E5E5E5;
   --ifm-color-cards-title: #2D2D2D;
   --ifm-color-cards-text: #919191;
   --ifm-color-logo: #2D2D2D;
@@ -31,8 +30,7 @@
   --ifm-color-primary-lighter: #ADF500;
   --ifm-color-primary-lightest: #BEFF1A;
   --ifm-background-color: #2D2D2D;
-  --ifm-background-image: url('/img/bg5.svg');
-  --ifm-color-cards-bg: linear-gradient(137deg, #2D2D2D, #21014D);
+  --ifm-color-cards-bg: #21014D;
   --ifm-color-cards-title: #ffffff;
   --ifm-color-cards-text: #919191;
   --ifm-color-logo: white;
@@ -40,38 +38,19 @@
 }
 
 body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: var(--ifm-background-image);
-  background-size: 100%;
-  background-position: top center;
-  background-repeat: repeat-x;
-  opacity: O.2;
-  z-index: -1;
-  mask-image: linear-gradient(to bottom, black 30%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent);
+  display: none;
 }
 
 [data-theme='dark'] body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: var(--ifm-background-image);
-  background-size: 200%;
-  background-position: center;
-  background-color:#000000;
-  background-repeat: repeat-x;
-  opacity: 2;
-  z-index: -1;
-  mask-image: linear-gradient(to bottom, black 60%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
+  display: none;
+}
+
+body {
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] body {
+  background: var(--ifm-background-color);
 }
 
 html, body {
