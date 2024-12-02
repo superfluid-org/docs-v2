@@ -12,133 +12,83 @@ import MotomoComponent from '@site/src/components/MotomoComponent';
 
 <MotomoComponent/>
 
-Superfluid is a protocol revolving around a new token standard called Super Token. Super Tokens have special capabilities (super powers?).
-One of them allows to create second-by-second token transfers (called Money Streaming).
-In this guide, we'll walk through the process of setting up and deploying a basic contract for creating, updating and deleting Superfluid money streams. Let's go!
+Superfluid is a token-centric protocol revolving around a new token standard called Super Token. Super Tokens have special capabilities.
+One of them allows to create second-by-second token transfers (called [Money Streaming](/docs/protocol/money-streaming/overview.mdx)).
+In this guide, we'll walk through the process of setting up and deploying a basic contract for creating, updating or deleting Superfluid money streams.
+
+This contract allows you to:
+- Deploy a Mock Super Token
+- Create, update or delete money streams
 
 :::note Why this Quickstart?
 This is just an example to get you started with Superfluid. You can use this as a base to build more complex applications.
 
-You DO NOT need to set up the FlowSender contract to create, update and delete streams. You can do this directly from the [Dashboard](https://app.superfluid.finance/) or by interacting with the [CFAv1Forwarder contract](https://docs.superfluid.finance/docs/technical-reference/CFAv1Forwarder).
+You DO NOT need to follow this quickstart guide in order to create, update and delete streams. You can do this directly from the [Dashboard](https://app.superfluid.finance/) or by interacting with the [CFAv1Forwarder contract](https://docs.superfluid.finance/docs/technical-reference/CFAv1Forwarder).
 :::
 
 ## Prerequisites
 
-- Solidity knowledge
-- A development environment *(Remix, Hardhat, or Foundry)*
-- A testnet wallet *(e.g., MetaMask)*
-- Access to a testnet native coin *(e.g. Polygon Mumbai Testnet Matic - get faucet [here](https://faucet.matic.network/))*
+- The [Superfluid Boilerplate Repository](https://github.com/superfluid-finance/superfluid-boilerplate)
+- A development environment *(Remix or Foundry)*
+- A testnet wallet (in case you want to deploy the contract to a testnet) *(e.g., MetaMask)*
 
 
-## Contract Overview: FlowSender
+## Contract Overview: SuperfluidBoilerplate
 
-In this guide we will describe the contract `FlowSender`:
-- This contract is designed to interact with the Superfluid protocol, specifically to send [Super Tokens](/docs/protocol/super-tokens/overview.mdx) using [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
-- This contract enables the creation, modification, and deletion of continuous money streams.
-- The contract interacts with an example super token (fake DAI Super Token - fDAIx) to create a stream from itself to a receiver.
-- Each time a stream is created, a new receiver is added to the list of receivers, and the Superfluid Protocol keeps track of the balances and the receivers on the blockchain.
+In this guide we will describe the contract [`SuperfluidBoilerplate.sol`](https://github.com/superfluid-finance/superfluid-boilerplate/blob/master/src/SuperfluidBoilerplate.sol):
+- This contract is designed to interact with the Superfluid protocol, specifically to deploy a [Super Token](/docs/protocol/super-tokens/overview) and use [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
+- The contract enables the deployment of a Mock Super Token.
+- This contract enables the creation, modification, and deletion of continuous money streams to the caller (`msg.sender`).
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <FlowSenderVis/>
 </div>
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <p>*Visualization showing the user creating a flow through FlowSender and all of the streams that have been created*</p>
+    <p>*Visualization showing the contract streaming tokens to the users (callers)*</p>
 </div>
 
-:::tip *What is Tx?* 
-
-If you are new to blockchain development, you may not be familiar with the term "Tx". Tx is short for transaction, which is a record of an action on the blockchain. Transactions are used to transfer value, store data, and interact with smart contracts.
-
-:::
 
 ### Contract and Key Functions
 
 <div>
 <details>
-<summary>Click here to show `FlowSender` contract</summary>
+<summary>Click here to show `SuperfluidBoilerplate` contract</summary>
 <p>
 
 ```solidity
-//SPDX-License-Identifier: Unlicensed
-pragma solidity ^0.8.14;
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
 
-import { ISuperfluid, ISuperToken } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import {SuperTokenV1Library, ISuperToken, ISuperfluid} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
+import {ISuperTokenFactory} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperTokenFactory.sol";
+import {PureSuperTokenProxy, IPureSuperToken} from "./PureSuperToken.sol";
 
-import { SuperTokenV1Library } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
-
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-// For deployment on Mumbai Testnet
-
-interface IFakeDAI is IERC20 {
-
-    function mint(address account, uint256 amount) external;
-
-}
-
-contract FlowSender {
-
+contract SuperfluidBoilerplate {
     using SuperTokenV1Library for ISuperToken;
-    
-    mapping (address => bool) public accountList;
 
-    ISuperToken public daix;
+    ISuperToken public acceptedSuperToken;
+    ISuperfluid public host;
 
-    // fDAIx address on Polygon Mumbai = 0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f
-    constructor(ISuperToken _daix) {
-
-        daix = _daix;
-
+    constructor(ISuperfluid _host) {
+        host = _host;
     }
 
-    /// @dev Mints 10,000 fDAI to this contract and wraps it all into fDAIx
-    function gainDaiX() external {
-
-        // Get address of fDAI by getting underlying token address from DAIx token
-        IFakeDAI fdai = IFakeDAI( daix.getUnderlyingToken() );
-        
-        // Mint 10,000 fDAI
-        fdai.mint(address(this), 10000e18);
-
-        // Approve fDAIx contract to spend fDAI
-        fdai.approve(address(daix), 20000e18);
-
-        // Wrap the fDAI into fDAIx
-        daix.upgrade(10000e18);
-
+    function deployMockSuperToken() public {
+        acceptedSuperToken = IPureSuperToken(address(new PureSuperTokenProxy()));
+        PureSuperTokenProxy(payable(address(acceptedSuperToken))).initialize(
+            ISuperTokenFactory(host.getSuperTokenFactory()),
+            "Mock Super Token",
+            "mST",
+            address(this),
+            1000000000000000000000000
+        );
     }
 
-    /// @dev creates a stream from this contract to desired receiver at desired rate
-    function createStream(int96 flowRate, address receiver) external {
-
-        // Create stream
-        daix.createFlow(receiver, flowRate);
-
+    function setFlowRate(int96 flowRate) public {
+        require(flowRate > 0, "Flow rate must be greater than 0");
+        require(acceptedSuperToken.balanceOf(address(this)) > 0, "Insufficient balance");
+        acceptedSuperToken.flow(msg.sender, flowRate);
     }
-
-    /// @dev updates a stream from this contract to desired receiver to desired rate
-    function updateStream(int96 flowRate, address receiver) external {
-
-        // Update stream
-        daix.updateFlow(receiver, flowRate);
-
-    }
-
-    /// @dev deletes a stream from this contract to desired receiver
-    function deleteStream(address receiver) external {
-
-        // Delete stream
-        daix.deleteFlow(address(this), receiver);
-
-    }
-
-    /// @dev get flow rate between this contract to certain receiver
-    function readFlowRate(address receiver) external view returns (int96 flowRate) {
-        
-        // Get flow rate
-        return daix.getFlowRate(address(this), receiver);
-
-    }
-
 }
 ```
 
@@ -146,101 +96,143 @@ contract FlowSender {
 </details>
 </div>
 
-- **gainDaiX**: Mints and wraps fDAI into fDAIx (Superfluid's wrapped token).
-- **createStream**: Initiates a new money stream to a specified receiver.
-- **updateStream**: Updates an existing money stream's flow rate.
-- **deleteStream**: Terminates an existing money stream.
-- **readFlowRate**: Reads the current flow rate of a stream.
+The contract has two main functions:
+
+- **deployMockSuperToken**: Creates a new Super Token with 1,000,000 units initial supply minted to the contract.
+- **setFlowRate**: Creates, updates or deletes a stream to the caller with the specified flow rate.
 
 ## Environment Setup and Deployment
-
-Deploy the `FlowSender` contract to a testnet like Mumbai using your preferred development environment.
 
 <Tabs>
   <TabItem value="remix" label="Remix IDE" default>
 
 ### Using Remix IDE
 
-1. **Access Remix IDE**: Visit [Remix IDE](https://remix.ethereum.org/).
-2. **Create New File**: In the 'File Explorers' tab, create a new `.sol` file.
-3. **Paste Contract Code**: Copy the `FlowSender` contract code into the new file.
-4. **Compile the Contract**: Go to the 'Solidity Compiler' tab and click 'Compile'.
-5. **Deploy the Contract**: 
-    - Switch to the 'Deploy & Run Transactions' tab.
-    - Connect to MetaMask, selecting Mumbai Testnet.
-    - Click on 'Deploy' to deploy your contract.
-
-For more information, check out the [Remix IDE documentation](https://remix-ide.readthedocs.io/en/latest/).
-
-  </TabItem>
-  <TabItem value="hardhat" label="Hardhat">
-
-### Using Hardhat
-
-1. **Initialize Hardhat**: Set up a new Hardhat project by running `npx hardhat init` in your terminal.
-2. **Install Dependencies**: Install necessary dependencies like `@nomiclabs/hardhat-ethers`.
-3. **Add Contract**: Place the `FlowSender` contract in the `contracts` directory.
-4. **Create Deployment Script**: Write a script in the `scripts` folder to deploy the contract.
-5. **Deploy**: Run the script using `npx hardhat run scripts/deploy.js --network mumbai`.
-
-Explore more about Hardhat in the [Hardhat documentation](https://hardhat.org/getting-started/).
+1. **Create Files**: 
+   - Create `SuperfluidBoilerplate.sol` and paste the main contract from the [repository's `/src` folder](https://github.com/superfluid-finance/superfluid-boilerplate/tree/master/src)
+   - Create `PureSuperToken.sol` and paste the interface from the [repository's `/src` folder](https://github.com/superfluid-finance/superfluid-boilerplate/tree/master/src)
+2. **Compile**: Select compiler version 0.8.20 or higher
+3. **Deploy**: 
+   - Select "Injected Provider - MetaMask"
+   - Choose your network (make sure Superfluid supports it - check [here](https://explorer.superfluid.finance/base-mainnet/protocol))
+   - Enter the Superfluid host address in the constructor (get it from the [docs](/docs/protocol/contract-addresses) or from the [explorer](https://explorer.superfluid.finance/base-mainnet/protocol))
+   - Click "Deploy"
 
   </TabItem>
   <TabItem value="foundry" label="Foundry">
 
 ### Using Foundry
 
-1. **Set Up Foundry**: Initialize a new Foundry project with `forge init`.
-2. **Place Contract**: Add the `FlowSender` contract to your `src` directory.
-3. **Write Deployment Script**: Create a deployment script in the `script` directory.
-4. **Compile and Deploy**: Use `forge build` to compile and `forge deploy --network mumbai` to deploy.
+After cloning the [Superfluid Boilerplate Repository](https://github.com/superfluid-finance/superfluid-boilerplate), you can test and deploy the contract with the following commands:
 
-Learn more about Foundry at the [Foundry Book](https://book.getfoundry.sh).
+1. **Install Dependencies**:
+```bash
+forge install
+```
+
+2. **Test**:
+```bash
+forge test
+```
+
+3. **Deploy**:
+```bash
+forge create src/SuperfluidBoilerplate.sol:SuperfluidBoilerplate \
+  --constructor-args SUPERFLUID_HOST_ADDRESS \
+  --rpc-url YOUR_RPC_URL \
+  --private-key YOUR_PRIVATE_KEY
+```
 
   </TabItem>
 </Tabs>
 
-:::info *What is the token address?*
-When deploying the contract, you will need to provide the address of the fDAIx token on the testnet you are using. For example, on Mumbai Testnet, the address of fDAIx is `0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f`.
-
-For other testnets, make sure to check out the [Superfluid Explorer](https://Explorer.superfluid.finance/goerli/supertokens).
+:::tip Where can I get the Superfluid host address?
+Make sure to use the correct Superfluid host address for your network.
+You can get the Superfluid host address from the [docs](/docs/protocol/contract-addresses) or from the [explorer](https://explorer.superfluid.finance/base-mainnet/protocol).
 :::
 
-## Interacting with the Contract
+## Using the Contract
 
-Once you have deployed your contract, you can run your tests on your favourite framework. You can also test your smart contract live in the browser using the Superfluid Flow Sender Playground below. Modify `yourAddress` putting the address to your deployed contract and follow the steps on the interface below.
+After deployment, interact with your contract in two steps:
 
-```jsx live
-function FlowSenderPlayground() {
+1. **Deploy Mock Token**:
+   - Call `deployMockSuperToken()`
+   - This creates a new Super Token with 1,000,000 units and minted to the contract
 
-const yourAddress="0xe8f9eEDf7f171111169C71119cd625ee629E9831";
-return (
-    <div>
-      <FlowSenderComponent contractAddress={yourAddress} />
-    </div>
-  );
+2. **Create Streams**:
+   - Call `setFlowRate(flowRate)`
+   - The `flowRate` is tokens per second (with 18 decimals)
+   - Examples:
+     - For 1 token per month, use `flowRate ≈ 380414535736`
+     - For 1 token per week, use `flowRate ≈ 1653439153439`
+     - To delete the stream, use `flowRate = 0`
+
+:::tip How do I find the full list of methods for the SuperTokenV1Library?
+You can find the full list of methods for the SuperTokenV1Library in the [SuperTokenV1Library API Reference](/docs/technical-reference/SuperTokenV1Library).
+:::
+
+## Testing Your Contract
+
+As you can see in the repository, we have a test file that tests the contract. Here's a breakdown of the test file:
+
+```solidity
+contract SuperfluidBoilerplateTest is Test {
+    // Setup variables for the test environment
+    SuperfluidBoilerplate public boilerplate;
+    SuperfluidFrameworkDeployer.Framework public sf;
+    ISuperToken public acceptedSuperToken;
+    using SuperTokenV1Library for ISuperToken;
+
+    function setUp() public {
+        // Deploy local Superfluid test framework
+        vm.etch(ERC1820RegistryCompiled.at, ERC1820RegistryCompiled.bin);
+        SuperfluidFrameworkDeployer sfDeployer = new SuperfluidFrameworkDeployer();
+        sfDeployer.deployTestFramework();
+        sf = sfDeployer.getFramework();
+
+        // Deploy and initialize our contract
+        boilerplate = new SuperfluidBoilerplate(sf.host);
+        boilerplate.deployMockSuperToken();
+        acceptedSuperToken = boilerplate.acceptedSuperToken();
+    }
+
+    // Test creating a flow
+    function testSetFlowRate() public {
+        boilerplate.setFlowRate(100000000);
+        uint256 flowRate = uint256(uint96(acceptedSuperToken.getFlowRate(
+            address(boilerplate), 
+            address(this)
+        )));
+        assertEq(flowRate, uint256(100000000));
+    }
 }
 ```
 
-## Further Exploration
+The test file does two main things:
 
-### Understanding Super Tokens
+1. **Setup (`setUp` function)**:
+   - Deploys a local version of the Superfluid protocol for testing
+   - Creates our `SuperfluidBoilerplate` contract
+   - Deploys the Mock Super Token
 
-Super Tokens are the core of the Superfluid protocol, offering real-time finance capabilities. Learn about how these upgraded ERC-20 tokens enable new financial primitives.
+2. **Flow Rate Test (`testSetFlowRate` function)**:
+   - Creates a stream with a flow rate of 100000000 wei/second
+   - Verifies that the flow rate was set correctly
 
-- [Super Tokens Overview](/docs/protocol/super-tokens/overview.mdx)
-- [Deploying Super Tokens](docs/category/deploy-a-super-token)
+You can run these tests using the `forge test` command as shown in the setup instructions above.
 
-### Exploring Money Streaming
+## Next Steps
 
-Money Streaming is a novel concept introduced by Superfluid, allowing continuous and instant value transfer over time.
+Now that you understand the basics, you can:
 
-- [Money Streaming Overview](/docs/protocol/money-streaming/overview.mdx)
-- [More on Updating, Creating and Deleting streams](/docs/protocol/money-streaming/guides/create-update-delete-flow.mdx)
+1. **Explore Super Tokens**:
+   - [Super Tokens Overview](/docs/protocol/super-tokens/overview)
+   - [Advanced Token Creation](docs/protocol/super-tokens/guides/deploy-super-token/deploy-custom-super-token)
 
-### Diving into Distributions
+2. **Build Smart Contracts**:
+   - [Money Streaming Overview](/docs/protocol/money-streaming/overview)
+   - [Distribution Pools Overview](docs/protocol/distributions/overview)
+   - [How to use the SuperTokenV1Library](/docs/protocol/super-tokens/guides/using-library)
 
-Distributions are a key feature for scalable one-to-many payments in Superfluid. Learn how you can leverage distributions for various use cases.
-
-- [Understanding Distributions](/docs/protocol/distributions/overview.mdx)
-- [Pools and Distributions](/docs/protocol/distributions/guides/pools.mdx)
+3. **Build your client application**:
+   - [SDK Quickstart](/docs/sdk/quickstart)
