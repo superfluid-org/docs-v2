@@ -50,7 +50,7 @@ export default function Home(): JSX.Element {
             </span>
             <span style={{ 
               fontFamily: "GT Walsheim Pro",
-              fontSize: "100px",
+              fontSize: "50px",
               fontWeight: 500,
               lineHeight: "100px",
               letterSpacing: "-0.01em",
