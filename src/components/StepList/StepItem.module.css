@@ -15,79 +15,99 @@
   
   /* Grid container */
   .stepList {
-    max-width: 1000px;
-    margin: 0 10px;
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 20px;
+    padding: 0 20px;
+  }
+  
+  /* Individual item */
+  .stepItem {
+    position: relative;
+    background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.6) 50%,
+      rgba(134, 238, 30, 0.2) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  /* Add a darker overlay at the top */
+  .stepItem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    pointer-events: none;
+  }
+  
+  .stepItem:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Content within each item */
+  .stepContent {
+    position: relative; /* To appear above the gradient overlay */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 1;
+  }
+  
+  /* Number */
+  .stepNumber {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: right;
+  }
+  
+  /* Title */
+  .stepTitle h3 {
+    color: #ffffff;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* Text */
+  .stepText p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
   }
   
   /* Responsive adjustments */
   @media screen and (max-width: 768px) {
     .stepList {
-      grid-template-columns: 1fr; /* One column on small screens */
-      margin: 0; /* Adjust margin as needed */
+      grid-template-columns: 1fr;
     }
   
     .stepItem {
-      max-width: 100%; /* Full width for smaller screens */
-      padding: 20px; /* Adjust padding for smaller screens */
+      padding: 24px;
     }
   
-    .stepTitle {
-      font-size: 1rem; /* Adjust font size for smaller screens */
+    .stepTitle h3 {
+      font-size: 1.5rem;
     }
-  
-    .stepText {
-      font-size: 14px; /* Adjust font size for smaller screens */
-    }
-  }
-  
-  /* Individual item */
-  .stepItem {
-    will-change: auto;
-    background: var(--ifm-color-cards-bg);
-    border: 1px solid #47559d;
-    border-radius: 40px;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    max-width: 350px;
-    margin: 0 auto;
-  }
-
-  .stepItem:hover {
-    border: 1px solid var(--ifm-color-emphasis-400); /* Highlight border on hover */
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05); /* Add shadow on hover */
-  }
-  
-  /* Content within each item */
-  .stepContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  /* Icon */
-  .stepIcon {
-    width: 72px;
-    margin-bottom: 10px;
-  }
-  
-  /* Title */
-  .stepTitle {
-    color: var(--ifm-color-cards-title);
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 8px;
-  }
-  
-  /* Text */
-  .stepText {
-    color: var(--ifm-color-cards-text);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 150%;
   }
   
