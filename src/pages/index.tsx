@@ -2,7 +2,6 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import StepList from "@site/src/components/StepList";
 import Cards from "@site/src/components/Cards";
-import WavyBackground from "@site/src/components/WavyBackground";
 import { useState, useEffect } from "react";
 import styles from "./index.module.css";
 
@@ -17,6 +16,7 @@ export default function Home(): JSX.Element {
    }, []);
 
   return (
+
     <div className={styles.landingPageWrapper}>
       <Layout
         title={`${siteConfig.title}`}

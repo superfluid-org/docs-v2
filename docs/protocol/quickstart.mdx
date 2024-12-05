@@ -59,35 +59,26 @@ If you are new to blockchain development, you may not be familiar with the term 
 <p>
 
 ```solidity
-//SPDX-License-Identifier: Unlicensed
-pragma solidity ^0.8.14;
-
-import { ISuperfluid, ISuperToken } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
-
-import { SuperTokenV1Library } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.23;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-// For deployment on Mumbai Testnet
+import { ISuperfluid, ISuperToken } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import { SuperTokenV1Library } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
 
 interface IFakeDAI is IERC20 {
-
     function mint(address account, uint256 amount) external;
-
 }
 
 contract FlowSender {
-
     using SuperTokenV1Library for ISuperToken;
-    
-    mapping (address => bool) public accountList;
 
+    mapping (address => bool) public accountList;
     ISuperToken public daix;
 
     // fDAIx address on Polygon Mumbai = 0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f
     constructor(ISuperToken _daix) {
-
         daix = _daix;
-
     }
 
     /// @dev Mints 10,000 fDAI to this contract and wraps it all into fDAIx
@@ -95,7 +86,7 @@ contract FlowSender {
 
         // Get address of fDAI by getting underlying token address from DAIx token
         IFakeDAI fdai = IFakeDAI( daix.getUnderlyingToken() );
-        
+
         // Mint 10,000 fDAI
         fdai.mint(address(this), 10000e18);
 
@@ -104,41 +95,17 @@ contract FlowSender {
 
         // Wrap the fDAI into fDAIx
         daix.upgrade(10000e18);
-
     }
 
-    /// @dev creates a stream from this contract to desired receiver at desired rate
-    function createStream(int96 flowRate, address receiver) external {
-
-        // Create stream
-        daix.createFlow(receiver, flowRate);
-
+    /// @dev controls a stream with the given flowrate between this contract and the desired receiver
+    function setStream(address receiver, int96 flowRate) external {
+        daix.flow(receiver, flowRate);
     }
 
-    /// @dev updates a stream from this contract to desired receiver to desired rate
-    function updateStream(int96 flowRate, address receiver) external {
-
-        // Update stream
-        daix.updateFlow(receiver, flowRate);
-
-    }
-
-    /// @dev deletes a stream from this contract to desired receiver
-    function deleteStream(address receiver) external {
-
-        // Delete stream
-        daix.deleteFlow(address(this), receiver);
-
-    }
-
-    /// @dev get flow rate between this contract to certain receiver
-    function readFlowRate(address receiver) external view returns (int96 flowRate) {
-        
-        // Get flow rate
+    /// @dev get flow rate between this contract and the given receiver
+    function getFlowRate(address receiver) external view returns (int96 flowRate) {
         return daix.getFlowRate(address(this), receiver);
-
     }
-
 }
 ```
 
@@ -147,14 +114,12 @@ contract FlowSender {
 </div>
 
 - **gainDaiX**: Mints and wraps fDAI into fDAIx (Superfluid's wrapped token).
-- **createStream**: Initiates a new money stream to a specified receiver.
-- **updateStream**: Updates an existing money stream's flow rate.
-- **deleteStream**: Terminates an existing money stream.
-- **readFlowRate**: Reads the current flow rate of a stream.
+- **setStream**: Controls a stream between the contract and a receiver
+- **getFlowRate**: Reads the current flow rate of a stream.
 
 ## Environment Setup and Deployment
 
-Deploy the `FlowSender` contract to a testnet like Mumbai using your preferred development environment.
+Deploy the `FlowSender` contract to a testnet using your preferred development environment.
 
 <Tabs>
   <TabItem value="remix" label="Remix IDE" default>
@@ -173,6 +138,18 @@ Deploy the `FlowSender` contract to a testnet like Mumbai using your preferred d
 For more information, check out the [Remix IDE documentation](https://remix-ide.readthedocs.io/en/latest/).
 
   </TabItem>
+  <TabItem value="foundry" label="Foundry">
+
+### Using Foundry
+
+1. **Set Up Foundry**: Initialize a new Foundry project with `forge init`.
+2. **Place Contract**: Add the `FlowSender` contract to your `src` directory.
+3. **Write Deployment Script**: Create a deployment script in the `script` directory.
+4. **Compile and Deploy**: Use `forge build` to compile and `forge deploy --network mumbai` to deploy.
+
+Learn more about Foundry at the [Foundry Book](https://book.getfoundry.sh).
+
+  </TabItem>
   <TabItem value="hardhat" label="Hardhat">
 
 ### Using Hardhat
@@ -186,24 +163,11 @@ For more information, check out the [Remix IDE documentation](https://remix-ide.
 Explore more about Hardhat in the [Hardhat documentation](https://hardhat.org/getting-started/).
 
   </TabItem>
-  <TabItem value="foundry" label="Foundry">
-
-### Using Foundry
-
-1. **Set Up Foundry**: Initialize a new Foundry project with `forge init`.
-2. **Place Contract**: Add the `FlowSender` contract to your `src` directory.
-3. **Write Deployment Script**: Create a deployment script in the `script` directory.
-4. **Compile and Deploy**: Use `forge build` to compile and `forge deploy --network mumbai` to deploy.
-
-Learn more about Foundry at the [Foundry Book](https://book.getfoundry.sh).
-
-  </TabItem>
 </Tabs>
 
 :::info *What is the token address?*
-When deploying the contract, you will need to provide the address of the fDAIx token on the testnet you are using. For example, on Mumbai Testnet, the address of fDAIx is `0x5D8B4C2554aeB7e86F387B4d6c00Ac33499Ed01f`.
-
-For other testnets, make sure to check out the [Superfluid Explorer](https://Explorer.superfluid.finance/goerli/supertokens).
+When deploying the contract, you will need to provide the address of the fDAIx token on the testnet you are using.
+You can find those addresses in the [Superfluid Explorer](https://explorer.superfluid.finance/goerli/supertokens).
 :::
 
 ## Interacting with the Contract
