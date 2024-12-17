@@ -63,10 +63,10 @@ function setFlowPermissions(
 ) internal returns (bool)
 ```
 
-2. `createFlowFrom`: Create a flow as an operator on behalf of another account.
+2. `flowFrom`: Control a flow as an operator on behalf of another account.
 
 ```solidity
-function createFlowFrom(
+function flowFrom(
     ISuperToken token,
     address sender,
     address receiver,
@@ -95,17 +95,16 @@ User data in Superfluid allows developers to attach additional information to tr
 
 Many functions in the SuperTokenV1Library accept a `userData` parameter. This is typically a `bytes` type, allowing you to encode any data you want to include.
 
-Example of using user data when creating a flow:
+Example of using user data when controlling a flow:
 
 ```solidity
-function createFlowWithUserData(
+function flowFrom(
     ISuperToken token,
+    address sender,
     address receiver,
     int96 flowRate,
     bytes memory userData
-) internal {
-    token.createFlow(receiver, flowRate, userData);
-}
+) internal returns (bool)
 ```
 
 You can encode various types of data into the `userData` parameter. For example:
@@ -123,9 +122,8 @@ Here's a simple example demonstrating how one contract can grant permissions to 
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
-import "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
-import "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperToken.sol";
+import { ISuperfluid, ISuperToken } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+import { SuperTokenV1Library } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
 
 contract PermissionGranter {
     using SuperTokenV1Library for ISuperToken;
@@ -154,7 +152,7 @@ contract FlowCreator {
         address receiver,
         int96 flowRate
     ) external {
-        token.createFlowFrom(sender, receiver, flowRate);
+        token.flowFrom(sender, receiver, flowRate);
     }
 }
 ```

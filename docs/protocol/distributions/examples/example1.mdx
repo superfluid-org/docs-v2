@@ -75,13 +75,7 @@ The `AdSpotContract` is initialized with necessary Superfluid interfaces and par
 
 ```solidity
 constructor(ISuperToken _acceptedToken)
-    SuperAppBaseFlow(
-        ISuperfluid(ISuperToken(_acceptedToken).getHost()),
-        true,
-        true,
-        true,
-        string("")
-    )
+    CFASuperAppBase(ISuperfluid(_acceptedToken.getHost()))
 {
     // Contract initialization code
 }

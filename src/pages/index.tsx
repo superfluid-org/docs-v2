@@ -1,9 +1,9 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import Logo from "@site/src/components/Logo";
 import StepList from "@site/src/components/StepList";
 import Cards from "@site/src/components/Cards";
 import { useState, useEffect } from "react";
+import styles from "./index.module.css";
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
@@ -16,38 +16,60 @@ export default function Home(): JSX.Element {
    }, []);
 
   return (
-    <>
-      <div>
-        <Layout
-          title={`${siteConfig.title}`}
-          description="What is Superfluid and How can I build on it? <head />"
-        >
-          <div>
+
+    <div className={styles.landingPageWrapper}>
+      <Layout
+        title={`${siteConfig.title}`}
+        description="What is Superfluid and How can I build on it? <head />"
+      >
+        <div>
+          <br />
+          <br />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            <span style={{ 
+              fontFamily: "GT Walsheim Pro",
+              fontSize: "36px",
+              fontWeight: 500,
+              lineHeight: "43.2px",
+              letterSpacing: "-0.01em",
+              textAlign: "center",
+              textUnderlinePosition: "from-font",
+              textDecorationSkipInk: "none",
+              color: "rgba(134, 238, 30, 1)"
+            }}>
+              Technical Documentation
+            </span>
+            <span style={{ 
+              fontFamily: "GT Walsheim Pro",
+              fontSize: "50px",
+              fontWeight: 500,
+              lineHeight: "100px",
+              letterSpacing: "-0.01em",
+              textAlign: "center",
+              textUnderlinePosition: "from-font",
+              textDecorationSkipInk: "none",
+              color: "rgba(255, 255, 255, 1)"
+            }}>
+              The Most Advanced Money Streaming Protocol
+            </span>
+            <br />
+            <StepList />
             <br />
             <br />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Logo />
-              <br />
-              <span style={{ fontSize: "20px" }}>
-                Technical Documentation for the Superfluid Protocol
-              </span>
-              <br />
-              <StepList />
-              <br />
-              <br />
-              <Cards />
-              <br />
-            </div>
+            <Cards />
+            <br />
           </div>
-        </Layout>
-      </div>
-    </>
+        </div>
+      </Layout>
+    </div>
   );
 }

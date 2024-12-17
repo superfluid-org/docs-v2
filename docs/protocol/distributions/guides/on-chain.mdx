@@ -36,26 +36,30 @@ The same pool can be used to distribute any Super Token, be it for Instant or St
 ### createPool
 
 ```solidity
-function createPool(contract ISuperToken token,address admin,struct PoolConfig poolConfig) internal returns (contract ISuperfluidPool pool)
+function createPool(ISuperToken token, address admin, struct PoolConfig poolConfig) internal returns (contract ISuperfluidPool pool)
+
+// simplified variant using the following default settings:
+// admin = msg.sender, poolConfig = { transferabilityForUnitsOwner: false, distributionFromAnyAddress: true }
+function createPool(contract ISuperToken token) internal returns (contract ISuperfluidPool pool);
 ```
 
 Creates a new Superfluid Distribution Pool.
 
-### updateMemberUnits
+### distribute
 
 ```solidity
-function updateMemberUnits( contract ISuperToken token, contract ISuperfluidPool pool, address memberAddress, uint128 newUnits) internal returns (bool)
+function distribute(ISuperToken token, ISuperfluidPool pool, uint256 amount) internal returns (bool)
 ```
 
-Updates the units of a pool member.
+Distributes the specified amount of tokens among pool members.
 
 ### distributeFlow
 
 ```solidity
-function distributeFlow(ISuperToken token, address from, ISuperfluidPool pool, int96 requestedFlowRate) internal returns (bool)
+function distributeFlow(ISuperToken token, ISuperfluidPool pool, int96 requestedFlowRate) internal returns (bool)
 ```
 
-Initiates a distribution flow from a sender to a pool with the specified flow rate.
+Initiates a distribution flow from a sender to a pool with the specified total flow rate.
 
 :::warning Important
 Keep in mind that the total amount of units in the pool needs to be significantly lower than the total flow rate or the total tokens distributed of the pool.
@@ -65,7 +69,7 @@ To understand more why this is the case, please refer to the [Member Units](/doc
 ### connectPool
 
 ```solidity
-function connectPool( contract ISuperToken token, contract ISuperfluidPool pool) internal returns (bool)
+function connectPool(ISuperToken token, contract ISuperfluidPool pool) internal returns (bool)
 ```
 
 Connects a pool member to pool.
@@ -89,6 +93,16 @@ function isMemberConnected(ISuperToken token, address pool, address member) inte
 ```
 
 Checks whether a member is connected to a pool and eligible to receive distributions.
+
+## ISuperfluidPool
+
+### updateMemberUnits
+
+```solidity
+function updateMemberUnits(address memberAddress, uint128 newUnits) internal returns (bool)
+```
+
+Updates the units of a pool member.
 
 ## Contract Example
 
@@ -115,7 +129,7 @@ contract MyDistributionsContract {
     }
 
     function startStreamingDistribution(ISuperfluidPool pool, int96 flowRate) public {
-        _superToken.distributeFlow(address(this), pool, flowRate);
+        _superToken.distributeFlow(pool, flowRate);
         // Additional logic for streaming distribution
     }
 }
