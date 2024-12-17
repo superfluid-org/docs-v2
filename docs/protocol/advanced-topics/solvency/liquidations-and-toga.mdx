@@ -86,7 +86,7 @@ PICs can't remove their `stake` at will through a single transaction, but rather
 
 All liquidation rewards are added to the `stake`, thus - depending on the exitRate set by the PIC and the number of size of streams becoming critical - the stake of a PIC could shrink, grow or stay the same over time. (The maximum allowed `exitRate` is calculated based on the worst case of no rewards being added during that timeframe.)
 
-In order to become the PIC, you can either use the Dapp at https://toga.superfluid.finance/ or use `ERC777.send()` to post the desired stake to the TOGA contract - optinally with an `exitRate` set in the `data` parameter if you don't like the default `exitRate`. The TOGA contract implements an ERC777 callback for the auction mechanism.
+In order to become the PIC, you can either use the Dapp at https://toga.superfluid.finance/ or use `ERC777.send()` to post the desired stake to the TOGA contract - optionally with an `exitRate` set in the `data` parameter if you don't like the default `exitRate`. The TOGA contract implements an ERC777 callback for the auction mechanism.
 
 :::warning CAUTION
 Do NOT use `ERC20.transfer()` for TOGA bids, because those may not trigger the needed callback in the future.

@@ -57,7 +57,7 @@ export default function GuideCards() {
   const leftGuides = [
     { title: "What is Superfluid?", description: "Learn about the core concepts of Superfluid", link: "/docs/concepts/superfluid" },
     { title: "What are Super Tokens?", description: "Understand the powerful Super Token standard", link: "/docs/concepts/overview/super-tokens" },
-    { title: "What are Ditribution Pools?", description: "Understand the power of Money Streaming", link: "/docs/concepts/overview/distributions" },
+    { title: "What are Distribution Pools?", description: "Understand the power of Money Streaming", link: "/docs/concepts/overview/distributions" },
     { title: "Deploy your Super Token (no-code)", description: "Deploy your Wrapped or Pure Super Token", link: "/docs/category/deploy-a-super-token" },
   ];
 
