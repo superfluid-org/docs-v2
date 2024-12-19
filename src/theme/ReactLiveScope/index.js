@@ -5,7 +5,7 @@ import SuperTokenABI from "./SuperTokenABI.json";
 import CFAv1ForwarderABI from "./CFAv1ForwarderABI.json";
 import GDAv1ForwarderABI from "./GDAv1ForwarderABI.json";
 import Logo from "/src/components/Logo";
-import { Button, Input, Box, Text, Flex, VStack, HStack, useToast, ChakraProvider } from '@chakra-ui/react';
+import { Button, Input, Box, Text, Flex, VStack, HStack, useToast } from '@chakra-ui/react';
 
 const FlowSenderComponent = ({ contractAddress }) => {
   const [walletAddress, setWalletAddress] = useState("");

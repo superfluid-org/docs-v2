@@ -1,7 +1,6 @@
 ---
 sidebar_position: 3
 ---
-import Button from '@mui/material/Button';
 import Link from '@docusaurus/Link';
 
 # Solvency Dashboard
@@ -9,7 +8,21 @@ import Link from '@docusaurus/Link';
 Click on the link below to find the solvency dashboard for the Superfluid protocol.
 
 <div style={{ textAlign: 'center', margin: '20px' }}>
-   <Button variant="contained" style={{ backgroundColor: 'green', fontSize: '16px', padding: '10px 20px' }} component={Link} to="https://superfluid.metabaseapp.com/public/dashboard/a074474a-3c03-4368-84f9-a87761f5d902">The Solvency Dashboard</Button>
+   <a 
+      href="https://superfluid.metabaseapp.com/public/dashboard/a074474a-3c03-4368-84f9-a87761f5d902"
+      className="button-link"
+      style={{
+         backgroundColor: 'green',
+         color: 'white',
+         fontSize: '16px',
+         padding: '10px 20px',
+         textDecoration: 'none',
+         borderRadius: '4px',
+         display: 'inline-block'
+      }}
+   >
+      The Solvency Dashboard
+   </a>
 </div>
 
 :::note
