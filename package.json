@@ -25,6 +25,7 @@
     "@docusaurus/theme-search-algolia": "^3.1.1",
     "@emotion/react": ">=11",
     "@emotion/styled": ">=11",
+    "framer-motion": ">=4.0.0",
     "@mdx-js/react": "^3.0.0",
     "@openzeppelin/contracts": "^4.7.3",
     "@saucelabs/theme-github-codeblock": "^0.2.3",
