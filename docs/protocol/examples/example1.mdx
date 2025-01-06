@@ -12,10 +12,16 @@ This guide explores the development of a decentralized application (DApp) for an
 
 ## Overview
 
-In the ever-evolving landscape of digital advertising, there's a need for more dynamic and efficient systems. Traditional models often involve complex, non-transparent payment structures and lack real-time interaction capabilities. Our DApp aims to address these challenges by using Distributions from Superflui Protocol for seamless transactions and fair distribution of advertising revenues.
+In the ever-evolving landscape of digital advertising, there's a need for more dynamic and efficient systems. Traditional models often involve complex, non-transparent payment structures and lack real-time interaction capabilities. Our DApp aims to address these challenges by using Distributions from Superfluid Protocol for seamless transactions and fair distribution of advertising revenues.
+
+This example addresses the following Superfluid Protocol features:
+
+- [Money Streaming](/docs/protocol/money-streaming/overview)
+- [Distribution Pools](/docs/protocol/distributions/guides/pools)
+- [Super Apps](/docs/protocol/advanced-topics/super-apps/deploy-a-super-app)
 
 :::tip Check out the full codebase
-For the complete implementation of the DApp, including the smart contract and foundry test, refer to the [Super Examples GitHub repository](https://github.com/superfluid-finance/super-examples/tree/main/projects/gda-advertisement-auction).
+For the complete implementation of the DApp, including the smart contract and foundry test, refer to the [GitHub repository](https://github.com/superfluid-finance/ad-auction-example).
 :::
 
 ### The Problem
@@ -63,7 +69,7 @@ This guide is intended for blockchain developers and assumes familiarity with Et
 
 ## Smart Contract Implementation
 
-The [`AdSpotContract`](https://github.com/superfluid-finance/super-examples/blob/main/projects/gda-advertisement-auction/contracts/AdSpotContract.sol) plays a crucial role in our DApp, integrating Superfluid's streaming capabilities for an innovative advertisement auction system. Let's dive into the key components and functionalities of this smart contract.
+The [`AdSpotContract`](https://github.com/superfluid-finance/ad-auction-example/blob/master/src/AdSpotContract.sol) plays a crucial role in our DApp, integrating Superfluid's streaming capabilities for an innovative advertisement auction system. Let's dive into the key components and functionalities of this smart contract.
 
 ### Contract Overview
 
@@ -125,7 +131,7 @@ These functions are essential for users to interact with and understand the cont
 
 <Admonition type="info">
 
-For a complete code base and tests of the `AdSpotContract`, refer to the [full contract code](https://github.com/superfluid-finance/super-examples/tree/main/projects/gda-advertisement-auction).
+For a complete code base and tests of the `AdSpotContract`, refer to the [full contract code](https://github.com/superfluid-finance/ad-auction-example/).
 
 </Admonition>
 
