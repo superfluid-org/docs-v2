@@ -40,4 +40,9 @@ contract MultiFlowDeleteMacro is IUserDefinedMacro {
     function getParams(ISuperToken superToken, address[] memory receivers) external pure returns (bytes memory) {
         return abi.encode(superToken, receivers);
     }
+
+    // postCheck is a function that is called after the batch operations are executed
+    function postCheck(ISuperfluid host, bytes memory params, address msgSender) external view{
+        
+    }
 }
