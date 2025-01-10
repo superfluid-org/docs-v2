@@ -17,6 +17,8 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
   const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
   const [error, setError] = useState<string>("");
   const [manualInput, setManualInput] = useState<boolean>(false);
+  const [isDeploying, setIsDeploying] = useState<boolean>(false);
+  const [deployedAddress, setDeployedAddress] = useState<string>("");
 
   const chainAddresses: { [key: string]: { address: string; name: string; chainParams?: any } } = {
     "1": {
@@ -312,10 +314,16 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
 
   const createWrapper = async () => {
     if (provider && contractAddress) {
+      setIsDeploying(true);
+      setError("");
+      setDeployedAddress("");
+      
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
         contractAddress,
-        ["function createERC20Wrapper(address underlyingToken, uint8 upgradability, string memory name, string memory symbol) returns (bool)"],
+        [
+          "function createERC20Wrapper(address underlyingToken, uint8 upgradability, string memory name, string memory symbol) returns (address)",
+        ],
         signer
       );
 
@@ -326,10 +334,19 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
           name,
           symbol
         );
-        console.log("Transaction:", transaction);
+        
+        // Wait for transaction to be mined
+        const receipt = await transaction.wait();
+        
+        // Get the created wrapper address from events
+        const wrapperAddress = receipt.logs[2].address;
+        setDeployedAddress(wrapperAddress);
+        console.log("Transaction:", receipt);
       } catch (error) {
         console.error("Error:", error);
         setError("Failed to create wrapper. Please try again.");
+      } finally {
+        setIsDeploying(false);
       }
     }
   };
@@ -403,15 +420,47 @@ const ERC20WrapperComponent: React.FC<ERC20WrapperProps> = () => {
       
       {error && <div style={{ color: "red", fontSize: "14px" }}>{error}</div>}
       
+      {isDeploying && (
+        <div style={{ textAlign: "center", margin: "10px 0" }}>
+          <div className="loading-spinner"></div>
+          <p>Deploying Super Token Wrapper...</p>
+        </div>
+      )}
+      
+      {deployedAddress && (
+        <div>
+          <p>Super Token Wrapper deployed successfully!</p>
+          <p>Address: {deployedAddress}</p>
+        </div>
+      )}
+      
       <button
         onClick={createWrapper}
         style={{ padding: "10px", fontSize: "16px", cursor: "pointer" }}
-        disabled={!connected || !name || !symbol}
+        disabled={!connected || !name || !symbol || isDeploying}
       >
-        Create Wrapper
+        {isDeploying ? "Deploying..." : "Create Wrapper"}
       </button>
     </div>
   );
 };
+
+// Add this CSS somewhere in your styles
+const styles = `
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+`;
 
 export default ERC20WrapperComponent;
