@@ -15,7 +15,7 @@ This web application contains all documentation for the Superfluid Protocol. It 
 * **SDK** - Guides and tutorials about how to build your own Superfluid SDK from the protocol forwarders.
 * **Technical Reference** - Technical Reference of the most important Superfluid Contracts.
 
-Superfluid is a protocol that revolves around Super Tokens and their primitives Money Streaming and Distributions. In the Protocol page, each one of these concepts have three items:
+Superfluid is a protocol that revolves around Super Tokens and their primitives Money Streaming and Distributions. In the documentation, each one of these sections have three items:
 
 * _Overview_
 * _Guides_
