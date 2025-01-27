@@ -35,7 +35,7 @@ A Stream is a non-zero flow, while a zero flow is not considered a Stream.
 
 This function sets the specified flowrate between sender and receiver.
 
-```
+```solidity
 /**
     * @dev Sets the given CFA flowrate between the caller and a given receiver.
     * If there's no pre-existing flow and `flowRate` non-zero, a new flow is created.
@@ -93,7 +93,7 @@ function updateFlow(ISuperToken token, address receiver, int96 flowRate)
 
 ### Function: `deleteFlow`
 
-To delete an eisting, you need to call `deleteFlow` and  specify the token, sender, and receiver.
+To delete an existing, you need to call `deleteFlow` and  specify the token, sender, and receiver.
 
 ```solidity
 /**
