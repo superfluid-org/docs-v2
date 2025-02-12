@@ -33,15 +33,15 @@ const GuideCard = ({ title, description, link }) => (
 const GuideCardList = ({ leftGuides, rightGuides, leftTitle, rightTitle }) => {
   return (
     <div className={styles.guide_cards_container}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '50px' }}>
-        <div style={{ flex: 1 }}>
-          <h2 className={styles.guide_cards_title} style={{ color: 'white', fontSize: '1.5rem' }}>{leftTitle}</h2>
+      <div className={styles.guide_cards_grid}>
+        <div className={styles.guide_cards_column}>
+          <h2 className={styles.guide_cards_title}>{leftTitle}</h2>
           {leftGuides.map((guide, index) => (
             <GuideCard key={index} title={guide.title} description={guide.description} link={guide.link} />
           ))}
         </div>
-        <div style={{ flex: 1 }}>
-          <h2 className={styles.guide_cards_title} style={{ color: 'white', fontSize: '1.5rem' }}>{rightTitle}</h2>
+        <div className={styles.guide_cards_column}>
+          <h2 className={styles.guide_cards_title}>{rightTitle}</h2>
           {rightGuides.map((guide, index) => (
             <GuideCard key={index} title={guide.title} description={guide.description} link={guide.link} />
           ))}
