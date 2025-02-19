@@ -151,7 +151,7 @@ const config: Config = {
             },
             {
               label: "SDK",
-              to: "/docs/sdk/quickstart",
+              to: "/docs/sdk/overview",
             },
             {
               label: "Technical Reference",

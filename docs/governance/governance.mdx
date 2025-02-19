@@ -1,0 +1,47 @@
+---
+sidebar_position: 1
+---
+
+import Card from '@site/src/components/Card';
+import styles from '@site/src/components/Card/styles.module.css';
+import { 
+  UsersThree, 
+  Gavel, 
+  Coins, 
+  ChartLineUp
+} from '@phosphor-icons/react';
+
+# Governance Overview
+
+The Superfluid protocol is governed by its community through a decentralized autonomous organization (DAO). This section outlines the key components of Superfluid's governance system.
+
+<div className={styles.governanceGrid}>
+  <Card
+    title="Organization"
+    description="Learn about the Superfluid DAO structure, Foundation, Security Council, and governance bodies."
+    link="https://forum.superfluid.org/t/superfluid-dao-governance-and-tokenomics/69#p-124-organization-2"
+    icon={() => <UsersThree size={32} weight="bold" />}
+  />
+  <Card
+    title="Voting Process"
+    description="Understand how proposals are submitted, voted on, and implemented through the Superfluid governance system."
+    link="https://forum.superfluid.org/t/superfluid-dao-governance-and-tokenomics/69#p-124-voting-3"
+    icon={() => <Gavel size={32} weight="bold" />}
+  />
+  <Card
+    title="SUP Token"
+    description="Explore the Superfluid Token (SUP), its functionality, distribution, and role in protocol governance."
+    link="https://forum.superfluid.org/t/superfluid-dao-governance-and-tokenomics/69#p-124-sup-token-4"
+    icon={() => <Coins size={32} weight="bold" />}
+  />
+  <Card
+    title="Streaming Programmatic Rewards"
+    description="Discover how the DAO allocates tokens to users and developers to incentivize ecosystem growth."
+    link="https://forum.superfluid.org/t/superfluid-dao-governance-and-tokenomics/69#p-124-streaming-programmatic-rewards-8"
+    icon={() => <ChartLineUp size={32} weight="bold" />}
+  />
+</div>
+
+:::info
+For detailed information about specific aspects of governance, click on any of the cards above.
+:::

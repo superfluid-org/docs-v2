@@ -18,7 +18,7 @@ In this guide, we'll walk through the process of setting up and deploying a basi
 
 This contract allows you to:
 - Deploy a Mock Super Token
-- Create, update or delete money streams (flows)
+- Create, update or delete money streams
 
 :::note Why this Quickstart?
 This is just an example to get you started with Superfluid. You can use this as a base to build more complex applications.
@@ -28,12 +28,12 @@ You DO NOT need to follow this quickstart guide in order to create, update and d
 
 ## Prerequisites
 
-- The [Superfluid Simple Vesting Contract Repository](https://github.com/superfluid-finance/superfluid-quickstart)
+- The [Superfluid Simple Vesting Contract Repository](https://github.com/superfluid-finance/superfluid-boilerplate)
 - A development environment *(Remix or Foundry)*
 - A testnet wallet (in case you want to deploy the contract to a testnet) *(e.g., MetaMask)*
 
 
-## Contract Overview: SuperfluidVesting
+## Contract Overview: SuperfluidBoilerplate
 
 In this guide we will describe the contract [`SuperfluidVesting.sol`](https://github.com/superfluid-finance/superfluid-quickstart/blob/master/src/SuperfluidVesting.sol):
 - This contract is designed to interact with the Superfluid protocol, specifically to deploy a [Super Token](/docs/protocol/super-tokens/overview) and use [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
@@ -52,7 +52,7 @@ In this guide we will describe the contract [`SuperfluidVesting.sol`](https://gi
 
 <div>
 <details>
-<summary>Click here to show `SuperfluidVesting` contract</summary>
+<summary>Click here to show `SuperfluidBoilerplate` contract</summary>
 <p>
 
 ```solidity
@@ -145,7 +145,7 @@ The contract has two main methods:
 
 ### Using Foundry
 
-After cloning the [Superfluid Vesting Repository](https://github.com/superfluid-finance/superfluid-quickstart), you can test and deploy the contract with the following commands:
+After cloning the [Superfluid Boilerplate Repository](https://github.com/superfluid-finance/superfluid-quickstart), you can test and deploy the contract with the following commands:
 
 1. **Install Dependencies**:
 ```bash
@@ -238,7 +238,7 @@ The test file does two main things:
 
 1. **Setup (`setUp` function)**:
    - Deploys a local version of the Superfluid protocol for testing
-   - Creates our `SuperfluidVesting` contract
+   - Creates our `SuperfluidBoilerplate` contract
    - Deploys the Mock Super Token
 
 2. **Vesting Test (`testVesting` function)**:

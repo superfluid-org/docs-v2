@@ -2,20 +2,20 @@
 
 Welcome to the official technical documentation of Superfluid, the protocol layer for real-time finance on the blockchain. Our documentation is designed to provide you with comprehensive guides, tutorials, and reference materials to help you understand and integrate Superfluid into your smart contracts and applications.
 
-## Superfluid Protocol Documentation
+## Superfluid Finance Documentation
 
-This web application contains all documentation for the Superfluid Protocol. It is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
+This web application contains all documentation for Superfluid Finance products. It is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
 
 ## Project Layout
 
-### Superfluid Protocol documentation is organized into four main sections:
+### Superfluid Finance documentation is organized into four main sections:
 
 * **Concepts** - Fundamental Superfluid information or concepts essential for using Superfluid products, such as _Money Streaming_, _Distributions_ and _Super Tokens_.
 * **Protocol** - Deep dive into Superfluid smart contracts, and guides to build using Superfluid.
-* **SDK** - Guides and tutorials about how to build your own Superfluid SDK from the protocol forwarders.
+* **SDK** - Guides and tutorials about how to use the Superfluid SDK.
 * **Technical Reference** - Technical Reference of the most important Superfluid Contracts.
 
-Superfluid is a protocol that revolves around Super Tokens and their primitives Money Streaming and Distributions. In the documentation, each one of these sections have three items:
+Superfluid is a protocol that revolves around Super Tokens and their primitives Money Streaming and Distributions. In the Protocol page, each one of these concepts have three items:
 
 * _Overview_
 * _Guides_

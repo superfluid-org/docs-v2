@@ -1,0 +1,56 @@
+.card {
+    background: var(--ifm-card-background-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: var(--ifm-card-border-radius);
+    box-shadow: var(--ifm-global-shadow-lw);
+    display: block;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    text-decoration: none !important;
+    color: inherit;
+  }
+  
+  .card:hover {
+    border-color: var(--ifm-color-primary);
+    box-shadow: var(--ifm-global-shadow-md);
+    transform: translateY(-2px);
+  }
+  
+  .cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .cardTitle {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--ifm-heading-color);
+  }
+  
+  .cardDescription {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ifm-color-emphasis-700);
+  }
+  
+  .governanceGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  /* Make it responsive for mobile */
+  @media (max-width: 768px) {
+    .governanceGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .cardIcon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 0.5rem;
+    color: var(--ifm-color-primary);
+  }

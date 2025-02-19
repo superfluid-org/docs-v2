@@ -9,6 +9,10 @@ import {
   AtSign,
 } from "react-feather";
 
+import { 
+  Gavel
+} from '@phosphor-icons/react';
+
 export const actions = [
   {
     title: "What is Superfluid?",
@@ -31,8 +35,14 @@ export const actions = [
   {
     title: "SDK",
     icon: AtSign,
-    to: "/docs/sdk/quickstart",
+    to: "/docs/sdk/overview",
     text: `Learn about how to interact with Superfluid to build your client-side SDK.`,
+  },
+  {
+    title: "Governance",
+    icon: Gavel,
+    to: "/docs/governance",
+    text: `Learn about the Superfluid DAO governance and tokenomics.`,
   },
   {
     title: "Technical Reference",
