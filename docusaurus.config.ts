@@ -107,7 +107,7 @@ const config: Config = {
         {
           href: "https://github.com/superfluid-finance",
           position: "right",
-          label: "Github",
+          label: "GitHub",
         },
         {
           href: "https://discord.gg/pPzPEDMVua",
@@ -163,7 +163,7 @@ const config: Config = {
           title: "Community",
           items: [
             {
-              label: "Github",
+              label: "GitHub",
               href: "https://github.com/superfluid-finance",
             },
             {
