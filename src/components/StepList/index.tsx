@@ -35,7 +35,7 @@ export const actions = [
   {
     title: "SDK",
     icon: AtSign,
-    to: "/docs/sdk/overview",
+    to: "/docs/sdk/quickstart",
     text: `Learn about how to interact with Superfluid to build your client-side SDK.`,
   },
   {
