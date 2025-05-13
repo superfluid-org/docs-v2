@@ -248,7 +248,7 @@ If you run into this issue, you can try to set a fixed width to the component li
 ```
 This should fix the jumpy behaviour and make the component flow smoothly like the example below:
 <div style={{ display: "flex", fontSize: "1.2rem", fontWeight: "bold", justifyContent: "center" }}>
-  <div style={{ width: "160px", margin: "auto" }}>
+  <div style={{ width: "180px", margin: "auto" }}>
    ✅ <FlowingBalance startingBalance={BigInt("1000000000000000000")} startingBalanceDate={new Date('2024-01-01T00:00:00.000Z')} flowRate={BigInt("1000000000000000")} />
   </div>
 </div>
