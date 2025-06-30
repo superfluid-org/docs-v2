@@ -1,0 +1,750 @@
+---
+sidebar_position: 2
+---
+
+import CodeBlock from "@theme/CodeBlock";
+
+# Batch Calls with Host Contract
+
+Execute multiple Superfluid operations in a single transaction using the Host contract's `batchCall` function.
+This approach provides direct control over batch operations without requiring custom macro contracts,
+leveraging the [modular architecture](/docs/technical-reference/Architecture) of Superfluid,
+and specifically the mastermind contract of the protocol called the [Superfluid Host](/docs/concepts/advanced-topics/superfluid-host).
+
+## Background
+
+The Superfluid Host contract makes it possible to batch transactions from day one through a method called `batchCall`.
+This direct approach allows you to combine multiple Superfluid operations into a single atomic transaction,
+providing gas optimization and ensuring all operations succeed or fail together.
+
+Unlike the [MacroForwarder approach](/docs/sdk/advanced-topics/batch-calls-macro),
+this method gives you direct control over the operations without needing to deploy custom contracts.
+
+## How Batch Calls Work
+
+Batch calls work by constructing an array of `ISuperfluid.Operation` structs and passing them to the Host contract's `batchCall` function.
+Each operation contains:
+
+- **operationType**: Identifies the type of operation (e.g., token upgrade, flow creation)
+- **target**: The contract address to call
+- **data**: Encoded function call data
+
+```solidity
+struct Operation {
+    uint32 operationType;
+    address target;
+    bytes data;
+}
+```
+
+## Operation Types
+
+Each operation in a batch call requires an operation type identifier. These are defined in the `BatchOperation` library in [Definitions.sol](https://github.com/superfluid-org/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/interfaces/superfluid/Definitions.sol):
+
+```javascript
+// Available operation types:
+OPERATION_TYPE.UNSUPPORTED                    // = 0
+OPERATION_TYPE.ERC20_APPROVE                  // = 1
+OPERATION_TYPE.ERC20_TRANSFER_FROM            // = 2
+OPERATION_TYPE.ERC777_SEND                    // = 3 (deprecated)
+OPERATION_TYPE.ERC20_INCREASE_ALLOWANCE       // = 4
+OPERATION_TYPE.ERC20_DECREASE_ALLOWANCE       // = 5
+OPERATION_TYPE.SUPERTOKEN_UPGRADE             // = 101
+OPERATION_TYPE.SUPERTOKEN_DOWNGRADE           // = 102
+OPERATION_TYPE.SUPERFLUID_CALL_AGREEMENT      // = 201 (main type for CFA/GDA calls)
+OPERATION_TYPE.CALL_APP_ACTION                // = 202
+OPERATION_TYPE.SIMPLE_FORWARD_CALL            // = 301
+OPERATION_TYPE.ERC2771_FORWARD_CALL           // = 302
+```
+
+## Contract Addresses and ABIs
+
+You can find contract addresses for all networks on the [Superfluid Explorer](https://explorer.superfluid.org/). For example, Base Sepolia contracts can be found at: https://explorer.superfluid.org/base-sepolia/protocol
+
+### Superfluid Host Contract
+
+The Host contract is the central contract that executes batch calls. Here's the Base Sepolia example:
+
+**Contract Address (Base Sepolia):**
+```javascript
+const hostAddress = "0x109412E3C84f0539b43d39dB691B08c90f58dC7c";
+```
+
+**Host ABI (Essential Functions):**
+```json
+[
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint32", "name": "operationType", "type": "uint32" },
+          { "internalType": "address", "name": "target", "type": "address" },
+          { "internalType": "bytes", "name": "data", "type": "bytes" }
+        ],
+        "internalType": "struct ISuperfluid.Operation[]",
+        "name": "operations",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "batchCall",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint32", "name": "operationType", "type": "uint32" },
+          { "internalType": "address", "name": "target", "type": "address" },
+          { "internalType": "bytes", "name": "data", "type": "bytes" }
+        ],
+        "internalType": "struct ISuperfluid.Operation[]",
+        "name": "operations",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "forwardBatchCall",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+```
+
+### CFA Forwarder Contract
+
+For flow operations (create, update, delete flows):
+
+**Contract Address (Base Sepolia):**
+```javascript
+const cfaForwarderAddress = "0xcfA132E353cB4E398080B9700609bb008eceB125";
+```
+
+**CFA Forwarder ABI (Essential Functions):**
+```json
+[
+  {
+    "inputs": [
+      { "internalType": "contract ISuperToken", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "sender", "type": "address" },
+      { "internalType": "address", "name": "receiver", "type": "address" },
+      { "internalType": "int96", "name": "flowRate", "type": "int96" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "createFlow",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract ISuperToken", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "sender", "type": "address" },
+      { "internalType": "address", "name": "receiver", "type": "address" },
+      { "internalType": "int96", "name": "flowRate", "type": "int96" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "updateFlow",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract ISuperToken", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "sender", "type": "address" },
+      { "internalType": "address", "name": "receiver", "type": "address" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "deleteFlow",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+```
+
+### GDA Forwarder Contract
+
+For distribution operations (create pools, distribute tokens):
+
+**Contract Address (Base Sepolia):**
+```javascript
+const gdaForwarderAddress = "0x6DA13Bde224A05a288748d857b9e7DDEffd1dE08";
+```
+
+**GDA Forwarder ABI (Essential Functions):**
+```json
+[
+  {
+    "inputs": [
+      { "internalType": "contract ISuperToken", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "admin", "type": "address" },
+      {
+        "components": [
+          { "internalType": "bool", "name": "transferabilityForUnitsOwner", "type": "bool" },
+          { "internalType": "bool", "name": "distributionFromAnyAddress", "type": "bool" }
+        ],
+        "internalType": "struct PoolConfig",
+        "name": "config",
+        "type": "tuple"
+      }
+    ],
+    "name": "createPool",
+    "outputs": [
+      { "internalType": "bool", "name": "success", "type": "bool" },
+      { "internalType": "contract ISuperfluidPool", "name": "pool", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract ISuperToken", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "from", "type": "address" },
+      { "internalType": "contract ISuperfluidPool", "name": "pool", "type": "address" },
+      { "internalType": "uint256", "name": "requestedAmount", "type": "uint256" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "distribute",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract ISuperToken", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "from", "type": "address" },
+      { "internalType": "contract ISuperfluidPool", "name": "pool", "type": "address" },
+      { "internalType": "int96", "name": "requestedFlowRate", "type": "int96" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "distributeFlow",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract ISuperfluidPool", "name": "pool", "type": "address" },
+      { "internalType": "address", "name": "memberAddress", "type": "address" },
+      { "internalType": "uint128", "name": "newUnits", "type": "uint128" },
+      { "internalType": "bytes", "name": "userData", "type": "bytes" }
+    ],
+    "name": "updateMemberUnits",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+```
+
+:::tip Contract Addresses
+These are the Base Sepolia testnet addresses. For other networks, visit the [Superfluid Explorer](https://explorer.superfluid.org/) and select your desired network.
+:::
+
+## Basic Implementation
+
+### Using the SDK with React Hooks
+
+Here's how to create a batch call using the Superfluid SDK:
+
+```tsx
+import React, { useState } from 'react';
+import { ethers } from 'ethers';
+import { hostAbi, hostAddress, superTokenAbi, cfaForwarderAbi, cfaForwarderAddress } from '@superfluid-finance/sdk-core';
+import { useAccount, useWriteContract } from 'wagmi';
+
+function BatchCallComponent() {
+  const { address } = useAccount();
+  const [superToken, setSuperToken] = useState('');
+  const [receiver, setReceiver] = useState('');
+  const [amount, setAmount] = useState('');
+  const [flowRate, setFlowRate] = useState('');
+
+  const { writeContract: batchCall } = useWriteContract();
+
+  const executeBatchCall = async () => {
+    if (!address) return;
+
+    // Define operations
+    const operations = [
+      // Operation 1: Upgrade tokens
+      {
+        operationType: 101, // SUPERTOKEN_UPGRADE
+        target: superToken,
+        data: ethers.utils.defaultAbiCoder.encode(
+          ['uint256'],
+          [ethers.utils.parseEther(amount)]
+        )
+      },
+      // Operation 2: Create flow
+      {
+        operationType: 201, // SUPERFLUID_CALL_AGREEMENT
+        target: "0xcfA132E353cB4E398080B9700609bb008eceB125", // Base Sepolia CFA Forwarder
+        data: ethers.utils.defaultAbiCoder.encode(
+          ['bytes', 'bytes'],
+          [
+            ethers.utils.defaultAbiCoder.encode(
+              ['address', 'address', 'address', 'int96', 'bytes'],
+              [superToken, address, receiver, flowRate, '0x']
+            ),
+            '0x'
+          ]
+        )
+      }
+    ];
+
+    // Execute batch call
+    batchCall({
+      address: "0x109412E3C84f0539b43d39dB691B08c90f58dC7c", // Base Sepolia Host
+      abi: hostAbi,
+      functionName: 'batchCall',
+      args: [operations]
+    });
+  };
+
+  return (
+    <div>
+      <h2>Batch Call: Upgrade & Create Flow</h2>
+      <input 
+        placeholder="Super Token Address"
+        value={superToken}
+        onChange={(e) => setSuperToken(e.target.value)}
+      />
+      <input 
+        placeholder="Receiver Address"
+        value={receiver}
+        onChange={(e) => setReceiver(e.target.value)}
+      />
+      <input 
+        placeholder="Amount to Upgrade"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+      />
+      <input 
+        placeholder="Flow Rate"
+        value={flowRate}
+        onChange={(e) => setFlowRate(e.target.value)}
+      />
+      <button onClick={executeBatchCall}>
+        Execute Batch Call
+      </button>
+    </div>
+  );
+}
+```
+
+### Using Ethers.js Directly
+
+For applications not using React hooks:
+
+```javascript
+import { ethers } from 'ethers';
+import { hostAbi, hostAddress, superTokenAbi, cfaForwarderAbi } from '@superfluid-finance/sdk-core';
+
+async function executeBatchCall(provider, signer) {
+  const hostContract = new ethers.Contract(
+    "0x109412E3C84f0539b43d39dB691B08c90f58dC7c", // Base Sepolia Host
+    hostAbi,
+    signer
+  );
+
+  const operations = [
+    // Upgrade operation
+    {
+      operationType: 101,
+      target: '0x...', // Super Token address
+      data: ethers.utils.defaultAbiCoder.encode(
+        ['uint256'],
+        [ethers.utils.parseEther('100')]
+      )
+    },
+    // Create flow operation
+    {
+      operationType: 201,
+      target: '0x...', // CFA Forwarder address
+      data: ethers.utils.defaultAbiCoder.encode(
+        ['bytes', 'bytes'],
+        [
+          ethers.utils.defaultAbiCoder.encode(
+            ['address', 'address', 'address', 'int96', 'bytes'],
+            ['0x...', signer.address, '0x...', '1000000000000000', '0x']
+          ),
+          '0x'
+        ]
+      )
+    }
+  ];
+
+  const tx = await hostContract.batchCall(operations);
+  await tx.wait();
+  
+  console.log('Batch call executed:', tx.hash);
+}
+```
+
+## Common Batch Call Patterns
+
+### 1. Wrap and Stream Pattern
+
+Upgrade underlying tokens to Super Tokens and immediately start streaming:
+
+:::note Approval Required
+The underlying token approval cannot be included in the batch call because `msg.sender` changes when operations go through the Superfluid Host. You must approve the underlying token separately before executing the batch.
+:::
+
+```javascript
+const wrapAndStreamOperations = [
+  // Upgrade tokens to Super Token
+  {
+    operationType: 101, // SUPERTOKEN_UPGRADE
+    target: superTokenAddress,
+    data: ethers.utils.defaultAbiCoder.encode(
+      ['uint256'],
+      [ethers.utils.parseEther('1000')]
+    )
+  },
+  // Create flow
+  {
+    operationType: 201, // SUPERFLUID_CALL_AGREEMENT  
+    target: cfaForwarderAddress,
+    data: ethers.utils.defaultAbiCoder.encode(
+      ['bytes', 'bytes'],
+      [
+        ethers.utils.defaultAbiCoder.encode(
+          ['address', 'address', 'address', 'int96', 'bytes'],
+          [superTokenAddress, senderAddress, receiverAddress, flowRate, '0x']
+        ),
+        '0x'
+      ]
+    )
+  }
+];
+```
+
+### 2. Multi-Flow Management
+
+Update multiple flows in a single transaction:
+
+```javascript
+const receivers = [
+  { address: '0x123...', flowRate: '1000000000000000' },
+  { address: '0x456...', flowRate: '2000000000000000' },
+  { address: '0x789...', flowRate: '1500000000000000' }
+];
+
+const multiFlowOperations = receivers.map(receiver => ({
+  operationType: 201, // SUPERFLUID_CALL_AGREEMENT
+  target: cfaForwarderAddress,
+  data: ethers.utils.defaultAbiCoder.encode(
+    ['bytes', 'bytes'],
+    [
+      ethers.utils.defaultAbiCoder.encode(
+        ['address', 'address', 'address', 'int96', 'bytes'],
+        [superTokenAddress, senderAddress, receiver.address, receiver.flowRate, '0x']
+      ),
+      '0x'
+    ]
+  )
+}));
+```
+
+### 3. Pool Distribution Batch
+
+Create a pool and distribute tokens:
+
+```javascript
+const poolOperations = [
+  // Create pool
+  {
+    operationType: 201, // SUPERFLUID_CALL_AGREEMENT
+    target: gdaForwarderAddress,
+    data: ethers.utils.defaultAbiCoder.encode(
+      ['bytes', 'bytes'],
+      [
+        ethers.utils.defaultAbiCoder.encode(
+          ['address', 'address', 'tuple(bool,bool)'],
+          [superTokenAddress, adminAddress, [true, false]]
+        ),
+        '0x'
+      ]
+    )
+  },
+  // Distribute to pool
+  {
+    operationType: 201, // SUPERFLUID_CALL_AGREEMENT
+    target: gdaForwarderAddress,
+    data: ethers.utils.defaultAbiCoder.encode(
+      ['bytes', 'bytes'],
+      [
+        ethers.utils.defaultAbiCoder.encode(
+          ['address', 'address', 'address', 'uint256', 'bytes'],
+          [superTokenAddress, senderAddress, poolAddress, distributionAmount, '0x']
+        ),
+        '0x'
+      ]
+    )
+  }
+];
+```
+
+## Complete Example: Batch Flow Manager
+
+Here's a complete React component that demonstrates batch flow management:
+
+```jsx live
+function BatchFlowManager() {
+  const [tokenAddress, setTokenAddress] = useState('');
+  const [receivers, setReceivers] = useState('');
+  const [flowRates, setFlowRates] = useState('');
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [account, setAccount] = useState('');
+  const [message, setMessage] = useState('');
+
+  const hostAddress = '0x109412E3C84f0539b43d39dB691B08c90f58dC7c'; // Base Sepolia
+  const cfaForwarderAddress = '0xcfA132E353cB4E398080B9700609bb008eceB125'; // Base Sepolia
+
+  const hostABI = [
+    {
+      "inputs": [
+        {
+          "components": [
+            { "internalType": "uint32", "name": "operationType", "type": "uint32" },
+            { "internalType": "address", "name": "target", "type": "address" },
+            { "internalType": "bytes", "name": "data", "type": "bytes" }
+          ],
+          "internalType": "struct ISuperfluid.Operation[]",
+          "name": "operations",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "batchCall",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ];
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        setAccount(address);
+        setWalletConnected(true);
+        setMessage(`Connected to ${address}`);
+      } catch (error) {
+        setMessage('Failed to connect wallet');
+      }
+    } else {
+      setMessage('Please install MetaMask');
+    }
+  };
+
+  const executeBatchFlows = async () => {
+    if (!walletConnected) {
+      setMessage('Please connect wallet first');
+      return;
+    }
+
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const hostContract = new ethers.Contract(hostAddress, hostABI, signer);
+
+      // Parse receivers and flow rates
+      const receiverList = receivers.split(',').map(r => r.trim());
+      const flowRateList = flowRates.split(',').map(r => r.trim());
+
+      if (receiverList.length !== flowRateList.length) {
+        setMessage('Number of receivers must match number of flow rates');
+        return;
+      }
+
+      // Create operations for each flow
+      const operations = receiverList.map((receiver, index) => ({
+        operationType: 201, // SUPERFLUID_CALL_AGREEMENT
+        target: cfaForwarderAddress,
+        data: ethers.utils.defaultAbiCoder.encode(
+          ['bytes', 'bytes'],
+          [
+            ethers.utils.defaultAbiCoder.encode(
+              ['address', 'address', 'address', 'int96', 'bytes'],
+              [tokenAddress, account, receiver, flowRateList[index], '0x']
+            ),
+            '0x'
+          ]
+        )
+      }));
+
+      const tx = await hostContract.batchCall(operations);
+      await tx.wait();
+      
+      setMessage(`Batch flows created successfully! TX: ${tx.hash}`);
+    } catch (error) {
+      setMessage(`Error: ${error.message}`);
+    }
+  };
+
+  return (
+    <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
+      <h2>Batch Flow Manager</h2>
+      
+      {!walletConnected ? (
+        <button 
+          onClick={connectWallet}
+          style={{
+            backgroundColor: '#168c1e',
+            color: 'white',
+            padding: '10px 15px',
+            borderRadius: '5px',
+            border: 'none',
+            cursor: 'pointer',
+            marginBottom: '10px'
+          }}
+        >
+          Connect Wallet
+        </button>
+      ) : (
+        <p>Connected: {account}</p>
+      )}
+      
+      <div style={{ marginBottom: '10px' }}>
+        <input
+          placeholder="Super Token Address"
+          value={tokenAddress}
+          onChange={(e) => setTokenAddress(e.target.value)}
+          style={{ width: '100%', padding: '8px', marginBottom: '5px' }}
+        />
+        <input
+          placeholder="Receiver Addresses (comma-separated)"
+          value={receivers}
+          onChange={(e) => setReceivers(e.target.value)}
+          style={{ width: '100%', padding: '8px', marginBottom: '5px' }}
+        />
+        <input
+          placeholder="Flow Rates (comma-separated, in wei/second)"
+          value={flowRates}
+          onChange={(e) => setFlowRates(e.target.value)}
+          style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+        />
+        <button
+          onClick={executeBatchFlows}
+          style={{
+            backgroundColor: '#168c1e',
+            color: 'white',
+            padding: '10px 15px',
+            borderRadius: '5px',
+            border: 'none',
+            cursor: 'pointer',
+            width: '100%'
+          }}
+        >
+          Create Batch Flows
+        </button>
+      </div>
+      
+      {message && (
+        <p style={{ 
+          marginTop: '10px', 
+          padding: '10px', 
+          backgroundColor: '#f0f0f0', 
+          borderRadius: '5px' 
+        }}>
+          {message}
+        </p>
+      )}
+    </div>
+  );
+}
+```
+
+## Error Handling and Best Practices
+
+### Atomic Execution
+Batch calls are atomic - if any operation fails, the entire batch reverts:
+
+```javascript
+try {
+  const tx = await hostContract.batchCall(operations);
+  await tx.wait();
+  console.log('All operations succeeded');
+} catch (error) {
+  console.error('Batch call failed:', error);
+  // All operations have been reverted
+}
+```
+
+### Operation Ordering
+Operations execute sequentially, so order matters:
+
+```javascript
+// ✅ Good: Approve first, then upgrade
+const operations = [
+  approveOperation,
+  upgradeOperation,
+  createFlowOperation
+];
+
+// ❌ Bad: Trying to upgrade without approval
+const operations = [
+  upgradeOperation,  // This will fail
+  approveOperation
+];
+```
+
+### Conditional Operations
+You can build conditional batch calls based on current state:
+
+```javascript
+async function buildConditionalBatch(tokenAddress, userAddress) {
+  const operations = [];
+  
+  // Check current balance
+  const balance = await superToken.balanceOf(userAddress);
+  
+  if (balance.lt(ethers.utils.parseEther('100'))) {
+    // Add upgrade operation if balance is low
+    operations.push({
+      operationType: 101,
+      target: tokenAddress,
+      data: ethers.utils.defaultAbiCoder.encode(
+        ['uint256'],
+        [ethers.utils.parseEther('1000')]
+      )
+    });
+  }
+  
+  // Always add flow creation
+  operations.push(createFlowOperation);
+  
+  return operations;
+}
+```
+
+## Comparison with MacroForwarder
+
+| Feature | Host batchCall | MacroForwarder |
+|---------|----------------|----------------|
+| **Deployment** | No deployment needed | Requires macro contract |
+| **Flexibility** | Full control over operations | Predefined macro logic |
+| **Gas Cost** | Lower (direct calls) | Slightly higher (proxy) |
+| **Reusability** | Manual construction | Reusable macro functions |
+| **Complexity** | Higher implementation | Simpler usage |
+
+## Next Steps
+
+- Explore the [MacroForwarder approach](/docs/sdk/advanced-topics/batch-calls-macro) for reusable patterns
+- Learn about [Advanced Topics](/docs/sdk/advanced-topics/) in the SDK
+- Check out [automation contracts](/docs/protocol/advanced-topics/automations/) for scheduled operations
+
+## Related Resources
+
+- [Superfluid Host Contract](/docs/concepts/advanced-topics/superfluid-host)
+- [CFA Forwarder Reference](/docs/technical-reference/CFAv1Forwarder)
+- [GDA Forwarder Reference](/docs/technical-reference/GDAv1Forwarder)
+- [SDK Core Documentation](https://sdk.superfluid.pro/)
