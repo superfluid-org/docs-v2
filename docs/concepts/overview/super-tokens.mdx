@@ -7,10 +7,10 @@ import SuperTokenPureVis from "@site/src/components/Visualizations/SuperTokenPur
 
 # Super Tokens
 
-Super Tokens extend the [ERC20 token standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) with additional functionalities like [Money Streaming](./money-streaming.mdx) or [Distributions](./distributions.mdx), formerly known as Super Agreements. There are two types of Super Tokens: wrapper and custom.
+Super Tokens extend the [ERC20 token standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) with additional functionalities like [Payment Streams](./money-streaming.mdx) or [Distributions](./distributions.mdx), formerly known as Super Agreements. There are two types of Super Tokens: wrapper and custom.
 
 :::info
-Super Tokens can perform all the functions of a traditional [ERC20 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/), plus additional value transfer methods enabled by Superfluid, such as money streaming.
+Super Tokens can perform all the functions of a traditional [ERC20 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/), plus additional value transfer methods enabled by Superfluid, such as payment streaming.
 :::
 
 ## Wrapper Super Tokens
@@ -34,12 +34,12 @@ Pure Super Tokens are natively Superfluid-enabled without an underlying token. T
   <SuperTokenPureVis />
 </div>
 <div style={{ display: "flex", justifyContent: "center" }}>
-  <p>*A Pure Super Token has inherent superpowers such as [Money Streaming](./money-streaming.mdx) and [Distributions](./distributions.mdx)*</p>
+  <p>*A Pure Super Token has inherent superpowers such as [Payment Streams](./money-streaming.mdx) and [Distributions](./distributions.mdx)*</p>
 </div>
 
 ## Real-Time Balance
 
-Super Tokens track an account's balance dynamically, factoring in both regular transfers and impacts from Money Streaming and Distributions.
+Super Tokens track an account's balance dynamically, factoring in both regular transfers and impacts from Payment Streams and Distributions.
 
 - **Static Balance**: The standard ERC20 balance affected by lump-sum transfers.
 - **Real-Time Balances**: The ongoing impact of each Super Agreement on an account's balance, which can be positive or negative.

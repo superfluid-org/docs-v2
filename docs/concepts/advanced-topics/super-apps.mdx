@@ -5,7 +5,7 @@ import Admonition from '@theme/Admonition';
 
 # Super Apps
 
-Super Apps represents a class of smart contracts that interact seamlessly with the Superfluid Protocol, enabling dynamic responses to Money streaming or Distributions (Also called Super Agreements).
+Super Apps represents a class of smart contracts that interact seamlessly with the Superfluid Protocol, enabling dynamic responses to Payment Streams or Distributions (Also called Super Agreements).
 
 ## Definition
 
@@ -19,9 +19,9 @@ The reactivity of Super Apps stems from **callbacks**. These are segments of cod
 
 Consider a Super App designed to consolidate all incoming flows into a single outgoing flow to a specific account (Account Z):
 
-1. **Incoming Flow from Account A**: Account A initiates a Money Stream to the Super App (100 USDCx/mo). The Super App, in turn, starts an outbound Stream of the same rate to Account Z.
-2. **Multiple Flow Adjustments**: If Account B starts a new Money Stream to the Super App (25 USDCx/mo) and Account A adjusts its flow (to 50 USDCx/mo), the Super App responds by updating its outbound Streams accordingly.
-3. **Ongoing Reactions**: The Super App continues to adapt to new Money Streams or adjustments from various accounts, maintaining a reactive outbound flow.
+1. **Incoming Flow from Account A**: Account A initiates a Payment Stream to the Super App (100 USDCx/mo). The Super App, in turn, starts an outbound Stream of the same rate to Account Z.
+2. **Multiple Flow Adjustments**: If Account B starts a new Payment Stream to the Super App (25 USDCx/mo) and Account A adjusts its flow (to 50 USDCx/mo), the Super App responds by updating its outbound Streams accordingly.
+3. **Ongoing Reactions**: The Super App continues to adapt to new Payment Streams or adjustments from various accounts, maintaining a reactive outbound flow.
 
 <Admonition type="info">
 <strong>NOTE</strong>: For a smart contract to qualify as a Super App, it must have defined callbacks to interact with Super Agreements.

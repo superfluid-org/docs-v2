@@ -8,7 +8,7 @@ The [SuperTokenV1Library](https://github.com/superfluid-finance/protocol-monorep
 when building smart contracts on-chain.
 
 This comprehensive library provides all the necessary tools to work with the two main primitives of the Superfluid protocol:
-[Money Streaming](/docs/protocol/money-streaming/overview) (also called *Constant Flow Agreement* or *CFA*)
+[Payment Streams](/docs/protocol/money-streaming/overview) (also called *Constant Flow Agreement* or *CFA*)
 and [Distribution Pools](/docs/protocol/distributions/overview) (also called *General Distributions Agreement* or *GDA*).
 
 ## Getting Started
@@ -39,7 +39,7 @@ For more details on the full list of functions and usage, refer to the [SuperTok
 
 The SuperTokenV1Library revolves around two main primitives:
 
-1. **Constant Flow Agreement (CFA)**: This represents Money Streaming functionality.
+1. **Constant Flow Agreement (CFA)**: This represents Payment Streams functionality.
 2. **General Distributions Agreement (GDA)**: This handles Distribution Pools.
 
 The library provides functions for various operations within these primitives:
@@ -53,9 +53,9 @@ The library provides functions for various operations within these primitives:
 
 Let's explore some example functions in the SuperTokenV1Library:
 
-### Money Streaming (CFA) Functions
+### Payment Streams (CFA) Functions
 
-The library provides a wide range of functions for managing money streams, including creating, updating, and deleting flows. For example:
+The library provides a wide range of functions for managing payment streams, including creating, updating, and deleting flows. For example:
 
 #### Creating a Flow
 
@@ -68,7 +68,7 @@ function createFlow(
 ) internal returns (bool)
 ```
 
-This function creates a new money stream. You can omit the `userData` parameter if not needed.
+This function creates a new payment stream. You can omit the `userData` parameter if not needed.
 
 #### Getting Flow Information
 
@@ -175,4 +175,4 @@ Many functions in the SuperTokenV1Library allow you to attach user data to your 
 
 ## Conclusion
 
-The SuperTokenV1Library is a powerful tool for interacting with the Superfluid protocol on-chain, in order to build smart contracts. By leveraging its functions for money streaming and distribution pools, you can create sophisticated blockchain applications with real-time finance capabilities. Always refer to the latest documentation and test thoroughly to ensure your implementation is correct and secure.
+The SuperTokenV1Library is a powerful tool for interacting with the Superfluid protocol on-chain, in order to build smart contracts. By leveraging its functions for payment streams and distribution pools, you can create sophisticated blockchain applications with real-time finance capabilities. Always refer to the latest documentation and test thoroughly to ensure your implementation is correct and secure.

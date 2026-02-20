@@ -5,9 +5,7 @@ sidebar_position: 1
 import Admonition from '@theme/Admonition';
 import Link from '@docusaurus/Link';
 import UnitsVisualization from "@site/src/components/Visualizations/UnitsVis";
-import PoolStreamVisualization from '@site/src/components/Visualizations/PoolStreamVis';
-import PoolInstantVis from "@site/src/components/Visualizations/PoolInstantVis";
-import PoolStreamVis from "@site/src/components/Visualizations/PoolStreamVis";
+import DistributionAnimation from "@site/src/components/DistributionAnimation";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -15,13 +13,13 @@ import TabItem from '@theme/TabItem';
 
 ## Introduction
 
-Distributions is a Superfluid primitive that allows scalable are one-to-many or many-to-many transfer of value, in the form of discreet transfers or [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
-Superfluid's implementation of this concept allows for the creation of **Pools** with a designated **pool admin** who manages **units** for **pool members**.
+Distributions is a Superfluid primitive that allows scalable are one-to-many or many-to-many transfer of value, in the form of discreet transfers or [Payment Streams](/docs/protocol/money-streaming/overview.mdx).
+Superfluid's implementation of this concept allows for the creation of **Distribution Pools** with a designated **pool admin** who manages **units** for **pool members**.
 Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable.
 We make the difference between two types of Distributions:
 
 - **Instant Distribution**: They allow one discreet transfer of Super Tokens to any number of receivers with a fixed gas cost.
-- **Streaming Distribution**: They allow for continuous distribution of funds to receivers through [Money Streaming](/docs/protocol/money-streaming/overview.mdx) to a Pool.
+- **Streaming Distribution**: They allow for continuous distribution of funds to receivers through [Payment Streams](/docs/protocol/money-streaming/overview.mdx) to a Pool.
 
 :::note About Pools
 Each distribution pool is denominated in a single Super Token but supports both Instant and Streaming Distributions.
@@ -36,11 +34,7 @@ Each distribution pool is denominated in a single Super Token but supports both 
 
 **Instant Distributions allow one transaction to distribute to any number of receivers with a fixed gas cost.**
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  *Click on the Blue Circle to initiate an Instant Distribution*
-  <br />
-</div>
-<PoolInstantVis />
+<DistributionAnimation mode="instant" />
 <div style={{ display: "flex", justifyContent: "center" }}>
   <p>
     *By creating a Distribution Pool, you can distribute any token instantly*
@@ -50,13 +44,9 @@ Each distribution pool is denominated in a single Super Token but supports both 
   </TabItem>
   <TabItem value="streaming">
 
-**Instant Distributions allow for continuous distribution of funds to receivers through [Money Streaming](../money-streaming/overview.mdx) to a Pool.**
+**Streaming Distributions allow for continuous distribution of funds to receivers through [Payment Streams](../money-streaming/overview.mdx) to a Pool.**
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  *Watch how the continuous stream gets distributed automatically through the pool*
-  <br />
-</div>
-<PoolStreamVis />
+<DistributionAnimation mode="streaming" />
 <div style={{ display: "flex", justifyContent: "center" }}>
   <p>
     *By creating a Distribution Pool, you can distribute any stream with no gas cost*
@@ -80,7 +70,7 @@ Distributions are persistent, allowing multiple triggers with varying amounts. U
 
 ## Key Concepts
 
-- **Pool**: Channels for proportional token distribution.
+- **Distribution Pool**: Channels for proportional token distribution.
 - **Pool Admin**: Decides of the most important parameters of the distribution, including units.
 - **Pool Members**: Receivers allocated units for distribution.
 
@@ -107,11 +97,9 @@ Publishers can manage multiple Indices, and subscribers can be part of multiple 
 
 Pool admins manage units and distributions, while members receive distributions based on their units.
 
+<DistributionAnimation mode="streaming" />
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-<PoolStreamVisualization/>
-</div>
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-    <p>*Visualization of money streaming from an external source to a Pool and its members*</p>
+    <p>*Visualization of payment streams from an external source to a Pool and its members*</p>
 </div>
 
 ### Distribution Types

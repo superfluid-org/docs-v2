@@ -59,7 +59,7 @@ export default function Home(): JSX.Element {
               textDecorationSkipInk: "none",
               color: "rgba(255, 255, 255, 1)"
             }}>
-              The Most Advanced Money Streaming Protocol
+              The Most Advanced Payment Streaming Protocol
             </span>
             <br />
             <StepList />

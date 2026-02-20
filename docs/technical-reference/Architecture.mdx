@@ -29,7 +29,7 @@ It is the protocol deployed when a new `SuperfluidFrameworkDeployer` instance is
 ### SuperToken (UUPS Proxy - EIP-1967)
 
 This is the fundamental smart contract within the Superfluid Protocol, which is an upgradable advanced token contract which inherits from the ERC20 standard, and enhances it
-with additional features such as Money Streaming and Distributions.
+with additional features such as Payment Streams and Distributions.
 
 :::note Unmanaged SuperTokens
 Super Token contracts can be created by anyone, and can either be managed by the Superfluid Protocol ([The Host](#superfluid-host-contract-uups-proxy)), or completely unmanaged with no influence from the Host.
@@ -40,7 +40,7 @@ They can be used to represent any asset or right, and can be used in any context
 
 #### ConstantFlowAgreementV1 (UUPS Proxy)
 
-A versioned agreement that governs the continuous flow of tokens between parties, ie [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
+A versioned agreement that governs the continuous flow of tokens between parties, ie [Payment Streams](/docs/protocol/money-streaming/overview.mdx).
 
 #### InstantDistributionAgreementV1 (UUPS Proxy)
 
@@ -78,7 +78,7 @@ The main governance contract that will allow Superfluid community members to par
 
 #### ConstantFlowNFT (UUPS Proxy)
 
-Smart contract for non-fungible tokens (NFTs) that have a constant flow rate associated with them. These are NFTs minted to represent Money Streaming flows.
+Smart contract for non-fungible tokens (NFTs) that have a constant flow rate associated with them. These are NFTs minted to represent Payment Stream flows.
 
 #### PoolAdminNFT (UUPS Proxy)
 

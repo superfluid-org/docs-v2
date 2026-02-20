@@ -13,12 +13,12 @@ import MotomoComponent from '@site/src/components/MotomoComponent';
 <MotomoComponent/>
 
 Superfluid is a token-centric protocol revolving around a new token standard called Super Token. Super Tokens have special capabilities.
-One of them allows to create second-by-second token transfers (called [Money Streaming](/docs/protocol/money-streaming/overview.mdx)).
+One of them allows to create second-by-second token transfers (called [Payment Streams](/docs/protocol/money-streaming/overview.mdx)).
 In this guide, we'll walk through the process of setting up and deploying a basic vesting contract which deploys a Mock Super Token and creates a stream to a recipient.
 
 This contract allows you to:
 - Deploy a Mock Super Token
-- Create, update or delete money streams
+- Create, update or delete payment streams
 
 :::note Why this Quickstart?
 This is just an example to get you started with Superfluid. You can use this as a base to build more complex applications.
@@ -36,9 +36,9 @@ You DO NOT need to follow this quickstart guide in order to create, update and d
 ## Contract Overview: SuperfluidBoilerplate
 
 In this guide we will describe the contract [`SuperfluidVesting.sol`](https://github.com/superfluid-finance/superfluid-quickstart/blob/master/src/SuperfluidVesting.sol):
-- This contract is designed to interact with the Superfluid protocol, specifically to deploy a [Super Token](/docs/protocol/super-tokens/overview) and use [Money Streaming](/docs/protocol/money-streaming/overview.mdx).
+- This contract is designed to interact with the Superfluid protocol, specifically to deploy a [Super Token](/docs/protocol/super-tokens/overview) and use [Payment Streams](/docs/protocol/money-streaming/overview.mdx).
 - The contract enables the deployment of a Mock Super Token in the constructor.
-- This contract enables the creation, modification, and deletion of continuous money streams to the a recipient.
+- This contract enables the creation, modification, and deletion of continuous payment streams to the a recipient.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <FlowSenderVis/>
@@ -256,7 +256,7 @@ Now that you understand the basics, you can:
    - [Advanced Token Creation](docs/protocol/super-tokens/guides/deploy-super-token/deploy-custom-super-token)
 
 2. **Build Smart Contracts**:
-   - [Money Streaming Overview](/docs/protocol/money-streaming/overview)
+   - [Payment Streams Overview](/docs/protocol/money-streaming/overview)
    - [Distribution Pools Overview](docs/protocol/distributions/overview)
    - [How to use the SuperTokenV1Library](/docs/protocol/super-tokens/guides/using-library)
 

@@ -11,7 +11,7 @@ and attach user data to transactions within your smart contracts.
 ## Introduction to SuperTokenV1Library
 
 The [SuperTokenV1Library](/docs/technical-reference/SuperTokenV1Library) is the primary interface for developers to interact with the Superfluid protocol when building smart contracts on-chain.
-It provides a comprehensive set of tools for working with [Money Streaming](/docs/protocol/money-streaming/overview) (*Constant Flow Agreement - CFA*) and [Distribution Pools](/docs/protocol/distributions/overview) (*General Distributions Agreement - GDA*).
+It provides a comprehensive set of tools for working with [Payment Streams](/docs/protocol/money-streaming/overview) (*Constant Flow Agreement - CFA*) and [Distribution Pools](/docs/protocol/distributions/overview) (*General Distributions Agreement - GDA*).
 
 To use the SuperTokenV1Library in your smart contract:
 
@@ -32,7 +32,7 @@ For more details on the SuperTokenV1Library, refer to the page [Using the SuperT
 ## Access Control in Superfluid
 
 Access control is a crucial aspect of smart contract security, allowing certain addresses to perform specific actions.
-In the context of Superfluid and money streaming, Access Control Lists (ACLs) enables one address (the Flow Operator) to manage streams on behalf of another address.
+In the context of Superfluid and payment streams, Access Control Lists (ACLs) enables one address (the Flow Operator) to manage streams on behalf of another address.
 
 ### How Access Control Works in Superfluid
 
@@ -45,7 +45,7 @@ Superfluid implements a flexible permission system for flow management:
 3. **Operator Actions**: Once granted permissions, the operator can perform the allowed actions within the specified flow rate allowance.
 
 :::tip Access Control for [Distribution Pools](/docs/protocol/distributions/overview)
-In this document, we address Access Control for Money Streaming (CFA). Currently, there are no access control functions for [Distribution Pools](/docs/protocol/distributions/overview). However, you can build your own access control system using the SuperTokenV1Library functions.
+In this document, we address Access Control for Payment Streams (CFA). Currently, there are no access control functions for [Distribution Pools](/docs/protocol/distributions/overview). However, you can build your own access control system using the SuperTokenV1Library functions.
 :::
 
 ### Key Functions for Access Control

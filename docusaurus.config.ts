@@ -3,8 +3,8 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: "Superfluid | Stream Money Every Second",
-  tagline: "Superfluid is the leading asset streaming protocol that brings subscriptions, salaries and rewards to DAOs and crypto-native businesses.",
+  title: "Superfluid | Payment Streams Every Second",
+  tagline: "Superfluid is the leading payment streaming protocol that brings subscriptions, salaries and rewards to DAOs and crypto-native businesses.",
   favicon: "img/favicon.ico",
   themes: [
     "@docusaurus/theme-live-codeblock",

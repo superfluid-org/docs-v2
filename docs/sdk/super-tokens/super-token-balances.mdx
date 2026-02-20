@@ -24,12 +24,12 @@ Tracking the balance of Super Tokens requires a more nuanced approach than tradi
 ### Challenges
 
 - **Event-Based Tracking Limitation**: Some applications, like Etherscan, use `transfer` events to track user balances. However, due to scalability concerns, Super Tokens don't emit `transfer` events with every balance change, leading to potential discrepancies in displayed balances.
-- **Multi-source updates**: Super Tokens can be updated from multiple sources, from [Money Streaming](/docs/protocol/money-streaming/overview.mdx), but also [Distributions](/docs/protocol/distributions/overview.mdx).
+- **Multi-source updates**: Super Tokens can be updated from multiple sources, from [Payment Streams](/docs/protocol/money-streaming/overview.mdx), but also [Distributions](/docs/protocol/distributions/overview.mdx).
 
 ### Solution 1 (recommended): Using `balanceOf`
 
 As we mentioned earlier, Super Tokens are ERC20 compatible, so you can use the `balanceOf` function from the token smart contract to get the real time aggregated balance of a user.
-The Superfluid Protocol modifies the `balanceOf` function to account for the various fund movement methods unique to Super Tokens including Money Streaming and Distributions.
+The Superfluid Protocol modifies the `balanceOf` function to account for the various fund movement methods unique to Super Tokens including Payment Streams and Distributions.
 You can simply call this function to get the real time aggregated balance of a user like so:
 
 ```jsx
@@ -349,6 +349,6 @@ return (
 ```
 
 :::tip About this example
-Please keep in mind that in the example above we make the assumption that the user is only using Money Streaming and Distributions in the form of the GDA,
+Please keep in mind that in the example above we make the assumption that the user is only using Payment Streams and Distributions in the form of the GDA,
 but not Distributions in the form of the IDA. If you are using IDA, you will need to add a new query to get the data related to each transfer a user is distributing.
 :::

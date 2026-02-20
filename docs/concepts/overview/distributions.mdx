@@ -2,8 +2,7 @@
 sidebar_position: 3
 ---
 
-import PoolInstantVis from "@site/src/components/Visualizations/PoolInstantVis";
-import PoolStreamVis from "@site/src/components/Visualizations/PoolStreamVis";
+import DistributionAnimation from "@site/src/components/DistributionAnimation";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import ThemedImage from '@theme/ThemedImage';
@@ -16,7 +15,7 @@ Distributions allow for the transfer of value to multiple recipients with minima
 
 :::note
 There are other on-chain solutions that may seem to solve this problem without using a new token implementation (e.g [Disperse App](https://disperse.app/)).
-While these solutions can be great for a low amount of recipients, they are not infinitely scalable and can become very expensive as the number of recipients increases. Furthermore, they do not allow for distributing money streaming
+While these solutions can be great for a low amount of recipients, they are not infinitely scalable and can become very expensive as the number of recipients increases. Furthermore, they do not allow for distributing payment streams
 :::
 
 ## Overview
@@ -24,7 +23,7 @@ While these solutions can be great for a low amount of recipients, they are not 
 Distributions function by allowing for the creation of **pools** with a designated **pool admin** who manages **units** for **pool members**. Members of these pools can receive funds either instantly or through continuous streaming, making this method highly efficient and scalable. There are two types of Distributions:
 
 - **Instant Distributions**: They allow one transaction distribution to any number of receivers with a fixed gas cost.
-- **Streaming Distributions**: They allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.
+- **Streaming Distributions**: They allow for continuous distribution of funds to receivers through [Payment Streams](./money-streaming.mdx) to a Pool.
 
 ---
 <Tabs defaultValue="instant" values={[
@@ -35,11 +34,7 @@ Distributions function by allowing for the creation of **pools** with a designat
 
 **Instant Distributions** allow one transaction to distribute to any number of receivers with a fixed gas cost.
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  *Click on the Blue Circle to initiate an Instant Distribution*
-  <br />
-</div>
-<PoolInstantVis />
+<DistributionAnimation mode="instant" />
 <div style={{ display: "flex", justifyContent: "center" }}>
   <p>
     *By creating a Distribution Pool, you can distribute any token instantly*
@@ -49,13 +44,9 @@ Distributions function by allowing for the creation of **pools** with a designat
   </TabItem>
   <TabItem value="streaming">
 
-**Instant Distributions** allow for continuous distribution of funds to receivers through [Money Streaming](./money-streaming.mdx) to a Pool.
+**Streaming Distributions** allow for continuous distribution of funds to receivers through [Payment Streams](./money-streaming.mdx) to a Pool.
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  *Watch how the continuous stream gets distributed automatically through the pool*
-  <br />
-</div>
-<PoolStreamVis />
+<DistributionAnimation mode="streaming" />
 <div style={{ display: "flex", justifyContent: "center" }}>
   <p>
     *By creating a Distribution Pool, you can distribute any stream with no gas cost*
@@ -70,7 +61,7 @@ Distributions function by allowing for the creation of **pools** with a designat
 
 ### Definitions
 
-- **Pool**: A channel for proportional token distribution.
+- **Distribution Pool**: A channel for proportional token distribution.
 - **Distribution**: The action of allocating specified token amounts to receivers.
 - **Units**: Represent the proportion of the distribution each subscriber receives.
 - **Pool Admin**: The administrator of the distribution process.
@@ -121,9 +112,9 @@ This example demonstrates how a change in the distributor's streaming rate affec
 
 ## Advanced Pool Features
 
-As pools are also ERC20 tokens, they enable:
+As distribution pools are also ERC20 tokens, they enable:
 
 - **Transfer of Units**: Pool members can freely transfer their units.
 - **Delegated Transfers**: Using the `approve` and `transferFrom` functions, units can be transferred on behalf of a member.
 
-These features add composability and flexibility, expanding the potential use cases for pools in web3.
+These features add composability and flexibility, expanding the potential use cases for distribution pools in web3.

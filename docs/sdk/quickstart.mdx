@@ -5,13 +5,13 @@ sidebar_position: 1
 # Quickstart
 
 This guide will help you get started with the Superfluid protocol by creating a simple React app that interacts with the protocol.
-You'll learn how to connect your wallet, create streams, and create pools using the Superfluid protocol.
+You'll learn how to connect your wallet, create payment streams, and create distribution pools using the Superfluid protocol.
 
 ## How to Interact with the Superfluid Protocol
 
 When interacting with the Superfluid protocol from a client application, you'll use one of two contracts depending on the functionality you need:
 
-1. For Money Streaming: Use the [`CFAv1Forwarder`](/docs/technical-reference/CFAv1Forwarder) contract
+1. For Payment Streams: Use the [`CFAv1Forwarder`](/docs/technical-reference/CFAv1Forwarder) contract
 2. For Distribution Pools: Use the [`GDAv1Forwarder`](/docs/technical-reference/GDAv1Forwarder) contract
 
 We use these forwarder contracts instead of building an SDK because:
@@ -52,7 +52,7 @@ To create a new Next.js app, follow these steps:
 In this section, we will provide a React component that allows you to interact with the Superfluid protocol.
 This component will allow you to:
 - Connect your wallet (eg. Metamask)
-- Create a stream through the `CFAv1Forwarder` contract (for [Money Streaming](docs/concepts/overview/money-streaming))
+- Create a stream through the `CFAv1Forwarder` contract (for [Payment Streams](docs/concepts/overview/money-streaming))
 - Create a pool through the `GDAv1Forwarder` contract (for [Distribution Pools](docs/concepts/overview/distributions))
 
 Here's a React component that allows you to create a stream and create a pool. You can copy and paste this into a new file in your Next.js app's `pages` directory (e.g., `pages/superfluid-demo.js`):
@@ -207,9 +207,9 @@ To use this component:
 2. Uncomment the necessary imports at the top of the file.
 3. Run your Next.js app with `npm run dev`.
 4. Navigate to `http://localhost:3000/superfluid-demo` in your browser.
-5. Connect your wallet, then you can create streams and pools using the Superfluid protocol.
+5. Connect your wallet, then you can create payment streams and distribution pools using the Superfluid protocol.
 
-This component provides a basic interface for creating streams and pools. In a production environment, you would want to add more error checking, input validation, and additional features.
+This component provides a basic interface for creating payment streams and distribution pools. In a production environment, you would want to add more error checking, input validation, and additional features.
 
 :::tip About the Component
 A few tips in order to make sure you can use the component correctly:

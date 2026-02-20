@@ -10,21 +10,21 @@ import SuperTokenVis from '@site/src/components/Visualizations/SuperTokenVis';
 
 # Overview of Super Tokens
 
-Super Tokens extend the ERC20 token standard by integrating additional functionalities like streams and distributions. Super Tokens exist in two primary forms: Wrapper and Pure.
+Super Tokens extend the ERC20 token standard by integrating additional functionalities like payment streams and distributions. Super Tokens exist in two primary forms: Wrapper and Pure.
 
 
 
 ## Real-Time Balance
 
-Super Tokens revolutionize balance calculations by combining traditional static balances with dynamic, real-time adjustments based on streams and distributions, leading to a more fluid representation of an account's value.
+Super Tokens revolutionize balance calculations by combining traditional static balances with dynamic, real-time adjustments based on payment streams and distributions, leading to a more fluid representation of an account's value.
 
 Characteristics of Super Tokens:
 
 * **Static Balance**: Reflects the conventional ERC20 balance, representing the basic, unchanging part of an account's value.
-* **Real-Time Balances**: Incorporates fluctuations from streams and distributions, adjusting the balance with each block to reflect ongoing financial activities. When you call the method `balanceOf()` on a Super Token, you get a real-time balance.
+* **Real-Time Balances**: Incorporates fluctuations from payment streams and distributions, adjusting the balance with each block to reflect ongoing financial activities. When you call the method `balanceOf()` on a Super Token, you get a real-time balance.
 * **Complex Calculation**: Unlike conventional tokens, `balanceOf()` method in Super Tokens doesn't just retrieve a stored value; it performs complex calculations based on numerous parameters to give the real time balance.
 * **Ongoing Relationships**: These calculations consider the account's continuous relationships with others, making the balance more representative of the current financial state.
-* **Time-Sensitive**: In cases involving streams, the balance is further influenced by time, specifically through the timestamp of the latest block, making it sensitive to the passage of time.
+* **Time-Sensitive**: In cases involving payment streams, the balance is further influenced by time, specifically through the timestamp of the latest block, making it sensitive to the passage of time.
 * **Dynamic Adjustment**: As a result, the balance is a "real-time balance," capable of changing with every new block, independent of direct transactions affecting the account.
 
 ## Types of Super Tokens
