@@ -2,8 +2,8 @@
 sidebar_position: 1
 ---
 
-import SuperTokenVis from "@site/src/components/Visualizations/SuperTokenVis";
-import SuperTokenPureVis from "@site/src/components/Visualizations/SuperTokenPureVis";
+import WrapAnimation from "@site/src/components/WrapAnimation";
+import SuperTokenStreamAnimation from "@site/src/components/SuperTokenStreamAnimation";
 
 # Super Tokens
 
@@ -17,9 +17,7 @@ Super Tokens can perform all the functions of a traditional [ERC20 token](https:
 
 Wrapper Super Tokens are existing tokens wrapped to gain Superfluid functionalities. Wrapping converts the underlying token into its Super Token version, while unwrapping reverses the process.
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <SuperTokenVis />
-</div>
+<WrapAnimation />
 <div style={{ display: "flex", justifyContent: "center" }}>
   <p>*By wrapping the original token you obtain a SUPER TOKEN*</p>
 </div>
@@ -30,9 +28,7 @@ For more informations, about the wrapping process, please refer to our [Develope
 
 Pure Super Tokens are natively Superfluid-enabled without an underlying token. They offer inherent ERC20 functionalities plus Superfluid's Super Agreement capabilities.
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <SuperTokenPureVis />
-</div>
+<SuperTokenStreamAnimation />
 <div style={{ display: "flex", justifyContent: "center" }}>
   <p>*A Pure Super Token has inherent superpowers such as [Payment Streams](./money-streaming.mdx) and [Distributions](./distributions.mdx)*</p>
 </div>

@@ -1,65 +1,30 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Blockie } from "@site/src/components/Blockie";
 import { useColorMode } from "@docusaurus/theme-common";
 
-interface StreamAnimationProps {
-  className?: string;
-  compact?: boolean;
-}
-
-export default function StreamAnimation({
+export default function SuperTokenStreamAnimation({
   className = "",
-  compact = false,
-}: StreamAnimationProps) {
+}: {
+  className?: string;
+}) {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  const h = compact ? 340 : 480;
-  const w = compact ? 440 : 580;
-
-  const senderX = 70;
+  const w = 440;
+  const h = 240;
+  const tokenX = 90;
   const receiverX = w - 70;
   const centerY = h / 2;
 
   const textColor = isDark ? "#e0e0e0" : "#1a1a2a";
   const mutedColor = isDark ? "#8a8aa0" : "#6a6a80";
+  const superFill = isDark ? "#1a2a1a" : "#eaf7e0";
+  const receiverFill = isDark ? "#1e2a2e" : "#e8f0f0";
 
-  const receivers = compact
-    ? [
-        {
-          y: centerY - 70,
-          label: "Bob",
-          rate: "0.038/s",
-          seed: "0xb0b0000000000000000000000000000000000001",
-        },
-        {
-          y: centerY + 70,
-          label: "Carol",
-          rate: "0.012/s",
-          seed: "0xca401000000000000000000000000000000000002",
-        },
-      ]
-    : [
-        {
-          y: centerY - 110,
-          label: "Bob",
-          rate: "0.038/s",
-          seed: "0xb0b0000000000000000000000000000000000001",
-        },
-        {
-          y: centerY,
-          label: "Carol",
-          rate: "0.012/s",
-          seed: "0xca401000000000000000000000000000000000002",
-        },
-        {
-          y: centerY + 110,
-          label: "Dave",
-          rate: "0.005/s",
-          seed: "0xdave000000000000000000000000000000000003",
-        },
-      ];
+  const receivers = [
+    { y: centerY - 55, label: "Receiver A" },
+    { y: centerY + 55, label: "Receiver B" },
+  ];
 
   return (
     <div
@@ -67,15 +32,21 @@ export default function StreamAnimation({
       style={{ display: "flex", justifyContent: "center" }}
     >
       <svg
-        viewBox={`10 0 ${w - 20} ${h}`}
+        viewBox={`0 0 ${w} ${h}`}
         style={{ width: "100%", height: "auto", maxWidth: w }}
       >
         <defs>
-          <linearGradient id="streamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient
+            id="stStreamGrad"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
             <stop offset="0%" stopColor="#86ED1E" stopOpacity="0.8" />
             <stop offset="100%" stopColor="#0d8f7f" stopOpacity="0.8" />
           </linearGradient>
-          <filter id="glow">
+          <filter id="stGlow">
             <feGaussianBlur stdDeviation="3" result="coloredBlur" />
             <feMerge>
               <feMergeNode in="coloredBlur" />
@@ -84,38 +55,24 @@ export default function StreamAnimation({
           </filter>
         </defs>
 
-        {/* Stream lines */}
+        {/* Stream lines and particles */}
         {receivers.map((r, i) => {
-          const path = `M ${senderX + 36} ${centerY} Q ${w / 2} ${centerY} ${receiverX - 36} ${r.y}`;
+          const path = `M ${tokenX + 36} ${centerY} Q ${w / 2} ${centerY} ${receiverX - 24} ${r.y}`;
           return (
             <g key={i}>
+              {/* Background path */}
               <path
                 d={path}
                 fill="none"
                 stroke="#86ED1E"
                 strokeWidth="1"
-                strokeOpacity="0.15"
+                strokeOpacity="0.12"
               />
-              {[0, 1, 2, 3].map((p) => (
-                <circle
-                  key={p}
-                  r="3"
-                  fill="url(#streamGrad)"
-                  filter="url(#glow)"
-                >
-                  <animateMotion
-                    dur="2.5s"
-                    begin={`${p * 0.6 + i * 0.3}s`}
-                    repeatCount="indefinite"
-                    calcMode="linear"
-                    path={path}
-                  />
-                </circle>
-              ))}
+              {/* Animated dashed line */}
               <motion.path
                 d={path}
                 fill="none"
-                stroke="url(#streamGrad)"
+                stroke="url(#stStreamGrad)"
                 strokeWidth="2"
                 strokeDasharray="8 16"
                 initial={{ strokeDashoffset: 0 }}
@@ -125,27 +82,38 @@ export default function StreamAnimation({
                   repeat: Infinity,
                   ease: "linear",
                 }}
-                opacity={0.4}
+                opacity={0.35}
               />
+              {/* Flowing particles */}
+              {[0, 1, 2].map((p) => (
+                <circle
+                  key={p}
+                  r="3"
+                  fill="url(#stStreamGrad)"
+                  filter="url(#stGlow)"
+                >
+                  <animateMotion
+                    dur="2.5s"
+                    begin={`${p * 0.7 + i * 0.3}s`}
+                    repeatCount="indefinite"
+                    calcMode="linear"
+                    path={path}
+                  />
+                </circle>
+              ))}
             </g>
           );
         })}
 
-        {/* Sender node */}
+        {/* Super Token */}
         <motion.g
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.6, ease: "backOut" }}
+          transition={{ duration: 0.5, ease: "backOut" }}
         >
-          <Blockie
-            seed="0xa11ce00000000000000000000000000000000000"
-            x={senderX}
-            y={centerY}
-            r={32}
-            clipId="sender-blockie"
-          />
+          {/* Pulsing glow ring */}
           <circle
-            cx={senderX}
+            cx={tokenX}
             cy={centerY}
             r={32}
             fill="none"
@@ -155,7 +123,7 @@ export default function StreamAnimation({
           >
             <animate
               attributeName="r"
-              values="32;44;32"
+              values="32;42;32"
               dur="3s"
               repeatCount="indefinite"
             />
@@ -166,86 +134,96 @@ export default function StreamAnimation({
               repeatCount="indefinite"
             />
           </circle>
+          <circle
+            cx={tokenX}
+            cy={centerY}
+            r={32}
+            fill={superFill}
+            stroke="#86ED1E"
+            strokeWidth="1.5"
+          />
           <text
-            x={senderX}
-            y={centerY + 46}
-            textAnchor="middle"
-            fill={textColor}
-            fontSize="10"
-            fontWeight="600"
-          >
-            Alice
-          </text>
-          <text
-            x={senderX}
-            y={centerY + 58}
+            x={tokenX}
+            y={centerY + 5}
             textAnchor="middle"
             fill="#86ED1E"
-            fontSize="8"
+            fontSize="11"
+            fontWeight="700"
           >
-            Sender
+            Super
+          </text>
+          <text
+            x={tokenX}
+            y={centerY + 48}
+            textAnchor="middle"
+            fill={textColor}
+            fontSize="9"
+            fontWeight="500"
+          >
+            Pure Super Token
           </text>
         </motion.g>
 
-        {/* Receiver nodes */}
+        {/* Receivers */}
         {receivers.map((r, i) => (
           <motion.g
             key={i}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{
-              duration: 0.6,
-              delay: 0.2 + i * 0.15,
+              duration: 0.5,
+              delay: 0.15 + i * 0.1,
               ease: "backOut",
             }}
           >
-            <Blockie
-              seed={r.seed}
-              x={receiverX}
-              y={r.y}
-              r={32}
-              clipId={`receiver-blockie-${i}`}
+            <circle
+              cx={receiverX}
+              cy={r.y}
+              r={22}
+              fill={receiverFill}
+              stroke="#0d8f7f"
+              strokeWidth="1"
             />
             <text
               x={receiverX}
-              y={r.y + 46}
+              y={r.y + 4}
               textAnchor="middle"
-              fill={textColor}
-              fontSize="10"
+              fill="#0d8f7f"
+              fontSize="9"
               fontWeight="600"
             >
-              {r.label}
+              {String.fromCharCode(65 + i)}
             </text>
             <text
               x={receiverX}
-              y={r.y + 58}
+              y={r.y + 36}
               textAnchor="middle"
-              fill="#0d8f7f"
+              fill={mutedColor}
               fontSize="8"
             >
-              {r.rate}
+              {r.label}
             </text>
           </motion.g>
         ))}
 
         {/* Section labels */}
         <text
-          x={senderX}
-          y={compact ? 28 : 36}
+          x={tokenX}
+          y={22}
           textAnchor="middle"
           fill={mutedColor}
-          fontSize="10"
-          letterSpacing="0.1em"
+          fontSize="9"
+          letterSpacing="0.08em"
         >
-          SENDER
+          SUPER TOKEN
         </text>
         <text
           x={receiverX}
-          y={compact ? 28 : 36}
+          y={22}
           textAnchor="middle"
           fill={mutedColor}
-          fontSize="10"
-          letterSpacing="0.1em"
+          fontSize="9"
+          letterSpacing="0.08em"
         >
           RECEIVERS
         </text>

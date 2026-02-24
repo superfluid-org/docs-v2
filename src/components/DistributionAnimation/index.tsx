@@ -94,27 +94,30 @@ export default function DistributionAnimation({
           strokeOpacity="0.15"
         />
         {isInstant ? (
-          /* Instant: burst of particles on a cycle */
-          [0, 1, 2, 3, 4].map((p) => (
-            <motion.circle
-              key={`s2p-${p}`}
-              r="3.5"
-              fill={`url(#distGrad-${mode})`}
-              filter={`url(#distGlow-${mode})`}
-              initial={{ offsetDistance: "0%", opacity: 0 }}
-              animate={{ offsetDistance: "100%", opacity: [0, 1, 1, 0] }}
-              transition={{
-                duration: 1.2,
-                delay: p * 0.08,
-                repeat: Infinity,
-                repeatDelay: 3,
-                ease: "easeOut",
-              }}
-              style={
-                { offsetPath: `path('${senderToPoolPath}')` } as React.CSSProperties
-              }
+          /* Instant: one big ball travels to pool, then splits into smaller balls */
+          <circle
+            r="6"
+            fill={`url(#distGrad-${mode})`}
+            filter={`url(#distGlow-${mode})`}
+          >
+            <animateMotion
+              dur="5s"
+              begin="0s"
+              repeatCount="indefinite"
+              path={senderToPoolPath}
+              keyPoints="0;1;1"
+              keyTimes="0;0.3;1"
+              calcMode="linear"
             />
-          ))
+            <animate
+              attributeName="opacity"
+              values="0;1;1;0;0"
+              keyTimes="0;0.04;0.25;0.3;1"
+              dur="5s"
+              begin="0s"
+              repeatCount="indefinite"
+            />
+          </circle>
         ) : (
           /* Streaming: continuous flow */
           <>
@@ -130,23 +133,20 @@ export default function DistributionAnimation({
               opacity={0.4}
             />
             {[0, 1, 2].map((p) => (
-              <motion.circle
+              <circle
                 key={`s2p-c-${p}`}
                 r="3"
                 fill={`url(#distGrad-${mode})`}
                 filter={`url(#distGlow-${mode})`}
-                initial={{ offsetDistance: "0%" }}
-                animate={{ offsetDistance: "100%" }}
-                transition={{
-                  duration: 2,
-                  delay: p * 0.65,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                style={
-                  { offsetPath: `path('${senderToPoolPath}')` } as React.CSSProperties
-                }
-              />
+              >
+                <animateMotion
+                  dur="2s"
+                  begin={`${p * 0.65}s`}
+                  repeatCount="indefinite"
+                  calcMode="linear"
+                  path={senderToPoolPath}
+                />
+              </circle>
             ))}
           </>
         )}
@@ -162,27 +162,40 @@ export default function DistributionAnimation({
               strokeOpacity="0.15"
             />
             {isInstant ? (
-              /* Instant: burst after pool receives */
-              [0, 1, 2].map((p) => (
-                <motion.circle
-                  key={p}
-                  r="3"
-                  fill={`url(#distGrad-${mode})`}
-                  filter={`url(#distGlow-${mode})`}
-                  initial={{ offsetDistance: "0%", opacity: 0 }}
-                  animate={{ offsetDistance: "100%", opacity: [0, 1, 1, 0] }}
-                  transition={{
-                    duration: 1.0,
-                    delay: 1.4 + p * 0.1 + i * 0.15,
-                    repeat: Infinity,
-                    repeatDelay: 3.2,
-                    ease: "easeOut",
-                  }}
-                  style={
-                    { offsetPath: `path('${path}')` } as React.CSSProperties
-                  }
-                />
-              ))
+              /* Instant: big ball splits — proportional smaller balls go to each member simultaneously */
+              Array.from(
+                { length: Math.max(1, Math.round((unitShares[i] / totalUnits) * 6)) },
+                (_, p) => {
+                  const ballR = 2 + (unitShares[i] / totalUnits) * 2.5;
+                  const beginTime = 1.5 + p * 0.04;
+                  return (
+                    <circle
+                      key={p}
+                      r={ballR}
+                      fill={`url(#distGrad-${mode})`}
+                      filter={`url(#distGlow-${mode})`}
+                    >
+                      <animateMotion
+                        dur="5s"
+                        begin={`${beginTime}s`}
+                        repeatCount="indefinite"
+                        path={path}
+                        keyPoints="0;1;1"
+                        keyTimes="0;0.24;1"
+                        calcMode="linear"
+                      />
+                      <animate
+                        attributeName="opacity"
+                        values="0;1;1;0;0"
+                        keyTimes="0;0.03;0.18;0.24;1"
+                        dur="5s"
+                        begin={`${beginTime}s`}
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  );
+                }
+              )
             ) : (
               /* Streaming: continuous proportional flow */
               <>
@@ -204,29 +217,56 @@ export default function DistributionAnimation({
                 {Array.from(
                   { length: Math.max(1, Math.round((unitShares[i] / totalUnits) * 4)) },
                   (_, p) => (
-                    <motion.circle
+                    <circle
                       key={p}
                       r={2 + (unitShares[i] / totalUnits) * 2}
                       fill={`url(#distGrad-${mode})`}
                       filter={`url(#distGlow-${mode})`}
-                      initial={{ offsetDistance: "0%" }}
-                      animate={{ offsetDistance: "100%" }}
-                      transition={{
-                        duration: 2.5,
-                        delay: p * 0.7 + i * 0.25,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                      style={
-                        { offsetPath: `path('${path}')` } as React.CSSProperties
-                      }
-                    />
+                    >
+                      <animateMotion
+                        dur="2.5s"
+                        begin={`${p * 0.7 + i * 0.25}s`}
+                        repeatCount="indefinite"
+                        calcMode="linear"
+                        path={path}
+                      />
+                    </circle>
                   )
                 )}
               </>
             )}
           </g>
         ))}
+
+        {/* Pool impact ring — flashes when big ball arrives (instant only) */}
+        {isInstant && (
+          <circle
+            cx={poolX}
+            cy={centerY}
+            r="5"
+            fill="none"
+            stroke="#86ED1E"
+            strokeWidth="2"
+            opacity="0"
+          >
+            <animate
+              attributeName="r"
+              values="5;32;32"
+              keyTimes="0;0.06;1"
+              dur="5s"
+              begin="1.35s"
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="opacity"
+              values="0.6;0;0"
+              keyTimes="0;0.06;1"
+              dur="5s"
+              begin="1.35s"
+              repeatCount="indefinite"
+            />
+          </circle>
+        )}
 
         {/* Sender node */}
         <motion.g
@@ -254,13 +294,13 @@ export default function DistributionAnimation({
               <animate
                 attributeName="r"
                 values="32;46;32"
-                dur="4.2s"
+                dur="5s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="opacity"
                 values="0.4;0;0.4"
-                dur="4.2s"
+                dur="5s"
                 repeatCount="indefinite"
               />
             </circle>
