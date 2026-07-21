@@ -28,13 +28,13 @@ For more details, please visit the [Immunefi Bug Bounty Program page](https://im
 
 Superfluid has been audited on multiple occasions, you can find these past audit reports here:
 
-For the audit reports, check out the [Superfluid GitHub repository](https://github.com/superfluid-finance/protocol-monorepo/tree/dev/packages/ethereum-contracts/audits).
+For the audit reports, check out the [Superfluid GitHub repository](https://github.com/superfluid-org/protocol-monorepo/tree/dev/packages/ethereum-contracts/audits).
 
 ## General Security Tips For Superfluid Developers
 
 - We recommend what every good security expert would recommend: full test coverage, separation of concerns, and using automated tools like GitHub Actions or [Trail of Bits](https://blog.trailofbits.com/2018/03/23/use-our-suite-of-ethereum-security-tools/)' tools for fuzzing & static analysis
   - Guides like [this one from Consensys](https://consensys.github.io/smart-contract-best-practices/) can be helpful in understanding what to think about before deploying smart contracts to mainnet.
-  - If you're looking for inspiration on setting up your own GitHub Actions pipelines, you can find a breakdown of Superfluid's own GitHub Actions setup [here](https://github.com/superfluid-finance/protocol-monorepo/wiki/Superfluid-GitHub-Actions-Deep-Dive).
+  - If you're looking for inspiration on setting up your own GitHub Actions pipelines, you can find a breakdown of Superfluid's own GitHub Actions setup [here](https://github.com/superfluid-org/protocol-monorepo/wiki/Superfluid-GitHub-Actions-Deep-Dive).
 - Beyond this, we recommend that you continue to think about security & potential for loss of funds in the front end and off-chain components of your project (if you have them).
   - For example, we highly recommend you adopt some of the same UX practices that we do in the [Superfluid dashboard](https://app.superfluid.finance/) if you have a front end that allows people to create Superfluid streams.
   - I.e., we let the user know that letting their balance hit zero before they close their stream will [lead to a liquidation](/docs/protocol/advanced-topics/solvency/liquidations-and-toga).
@@ -46,5 +46,5 @@ For the audit reports, check out the [Superfluid GitHub repository](https://gith
 
 ### Custom Super Tokens
 
-- In general, we advise sticking to the existing Super Token interfaces seen [here](https://github.com/superfluid-finance/protocol-monorepo/tree/dev/packages/ethereum-contracts/contracts/interfaces/tokens) unless you have a good reason not to.
+- In general, we advise sticking to the existing Super Token interfaces seen [here](https://github.com/superfluid-org/protocol-monorepo/tree/dev/packages/ethereum-contracts/contracts/interfaces/tokens) unless you have a good reason not to.
 - If you want to deviate from this, we strongly encourage you to reach out to the Superfluid developer team in the #dev-support channel in our [Discord](https://discord.superfluid.finance).

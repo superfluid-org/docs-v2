@@ -105,7 +105,7 @@ const config: Config = {
           label: "Explorer",
         },
         {
-          href: "https://github.com/superfluid-finance",
+          href: "https://github.com/superfluid-org",
           position: "right",
           label: "GitHub",
         },
@@ -164,7 +164,7 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/superfluid-finance",
+              href: "https://github.com/superfluid-org",
             },
             {
               label: "Discord",

@@ -18,7 +18,7 @@ Super Apps are smart contracts registered with the Superfluid Protocol, allowing
     <p>*The Tradeable Cashflow NFT*</p>
 </div>
 
-Super Apps can execute custom logic in response to streaming-related actions. A great example is the [tradeable cashflow NFT contract](https://github.com/superfluid-finance/super-examples/tree/c784d239557d6fb5e56a2c8951ac4353256d611d/projects/tradeable-cashflow), which automatically opens a new stream from the NFT contract to the owner of the NFT upon receiving a stream.
+Super Apps can execute custom logic in response to streaming-related actions. A great example is the [tradeable cashflow NFT contract](https://github.com/superfluid-org/super-examples/tree/c784d239557d6fb5e56a2c8951ac4353256d611d/projects/tradeable-cashflow), which automatically opens a new stream from the NFT contract to the owner of the NFT upon receiving a stream.
 
 Callbacks in Super Apps are triggered by these actions:
 
@@ -49,7 +49,7 @@ _host.registerAppWithKey(configWord, registrationKey);
 
 The `APP_LEVEL_FINAL` flag ensures that the callbacks run in the first app in a chain of Super Apps. The `_NOOP` designations specify which callbacks are not used, avoiding unnecessary reverts.
 
-For mainnet deployments, pre-approval is required for registering Super Apps. Check out the [Super App White-listing Guide](https://github.com/superfluid-finance/protocol-monorepo/wiki/Super-App-White-listing-Guide) for more information.
+For mainnet deployments, pre-approval is required for registering Super Apps. Check out the [Super App White-listing Guide](https://github.com/superfluid-org/protocol-monorepo/wiki/Super-App-White-listing-Guide) for more information.
 
 ### Super App Stream Buffers
 

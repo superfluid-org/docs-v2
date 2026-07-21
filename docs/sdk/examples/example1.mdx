@@ -8,7 +8,7 @@ This guide will walk you through creating a web application that enables
 streaming reward distributions using Superfluid's [Distribution Pools](/docs/protocol/distributions/overview) and Macro for [Batching Calls](/docs/sdk/advanced-topics/batch-calls).
 
 :::tip
-If you want to see the full example, you can check it out in the [GitHub Repository](https://github.com/superfluid-finance/rewards-macro-example).
+If you want to see the full example, you can check it out in the [GitHub Repository](https://github.com/superfluid-org/rewards-macro-example).
 :::
 
 ## Overview
@@ -63,9 +63,9 @@ To deploy a Distribution Pool, you can use the [GDAv1Forwarder](/docs/technical-
 
 [Macros](/docs/sdk/advanced-topics/batch-calls) allow us to batch multiple operations into a single transaction. In our case, we're using:
 - `MacroForwarder`: Contract that executes our macro
-- [`RewardsMacro`](https://github.com/superfluid-finance/rewards-macro-example/blob/main/contracts/RewardsMacro.sol): Our custom macro for setting up distributions
+- [`RewardsMacro`](https://github.com/superfluid-org/rewards-macro-example/blob/main/contracts/RewardsMacro.sol): Our custom macro for setting up distributions
 
-In our example, we deployed a [`RewardsMacro`](https://github.com/superfluid-finance/rewards-macro-example/blob/main/contracts/RewardsMacro.sol) contract on [OP Sepolia](https://optimism-sepolia.blockscout.com/address/0xA315e7EB0a278fac7B3a74DB895f5bf801EAb632?tab=contract) for the purposes of our example.
+In our example, we deployed a [`RewardsMacro`](https://github.com/superfluid-org/rewards-macro-example/blob/main/contracts/RewardsMacro.sol) contract on [OP Sepolia](https://optimism-sepolia.blockscout.com/address/0xA315e7EB0a278fac7B3a74DB895f5bf801EAb632?tab=contract) for the purposes of our example.
 
 ## Key Components
 
