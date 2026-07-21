@@ -59,7 +59,7 @@ To set up your fork for contributing, you can use the following commands or modi
 
 ```console
 cd docs-v2
-git remote add upstream https://github.com/superfluid-finance/docs-v2.git
+git remote add upstream https://github.com/superfluid-org/docs-v2.git
 git fetch upstream
 git pull --rebase upstream main
 git checkout -b "feature/my-awesome-docs-update"

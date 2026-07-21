@@ -33,7 +33,7 @@
     { "source": "/superfluid/resources/security-and-bug-bounties", "destination": "/docs/protocol/contribute/bug-bounties", "permanent": true },
     { "source": "/superfluid/resources/token-dashboard-submission", "destination": "/docs/protocol/contribute/submit-token-dashboard", "permanent": true },
     { "source": "/superfluid/resources/learn-about-ethereum", "destination": "https://ethereum.org/developers"},
-    { "source": "/superfluid/resources/code-of-conduct", "destination": "https://github.com/superfluid-finance/protocol-monorepo?tab=coc-ov-file"},
+    { "source": "/superfluid/resources/code-of-conduct", "destination": "https://github.com/superfluid-org/protocol-monorepo?tab=coc-ov-file"},
     { "source": "/superfluid/docs/subgraph", "destination": "/docs/sdk/money-streaming/subgraph", "permanent": true },
     { "source": "/superfluid/protocol-developers(.*)", "destination": "/docs/protocol/quickstart"},
     { "source": "/superfluid/developers/interactive-tutorials/money-streaming-1", "destination": "/docs/protocol/money-streaming/guides/money-streaming-with-super-tokens/interact-off-chain", "permanent": true },

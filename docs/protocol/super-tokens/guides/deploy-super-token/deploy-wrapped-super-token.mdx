@@ -28,7 +28,7 @@ Before you start, ensure you have:
 ---
 ## Super Tokens Factory Contract
 
-The [Super Token Factory contract](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperTokenFactory.sol) is used to create Super Tokens:
+The [Super Token Factory contract](https://github.com/superfluid-org/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperTokenFactory.sol) is used to create Super Tokens:
 - It is permissionless and can be used by anyone to create Super Tokens.
 - It is deployed on all the networks where you can find the Superfluid Protocol.
 
@@ -61,11 +61,11 @@ You can deploy your own Wrapper Super Token using the Super Token Factory contra
 - **Symbol**: The symbol of the Super Token. We recommend using the same symbol as the underlying token suffixed with 'x' (eg. 'DAIx').
 
 :::tip What is Upgradability?
-If you look at the `CreateERC20Wrapper` method at the [Super Token Factory contract](https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperTokenFactory.sol), you'll see a parameter called `Upgradability`.
+If you look at the `CreateERC20Wrapper` method at the [Super Token Factory contract](https://github.com/superfluid-org/protocol-monorepo/blob/dev/packages/ethereum-contracts/contracts/superfluid/SuperTokenFactory.sol), you'll see a parameter called `Upgradability`.
 
 This allows Superfluid Protocol Governance to upgrade the Super Token contract in the future and stay compatible with the latest features.
     - '0': Not Upgradable: The contract cannot be upgraded.
-    - '1': Semi-Upgradability: The contract can be upgraded by Superfluid Protocol Governance but only under certain [conditions](https://github.com/superfluid-finance/protocol-monorepo/wiki/About-Super-Token-Classification).
+    - '1': Semi-Upgradability: The contract can be upgraded by Superfluid Protocol Governance but only under certain [conditions](https://github.com/superfluid-org/protocol-monorepo/wiki/About-Super-Token-Classification).
     - '2': Fully Upgradable: The contract can be upgraded by Superfluid Protocol Governance without any restrictions.
 
 For the purpose of simplicity, we always recommend using '1'. This is why this parameter is not included in the interface below and is set to 1 by default.
@@ -112,7 +112,7 @@ Self-Governed Super Tokens give you the ability to control and update Super Toke
 
 <Admonition type="tip">
 
-For more information, see the [Self-Governed Super Token Wiki](https://github.com/superfluid-finance/protocol-monorepo/wiki/Self-Governed-Super-Token) or seek assistance on [Superfluid Discord](https://discord.superfluid.finance/).
+For more information, see the [Self-Governed Super Token Wiki](https://github.com/superfluid-org/protocol-monorepo/wiki/Self-Governed-Super-Token) or seek assistance on [Superfluid Discord](https://discord.superfluid.finance/).
 
 </Admonition>
 
