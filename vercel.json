@@ -16,7 +16,7 @@
     { "source": "/superfluid/developers/automations(.*)", "destination": "/docs/category/automations" },
     { "source": "/superfluid/developers/integration-guides(.*)", "destination": "/docs/protocol/quickstart" },
     { "source": "/superfluid/developers/integration-guides(.*)", "destination": "/docs/protocol/quickstart" },
-    { "source": "/superfluid/developers/superfluid-subscriptions(.*)", "destination": "https://checkout-docs.superfluid.finance/" },
+    { "source": "/superfluid/developers/superfluid-subscriptions(.*)", "destination": "https://superfluid.org/checkout-retired" },
     { "source": "/superfluid/developers/sdk-core(.*)", "destination": "/docs/sdk/quickstart" },
     { "source": "/superfluid/developers/sdk(.*)", "destination": "/docs/sdk/quickstart" },
     { "source": "/superfluid/developers/solidity-examples(.*)", "destination": "/docs/protocol/quickstart" },
