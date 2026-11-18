@@ -47,7 +47,7 @@ Thank you for considering contributing to the Superfluid Finance documentation! 
 ### Creating a Pull Request
 
 1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository.
-2. Clone your fork to your local machine and switch to a new branch for your contribution. Ensure your branch is up-to-date with the main branch of the original repo.
+2. Clone your fork to your local machine and switch to a new branch for your contribution. Ensure your branch is up-to-date with the `master` branch of the original repo.
 3. Make your changes, commit them, and push the branch to your fork.
 4. Navigate to the original Superfluid Finance documentation repository in your web browser and initiate a new pull request.
 5. Provide a clear and descriptive title for the pull request, and summarize your changes in the description. If your changes are related to an existing issue, reference it by including the issue number (e.g., #123).
@@ -61,7 +61,7 @@ To set up your fork for contributing, you can use the following commands or modi
 cd docs-v2
 git remote add upstream https://github.com/superfluid-org/docs-v2.git
 git fetch upstream
-git pull --rebase upstream main
+git pull --rebase upstream master
 git checkout -b "feature/my-awesome-docs-update"
 ```
 
@@ -82,13 +82,13 @@ Your contributions, whether big or small, are greatly appreciated and help make 
 ### Installation
 
 ```console
-yarn install
+npm install
 ```
 
 ### Local Development
 
 ```console
-yarn run start
+npm run start
 ```
 
 This command starts a local development server and opens a browser window. Most changes are reflected live without having to restart the server.
@@ -96,7 +96,7 @@ This command starts a local development server and opens a browser window. Most 
 ### Build
 
 ```console
-yarn build
+npm run build
 ```
 
 Generates static content into the `build` directory for hosting on any static content hosting service.
